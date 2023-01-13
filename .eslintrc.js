@@ -1,9 +1,9 @@
 module.exports = {
   root: true,
-  extends: ["custom"],
+  extends: ['weekly'],
   settings: {
     next: {
-      rootDir: ["apps/*/"],
+      rootDir: ['apps/*/'],
     },
   },
 };

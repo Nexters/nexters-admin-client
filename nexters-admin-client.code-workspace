@@ -1,0 +1,34 @@
+{
+  "folders": [
+    {
+      "path": ".github"
+    },
+    {
+      "path": ".yarn"
+    },
+    {
+      "path": "packages"
+    },
+    {
+      "path": "apps"
+    }
+  ],
+  "settings": {
+    "search.exclude": {
+      "**/.yarn": true,
+      "**/.pnp.*": true
+    },
+    "editor.formatOnSave": true,
+    "eslint.nodePath": "../.././.yarn/sdks",
+    "typescript.tsdk": "../.yarn/sdks/typescript/lib",
+    "prettier.prettierPath": "../.././.yarn/sdks/prettier/index.js",
+    "typescript.enablePromptUseWorkspaceTsdk": true
+  },
+  "extensions": {
+    "recommendations": [
+      "arcanis.vscode-zipfs",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode"
+    ]
+  }
+}

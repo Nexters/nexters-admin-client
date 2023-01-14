@@ -1,4 +1,4 @@
-import { Button } from 'ui';
+import { Button } from '@weekly/ui';
 
 export default function Home() {
   return (

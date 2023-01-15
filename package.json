@@ -14,13 +14,11 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
-    "postpack": "pinst --enable",
-    "lint-staged": "lint-staged"
+    "postpack": "pinst --enable"
   },
   "devDependencies": {
     "eslint-config-weekly": "*",
     "husky": "^8.0.0",
-    "lint-staged": "^13.1.0",
     "pinst": "^3.0.0",
     "prettier": "latest",
     "turbo": "1.6.3",

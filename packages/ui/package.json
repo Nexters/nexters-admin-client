@@ -6,8 +6,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "TIMING=1 eslint \"**/*.ts*\"",
-    "lint:fix": "TIMING=1 eslint \"**/*.ts*\" --fix",
-    "check-types": "tsc --noEmit --skipLibCheck"
+    "lint:fix": "TIMING=1 eslint \"**/*.ts*\" --fix"
   },
   "devDependencies": {
     "@types/react": "^17.0.37",

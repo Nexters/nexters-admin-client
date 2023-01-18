@@ -6,8 +6,8 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint": "TIMING=1 eslint \"**/*.{ts,tsx}\"",
+    "lint:fix": "TIMING=1 eslint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
     "@weekly/ui": "*",

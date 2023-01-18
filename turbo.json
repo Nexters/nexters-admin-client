@@ -5,9 +5,12 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
-    "check-types": {},
-    "lint": {},
-    "lint:fix": {},
+    "lint": {
+      "outputs": []
+    },
+    "lint:fix": {
+      "outputs": []
+    },
     "dev": {
       "cache": false
     }

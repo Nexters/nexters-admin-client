@@ -1,4 +1,5 @@
 import { Button } from '@weekly/ui';
+import React from 'react';
 
 import Hello from '~/components/Hello';
 

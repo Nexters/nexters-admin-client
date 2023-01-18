@@ -6,9 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "check-types": "tsc --noEmit --skipLibCheck"
+    "lint": "TIMING=1 eslint \"**/*.{ts,tsx}\"",
+    "lint:fix": "TIMING=1 eslint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
     "@weekly/ui": "*",

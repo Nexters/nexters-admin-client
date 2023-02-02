@@ -1,4 +1,4 @@
-import { Theme } from '@emotion/react';
+import type { Theme } from '@emotion/react';
 
 import { palette } from './palette';
 import { typo } from './typo';

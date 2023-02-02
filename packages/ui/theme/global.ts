@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import emotionReset from 'emotion-reset';
+import reset from 'emotion-reset';
 
 export const globalStyle = css`
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css');
 
-  ${emotionReset}
+  ${reset}
   body {
     font-family: 'Pretendard', Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',

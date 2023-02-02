@@ -1,7 +1,8 @@
 import { ThemeProvider } from '@weekly/ui/theme';
 import type { AppProps } from 'next/app';
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = (props: AppProps) => {
+  const { Component, pageProps } = props;
   return (
     <ThemeProvider>
       <Component {...pageProps} />

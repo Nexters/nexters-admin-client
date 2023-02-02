@@ -1,9 +1,4 @@
 {
-  "*.{js,ts,jsx,tsx}": [
-    "yarn lint:fix",
-    "yarn check-types"
-  ],
-  "*.{js,ts,jsx,tsx,json}": [
-    "prettier --write"
-  ]
+  "*.{js,ts,jsx,tsx}": ["yarn lint:fix"],
+  "*.{js,ts,jsx,tsx,json}": ["prettier --write"]
 }

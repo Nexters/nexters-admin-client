@@ -1,0 +1,25 @@
+{
+  "new-component": {
+    "prefix": "newcomponent",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import styled from '@emotion/styled';",
+      "",
+      "interface ${1:${TM_FILENAME_BASE}}Props {",
+      "};",
+      "",
+      "type Props = Partial<$1Props>;",
+      "",
+      "function $1(props: Props) {",
+      "  const { } = props;",
+      "  return <Container></Container>;",
+      "}",
+      "",
+      "const Container = styled.div<$1Props>``;",
+      "",
+      "export { $1 };",
+      ""
+    ],
+    "description": "파일이름을 기반으로 컴포넌트를 작성을 위한 함수를 생성해줍니다."
+  }
+}

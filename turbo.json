@@ -17,5 +17,8 @@
   },
   "globalEnv": [
     "BASE_URL"
+  ],
+  "globalDependencies": [
+    ".env"
   ]
 }

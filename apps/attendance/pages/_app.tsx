@@ -1,13 +1,16 @@
+import { QueryClientProvider } from '@weekly/api';
 import { ThemeProvider } from '@weekly/ui/theme';
 import type { AppProps } from 'next/app';
 
-function App(props: AppProps) {
+const App = (props: AppProps) => {
   const { Component, pageProps } = props;
   return (
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <QueryClientProvider>
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;

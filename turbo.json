@@ -14,5 +14,12 @@
     "dev": {
       "cache": false
     }
-  }
+  },
+  "globalEnv": [
+    "BASE_URL",
+    "NODE_ENV"
+  ],
+  "globalDependencies": [
+    ".env"
+  ]
 }

@@ -14,5 +14,8 @@
     "dev": {
       "cache": false
     }
-  }
+  },
+  "globalEnv": [
+    "BASE_URL"
+  ]
 }

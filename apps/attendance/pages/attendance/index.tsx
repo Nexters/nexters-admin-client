@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-function Home() {
+function Attendance() {
   return (
     <div>
-      <h1>홈</h1>
+      <h1>Attendance</h1>
       <div>
         <Link href="/">홈</Link>
       </div>
@@ -20,7 +20,7 @@ function Home() {
         <Link href="/attendance">카메라 켜는 출석 페이지</Link>
       </div>
       <div>
-        <Link href="/attendance/id-a">출석 페이지</Link>
+        <Link href="/attendance/id-f">출석 페이지</Link>
       </div>
       <div>
         <Link href="/attendance/me">내 출석정보</Link>
@@ -29,4 +29,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Attendance;

@@ -1,8 +1,9 @@
-import type { PropsWithChildren } from 'react';
 import {
   QueryClient,
   QueryClientProvider as BaseQueryClientProvider,
-} from 'react-query';
+} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import type { PropsWithChildren } from 'react';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,6 +17,9 @@ function QueryClientProvider(props: PropsWithChildren<unknown>) {
   return (
     <BaseQueryClientProvider client={queryClient}>
       {children}
+      <ReactQueryDevtools
+        initialIsOpen={process.env.NODE_ENV !== 'production'}
+      />
     </BaseQueryClientProvider>
   );
 }

@@ -24,6 +24,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:apps/attendance"\
       },\
       {\
+        "name": "@weekley/qr",\
+        "reference": "workspace:apps/qr"\
+      },\
+      {\
         "name": "eslint-config-weekly",\
         "reference": "workspace:packages/eslint-config-weekly"\
       },\
@@ -40,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["@weekley/attendance", ["workspace:apps/attendance"]],\
+      ["@weekley/qr", ["workspace:apps/qr"]],\
       ["@weekly/admin", ["workspace:apps/admin"]],\
       ["@weekly/nexters-admin-client", ["workspace:."]],\
       ["@weekly/tsconfig", ["workspace:packages/tsconfig"]],\
@@ -1176,6 +1181,27 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/attendance/",\
           "packageDependencies": [\
             ["@weekley/attendance", "workspace:apps/attendance"],\
+            ["@babel/core", "npm:7.20.12"],\
+            ["@types/node", "npm:17.0.45"],\
+            ["@types/react", "npm:18.0.26"],\
+            ["@types/react-dom", "npm:18.0.10"],\
+            ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
+            ["@weekly/ui", "workspace:packages/ui"],\
+            ["eslint", "npm:7.32.0"],\
+            ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
+            ["next", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:13.1.1"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:18.2.0"],\
+            ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@weekley/qr", [\
+        ["workspace:apps/qr", {\
+          "packageLocation": "./apps/qr/",\
+          "packageDependencies": [\
+            ["@weekley/qr", "workspace:apps/qr"],\
             ["@babel/core", "npm:7.20.12"],\
             ["@types/node", "npm:17.0.45"],\
             ["@types/react", "npm:18.0.26"],\

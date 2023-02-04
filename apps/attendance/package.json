@@ -10,6 +10,7 @@
     "lint:fix": "TIMING=1 eslint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
+    "@weekly/api": "*",
     "@weekly/ui": "*",
     "next": "^13.1.1",
     "react": "^18.2.0",

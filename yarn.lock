@@ -921,6 +921,7 @@ __metadata:
     "@types/node": ^17.0.12
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
+    "@weekly/api": "*"
     "@weekly/tsconfig": "*"
     "@weekly/ui": "*"
     eslint: 7.32.0
@@ -940,6 +941,7 @@ __metadata:
     "@types/node": ^17.0.12
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
+    "@weekly/api": "*"
     "@weekly/tsconfig": "*"
     "@weekly/ui": "*"
     eslint: 7.32.0
@@ -959,6 +961,7 @@ __metadata:
     "@types/node": ^17.0.12
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
+    "@weekly/api": "*"
     "@weekly/tsconfig": "*"
     "@weekly/ui": "*"
     eslint: 7.32.0
@@ -970,7 +973,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@weekly/api@workspace:packages/api":
+"@weekly/api@*, @weekly/api@workspace:packages/api":
   version: 0.0.0-use.local
   resolution: "@weekly/api@workspace:packages/api"
   dependencies:

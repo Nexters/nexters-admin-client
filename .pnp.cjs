@@ -1190,6 +1190,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.45"],\
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
+            ["@weekly/api", "workspace:packages/api"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["@weekly/ui", "workspace:packages/ui"],\
             ["eslint", "npm:7.32.0"],\
@@ -1211,6 +1212,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.45"],\
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
+            ["@weekly/api", "workspace:packages/api"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["@weekly/ui", "workspace:packages/ui"],\
             ["eslint", "npm:7.32.0"],\
@@ -1232,6 +1234,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.45"],\
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
+            ["@weekly/api", "workspace:packages/api"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["@weekly/ui", "workspace:packages/ui"],\
             ["eslint", "npm:7.32.0"],\

@@ -1,17 +1,17 @@
 import type { GetStaticProps } from 'next';
 
-function Home() {
+function NotFound() {
   return null;
 }
 
 const getStaticProps: GetStaticProps = () => {
   return {
     redirect: {
-      destination: '/admin/attendance',
+      destination: '/',
       permanent: true,
     },
   };
 };
 
 export { getStaticProps };
-export default Home;
+export default NotFound;

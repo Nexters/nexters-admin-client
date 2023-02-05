@@ -7,7 +7,7 @@ function Home() {
 const getStaticProps: GetStaticProps = () => {
   return {
     redirect: {
-      destination: '/admin/attendance',
+      destination: '/attendance',
       permanent: true,
     },
   };

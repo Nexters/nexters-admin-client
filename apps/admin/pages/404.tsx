@@ -7,7 +7,7 @@ function NotFound() {
 const getStaticProps: GetStaticProps = () => {
   return {
     redirect: {
-      destination: '/',
+      destination: '/attendance',
       permanent: true,
     },
   };

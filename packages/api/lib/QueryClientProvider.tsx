@@ -17,9 +17,9 @@ function QueryClientProvider(props: PropsWithChildren<unknown>) {
   return (
     <BaseQueryClientProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools
-        initialIsOpen={process.env.NODE_ENV !== 'production'}
-      />
+      {process.env.NODE_ENV !== 'production' && (
+        <ReactQueryDevtools initialIsOpen={false} />
+      )}
     </BaseQueryClientProvider>
   );
 }

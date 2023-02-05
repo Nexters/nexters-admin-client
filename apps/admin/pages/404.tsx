@@ -1,6 +1,6 @@
 import type { GetStaticProps } from 'next';
 
-function Home() {
+function NotFound() {
   return null;
 }
 
@@ -14,4 +14,4 @@ const getStaticProps: GetStaticProps = () => {
 };
 
 export { getStaticProps };
-export default Home;
+export default NotFound;

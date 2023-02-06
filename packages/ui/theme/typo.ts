@@ -58,7 +58,13 @@ function getTypoObjectKey(typoKey: TypoKey, weightKey: WeightKey) {
   return typoKey + capitalizeFirstLetter(weightKey);
 }
 
-function getEachTypoObject(typoKey: TypoKey, weightKeyArray: WeightKey[]) {
+type TypoObjectKey = `${TypoKey}${Capitalize<WeightKey>}`;
+type TypoObject = Record<
+  TypoObjectKey,
+  ReturnType<typeof generateTypographyString>
+>;
+
+function getTypoObjectByTypoKey(typoKey: TypoKey, weightKeyArray: WeightKey[]) {
   return weightKeyArray.reduce((typoObject, weightKey) => {
     const key = getTypoObjectKey(typoKey, weightKey) as TypoObjectKey;
     return {
@@ -68,17 +74,11 @@ function getEachTypoObject(typoKey: TypoKey, weightKeyArray: WeightKey[]) {
   }, {} as TypoObject);
 }
 
-type TypoObjectKey = `${TypoKey}${Capitalize<WeightKey>}`;
-type TypoObject = Record<
-  TypoObjectKey,
-  ReturnType<typeof generateTypographyString>
->;
-
 function generateTypoObject(schema: typeof typoSchema): TypoObject {
   return (Object.keys(schema) as TypoKey[]).reduce(
     (typoObject, typoKey) => ({
       ...typoObject,
-      ...getEachTypoObject(typoKey, schema[typoKey]),
+      ...getTypoObjectByTypoKey(typoKey, schema[typoKey]),
     }),
     {} as TypoObject
   );

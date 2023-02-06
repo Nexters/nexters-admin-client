@@ -1,6 +1,7 @@
 import { Global, ThemeProvider as BaseThemeProvider } from '@emotion/react';
 import { PropsWithChildren } from 'react';
 
+import { rem } from './common';
 import { globalStyle } from './global';
 import { palette } from './palette';
 import { media, theme } from './theme';
@@ -16,4 +17,4 @@ function ThemeProvider(props: PropsWithChildren<unknown>) {
   );
 }
 
-export { media, palette, ThemeProvider, typo };
+export { media, palette, rem, ThemeProvider, typo };

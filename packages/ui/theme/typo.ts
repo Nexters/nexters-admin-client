@@ -19,6 +19,16 @@ const weightMap = {
   regular: 400,
 } as const;
 
+const lineHeightMap = {
+  h1: 1.6,
+  h2: 1.6,
+  h3: 1.6,
+  h4: 1.5,
+  body1: 1.5,
+  body2: 1.5,
+  caption: 1.6,
+} as const;
+
 function generateTypographyString(
   size: keyof typeof sizeMap,
   weight: keyof typeof weightMap
@@ -26,6 +36,7 @@ function generateTypographyString(
   return css`
     font-size: ${rem(sizeMap[size])};
     font-weight: ${weightMap[weight]};
+    line-height: ${lineHeightMap[size]};
   `;
 }
 

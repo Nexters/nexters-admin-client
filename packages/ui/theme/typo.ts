@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 
-export const rem = (px: number) => `${px / 16}rem`;
+import { rem } from './common';
 
-const sizeMap = {
+type TypoKey = 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2' | 'caption';
+type WeightKey = 'bold' | 'semibold' | 'medium' | 'regular';
+
+const sizeMap: Record<TypoKey, number> = {
   h1: 28,
   h2: 24,
   h3: 20,
@@ -10,16 +13,16 @@ const sizeMap = {
   body1: 16,
   body2: 14,
   caption: 12,
-} as const;
+};
 
-const weightMap = {
+const weightMap: Record<WeightKey, number> = {
   bold: 700,
   semibold: 600,
   medium: 500,
   regular: 400,
-} as const;
+};
 
-const lineHeightMap = {
+const lineHeightMap: Record<TypoKey, number> = {
   h1: 1.6,
   h2: 1.6,
   h3: 1.6,
@@ -27,40 +30,60 @@ const lineHeightMap = {
   body1: 1.5,
   body2: 1.5,
   caption: 1.6,
-} as const;
+};
 
-function generateTypographyString(
-  size: keyof typeof sizeMap,
-  weight: keyof typeof weightMap
-) {
+const typoSchema: Record<TypoKey, Array<WeightKey>> = {
+  h1: ['bold', 'medium', 'regular'],
+  h2: ['bold', 'medium', 'regular'],
+  h3: ['bold', 'medium', 'regular'],
+  h4: ['bold', 'medium', 'regular', 'semibold'],
+  body1: ['bold', 'medium', 'regular'],
+  body2: ['bold', 'medium', 'regular'],
+  caption: ['bold', 'medium', 'regular'],
+};
+
+function generateTypographyString(typoKey: TypoKey, weightKey: WeightKey) {
   return css`
-    font-size: ${rem(sizeMap[size])};
-    font-weight: ${weightMap[weight]};
-    line-height: ${lineHeightMap[size]};
+    font-size: ${rem(sizeMap[typoKey])};
+    font-weight: ${weightMap[weightKey]};
+    line-height: ${lineHeightMap[typoKey]};
   `;
 }
 
-export const typo = {
-  h1Bold: generateTypographyString('h1', 'bold'),
-  h1Medium: generateTypographyString('h1', 'medium'),
-  h1Regular: generateTypographyString('h1', 'regular'),
-  h2Bold: generateTypographyString('h2', 'bold'),
-  h2Medium: generateTypographyString('h2', 'medium'),
-  h2Regular: generateTypographyString('h2', 'regular'),
-  h3Bold: generateTypographyString('h3', 'bold'),
-  h3Medium: generateTypographyString('h3', 'medium'),
-  h3Regular: generateTypographyString('h3', 'regular'),
-  h4Bold: generateTypographyString('h4', 'bold'),
-  h4SemiBold: generateTypographyString('h4', 'semibold'),
-  h4Medium: generateTypographyString('h4', 'medium'),
-  h4Regular: generateTypographyString('h4', 'regular'),
-  body1Bold: generateTypographyString('body1', 'bold'),
-  body1Medium: generateTypographyString('body1', 'medium'),
-  body1Regular: generateTypographyString('body1', 'regular'),
-  body2Bold: generateTypographyString('body2', 'bold'),
-  body2Medium: generateTypographyString('body2', 'medium'),
-  body2Regular: generateTypographyString('body2', 'regular'),
-  captionBold: generateTypographyString('caption', 'bold'),
-  captionMedium: generateTypographyString('caption', 'medium'),
-  captionRegular: generateTypographyString('caption', 'regular'),
-} as const;
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getTypoObjectKey(typoKey: TypoKey, weightKey: WeightKey) {
+  return typoKey + capitalizeFirstLetter(weightKey);
+}
+
+type TypoObjectKey = `${TypoKey}${Capitalize<WeightKey>}`;
+type TypoObject = Record<
+  TypoObjectKey,
+  ReturnType<typeof generateTypographyString>
+>;
+
+function getTypoObjectByTypoKey(typoKey: TypoKey, weightKeyArray: WeightKey[]) {
+  return weightKeyArray.reduce((typoObject, weightKey) => {
+    const key = getTypoObjectKey(typoKey, weightKey) as TypoObjectKey;
+    return {
+      ...typoObject,
+      [key]: generateTypographyString(typoKey, weightKey),
+    };
+  }, {} as TypoObject);
+}
+
+function generateTypoObject(schema: typeof typoSchema): TypoObject {
+  return (Object.keys(schema) as TypoKey[]).reduce(
+    (typoObject, typoKey) => ({
+      ...typoObject,
+      ...getTypoObjectByTypoKey(typoKey, schema[typoKey]),
+    }),
+    {} as TypoObject
+  );
+}
+
+const typo = generateTypoObject(typoSchema);
+
+export { typo };

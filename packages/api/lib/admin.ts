@@ -7,7 +7,10 @@ const fetcher = {
 };
 
 function useAdminAttendanceQuery(generation: number) {
-  const result = useQuery(['admin', 'attendance'], fetcher.get(generation));
+  const result = useQuery({
+    queryKey: ['admin', 'attendance'],
+    queryFn: () => fetcher.get(generation),
+  });
   return result;
 }
 

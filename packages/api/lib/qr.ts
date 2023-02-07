@@ -7,7 +7,7 @@ const fetcher = {
 };
 
 function useQRQuery() {
-  const result = useQuery(['qr'], fetcher.get);
+  const result = useQuery({ queryKey: ['qr'], queryFn: fetcher.get });
   return result;
 }
 

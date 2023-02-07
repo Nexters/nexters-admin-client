@@ -1,8 +1,8 @@
 import { useRedirectEffect } from '~/hooks/useRedirectEffect';
 
-function Home() {
+function NotFound() {
   useRedirectEffect(process.env.ADMIN_URL ?? '');
   return null;
 }
 
-export default Home;
+export default NotFound;

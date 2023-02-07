@@ -21,7 +21,7 @@ const weightMap = {
 
 function generateTypographyString(
   size: keyof typeof sizeMap,
-  weight: keyof typeof weightMap
+  weight: keyof typeof weightMap,
 ) {
   return css`
     font-size: ${rem(sizeMap[size])};

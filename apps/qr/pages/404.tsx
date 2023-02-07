@@ -1,17 +1,8 @@
-import type { GetStaticProps } from 'next';
+import { useRedirectEffect } from '~/hooks/useRedirectEffect';
 
 function NotFound() {
+  useRedirectEffect(process.env.ADMIN_URL ?? '');
   return null;
 }
 
-const getStaticProps: GetStaticProps = () => {
-  return {
-    redirect: {
-      destination: '/',
-      permanent: true,
-    },
-  };
-};
-
-export { getStaticProps };
 export default NotFound;

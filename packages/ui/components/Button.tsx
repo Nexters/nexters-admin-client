@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { rem } from '../theme';
+
 export interface ButtonProps extends React.ComponentProps<'button'> {
   fullWidth: boolean;
 }
@@ -8,9 +9,9 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
 type Props = Partial<ButtonProps>;
 
 function Button(props: Props) {
-  const { children, fullWidth } = props;
+  const { children, fullWidth = false } = props;
   return (
-    <Container fullWidth={fullWidth ?? false} {...props}>
+    <Container fullWidth={fullWidth} {...props}>
       {children}
     </Container>
   );

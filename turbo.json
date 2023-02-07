@@ -16,7 +16,8 @@
     }
   },
   "globalEnv": [
-    "BASE_URL",
+    "API_URL",
+    "ADMIN_URL",
     "NODE_ENV"
   ],
   "globalDependencies": [

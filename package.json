@@ -10,6 +10,7 @@
     "dev": "turbo run dev --parallel",
     "dev:admin": "turbo run dev --filter=admin",
     "dev:attendance": "turbo run dev --filter=attendance",
+    "dev:qr": "turbo run dev --filter=qr",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

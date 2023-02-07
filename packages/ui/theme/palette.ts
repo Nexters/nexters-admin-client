@@ -1,4 +1,4 @@
-export const palette = {
+const palette = {
   grayScale: {
     g10: '#FAFAFC',
     g20: '#F5F6FA',
@@ -22,3 +22,5 @@ export const palette = {
     pink100: '#FF6BF9',
   },
 };
+
+export { palette };

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import reset from 'emotion-reset';
 
-export const globalStyle = css`
+const globalStyle = css`
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css');
 
   ${reset}
@@ -33,3 +33,5 @@ export const globalStyle = css`
     outline: none;
   }
 `;
+
+export { globalStyle };

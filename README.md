@@ -10,16 +10,22 @@ yarn
 
 - 환경변수 예시 복사 후 설정
 
+`apps` 폴더 내부에 있는 각 앱별로 환경 변수를 설정해야한다.
+
+`turbo`의 `globalEnv`와 `globalDependencies`가 정상적으로 동작하지 않는 것 같다. ~~(아마도)~~
+
 ```shell
 cp .env.example .env
 ```
 
 - 서비스 워커 설정하기
 
-msw를 이용하는 각 프로젝트 별로 실행
+`msw`를 이용하는 각 프로젝트 별로 실행
 
 ```shell
-cd apps/{프로젝트 이름} && yarn msw init ./public
+cd apps/admin && yarn msw init ./public
+cd ../../ # root로 이동
+cd apps/attendance && yarn msw init ./public
 ```
 
 - 개발서버 켜기

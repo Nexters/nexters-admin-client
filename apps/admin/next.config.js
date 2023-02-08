@@ -2,5 +2,5 @@
 
 module.exports = {
   swcMinify: true,
-  transpilePackages: ['@weekly/ui', '@weekly/api'],
+  transpilePackages: ['@weekly/ui', '@weekly/api', '@weekly/msw'],
 };

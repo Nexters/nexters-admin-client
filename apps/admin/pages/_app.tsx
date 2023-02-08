@@ -10,7 +10,7 @@ const App = (props: AppProps) => {
   );
   useEffect(() => {
     async function init() {
-      const { initMocks } = await import('~/mocks');
+      const { initMocks } = await import('@weekly/msw');
       await initMocks();
       setShouldRender(true);
     }

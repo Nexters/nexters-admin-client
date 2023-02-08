@@ -3,10 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 import { api } from './common';
 
 const fetcher = {
-  get: () => api.get('/book'),
+  get: async () => {
+    const { data } = await api.get<{ title: string; description: string }>(
+      '/book',
+    );
+    return data;
+  },
 };
 
-function useAdminAttendanceQuery(generation: number) {
+function useAdminAttendanceQuery() {
   const result = useQuery({
     queryKey: ['admin', 'attendance'],
     queryFn: fetcher.get,

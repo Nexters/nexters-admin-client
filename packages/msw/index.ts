@@ -1,9 +1,9 @@
 async function initMocks() {
   if (typeof window === 'undefined') {
-    const { server } = await import('~/mocks/server');
+    const { server } = await import('./lib/server');
     server.listen();
   } else {
-    const { worker } = await import('~/mocks/browser');
+    const { worker } = await import('./lib/browser');
     worker.start();
   }
 }

@@ -1,9 +1,9 @@
 import { rest } from 'msw';
 
-import { Book } from '~/mocks/types';
+import { Book } from './types';
 
-export const handlers = [
-  rest.get('https://mock-api-server/book', (_req, res, ctx) => {
+const handlers = [
+  rest.get('https://mock-api-server/book', async (_req, res, ctx) => {
     return res(
       ctx.json<Book>({
         title: 'Lord of the Rings',
@@ -13,3 +13,5 @@ export const handlers = [
     );
   }),
 ] as const;
+
+export { handlers };

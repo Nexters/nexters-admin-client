@@ -1,8 +1,15 @@
+import { useAdminAttendanceQuery } from '@weekly/api';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 function Home() {
+  const { data } = useAdminAttendanceQuery();
   return (
     <div>
+      <Suspense fallback={<h2>Loading</h2>}>
+        <div>{data?.title}</div>
+        <div>{data?.description}</div>
+      </Suspense>
       <h1>홈</h1>
       <div>
         <Link href="/">홈</Link>

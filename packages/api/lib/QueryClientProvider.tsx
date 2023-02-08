@@ -7,7 +7,12 @@ import type { PropsWithChildren } from 'react';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { suspense: true, useErrorBoundary: true },
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+      suspense: true,
+      useErrorBoundary: true,
+    },
     mutations: { useErrorBoundary: true },
   },
 });

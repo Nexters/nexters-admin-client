@@ -1,6 +1,6 @@
 module.exports = {
   plugins: ['import', 'eslint-plugin-simple-import-sort', 'unused-imports'],
-  extends: ['next', 'turbo', 'prettier', 'plugin:import/recommended'],
+  extends: ['next', 'prettier', 'plugin:import/recommended'],
   rules: {
     'react/jsx-key': 'off',
     'react/no-unescaped-entities': 'off',

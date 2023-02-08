@@ -7,7 +7,7 @@ const fetcher = {
 };
 
 function useAttendanceQuery() {
-  const result = useQuery(['attendance'], fetcher.get);
+  const result = useQuery({ queryKey: ['attendance'], queryFn: fetcher.get });
   return result;
 }
 

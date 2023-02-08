@@ -6,8 +6,11 @@ const fetcher = {
   get: () => api.get('/book'),
 };
 
-function useAdminAttendanceQuery() {
-  const result = useQuery(['admin', 'attendance'], fetcher.get);
+function useAdminAttendanceQuery(generation: number) {
+  const result = useQuery({
+    queryKey: ['admin', 'attendance'],
+    queryFn: fetcher.get,
+  });
   return result;
 }
 

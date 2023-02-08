@@ -14,6 +14,14 @@ yarn
 cp .env.example .env
 ```
 
+- 서비스 워커 설정하기
+
+msw를 이용하는 각 프로젝트 별로 실행
+
+```shell
+cd apps/{프로젝트 이름} && yarn msw init ./public
+```
+
 - 개발서버 켜기
 
 ```shell

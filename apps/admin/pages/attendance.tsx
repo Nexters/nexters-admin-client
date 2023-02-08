@@ -1,6 +1,8 @@
+import { useAdminAttendanceQuery } from '@weekly/api';
 import Link from 'next/link';
 
 function Attendance() {
+  useAdminAttendanceQuery();
   return (
     <div>
       <h1>Attendance</h1>

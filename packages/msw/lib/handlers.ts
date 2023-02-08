@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { Book } from './types';
 
 const handlers = [
-  rest.get('https://mock-api-server/book', async (_req, res, ctx) => {
+  rest.get('https://mock-api-server/book', (_req, res, ctx) => {
     return res(
       ctx.json<Book>({
         title: 'Lord of the Rings',

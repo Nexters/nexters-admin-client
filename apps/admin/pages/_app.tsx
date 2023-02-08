@@ -3,7 +3,7 @@ import { ThemeProvider } from '@weekly/ui/theme';
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
 
-const App = (props: AppProps) => {
+function App(props: AppProps) {
   const { Component, pageProps } = props;
   const [shouldRender, setShouldRender] = useState(
     !process.env.NEXT_PUBLIC_API_MOCKING,
@@ -28,6 +28,6 @@ const App = (props: AppProps) => {
       </ThemeProvider>
     </QueryClientProvider>
   );
-};
+}
 
 export default App;

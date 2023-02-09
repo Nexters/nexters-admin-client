@@ -1,5 +1,7 @@
 import { rest } from 'msw';
 
+import { qr } from './data';
+import type { QRResponse } from './types';
 import { API_URL } from './url';
 import { VARIABLES } from './variables';
 
@@ -29,6 +31,59 @@ const memberAttendance = rest.post(
   },
 );
 
-const handlers = [memberAttendance] as const;
+// 어드민 QR 코드 조회 mock API
+const getQrCode = rest.get(
+  process.env.NEXT_PUBLIC_API_URL + API_URL.QR_CODE,
+  async (request, response, context) => {
+    // 인증 관련 검증 따로 진행하지 않음
+    const token = request.headers.get('Authorization');
+
+    console.log(
+      `%c[GET:${API_URL.QR_CODE}]: { token: ${token} }`,
+      'color: orange',
+    );
+
+    return response(context.status(200));
+  },
+);
+
+// 어드민 QR 코드 생성 mock API
+const postQrCode = rest.post(
+  process.env.NEXT_PUBLIC_API_URL + API_URL.QR_CODE,
+  async (request, response, context) => {
+    // 인증 관련 검증 따로 진행하지 않음
+    const token = request.headers.get('Authorization');
+
+    console.log(
+      `%c[POST:${API_URL.QR_CODE}]: { token: ${token} }`,
+      'color: orange',
+    );
+
+    return response(context.status(200), context.json<QRResponse>(qr));
+  },
+);
+
+// 어드민 QR 코드 생성 중단 mock API
+const deleteQrCode = rest.delete(
+  process.env.NEXT_PUBLIC_API_URL + API_URL.QR_CODE,
+  async (request, response, context) => {
+    // 인증 관련 검증 따로 진행하지 않음
+    const token = request.headers.get('Authorization');
+
+    console.log(
+      `%c[DELETE:${API_URL.QR_CODE}]: { token: ${token} }`,
+      'color: orange',
+    );
+
+    return response(context.status(204));
+  },
+);
+
+const handlers = [
+  memberAttendance,
+  getQrCode,
+  postQrCode,
+  deleteQrCode,
+] as const;
 
 export { handlers };

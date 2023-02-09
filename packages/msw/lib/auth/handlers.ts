@@ -1,11 +1,7 @@
 import type { DefaultBodyType, ResponseComposition, RestContext } from 'msw';
 import { rest } from 'msw';
 
-import type {
-  AdminLoginRequestBody,
-  LoginRequestBody,
-  LoginResponse,
-} from './types';
+import type { LoginResponse } from './types';
 import { API_URL } from './url';
 import { VARIABLES } from './variables';
 
@@ -27,7 +23,7 @@ function authentication(
 const memberLogin = rest.post(
   process.env.NEXT_PUBLIC_API_URL + API_URL.MEMBER_LOGIN,
   async (request, response, context) => {
-    const { email, password } = await request.json<LoginRequestBody>();
+    const { email, password } = await request.json();
 
     console.log(
       `%c[POST:${API_URL.MEMBER_LOGIN}]: { email: ${email} }`,
@@ -50,7 +46,7 @@ const memberLogin = rest.post(
 const adminLogin = rest.post(
   process.env.NEXT_PUBLIC_API_URL + API_URL.ADMIN_LOGIN,
   async (request, response, context) => {
-    const { username, password } = await request.json<AdminLoginRequestBody>();
+    const { username, password } = await request.json();
 
     console.log(
       `%c[POST:${API_URL.ADMIN_LOGIN}]: { username: ${username} }`,

@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import type { MeResponseBody, PasswordRequestBody } from './types';
+import type { MeResponseBody } from './types';
 import { API_URL } from './url';
 import { VARIABLES } from './variables';
 
@@ -9,7 +9,7 @@ const password = rest.put(
   process.env.NEXT_PUBLIC_API_URL + API_URL.PASSWORD,
   async (request, response, context) => {
     // 인증 관련 검증 따로 진행하지 않음
-    const { password } = await request.json<PasswordRequestBody>();
+    const { password } = await request.json();
     const token = request.headers.get('Authorization');
 
     console.log(

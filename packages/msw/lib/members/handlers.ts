@@ -70,7 +70,7 @@ const members = rest.get(
 
 // 어드민 단건 회원 생성 mock API
 const createMember = rest.post(
-  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBERS),
+  process.env.NEXT_PUBLIC_API_URL + API_URL.MEMBERS,
   async (request, response, context) => {
     const {
       name,
@@ -113,7 +113,7 @@ const createMember = rest.post(
 
 // 어드민 복수 회원 생성 mock API
 const createMembersBulk = rest.post(
-  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBERS_BULK),
+  process.env.NEXT_PUBLIC_API_URL + API_URL.MEMBERS_BULK,
   async (request, response, context) => {
     // TODO: data 형식 (csv 포맷)으로 보낼지 확인하기
     const { data } = await request.json();
@@ -136,7 +136,7 @@ const createMembersBulk = rest.post(
 
 // 어드민 회원 수정 mock API
 const updateMember = rest.put(
-  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER),
+  process.env.NEXT_PUBLIC_API_URL + API_URL.MEMBER,
   async (request, response, context) => {
     const { id } = request.params;
     const { name, gender, email, phoneNumber, generations, isManager } =
@@ -162,7 +162,7 @@ const updateMember = rest.put(
 
 // 어드민 회원 삭제 mock API
 const deleteMember = rest.delete(
-  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER),
+  process.env.NEXT_PUBLIC_API_URL + API_URL.MEMBER,
   async (request, response, context) => {
     const { id } = request.params;
 
@@ -181,7 +181,7 @@ const deleteMember = rest.delete(
 
 // 어드민 회원 활동구분 수정 mock API
 const updateMemberStatus = rest.put(
-  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER_STATUS),
+  process.env.NEXT_PUBLIC_API_URL + API_URL.MEMBER_STATUS,
   async (request, response, context) => {
     const { id } = request.params;
     const { status } = await request.json();
@@ -208,7 +208,7 @@ const updateMemberStatus = rest.put(
 
 // 어드민 회원 직군 수정 mock API
 const updateMemberPosition = rest.put(
-  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER_POSITION),
+  process.env.NEXT_PUBLIC_API_URL + API_URL.MEMBER_POSITION,
   async (request, response, context) => {
     const { id } = request.params;
     const { position, subPosition } = await request.json();

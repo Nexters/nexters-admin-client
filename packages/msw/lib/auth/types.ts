@@ -1,10 +1,15 @@
-type RequestBody = {
+type LoginRequestBody = {
   email: string;
   password: string;
 };
 
-type AuthResponse = {
+type AdminLoginRequestBody = {
+  username: string;
+  password: string;
+};
+
+type LoginResponse = {
   data: string; // JWT Token
 };
 
-export type { AuthResponse, RequestBody };
+export type { AdminLoginRequestBody, LoginRequestBody, LoginResponse };

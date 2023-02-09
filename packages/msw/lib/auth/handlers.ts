@@ -1,26 +1,55 @@
+import type { DefaultBodyType, ResponseComposition, RestContext } from 'msw';
 import { rest } from 'msw';
 
-import type { LoginRequestBody, LoginResponse } from './types';
-import { TEST_VARIABLES } from './variables';
+import type {
+  AdminLoginRequestBody,
+  LoginRequestBody,
+  LoginResponse,
+} from './types';
+import { VARIABLES } from './variables';
 
-const handlers = [
-  // 로그인 목 API
-  rest.post(
-    'https://mock-api-server/api/auth/login/member',
-    async (request, response, context) => {
-      const { email, password } = await request.json<LoginRequestBody>();
-      if (
-        email === TEST_VARIABLES.EMAIL &&
-        password === TEST_VARIABLES.PASSWORD
-      ) {
-        return response(
-          context.status(200),
-          context.json<LoginResponse>({ data: TEST_VARIABLES.SUCCESS_TOKEN }),
-        );
-      }
-      return response(context.status(401));
-    },
-  ),
-] as const;
+function authentication(
+  response: ResponseComposition<DefaultBodyType>,
+  context: RestContext,
+  predicate: () => boolean,
+) {
+  if (predicate()) {
+    return response(
+      context.status(200),
+      context.json<LoginResponse>({ data: VARIABLES.SUCCESS_TOKEN }),
+    );
+  }
+  return response(context.status(401));
+}
+
+// 사용자 로그인 mock API
+const memberLogin = rest.post(
+  'https://mock-api-server/api/auth/login/member',
+  async (request, response, context) => {
+    const { email, password } = await request.json<LoginRequestBody>();
+    return authentication(
+      response,
+      context,
+      () => email === VARIABLES.EMAIL && password === VARIABLES.PASSWORD,
+    );
+  },
+);
+
+// 어드민 로그인 mock API
+const adminLogin = rest.post(
+  'https://mock-api-server/api/auth/login/admin',
+  async (request, response, context) => {
+    const { username, password } = await request.json<AdminLoginRequestBody>();
+    return authentication(
+      response,
+      context,
+      () =>
+        username === VARIABLES.ADMIN_USERNAME &&
+        password === VARIABLES.ADMIN_PASSWORD,
+    );
+  },
+);
+
+const handlers = [memberLogin, adminLogin] as const;
 
 export { handlers };

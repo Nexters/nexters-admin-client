@@ -25,9 +25,19 @@ function authentication(
 
 // 사용자 로그인 mock API
 const memberLogin = rest.post(
-  API_URL.MEMBER_LOGIN,
+  process.env.NEXT_PUBLIC_API_URL + API_URL.MEMBER_LOGIN,
   async (request, response, context) => {
     const { email, password } = await request.json<LoginRequestBody>();
+
+    console.log(
+      `%c[POST:${API_URL.MEMBER_LOGIN}]: { email: ${email} }`,
+      'color: orange',
+    );
+    console.log(
+      `%c[POST:${API_URL.MEMBER_LOGIN}]: { password: ${password} }`,
+      'color: orange',
+    );
+
     return authentication(
       response,
       context,
@@ -38,9 +48,19 @@ const memberLogin = rest.post(
 
 // 어드민 로그인 mock API
 const adminLogin = rest.post(
-  API_URL.ADMIN_LOGIN,
+  process.env.NEXT_PUBLIC_API_URL + API_URL.ADMIN_LOGIN,
   async (request, response, context) => {
     const { username, password } = await request.json<AdminLoginRequestBody>();
+
+    console.log(
+      `%c[POST:${API_URL.ADMIN_LOGIN}]: { username: ${username} }`,
+      'color: orange',
+    );
+    console.log(
+      `%c[POST:${API_URL.ADMIN_LOGIN}]: { password: ${password} }`,
+      'color: orange',
+    );
+
     return authentication(
       response,
       context,

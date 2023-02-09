@@ -178,6 +178,61 @@ const deleteMember = rest.delete(
   },
 );
 
+// 어드민 회원 활동구분 수정 mock API
+const updateMemberStatus = rest.put(
+  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER_STATUS),
+  async (request, response, context) => {
+    const { id } = request.params;
+    const { status } = await request.json();
+
+    // 인증 관련 검증 따로 진행하지 않음
+    const token = request.headers.get('Authorization');
+
+    console.log(
+      `%c[PUT:${API_URL.MEMBER_STATUS}]: { id: ${id} }`,
+      'color: orange',
+    );
+    console.log(
+      `%c[PUT:${API_URL.MEMBER_STATUS}]: { status: ${status} }`,
+      'color: orange',
+    );
+    console.log(
+      `%c[PUT:${API_URL.MEMBER_STATUS}]: { token: ${token} }`,
+      'color: orange',
+    );
+
+    return response(context.status(200));
+  },
+);
+
+// 어드민 회원 직군 수정 mock API
+const updateMemberPosition = rest.put(
+  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER_POSITION),
+  async (request, response, context) => {
+    const { id } = request.params;
+    const { position, subPosition } = await request.json();
+    const data = { position, subPosition };
+
+    // 인증 관련 검증 따로 진행하지 않음
+    const token = request.headers.get('Authorization');
+
+    console.log(
+      `%c[PUT:${API_URL.MEMBER_POSITION}]: { id: ${id} }`,
+      'color: orange',
+    );
+    console.log(
+      `%c[PUT:${API_URL.MEMBER_POSITION}]: { data: ${data} }`,
+      'color: orange',
+    );
+    console.log(
+      `%c[PUT:${API_URL.MEMBER_POSITION}]: { token: ${token} }`,
+      'color: orange',
+    );
+
+    return response(context.status(200));
+  },
+);
+
 const handlers = [
   password,
   me,
@@ -186,6 +241,8 @@ const handlers = [
   createMembersBulk,
   updateMember,
   deleteMember,
+  updateMemberStatus,
+  updateMemberPosition,
 ] as const;
 
 export { handlers };

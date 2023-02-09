@@ -98,11 +98,11 @@ const createMember = rest.post(
     };
 
     console.log(
-      `%c[POST:${API_URL.MEMBERS}]: { token: ${token} }`,
+      `%c[POST:${API_URL.MEMBERS}]: { member: ${member} }`,
       'color: orange',
     );
     console.log(
-      `%c[POST:${API_URL.MEMBERS}]: { member: ${member} }`,
+      `%c[POST:${API_URL.MEMBERS}]: { token: ${token} }`,
       'color: orange',
     );
 
@@ -121,11 +121,11 @@ const createMembersBulk = rest.post(
     const token = request.headers.get('Authorization');
 
     console.log(
-      `%c[POST:${API_URL.MEMBERS_BULK}]: { token: ${token} }`,
+      `%c[POST:${API_URL.MEMBERS_BULK}]: { data: ${data} }`,
       'color: orange',
     );
     console.log(
-      `%c[POST:${API_URL.MEMBERS_BULK}]: { data: ${data} }`,
+      `%c[POST:${API_URL.MEMBERS_BULK}]: { token: ${token} }`,
       'color: orange',
     );
 
@@ -137,6 +137,7 @@ const createMembersBulk = rest.post(
 const updateMember = rest.put(
   (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER),
   async (request, response, context) => {
+    const { id } = request.params;
     const { name, gender, email, phoneNumber, generations, isManager } =
       await request.json();
     const data = { name, gender, email, phoneNumber, generations, isManager };
@@ -144,12 +145,13 @@ const updateMember = rest.put(
     // 인증 관련 검증 따로 진행하지 않음
     const token = request.headers.get('Authorization');
 
+    console.log(`%c[PUT:${API_URL.MEMBER}]: { id: ${id} }`, 'color: orange');
     console.log(
-      `%c[PUT:${API_URL.MEMBER}]: { token: ${token} }`,
+      `%c[PUT:${API_URL.MEMBER}]: { data: ${data} }`,
       'color: orange',
     );
     console.log(
-      `%c[PUT:${API_URL.MEMBER}]: { data: ${data} }`,
+      `%c[PUT:${API_URL.MEMBER}]: { token: ${token} }`,
       'color: orange',
     );
 
@@ -161,9 +163,12 @@ const updateMember = rest.put(
 const deleteMember = rest.delete(
   (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER),
   async (request, response, context) => {
+    const { id } = request.params;
+
     // 인증 관련 검증 따로 진행하지 않음
     const token = request.headers.get('Authorization');
 
+    console.log(`%c[DELETE:${API_URL.MEMBER}]: { id: ${id} }`, 'color: orange');
     console.log(
       `%c[DELETE:${API_URL.MEMBER}]: { token: ${token} }`,
       'color: orange',

@@ -3,6 +3,7 @@ const API_URL = {
   ME: '/api/members/me',
   MEMBERS: 'api/members',
   MEMBERS_BULK: 'api/members/bulk',
+  MEMBER: '/api/members/:id',
 };
 
 export { API_URL };

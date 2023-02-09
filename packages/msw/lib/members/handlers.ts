@@ -133,12 +133,54 @@ const createMembersBulk = rest.post(
   },
 );
 
+// 어드민 회원 수정 mock API
+const updateMember = rest.put(
+  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER),
+  async (request, response, context) => {
+    const { name, gender, email, phoneNumber, generations, isManager } =
+      await request.json();
+    const data = { name, gender, email, phoneNumber, generations, isManager };
+
+    // 인증 관련 검증 따로 진행하지 않음
+    const token = request.headers.get('Authorization');
+
+    console.log(
+      `%c[PUT:${API_URL.MEMBER}]: { token: ${token} }`,
+      'color: orange',
+    );
+    console.log(
+      `%c[PUT:${API_URL.MEMBER}]: { data: ${data} }`,
+      'color: orange',
+    );
+
+    return response(context.status(200));
+  },
+);
+
+// 어드민 회원 삭제 mock API
+const deleteMember = rest.delete(
+  (process.env.NEXT_PUBLIC_API_URL = API_URL.MEMBER),
+  async (request, response, context) => {
+    // 인증 관련 검증 따로 진행하지 않음
+    const token = request.headers.get('Authorization');
+
+    console.log(
+      `%c[DELETE:${API_URL.MEMBER}]: { token: ${token} }`,
+      'color: orange',
+    );
+
+    return response(context.status(204));
+  },
+);
+
 const handlers = [
   password,
   me,
   members,
   createMember,
   createMembersBulk,
+  updateMember,
+  deleteMember,
 ] as const;
 
 export { handlers };

@@ -3,4 +3,4 @@ type QRResponse = {
   sessionId: number;
 };
 
-export { QRResponse };
+export type { QRResponse };

@@ -1,4 +1,4 @@
-import { Member } from './types';
+import type { Member } from './types';
 
 const membersData: Member[] = [
   {

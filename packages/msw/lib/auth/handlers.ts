@@ -6,6 +6,7 @@ import type {
   LoginRequestBody,
   LoginResponse,
 } from './types';
+import { API_URL } from './url';
 import { VARIABLES } from './variables';
 
 function authentication(
@@ -24,7 +25,7 @@ function authentication(
 
 // 사용자 로그인 mock API
 const memberLogin = rest.post(
-  'https://mock-api-server/api/auth/login/member',
+  API_URL.MEMBER_LOGIN,
   async (request, response, context) => {
     const { email, password } = await request.json<LoginRequestBody>();
     return authentication(
@@ -37,7 +38,7 @@ const memberLogin = rest.post(
 
 // 어드민 로그인 mock API
 const adminLogin = rest.post(
-  'https://mock-api-server/api/auth/login/admin',
+  API_URL.ADMIN_LOGIN,
   async (request, response, context) => {
     const { username, password } = await request.json<AdminLoginRequestBody>();
     return authentication(

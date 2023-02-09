@@ -1497,6 +1497,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/msw/",\
           "packageDependencies": [\
             ["@weekly/msw", "workspace:packages/msw"],\
+            ["@types/node", "npm:18.13.0"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\

@@ -1482,6 +1482,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.45"],\
             ["@types/react", "npm:17.0.52"],\
             ["@types/react-dom", "npm:17.0.18"],\
+            ["@weekly/msw", "workspace:packages/msw"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["axios", "npm:1.3.2"],\
             ["eslint", "npm:7.32.0"],\

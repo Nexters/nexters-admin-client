@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
+import { API_URL } from '@weekly/msw';
 
 import { api } from './common';
-import { API_URL } from './url';
 
 type LoginRequestBody = {
   email: string;

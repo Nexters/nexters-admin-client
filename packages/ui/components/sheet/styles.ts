@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { DEFAULT_THEME } from '@myrealtrip/web-ui-theme';
+import { DEFAULT_THEME } from '@weekly/theme';
 import { CSSProperties } from 'react';
 
 const styles: { [key: string]: CSSProperties } = {

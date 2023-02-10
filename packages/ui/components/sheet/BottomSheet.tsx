@@ -36,7 +36,7 @@ export interface BottomSheetProps extends SheetProps {
  *
  * @example
  * ```tsx
- * import { BottomSheet } from '@myrealtrip/web-ui-components';
+ * import { BottomSheet } from '@weekly/ui';
  *
  * <BottomSheet isOpen={isOpen} snapPoints={[0, 300, 600]} detent="content">
  *   바텀시트 본문 입니다.

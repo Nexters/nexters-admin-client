@@ -1,17 +1,8 @@
-import type { GetStaticProps } from 'next';
+import { useRedirectEffect } from '~/hooks/useRedirectEffect';
 
 function NotFound() {
+  useRedirectEffect('/attendance');
   return null;
 }
 
-const getStaticProps: GetStaticProps = () => {
-  return {
-    redirect: {
-      destination: '/attendance',
-      permanent: true,
-    },
-  };
-};
-
-export { getStaticProps };
 export default NotFound;

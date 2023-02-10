@@ -1414,6 +1414,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@weekly/msw", "workspace:packages/msw"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["@weekly/ui", "workspace:packages/ui"],\
+            ["axios", "npm:1.3.2"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
             ["msw", "virtual:e0664ecf96a74da8ee95d962322b98313769824253283f7e26885bed878e141af80dc67b82bae219e1be20a163a63ce9b39f840b2f9f0444e21789c59f5a99af#npm:1.0.0"],\
@@ -1435,10 +1436,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
             ["@weekly/api", "workspace:packages/api"],\
+            ["@weekly/msw", "workspace:packages/msw"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["@weekly/ui", "workspace:packages/ui"],\
+            ["axios", "npm:1.3.2"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
+            ["msw", "virtual:e0664ecf96a74da8ee95d962322b98313769824253283f7e26885bed878e141af80dc67b82bae219e1be20a163a63ce9b39f840b2f9f0444e21789c59f5a99af#npm:1.0.0"],\
             ["next", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:13.1.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:18.2.0"],\

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '../emotion';
 
 interface TextFieldProps extends React.ComponentProps<'input'> {
   error: string;

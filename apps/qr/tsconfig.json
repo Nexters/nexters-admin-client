@@ -1,12 +1,6 @@
 {
   "extends": "@weekly/tsconfig/nextjs.json",
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "../../**/*.ts",
-    "../../**/*.tsx"
-  ],
+  "include": ["."],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": ".",

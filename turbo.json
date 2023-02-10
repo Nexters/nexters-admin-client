@@ -3,11 +3,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"],
-      "env": [
-        "NEXT_PUBLIC_API_URL",
-        "NEXT_PUBLIC_ADMIN_URL"
-      ]
+      "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
       "outputs": [],
@@ -20,8 +16,5 @@
     "dev": {
       "cache": false
     }
-  },
-  "globalEnv": [
-    "NODE_ENV"
-  ]
+  }
 }

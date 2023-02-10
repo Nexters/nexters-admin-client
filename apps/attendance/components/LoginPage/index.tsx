@@ -1,11 +1,20 @@
 import { styled } from '@weekly/ui';
 import Image from 'next/image';
+import { useCallback, useState } from 'react';
 
 import logo from '~/images/logo.png';
 
+import { BottomSheet } from './BottomSheet';
 import { LoginForm } from './LoginForm';
 
 function LoginPage() {
+  const [openBottomSheet, setOpenBottomSheet] = useState(false);
+  const onCloseBottomSheet = useCallback(() => {
+    setOpenBottomSheet(false);
+  }, []);
+  const onClickHelpButton = useCallback(() => {
+    setOpenBottomSheet(true);
+  }, []);
   return (
     <Container>
       <ImageContainer>
@@ -22,7 +31,10 @@ function LoginPage() {
         Weekly에 오신 걸 환영해요!`}
       </Description>
       <LoginForm />
-      <HelpButton>로그인 방법이 궁금해요</HelpButton>
+      <HelpButton onClick={onClickHelpButton}>
+        로그인 방법이 궁금해요
+      </HelpButton>
+      <BottomSheet open={openBottomSheet} onRequestClose={onCloseBottomSheet} />
     </Container>
   );
 }

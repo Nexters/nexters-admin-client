@@ -3,4 +3,8 @@ type QRResponse = {
   sessionId: number;
 };
 
-export type { QRResponse };
+type MemberAttendanceBody = {
+  nonce: string;
+};
+
+export type { MemberAttendanceBody, QRResponse };

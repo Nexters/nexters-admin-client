@@ -5,6 +5,8 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { PropsWithChildren } from 'react';
 
+import { AxiosProvider } from './AxiosProvider';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -19,12 +21,14 @@ const queryClient = new QueryClient({
 function QueryClientProvider(props: PropsWithChildren<unknown>) {
   const { children } = props;
   return (
-    <BaseQueryClientProvider client={queryClient}>
-      {children}
-      {process.env.NODE_ENV !== 'production' && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
-    </BaseQueryClientProvider>
+    <AxiosProvider>
+      <BaseQueryClientProvider client={queryClient}>
+        {children}
+        {process.env.NODE_ENV !== 'production' && (
+          <ReactQueryDevtools initialIsOpen={false} />
+        )}
+      </BaseQueryClientProvider>
+    </AxiosProvider>
   );
 }
 

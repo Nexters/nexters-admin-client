@@ -11,4 +11,5 @@ async function initMocks() {
 initMocks();
 
 export { initMocks };
+export * from './lib/types';
 export { API_URL } from './lib/urls';

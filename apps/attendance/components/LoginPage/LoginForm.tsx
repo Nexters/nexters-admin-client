@@ -33,7 +33,9 @@ function LoginForm() {
   );
 }
 
-const Container = styled.form``;
+const Container = styled.form`
+  width: 100%;
+`;
 
 const EmailTextField = styled(TextField)`
   margin-bottom: ${({ theme }) => theme.rem(16)};

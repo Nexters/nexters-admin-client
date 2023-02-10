@@ -45,7 +45,6 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 453px;
   margin-bottom: ${({ theme }) => theme.rem(36)};
 `;
 

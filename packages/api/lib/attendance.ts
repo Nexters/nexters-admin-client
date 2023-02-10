@@ -1,3 +1,4 @@
+// TODO: 반환 타입 없는 것들 확인하기
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { API_URL } from '@weekly/msw';
 
@@ -18,7 +19,6 @@ function useMemberAttendanceMutation() {
   return useMutation({ mutationFn });
 }
 
-// TODO: 반환 데이터 타입 처리
 function useQRCodeQuey() {
   const axios = useAxios();
   const queryFn = async () => {
@@ -28,7 +28,6 @@ function useQRCodeQuey() {
   return useQuery({ queryKey: ['attendance', 'qr'], queryFn });
 }
 
-// TODO: 반환 데이터 타입 처리
 function useCreateQRCodeMutation() {
   const axios = useAxios();
   const mutationFn = async () => {

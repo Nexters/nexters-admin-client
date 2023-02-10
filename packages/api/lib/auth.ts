@@ -1,21 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
+import type {
+  AdminLoginRequestBody,
+  LoginRequestBody,
+  LoginResponse,
+} from '@weekly/msw';
 import { API_URL } from '@weekly/msw';
 
 import { useAxios } from './AxiosProvider';
-
-type LoginRequestBody = {
-  email: string;
-  password: string;
-};
-
-type AdminLoginRequestBody = {
-  username: string;
-  password: string;
-};
-
-type LoginResponse = {
-  data: string; // JWT Token
-};
 
 function useLoginMuttion() {
   const axios = useAxios();

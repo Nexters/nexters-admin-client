@@ -1,46 +1,17 @@
 // TODO: 반환 타입 없는 것들 확인하기
 import { useMutation, useQuery } from '@tanstack/react-query';
+import type {
+  CreateMemberBulkBody,
+  MemberPositionBody,
+  MemberRequestBody,
+  MembersResponseBody,
+  MemberStatusBody,
+  MeResponseBody,
+  UpdatePasswordBody,
+} from '@weekly/msw';
 import { API_URL } from '@weekly/msw';
 
 import { useAxios } from './AxiosProvider';
-
-type UpdatePasswordBody = {
-  password: string;
-};
-
-type MeResponseBody = {
-  name: string;
-  generation: number;
-  position: string;
-};
-
-type Member = {
-  id: number;
-  name: string;
-  gender: string;
-  email: string;
-  phoneNumber: string;
-  generations: number[];
-  position: string;
-  subPosition: string;
-  status: string;
-  isManager: boolean;
-};
-
-type MemberRequestBody = Omit<Member, 'id'>;
-
-type MembersResponseBody = {
-  data: Member[];
-};
-
-// TODO: data 형식 (csv 포맷)으로 보낼지 확인하기
-type CreateMemberBulkBody = {
-  data: string;
-};
-
-type MemberStatusBody = Pick<Member, 'status'>;
-
-type MemberPositionBody = Pick<Member, 'position' | 'subPosition'>;
 
 function useUpdatePasswordMutation() {
   const axios = useAxios();

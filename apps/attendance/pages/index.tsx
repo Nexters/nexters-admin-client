@@ -1,15 +1,20 @@
-import { useAdminAttendanceQuery } from '@weekly/api';
+import { useLoginMuttion } from '@weekly/api';
+import { Button } from '@weekly/ui';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 function Home() {
-  const { data } = useAdminAttendanceQuery();
+  const { mutateAsync, data, isLoading, isError } = useLoginMuttion();
+  const onClickSuccess = () => {
+    mutateAsync({ email: 'test@test.com', password: '1111' });
+  };
+  const onClickFail = () => {
+    mutateAsync({ email: 'test@test.com', password: '111' });
+  };
   return (
     <div>
-      <Suspense fallback={<h2>Loading</h2>}>
-        <div>{data?.title}</div>
-        <div>{data?.description}</div>
-      </Suspense>
+      <div>{isLoading ? 'Loading' : isError ? 'Error' : data?.data}</div>
+      <Button onClick={onClickSuccess}>성공</Button>
+      <Button onClick={onClickFail}>실패</Button>
       <h1>홈</h1>
       <div>
         <Link href="/">홈</Link>

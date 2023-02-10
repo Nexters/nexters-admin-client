@@ -3,11 +3,11 @@ import * as auth from './auth';
 import * as members from './members';
 import * as sessions from './sessions';
 
-const handlers = [
-  ...auth.handlers,
-  ...members.handlers,
-  ...sessions.handlers,
-  ...attendance.handlers,
-] as const;
+const API_URL = {
+  ...attendance.API_URL,
+  ...auth.API_URL,
+  ...members.API_URL,
+  ...sessions.API_URL,
+};
 
-export { handlers };
+export { API_URL };

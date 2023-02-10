@@ -80,7 +80,7 @@ function generateTypoObject(schema: typeof typoSchema): TypoObject {
       ...typoObject,
       ...getTypoObjectByTypoKey(typoKey, schema[typoKey]),
     }),
-    {} as TypoObject
+    {} as TypoObject,
   );
 }
 

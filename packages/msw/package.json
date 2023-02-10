@@ -9,6 +9,7 @@
     "lint:fix": "TIMING=1 eslint \"**/*.{ts,tsx}\" --fix"
   },
   "devDependencies": {
+    "@types/node": "^18.13.0",
     "@weekly/tsconfig": "*",
     "eslint": "^7.32.0",
     "eslint-config-weekly": "*",

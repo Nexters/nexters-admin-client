@@ -11,3 +11,4 @@ async function initMocks() {
 initMocks();
 
 export { initMocks };
+export { API_URL } from './lib/urls';

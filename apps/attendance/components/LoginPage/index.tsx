@@ -12,8 +12,8 @@ function LoginPage() {
       <ImageContainer>
         <Image
           src={logo}
-          alt="WEEKLY"
-          placeholder="blur"
+          alt='WEEKLY'
+          placeholder='blur'
           width={255}
           height={243}
         />
@@ -23,7 +23,7 @@ function LoginPage() {
         Weekly에 오신 걸 환영해요!`}
       </Description>
       <LoginForm />
-      <HelpButton href="#bottom-sheet">로그인 방법이 궁금해요</HelpButton>
+      <HelpButton href='#help-login'>로그인 방법이 궁금해요</HelpButton>
       <BottomSheet />
     </Container>
   );

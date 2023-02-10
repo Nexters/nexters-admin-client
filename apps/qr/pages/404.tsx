@@ -1,4 +1,4 @@
-import { useRedirectEffect } from '~/hooks/useRedirectEffect';
+import { useRedirectEffect } from '@weekly/utils';
 
 function NotFound() {
   useRedirectEffect(process.env.NEXT_PUBLIC_ADMIN_URL ?? '');

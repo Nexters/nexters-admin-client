@@ -3,5 +3,10 @@
 module.exports = {
   reactStrictMode: false,
   swcMinify: true,
-  transpilePackages: ['@weekly/ui', '@weekly/api', '@weekly/msw'],
+  transpilePackages: [
+    '@weekly/ui',
+    '@weekly/api',
+    '@weekly/utils',
+    '@weekly/msw',
+  ],
 };

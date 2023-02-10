@@ -17,22 +17,27 @@ function LoginPage() {
           height={243}
         />
       </ImageContainer>
+      <Description>
+        {`넥스터즈 출석 서비스
+        Weekly에 오신 걸 환영해요!`}
+      </Description>
       <LoginForm />
+      <HelpButton>로그인 방법이 궁금해요</HelpButton>
     </Container>
   );
 }
 
 const Container = styled.div`
-  min-width: ${({ theme }) => theme.rem(320)};
-  max-width: ${({ theme }) => theme.rem(743)};
   height: 100vh;
-  background-color: ${({ theme }) => theme.palette.grayScale.g100};
   margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.rem(20)};
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-width: ${({ theme }) => theme.rem(320)};
+  max-width: ${({ theme }) => theme.rem(743)};
+  padding: 0 ${({ theme }) => theme.rem(20)};
+  background-color: ${({ theme }) => theme.palette.grayScale.g100};
 `;
 
 const ImageContainer = styled.div`
@@ -42,6 +47,23 @@ const ImageContainer = styled.div`
   width: 100%;
   max-width: 453px;
   margin-bottom: ${({ theme }) => theme.rem(36)};
+`;
+
+const Description = styled.h2`
+  white-space: pre-line;
+  align-self: flex-start;
+  ${({ theme }) => theme.typo.h2Bold};
+  margin-bottom: ${({ theme }) => theme.rem(32)};
+  color: ${({ theme }) => theme.palette.grayScale.white};
+`;
+
+const HelpButton = styled.button`
+  ${({ theme }) => theme.typo.body1Medium};
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: ${({ theme }) => theme.palette.grayScale.g10};
+  margin-top: ${({ theme }) => theme.rem(16)};
 `;
 
 export { LoginPage };

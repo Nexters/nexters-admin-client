@@ -19,6 +19,7 @@ module.exports = {
     'semi': ['error', 'always'],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+    'jsx-quotes': ['error', 'prefer-single'],
     'no-unused-vars': [
       'error',
       { vars: 'all', args: 'none', ignoreRestSiblings: false },

@@ -1,7 +1,7 @@
 import { styled } from '../emotion';
 
 interface TextFieldProps extends React.ComponentProps<'input'> {
-  error: string;
+  error: boolean;
 }
 
 type Props = Partial<TextFieldProps>;
@@ -17,7 +17,7 @@ const Input = styled.input<Props>`
   width: 100%;
   padding: ${({ theme }) => theme.rem(16)};
   border-radius: ${({ theme }) => theme.rem(16)};
-  background-color: ${({ theme }) => theme.palette.grayScale.g95};
+  background-color: ${({ theme }) => theme.palette.grayScale.g95} !important;
   color: ${({ theme }) => theme.palette.grayScale.white};
   outline: 1px solid
     ${({ theme, error }) =>

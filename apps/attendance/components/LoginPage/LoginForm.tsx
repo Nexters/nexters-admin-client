@@ -1,39 +1,71 @@
+import { useLoginMuttion } from '@weekly/api';
 import { Button, styled, TextField } from '@weekly/ui';
-import type { ChangeEvent } from 'react';
-import { useCallback, useState } from 'react';
+import {
+  useValidateState,
+  validateEmail,
+  validatePassword,
+} from '@weekly/utils';
+import { useRouter } from 'next/router';
+import type { ChangeEvent, MouseEventHandler } from 'react';
+import { useCallback } from 'react';
 
 function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const router = useRouter();
+  const emailState = useValidateState<string>('', [validateEmail]);
+  const passwordState = useValidateState<string>('', [validatePassword]);
+  const { mutateAsync } = useLoginMuttion();
   const onChangeEmail = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+    const value = event.target.value;
+    emailState.onChange(value);
   }, []);
   const onChangePassword = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value);
+      const value = event.target.value;
+      passwordState.onChange(value);
     },
     [],
   );
+  const onClickButton: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    event.stopPropagation();
+    if (emailState.error || passwordState.error) {
+      return;
+    }
+    const response = await mutateAsync({
+      email: emailState.value,
+      password: passwordState.value,
+    });
+    if (response.data) {
+      router.push('/attendance');
+    }
+  };
   return (
     <Container>
       <EmailTextField
-        placeholder="이메일"
-        name="email"
-        value={email}
+        autoComplete='off'
+        placeholder='이메일'
+        name='email'
+        type='email'
+        value={emailState.value}
+        error={emailState.error}
         onChange={onChangeEmail}
       />
       <PasswordTextField
-        placeholder="비밀번호"
-        name="password"
-        value={password}
+        autoComplete='off'
+        placeholder='비밀번호'
+        name='password'
+        type='password'
+        value={passwordState.value}
+        error={passwordState.error}
         onChange={onChangePassword}
       />
-      <Button fullWidth>로그인</Button>
+      <Button fullWidth type='button' onClick={onClickButton}>
+        로그인
+      </Button>
     </Container>
   );
 }
 
-const Container = styled.form`
+const Container = styled.div`
   width: 100%;
 `;
 

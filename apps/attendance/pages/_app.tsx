@@ -26,7 +26,7 @@ function App(props: AppProps) {
     <QueryClientProvider>
       <ThemeProvider>
         <NextSeo
-          title="WEEKLY"
+          title='WEEKLY'
           description='Nexters 22기 출출팀 당신의 한 주의 출석을 책임지는 웹 "위클리"'
         />
         <style global jsx>

@@ -20,6 +20,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "emotion-reset": "^3.0.1"
+    "@weekly/utils": "*",
+    "emotion-reset": "^3.0.1",
+    "framer-motion": "^9.0.2",
+    "react-merge-refs": "1.1.0"
   }
 }

@@ -1088,6 +1088,7 @@ __metadata:
     "@weekly/msw": "*"
     "@weekly/tsconfig": "*"
     "@weekly/ui": "*"
+    axios: ^1.3.2
     eslint: 7.32.0
     eslint-config-weekly: "*"
     msw: ^1.0.0
@@ -1107,10 +1108,13 @@ __metadata:
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
     "@weekly/api": "*"
+    "@weekly/msw": "*"
     "@weekly/tsconfig": "*"
     "@weekly/ui": "*"
+    axios: ^1.3.2
     eslint: 7.32.0
     eslint-config-weekly: "*"
+    msw: ^1.0.0
     next: ^13.1.1
     react: ^18.2.0
     react-dom: ^18.2.0

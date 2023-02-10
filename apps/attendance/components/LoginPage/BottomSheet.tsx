@@ -1,19 +1,10 @@
 import { styled } from '@weekly/ui';
 
-interface BottomSheetProps {
-  open: boolean;
-  onRequestClose: VoidFunction;
-}
-
-type Props = Partial<BottomSheetProps>;
-
-function BottomSheet(props: Props) {
-  const { open = false, onRequestClose } = props;
-  return open ? (
-    <Container>
-      <Dimmed />
-      <Contents>
-        <CloseButton onClick={onRequestClose}>
+function BottomSheet() {
+  return (
+    <Container id="bottom-sheet">
+      <Contents className="contents">
+        <CloseButton href="#close">
           <svg
             width="14"
             height="14"
@@ -46,31 +37,37 @@ function BottomSheet(props: Props) {
         </Description>
       </Contents>
     </Container>
-  ) : null;
+  );
 }
 
 const Container = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const Dimmed = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: ${({ theme }) => theme.palette.grayScale.black};
-  opacity: 0.74;
+  width: 100vw;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: all 450ms cubic-bezier(0.32, 1, 0.23, 1) 0ms;
+  background: rgba(0, 0, 0, 0.74);
+  &:target {
+    position: fixed;
+    top: 0;
+    opacity: 1;
+
+    & > .contents {
+      transform: translate(-50%, 0);
+      z-index: 10;
+    }
+  }
 `;
 
 const Contents = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, 100%);
   width: 100%;
+  transition: all 450ms cubic-bezier(0.32, 1, 0.23, 1) 100ms;
   min-width: ${({ theme }) => theme.rem(320)};
   max-width: ${({ theme }) => theme.rem(743)};
   background: ${({ theme }) => theme.palette.grayScale.g90};
@@ -86,8 +83,8 @@ const Title = styled.h2`
 `;
 
 const SubTitle = styled.span`
-  ${({ theme }) => theme.typo.body2Bold};
   display: block;
+  ${({ theme }) => theme.typo.body2Bold};
 `;
 
 const Description = styled.p`
@@ -100,7 +97,7 @@ const Description = styled.p`
   }
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled.a`
   position: absolute;
   color: inherit;
   top: ${({ theme }) => theme.rem(25)};

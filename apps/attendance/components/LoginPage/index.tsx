@@ -1,6 +1,5 @@
 import { styled } from '@weekly/ui';
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
 
 import logo from '~/images/logo.png';
 
@@ -8,13 +7,6 @@ import { BottomSheet } from './BottomSheet';
 import { LoginForm } from './LoginForm';
 
 function LoginPage() {
-  const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const onCloseBottomSheet = useCallback(() => {
-    setOpenBottomSheet(false);
-  }, []);
-  const onClickHelpButton = useCallback(() => {
-    setOpenBottomSheet(true);
-  }, []);
   return (
     <Container>
       <ImageContainer>
@@ -31,10 +23,8 @@ function LoginPage() {
         Weekly에 오신 걸 환영해요!`}
       </Description>
       <LoginForm />
-      <HelpButton onClick={onClickHelpButton}>
-        로그인 방법이 궁금해요
-      </HelpButton>
-      <BottomSheet open={openBottomSheet} onRequestClose={onCloseBottomSheet} />
+      <HelpButton href="#bottom-sheet">로그인 방법이 궁금해요</HelpButton>
+      <BottomSheet />
     </Container>
   );
 }
@@ -68,11 +58,11 @@ const Description = styled.h2`
   color: ${({ theme }) => theme.palette.grayScale.white};
 `;
 
-const HelpButton = styled.button`
-  ${({ theme }) => theme.typo.body1Medium};
+const HelpButton = styled.a`
   background: none;
   border: none;
   text-decoration: underline;
+  ${({ theme }) => theme.typo.body1Medium};
   color: ${({ theme }) => theme.palette.grayScale.g10};
   margin-top: ${({ theme }) => theme.rem(16)};
 `;

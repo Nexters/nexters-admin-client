@@ -46,6 +46,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "@weekly/ui",\
         "reference": "workspace:packages/ui"\
+      },\
+      {\
+        "name": "@weekly/utils",\
+        "reference": "workspace:packages/utils"\
       }\
     ],\
     "enableTopLevelFallback": true,\
@@ -59,6 +63,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@weekly/nexters-admin-client", ["workspace:."]],\
       ["@weekly/tsconfig", ["workspace:packages/tsconfig"]],\
       ["@weekly/ui", ["workspace:packages/ui"]],\
+      ["@weekly/utils", ["workspace:packages/utils"]],\
       ["eslint-config-weekly", ["workspace:packages/eslint-config-weekly"]]\
     ],\
     "fallbackPool": [\
@@ -1414,6 +1419,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@weekly/msw", "workspace:packages/msw"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["@weekly/ui", "workspace:packages/ui"],\
+            ["@weekly/utils", "workspace:packages/utils"],\
             ["axios", "npm:1.3.2"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
@@ -1439,6 +1445,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@weekly/msw", "workspace:packages/msw"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["@weekly/ui", "workspace:packages/ui"],\
+            ["@weekly/utils", "workspace:packages/utils"],\
             ["axios", "npm:1.3.2"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
@@ -1464,6 +1471,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@weekly/msw", "workspace:packages/msw"],\
             ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
             ["@weekly/ui", "workspace:packages/ui"],\
+            ["@weekly/utils", "workspace:packages/utils"],\
             ["axios", "npm:1.3.2"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
@@ -1551,6 +1559,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["emotion-reset", "virtual:294393e81224c3f25a1bb1d74b440cad5e8b7ce87a330cd4114e35f7c37fc7223ffd0eeae6c069303a9f5dea2b9c7e359e7e0e98af324920a99dbd4dc0152ada#npm:3.0.1"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
+            ["react", "npm:18.2.0"],\
+            ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@weekly/utils", [\
+        ["workspace:packages/utils", {\
+          "packageLocation": "./packages/utils/",\
+          "packageDependencies": [\
+            ["@weekly/utils", "workspace:packages/utils"],\
+            ["@types/react", "npm:17.0.52"],\
+            ["@types/react-dom", "npm:17.0.18"],\
+            ["@weekly/tsconfig", "workspace:packages/tsconfig"],\
+            ["eslint", "npm:7.32.0"],\
+            ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
+            ["next", "virtual:2a7ac55f2502bcccbf23aa0293cb499578d11eac7e6f5da5e653c9f62fbe64d689279749e969184b8feda5c96681df36860d0d808452685c5dbd886d4b3b61d7#npm:13.1.1"],\
             ["react", "npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"]\
           ],\
@@ -5074,6 +5099,53 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
+        ["virtual:2a7ac55f2502bcccbf23aa0293cb499578d11eac7e6f5da5e653c9f62fbe64d689279749e969184b8feda5c96681df36860d0d808452685c5dbd886d4b3b61d7#npm:13.1.1", {\
+          "packageLocation": "./.yarn/__virtual__/next-virtual-e4d25c9566/0/cache/next-npm-13.1.1-afb9b36a49-97a9154d62.zip/node_modules/next/",\
+          "packageDependencies": [\
+            ["next", "virtual:2a7ac55f2502bcccbf23aa0293cb499578d11eac7e6f5da5e653c9f62fbe64d689279749e969184b8feda5c96681df36860d0d808452685c5dbd886d4b3b61d7#npm:13.1.1"],\
+            ["@next/env", "npm:13.1.1"],\
+            ["@next/swc-android-arm-eabi", "npm:13.1.1"],\
+            ["@next/swc-android-arm64", "npm:13.1.1"],\
+            ["@next/swc-darwin-arm64", "npm:13.1.1"],\
+            ["@next/swc-darwin-x64", "npm:13.1.1"],\
+            ["@next/swc-freebsd-x64", "npm:13.1.1"],\
+            ["@next/swc-linux-arm-gnueabihf", "npm:13.1.1"],\
+            ["@next/swc-linux-arm64-gnu", "npm:13.1.1"],\
+            ["@next/swc-linux-arm64-musl", "npm:13.1.1"],\
+            ["@next/swc-linux-x64-gnu", "npm:13.1.1"],\
+            ["@next/swc-linux-x64-musl", "npm:13.1.1"],\
+            ["@next/swc-win32-arm64-msvc", "npm:13.1.1"],\
+            ["@next/swc-win32-ia32-msvc", "npm:13.1.1"],\
+            ["@next/swc-win32-x64-msvc", "npm:13.1.1"],\
+            ["@swc/helpers", "npm:0.4.14"],\
+            ["@types/fibers", null],\
+            ["@types/node-sass", null],\
+            ["@types/react", "npm:17.0.52"],\
+            ["@types/react-dom", "npm:17.0.18"],\
+            ["@types/sass", null],\
+            ["caniuse-lite", "npm:1.0.30001443"],\
+            ["fibers", null],\
+            ["node-sass", null],\
+            ["postcss", "npm:8.4.14"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", null],\
+            ["sass", null],\
+            ["styled-jsx", "virtual:e4d25c956636f9becce8ddba26e4aaf737d607be1fab7e0fd041f782dfe78b48c98f945f5975a96de4783fda7486126dc34951d7b5f1c55737188b6b998cdd6f#npm:5.1.1"]\
+          ],\
+          "packagePeers": [\
+            "@types/fibers",\
+            "@types/node-sass",\
+            "@types/react-dom",\
+            "@types/react",\
+            "@types/sass",\
+            "fibers",\
+            "node-sass",\
+            "react-dom",\
+            "react",\
+            "sass"\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:13.1.1", {\
           "packageLocation": "./.yarn/__virtual__/next-virtual-f13dc8f322/0/cache/next-npm-13.1.1-afb9b36a49-97a9154d62.zip/node_modules/next/",\
           "packageDependencies": [\
@@ -6288,6 +6360,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-plugin-macros", null],\
             ["client-only", "npm:0.0.1"],\
             ["react", null]\
+          ],\
+          "packagePeers": [\
+            "@babel/core",\
+            "@types/babel-plugin-macros",\
+            "@types/babel__core",\
+            "@types/react",\
+            "babel-plugin-macros",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:e4d25c956636f9becce8ddba26e4aaf737d607be1fab7e0fd041f782dfe78b48c98f945f5975a96de4783fda7486126dc34951d7b5f1c55737188b6b998cdd6f#npm:5.1.1", {\
+          "packageLocation": "./.yarn/__virtual__/styled-jsx-virtual-c39d8b5ed2/0/cache/styled-jsx-npm-5.1.1-2557a209ba-523a33b386.zip/node_modules/styled-jsx/",\
+          "packageDependencies": [\
+            ["styled-jsx", "virtual:e4d25c956636f9becce8ddba26e4aaf737d607be1fab7e0fd041f782dfe78b48c98f945f5975a96de4783fda7486126dc34951d7b5f1c55737188b6b998cdd6f#npm:5.1.1"],\
+            ["@babel/core", null],\
+            ["@types/babel-plugin-macros", null],\
+            ["@types/babel__core", null],\
+            ["@types/react", "npm:17.0.52"],\
+            ["babel-plugin-macros", null],\
+            ["client-only", "npm:0.0.1"],\
+            ["react", "npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@babel/core",\

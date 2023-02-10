@@ -12,6 +12,7 @@
   "dependencies": {
     "@weekly/api": "*",
     "@weekly/ui": "*",
+    "@weekly/utils": "*",
     "axios": "^1.3.2",
     "next": "^13.1.1",
     "react": "^18.2.0",

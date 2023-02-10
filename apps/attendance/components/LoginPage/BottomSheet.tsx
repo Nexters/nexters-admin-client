@@ -4,7 +4,7 @@ function BottomSheet() {
   return (
     <Container id="bottom-sheet">
       <Contents className="contents">
-        <CloseButton href="#close">
+        <CloseButton href="#">
           <svg
             width="14"
             height="14"

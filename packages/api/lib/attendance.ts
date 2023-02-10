@@ -1,14 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import { API_URL } from '@weekly/msw';
 
-import { api } from './common';
+import { useAxios } from './AxiosProvider';
 
-const fetcher = {
-  get: () => api.get('/attendance'),
+type MemberAttendanceBody = {
+  nonce: string;
 };
 
-function useAttendanceQuery() {
-  const result = useQuery({ queryKey: ['attendance'], queryFn: fetcher.get });
-  return result;
+function useMemberAttendanceMutation() {
+  const axios = useAxios();
+  const mutationFn = async (body: MemberAttendanceBody) => {
+    const { data } = await axios.post(API_URL.MEMBER_ATTENDANCE, {
+      nonce: body.nonce,
+    });
+    return data;
+  };
+  return useMutation({ mutationFn });
 }
 
-export { useAttendanceQuery };
+export { useMemberAttendanceMutation };

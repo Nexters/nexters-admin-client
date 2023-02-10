@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '@weekly/msw';
 
-import { api } from './common';
+import { useAxios } from './AxiosProvider';
 
 type LoginRequestBody = {
   email: string;
@@ -17,35 +17,28 @@ type LoginResponse = {
   data: string; // JWT Token
 };
 
-const login = {
-  member: async (body: LoginRequestBody) => {
-    const { data } = await api.post<LoginResponse>(API_URL.MEMBER_LOGIN, {
+function useLoginMuttion() {
+  const axios = useAxios();
+  const mutationFn = async (body: LoginRequestBody) => {
+    const { data } = await axios.post<LoginResponse>(API_URL.MEMBER_LOGIN, {
       email: body.email,
       password: body.password,
     });
     return data;
-  },
-  admin: async (body: AdminLoginRequestBody) => {
-    const { data } = await api.post<LoginResponse>(API_URL.ADMIN_LOGIN, {
+  };
+  return useMutation({ mutationFn });
+}
+
+function useAdminLoginMutation() {
+  const axios = useAxios();
+  const mutationFn = async (body: AdminLoginRequestBody) => {
+    const { data } = await axios.post<LoginResponse>(API_URL.ADMIN_LOGIN, {
       username: body.username,
       password: body.password,
     });
     return data;
-  },
-};
-
-function useLoginMuttion() {
-  const mutation = useMutation({
-    mutationFn: login.member,
-  });
-  return mutation;
-}
-
-function useAdminLoginMutation() {
-  const mutation = useMutation({
-    mutationFn: login.admin,
-  });
-  return mutation;
+  };
+  return useMutation({ mutationFn });
 }
 
 export { useAdminLoginMutation, useLoginMuttion };

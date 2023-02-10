@@ -8,17 +8,8 @@ type Props = Partial<TextFieldProps>;
 
 function TextField(props: Props) {
   const { error } = props;
-  return (
-    <Container>
-      <Input error={error} {...props} />
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-    </Container>
-  );
+  return <Input error={error} {...props} />;
 }
-
-const Container = styled.div`
-  position: relative;
-`;
 
 const Input = styled.input<Props>`
   ${({ theme }) => theme.typo.body1Bold}
@@ -44,15 +35,6 @@ const Input = styled.input<Props>`
     color: ${({ theme }) => theme.palette.grayScale.g50};
     outline: 1px solid ${({ theme }) => theme.palette.grayScale.g50};
   }
-`;
-
-const ErrorMessage = styled.span<Props>`
-  ${({ theme }) => theme.typo.body2Medium}
-  position: absolute;
-  left: 0;
-  transform: translateY(100%);
-  bottom: ${({ theme }) => theme.rem(-4)};
-  color: ${({ theme }) => theme.palette.main.red100};
 `;
 
 export { TextField };

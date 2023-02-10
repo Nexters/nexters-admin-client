@@ -32,6 +32,9 @@ const globalStyle = css`
   textarea:focus {
     outline: none;
   }
+  * {
+    box-sizing: border-box;
+  }
 `;
 
 export { globalStyle };

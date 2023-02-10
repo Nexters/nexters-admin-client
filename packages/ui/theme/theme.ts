@@ -1,11 +1,13 @@
 import type { Theme } from '@emotion/react';
 
+import { rem } from './common';
 import { palette } from './palette';
 import { typo } from './typo';
 
 const theme: Theme = {
   palette,
   typo,
+  rem,
 };
 
 const customMediaQuery = (minWidth: number): string =>

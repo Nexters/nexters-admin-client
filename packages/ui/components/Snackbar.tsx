@@ -37,6 +37,7 @@ function Snackbar(props: Props) {
     <ToastContainer
       position="top-center"
       closeOnClick
+      limit={1}
       autoClose={2000}
       closeButton={false}
       pauseOnHover={false}

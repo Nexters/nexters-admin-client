@@ -12,7 +12,12 @@ function useValidateState<T>(
     setValue(value);
     setError(!validationFunctions.map((fn) => fn(value)).every(Boolean));
   };
-  return { value, error, onChange } as const;
+  return {
+    isInital: value === initalValue,
+    value,
+    error,
+    onChange,
+  } as const;
 }
 
 export { useValidateState };

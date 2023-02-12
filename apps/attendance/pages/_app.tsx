@@ -1,5 +1,5 @@
 import { QueryClientProvider } from '@weekly/api';
-import { palette, ThemeProvider } from '@weekly/ui';
+import { palette, Snackbar, ThemeProvider } from '@weekly/ui';
 import type { AppProps } from 'next/app';
 import { NextSeo } from 'next-seo';
 import { useEffect, useState } from 'react';
@@ -36,6 +36,7 @@ function App(props: AppProps) {
             }
           `}
         </style>
+        <Snackbar />
         <Component {...pageProps} />
       </ThemeProvider>
     </QueryClientProvider>

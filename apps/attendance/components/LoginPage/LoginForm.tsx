@@ -1,23 +1,36 @@
 import { useLoginMuttion } from '@weekly/api';
-import { Button, styled, TextField } from '@weekly/ui';
+import { Button, openErrorSnackBar, styled, TextField } from '@weekly/ui';
 import {
   useValidateState,
   validateEmail,
   validatePassword,
 } from '@weekly/utils';
 import { useRouter } from 'next/router';
+import type {ChangeEvent, KeyboardEventHandler, MouseEventHandler} from 'react';
 import {
-  ChangeEvent,
-  KeyboardEventHandler,
-  MouseEventHandler,
-  useCallback,  useRef } from 'react';
+  useCallback,
+  useRef,
+} from 'react';
 
 function LoginForm() {
   const router = useRouter();
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const emailState = useValidateState<string>('', [validateEmail]);
   const passwordState = useValidateState<string>('', [validatePassword]);
-  const { mutateAsync } = useLoginMuttion();
+  const { mutate } = useLoginMuttion();
+  const submitLoginForm = () => {
+    mutate(
+      {
+        email: emailState.value,
+        password: passwordState.value,
+      },
+      {
+        // TODO: 에러처리 깔끔하게 하기
+        onError: () => openErrorSnackBar('유저 정보와 일치하지 않습니다.'),
+        onSuccess: () => router.push('/attendance'),
+      },
+    );
+  };
   const onChangeEmail = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     emailState.onChange(value);
@@ -34,32 +47,16 @@ function LoginForm() {
       passwordInputRef.current?.focus();
     }
   };
-  const onEnterPasswordInput: KeyboardEventHandler<HTMLInputElement> = async (
+  const onEnterPasswordInput: KeyboardEventHandler<HTMLInputElement> = (
     event,
   ) => {
     if (event.key === 'Enter') {
-      await submitLoginForm();
+      submitLoginForm();
     }
   };
-  const submitLoginForm = async () => {
-    if (emailState.error || passwordState.error) {
-      return;
-    }
-    await mutateAsync(
-      {
-        email: emailState.value,
-        password: passwordState.value,
-      },
-      {
-        // TODO: Toast 생성 후 연결
-        onError: (error) => console.log(error),
-        onSuccess: () => router.push('/attendance'),
-      },
-    );
-  };
-  const onClickButton: MouseEventHandler<HTMLButtonElement> = async (event) => {
-    event.stopPropagation();
-    await submitLoginForm();
+  const onClickLoginButton: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
+    submitLoginForm();
   };
   return (
     <Container>
@@ -90,7 +87,17 @@ function LoginForm() {
         onChange={onChangePassword}
         onKeyUp={onEnterPasswordInput}
       />
-      <Button fullWidth type='button' onClick={onClickButton}>
+      <Button
+        fullWidth
+        type='button'
+        onClick={onClickLoginButton}
+        disabled={
+          emailState.isInital ||
+          passwordState.isInital ||
+          emailState.error ||
+          passwordState.error
+        }
+      >
         로그인
       </Button>
     </Container>

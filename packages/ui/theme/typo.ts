@@ -33,13 +33,13 @@ const lineHeightMap: Record<TypoKey, number> = {
 };
 
 const typoSchema: Record<TypoKey, Array<WeightKey>> = {
-  h1: ['bold', 'medium', 'regular'],
-  h2: ['bold', 'medium', 'regular'],
-  h3: ['bold', 'medium', 'regular'],
+  h1: ['bold', 'medium', 'regular', 'semibold'],
+  h2: ['bold', 'medium', 'regular', 'semibold'],
+  h3: ['bold', 'medium', 'regular', 'semibold'],
   h4: ['bold', 'medium', 'regular', 'semibold'],
-  body1: ['bold', 'medium', 'regular'],
-  body2: ['bold', 'medium', 'regular'],
-  caption: ['bold', 'medium', 'regular'],
+  body1: ['bold', 'medium', 'regular', 'semibold'],
+  body2: ['bold', 'medium', 'regular', 'semibold'],
+  caption: ['bold', 'medium', 'regular', 'semibold'],
 };
 
 function generateTypographyString(typoKey: TypoKey, weightKey: WeightKey) {
@@ -86,4 +86,4 @@ function generateTypoObject(schema: typeof typoSchema): TypoObject {
 
 const typo = generateTypoObject(typoSchema);
 
-export { typo };
+export { lineHeightMap, sizeMap, typo, weightMap };

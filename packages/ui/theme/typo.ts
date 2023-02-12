@@ -59,8 +59,15 @@ function getTypoObjectKey(typoKey: TypoKey, weightKey: WeightKey) {
 }
 
 type TypoObjectKey = `${TypoKey}${Capitalize<WeightKey>}`;
+type ExcludedSemiBold =
+  | 'h1Semibold'
+  | 'h2Semibold'
+  | 'h3Semibold'
+  | 'body1Semibod'
+  | 'body2Semibold'
+  | 'captionSemibold';
 type TypoObject = Record<
-  TypoObjectKey,
+  Exclude<TypoObjectKey, ExcludedSemiBold>,
   ReturnType<typeof generateTypographyString>
 >;
 

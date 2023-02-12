@@ -23,13 +23,15 @@ const Input = styled.input<Props>`
   border-radius: ${({ theme }) => theme.rem(16)};
   background-color: ${({ theme }) => theme.palette.grayScale.g95};
   color: ${({ theme }) => theme.palette.grayScale.white};
-  box-shadow: 0 0 0 1px
+  border: 1px solid
     ${({ theme, error }) =>
     error ? theme.palette.main.red100 : theme.palette.main.green50};
+  outline: none;
 
   &:focus,
   &:hover {
-    box-shadow: 0 0 0 1px
+    outline: none;
+    border: 1px solid
       ${({ theme, error }) =>
     error ? theme.palette.main.red100 : theme.palette.main.green50};
   }
@@ -37,7 +39,7 @@ const Input = styled.input<Props>`
   &:placeholder-shown {
     ${({ theme }) => theme.typo.body1Medium};
     color: ${({ theme }) => theme.palette.grayScale.g50};
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.palette.grayScale.g50};
+    border: 1px solid ${({ theme }) => theme.palette.grayScale.g50};
   }
 `;
 

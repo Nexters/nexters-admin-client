@@ -30,13 +30,16 @@ function LoginForm() {
     if (emailState.error || passwordState.error) {
       return;
     }
-    const response = await mutateAsync({
-      email: emailState.value,
-      password: passwordState.value,
-    });
-    if (response.data) {
-      router.push('/attendance');
-    }
+    await mutateAsync(
+      {
+        email: emailState.value,
+        password: passwordState.value,
+      },
+      {
+        onError: (error) => console.log(error),
+        onSuccess: () => router.push('/attendance'),
+      },
+    );
   };
   return (
     <Container>

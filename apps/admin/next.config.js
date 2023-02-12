@@ -9,4 +9,8 @@ module.exports = {
     '@weekly/utils',
     '@weekly/msw',
   ],
+  i18n: {
+    locales: ['ko'],
+    defaultLocale: 'ko',
+  },
 };

@@ -20,6 +20,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "emotion-reset": "^3.0.1"
+    "emotion-reset": "^3.0.1",
+    "react-toastify": "^9.1.1"
   }
 }

@@ -6,11 +6,15 @@ import {
   validatePassword,
 } from '@weekly/utils';
 import { useRouter } from 'next/router';
-import type { ChangeEvent, MouseEventHandler } from 'react';
-import { useCallback } from 'react';
+import {
+  ChangeEvent,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  useCallback,  useRef } from 'react';
 
 function LoginForm() {
   const router = useRouter();
+  const passwordInputRef = useRef<HTMLInputElement>(null);
   const emailState = useValidateState<string>('', [validateEmail]);
   const passwordState = useValidateState<string>('', [validatePassword]);
   const { mutateAsync } = useLoginMuttion();
@@ -25,8 +29,19 @@ function LoginForm() {
     },
     [],
   );
-  const onClickButton: MouseEventHandler<HTMLButtonElement> = async (event) => {
-    event.stopPropagation();
+  const onEnterEmailInput: KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if (event.key === 'Enter') {
+      passwordInputRef.current?.focus();
+    }
+  };
+  const onEnterPasswordInput: KeyboardEventHandler<HTMLInputElement> = async (
+    event,
+  ) => {
+    if (event.key === 'Enter') {
+      await submitLoginForm();
+    }
+  };
+  const submitLoginForm = async () => {
     if (emailState.error || passwordState.error) {
       return;
     }
@@ -42,25 +57,38 @@ function LoginForm() {
       },
     );
   };
+  const onClickButton: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    event.stopPropagation();
+    await submitLoginForm();
+  };
   return (
     <Container>
       <EmailTextField
         autoComplete='off'
         placeholder='이메일'
+        id='email'
         name='email'
         type='email'
+        inputMode='email'
+        enterKeyHint='next'
         value={emailState.value}
         error={emailState.error}
         onChange={onChangeEmail}
+        onKeyUp={onEnterEmailInput}
       />
       <PasswordTextField
+        ref={passwordInputRef}
         autoComplete='off'
         placeholder='비밀번호'
+        id='password'
         name='password'
         type='password'
+        inputMode='text'
+        enterKeyHint='go'
         value={passwordState.value}
         error={passwordState.error}
         onChange={onChangePassword}
+        onKeyUp={onEnterPasswordInput}
       />
       <Button fullWidth type='button' onClick={onClickButton}>
         로그인
@@ -69,7 +97,7 @@ function LoginForm() {
   );
 }
 
-const Container = styled.div`
+const Container = styled.form`
   width: 100%;
 `;
 

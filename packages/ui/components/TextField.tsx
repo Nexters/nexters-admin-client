@@ -1,15 +1,19 @@
+import { forwardRef } from 'react';
+
 import { styled } from '../emotion';
 
 interface TextFieldProps extends React.ComponentProps<'input'> {
-  error: string;
+  error: boolean;
 }
 
 type Props = Partial<TextFieldProps>;
 
-function TextField(props: Props) {
+const TextField = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
   const { error } = props;
-  return <Input error={error} {...props} />;
-}
+  return <Input ref={ref} error={error} {...props} />;
+});
+
+TextField.displayName = 'TextField';
 
 const Input = styled.input<Props>`
   ${({ theme }) => theme.typo.body1Bold}
@@ -19,13 +23,15 @@ const Input = styled.input<Props>`
   border-radius: ${({ theme }) => theme.rem(16)};
   background-color: ${({ theme }) => theme.palette.grayScale.g95};
   color: ${({ theme }) => theme.palette.grayScale.white};
-  outline: 1px solid
+  border: 1px solid
     ${({ theme, error }) =>
     error ? theme.palette.main.red100 : theme.palette.main.green50};
+  outline: none;
 
   &:focus,
   &:hover {
-    outline: 1px solid
+    outline: none;
+    border: 1px solid
       ${({ theme, error }) =>
     error ? theme.palette.main.red100 : theme.palette.main.green50};
   }
@@ -33,7 +39,7 @@ const Input = styled.input<Props>`
   &:placeholder-shown {
     ${({ theme }) => theme.typo.body1Medium};
     color: ${({ theme }) => theme.palette.grayScale.g50};
-    outline: 1px solid ${({ theme }) => theme.palette.grayScale.g50};
+    border: 1px solid ${({ theme }) => theme.palette.grayScale.g50};
   }
 `;
 

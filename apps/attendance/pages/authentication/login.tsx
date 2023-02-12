@@ -1,15 +1,14 @@
-import { openErrorSnackBar, Snackbar } from '@weekly/ui';
+import { NextSeo } from 'next-seo';
+import { Fragment } from 'react';
+
+import { LoginPage } from '~/components';
 
 function Login() {
   return (
-    <>
-      <button
-        onClick={() => openErrorSnackBar('유저 정보와 일치하지 않습니다.')}
-      >
-        asdf
-      </button>
-      <Snackbar />
-    </>
+    <Fragment>
+      <NextSeo title='로그인' />
+      <LoginPage />
+    </Fragment>
   );
 }
 

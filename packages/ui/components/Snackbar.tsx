@@ -61,7 +61,7 @@ function Snackbar(props: Props) {
         fontFamily: 'Pretendard',
         fontSize: rem(sizeMap.body2),
         lineHeight: lineHeightMap.body2,
-        fontWeight: weightMap.semibold,
+        fontWeight: weightMap.medium,
         letterSpacing: '-0.01em',
       }}
     />

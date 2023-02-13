@@ -1452,6 +1452,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
             ["msw", "virtual:e0664ecf96a74da8ee95d962322b98313769824253283f7e26885bed878e141af80dc67b82bae219e1be20a163a63ce9b39f840b2f9f0444e21789c59f5a99af#npm:1.0.0"],\
             ["next", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:13.1.1"],\
+            ["qr-code-styling", "npm:1.6.0-rc.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"]\
@@ -5771,6 +5772,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/punycode-npm-2.2.0-9eb533dae1-32f291c1b1.zip/node_modules/punycode/",\
           "packageDependencies": [\
             ["punycode", "npm:2.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["qr-code-styling", [\
+        ["npm:1.6.0-rc.1", {\
+          "packageLocation": "./.yarn/cache/qr-code-styling-npm-1.6.0-rc.1-329dd5ef49-778754790f.zip/node_modules/qr-code-styling/",\
+          "packageDependencies": [\
+            ["qr-code-styling", "npm:1.6.0-rc.1"],\
+            ["qrcode-generator", "npm:1.4.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["qrcode-generator", [\
+        ["npm:1.4.4", {\
+          "packageLocation": "./.yarn/cache/qrcode-generator-npm-1.4.4-371a10ade5-860cfdd2a7.zip/node_modules/qrcode-generator/",\
+          "packageDependencies": [\
+            ["qrcode-generator", "npm:1.4.4"]\
           ],\
           "linkType": "HARD"\
         }]\

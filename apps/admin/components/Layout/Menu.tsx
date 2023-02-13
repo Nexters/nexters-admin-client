@@ -6,7 +6,9 @@ import Attendance from '~/assets/icons/image-user-check.svg';
 import Session from '~/assets/icons/line-chart-up.svg';
 import User from '~/assets/icons/users.svg';
 
-type AdminMenu = 'attendance' | 'activity' | 'user' | 'session';
+import { menuList } from '../components/dashboard/DashboardSidebar';
+
+type AdminMenu = (typeof menuList)[number];
 
 type AdminMenuMapType = Record<
   AdminMenu,

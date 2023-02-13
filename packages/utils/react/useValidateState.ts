@@ -10,6 +10,9 @@ function useValidateState<T>(
   const [error, setError] = useState(false);
   const onChange = (value: T) => {
     setValue(value);
+    validate(value);
+  };
+  const validate = (value: T) => {
     setError(!validationFunctions.map((fn) => fn(value)).every(Boolean));
   };
   return {
@@ -17,6 +20,7 @@ function useValidateState<T>(
     value,
     error,
     onChange,
+    validate,
   } as const;
 }
 

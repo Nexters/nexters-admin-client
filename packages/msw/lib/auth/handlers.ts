@@ -13,7 +13,10 @@ function authentication(
   if (predicate()) {
     return response(
       context.status(200),
-      context.json<LoginResponse>({ data: VARIABLES.SUCCESS_TOKEN }),
+      context.json<LoginResponse>({
+        data: VARIABLES.SUCCESS_TOKEN,
+        isInitalLogin: true,
+      }),
     );
   }
   return response(context.status(401));

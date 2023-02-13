@@ -5,6 +5,8 @@ import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import { useEffect, useState } from 'react';
 
+import { Layout } from '~/components';
+
 function App(props: AppProps) {
   const { Component, pageProps } = props;
   const [shouldRender, setShouldRender] = useState(
@@ -59,7 +61,9 @@ function App(props: AppProps) {
           `}
         </style>
         <Snackbar />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </QueryClientProvider>
   );

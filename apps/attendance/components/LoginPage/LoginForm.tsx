@@ -6,11 +6,12 @@ import {
   validatePassword,
 } from '@weekly/utils';
 import { useRouter } from 'next/router';
-import type {ChangeEvent, KeyboardEventHandler, MouseEventHandler} from 'react';
-import {
-  useCallback,
-  useRef,
+import type {
+  ChangeEvent,
+  KeyboardEventHandler,
+  MouseEventHandler,
 } from 'react';
+import { useCallback, useRef } from 'react';
 
 function LoginForm() {
   const router = useRouter();
@@ -27,7 +28,13 @@ function LoginForm() {
       {
         // TODO: 에러처리 깔끔하게 하기
         onError: () => openErrorSnackBar('유저 정보와 일치하지 않습니다.'),
-        onSuccess: () => router.push('/attendance'),
+        onSuccess: (response) => {
+          if (response.isInitalLogin) {
+            router.push('/authentication/password');
+            return;
+          }
+          router.push('/attendance');
+        },
       },
     );
   };

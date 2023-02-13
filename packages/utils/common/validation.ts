@@ -9,4 +9,10 @@ function validatePassword(password: string) {
   return 8 <= length && length <= 20;
 }
 
-export { validateEmail, validatePassword };
+function validatePasswordCheck(password: string) {
+  return function (passwordCheck: string) {
+    return password === passwordCheck;
+  };
+}
+
+export { validateEmail, validatePassword, validatePasswordCheck };

@@ -1,10 +1,13 @@
 import { css } from '@emotion/react';
 import reset from 'emotion-reset';
 
+import { boxModel } from './boxModel';
+
 const globalStyle = css`
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css');
 
   ${reset}
+  ${boxModel('')};
   body {
     font-family: 'Pretendard', Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',

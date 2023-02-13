@@ -51,7 +51,7 @@ function PasswordForm() {
       { password: passwordState.value },
       {
         // TODO: 에러처리 깔끔하게 하기
-        onError: () => openErrorSnackBar('오류가 발생했습니다.'),
+        onError: () => openErrorSnackBar('알 수 없는 오류가 발생했습니다.'),
         onSuccess: () => router.push('/attendance'),
       },
     );

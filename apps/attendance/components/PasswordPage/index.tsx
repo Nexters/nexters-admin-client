@@ -5,15 +5,17 @@ import { PasswordForm } from './PasswordForm';
 
 function PasswordPage() {
   return (
-    <Fragment>
+    <Container>
       <Description>
         {`비밀번호를
         다시 설정해 주세요!`}
       </Description>
       <PasswordForm />
-    </Fragment>
+    </Container>
   );
 }
+
+const Container = Fragment;
 
 const Description = styled.h2`
   white-space: pre-line;

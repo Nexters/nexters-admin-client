@@ -9,7 +9,7 @@ import { LoginForm } from './LoginForm';
 
 function LoginPage() {
   return (
-    <Fragment>
+    <Container>
       <ImageContainer>
         <Image
           src={logo}
@@ -26,9 +26,11 @@ function LoginPage() {
       <LoginForm />
       <HelpButton href='#help-login'>로그인 방법이 궁금해요</HelpButton>
       <BottomSheet />
-    </Fragment>
+    </Container>
   );
 }
+
+const Container = Fragment;
 
 const ImageContainer = styled.div`
   display: flex;

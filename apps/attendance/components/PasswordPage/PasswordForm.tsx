@@ -10,8 +10,10 @@ import {
   ChangeEvent,
   KeyboardEventHandler,
   MouseEventHandler,
-  useCallback,   useEffect,
-  useRef } from 'react';
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 
 function PasswordForm() {
   const router = useRouter();

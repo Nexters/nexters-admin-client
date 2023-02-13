@@ -67,7 +67,6 @@ const Container = styled.button<{ isSelected: boolean }>`
   padding: 8px 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
   border-radius: 8px;
 

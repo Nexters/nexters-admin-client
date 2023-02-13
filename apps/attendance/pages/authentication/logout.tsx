@@ -1,32 +1,12 @@
-import Link from 'next/link';
+import { useRedirectEffect } from '@weekly/utils';
+import { useEffect } from 'react';
 
 function Logout() {
-  return (
-    <div>
-      <h1>Logout</h1>
-      <div>
-        <Link href='/'>홈</Link>
-      </div>
-      <div>
-        <Link href='/authentication/login'>로그인</Link>
-      </div>
-      <div>
-        <Link href='/authentication/logout'>로그아웃</Link>
-      </div>
-      <div>
-        <Link href='/authentication/password'>비밀번호재설정</Link>
-      </div>
-      <div>
-        <Link href='/attendance'>카메라 켜는 출석 페이지</Link>
-      </div>
-      <div>
-        <Link href='/attendance/id-c'>출석 페이지</Link>
-      </div>
-      <div>
-        <Link href='/attendance/me'>내 출석정보</Link>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    localStorage.removeItem('@weekly/token');
+  }, []);
+  useRedirectEffect('/authentication/login');
+  return null;
 }
 
 export default Logout;

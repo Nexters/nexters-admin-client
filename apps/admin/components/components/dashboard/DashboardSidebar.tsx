@@ -1,12 +1,21 @@
 import { styled } from '@weekly/ui';
 
+import { Menu } from '~/components/Layout/Menu';
+
 interface DashboardSidebarProps {}
 
 type Props = Partial<DashboardSidebarProps>;
 
 function DashboardSidebar(props: Props) {
   const {} = props;
-  return <Wrapper>123</Wrapper>;
+  return (
+    <Wrapper>
+      <Menu variant='attendance' />
+      <Menu variant='activity' />
+      <Menu variant='user' />
+      <Menu variant='session' />
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`

@@ -1,4 +1,4 @@
-import { useLoginMuttion } from '@weekly/api';
+import { handleLoginError, useLoginMuttion } from '@weekly/api';
 import { Button, openErrorSnackBar, styled, TextField } from '@weekly/ui';
 import {
   useValidateState,
@@ -6,11 +6,12 @@ import {
   validatePassword,
 } from '@weekly/utils';
 import { useRouter } from 'next/router';
-import type {ChangeEvent, KeyboardEventHandler, MouseEventHandler} from 'react';
-import {
-  useCallback,
-  useRef,
+import type {
+  ChangeEvent,
+  KeyboardEventHandler,
+  MouseEventHandler,
 } from 'react';
+import { useRef } from 'react';
 
 function LoginForm() {
   const router = useRouter();
@@ -25,23 +26,23 @@ function LoginForm() {
         password: passwordState.value,
       },
       {
-        // TODO: 에러처리 깔끔하게 하기
-        onError: () => openErrorSnackBar('유저 정보와 일치하지 않습니다.'),
-        onSuccess: () => router.push('/attendance'),
+        onError(error) {
+          openErrorSnackBar(handleLoginError(error));
+        },
+        onSuccess() {
+          router.push('/attendance');
+        },
       },
     );
   };
-  const onChangeEmail = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     emailState.onChange(value);
-  }, []);
-  const onChangePassword = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      passwordState.onChange(value);
-    },
-    [],
-  );
+  };
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    passwordState.onChange(value);
+  };
   const onEnterEmailInput: KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
       passwordInputRef.current?.focus();

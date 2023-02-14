@@ -1,5 +1,6 @@
 import { styled } from '@weekly/ui';
 import Image from 'next/image';
+import { Fragment } from 'react';
 
 import logo from '~/images/logo.png';
 
@@ -29,18 +30,7 @@ function LoginPage() {
   );
 }
 
-const Container = styled.div`
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-width: ${({ theme }) => theme.rem(320)};
-  max-width: ${({ theme }) => theme.rem(743)};
-  padding: 0 ${({ theme }) => theme.rem(20)};
-  background-color: ${({ theme }) => theme.palette.grayScale.g100};
-`;
+const Container = Fragment;
 
 const ImageContainer = styled.div`
   display: flex;

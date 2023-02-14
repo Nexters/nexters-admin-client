@@ -1,28 +1,28 @@
 import { styled } from '@weekly/ui';
 
-import Logout from '~/assets/icons/logout.svg';
-import Weekly from '~/assets/icons/weekly.svg';
-import { Menu } from '~/components/Layout/Menu';
+import { Menu } from '~/components/components/dashboard/SidebarMenu';
+import Icon from '~/components/icons/Icon';
+import { menus } from '~/data';
 
 interface DashboardSidebarProps {}
 
 type Props = Partial<DashboardSidebarProps>;
 
-export const menuList = ['attendance', 'activity', 'user', 'session'] as const;
-
 function DashboardSidebar(props: Props) {
   const {} = props;
   return (
     <Wrapper>
-      <Logo />
+      <Logo>
+        <Icon name='weekly' />
+      </Logo>
       <Menus>
-        {menuList.map((menu) => (
-          <Menu variant={menu} />
+        {menus.map((menu) => (
+          <Menu variant={menu} key={menu} />
         ))}
       </Menus>
       <Bottom>
         <LogOutButton>
-          <Logout />
+          <Icon name='logout' />
           <span>로그아웃</span>
         </LogOutButton>
         <Version>v.1.0.0</Version>
@@ -43,28 +43,29 @@ const Wrapper = styled.div`
   outline: 0;
   left: 0;
   background-color: ${({ theme: { palette } }) => palette.grayScale.g100};
-  width: 132px;
+  width: ${({ theme }) => theme.rem(132)};
 `;
 
-const Logo = styled(Weekly)`
-  margin: 34px auto;
+const Logo = styled.div`
+  margin: ${({ theme }) => theme.rem(34)} auto;
 `;
 
 const Menus = styled.div`
-  width: 116px;
+  width: ${({ theme }) => theme.rem(116)};
   margin: 0 auto;
-  padding-top: 16px;
-  border-top: 1px solid ${({ theme }) => theme.palette.grayScale.g80};
+  padding-top: ${({ theme }) => theme.rem(16)};
+  border-top: ${({ theme }) => theme.rem(1)} solid
+    ${({ theme }) => theme.palette.grayScale.g80};
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.rem(8)};
 `;
 
 const Bottom = styled.div`
   position: fixed;
-  bottom: 32px;
-  left: 35px;
+  bottom: ${({ theme }) => theme.rem(32)};
+  left: ${({ theme }) => theme.rem(35)};
 `;
 const LogOutButton = styled.button`
   color: ${({ theme }) => theme.palette.grayScale.white};
@@ -72,17 +73,17 @@ const LogOutButton = styled.button`
 
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: ${({ theme }) => theme.rem(4)};
 
   & > span {
-    padding-top: 1px;
+    padding-top: ${({ theme }) => theme.rem(1)};
   }
 `;
 const Version = styled.div`
   color: ${({ theme }) => theme.palette.grayScale.g60};
   ${({ theme }) => theme.typo.captionMedium}
 
-  margin-top: 8px;
+  margin-top: ${({ theme }) => theme.rem(8)};
 `;
 
 export { DashboardSidebar };

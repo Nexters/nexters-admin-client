@@ -5,12 +5,14 @@ import {
   validateEmail,
   validatePassword,
 } from '@weekly/utils';
+import type { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
-import type {ChangeEvent, KeyboardEventHandler, MouseEventHandler} from 'react';
-import {
-  useCallback,
-  useRef,
+import type {
+  ChangeEvent,
+  KeyboardEventHandler,
+  MouseEventHandler,
 } from 'react';
+import { useRef } from 'react';
 
 function LoginForm() {
   const router = useRouter();
@@ -26,22 +28,32 @@ function LoginForm() {
       },
       {
         // TODO: 에러처리 깔끔하게 하기
-        onError: () => openErrorSnackBar('유저 정보와 일치하지 않습니다.'),
-        onSuccess: () => router.push('/attendance'),
+        onError(error) {
+          const { response } = error as AxiosError;
+          if (response?.status === 401) {
+            openErrorSnackBar('유저 정보와 일치하지 않습니다.');
+            return;
+          }
+          openErrorSnackBar('알 수 없는 오류가 발생했습니다.');
+        },
+        onSuccess(response) {
+          if (response.isInitalLogin) {
+            router.push('/authentication/password');
+            return;
+          }
+          router.push('/attendance');
+        },
       },
     );
   };
-  const onChangeEmail = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     emailState.onChange(value);
-  }, []);
-  const onChangePassword = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      passwordState.onChange(value);
-    },
-    [],
-  );
+  };
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    passwordState.onChange(value);
+  };
   const onEnterEmailInput: KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
       passwordInputRef.current?.focus();

@@ -23,7 +23,6 @@ function DashboardLayout(props: React.PropsWithChildren<Props>) {
 }
 
 const DashboardRoot = styled.div`
-  background-color: aliceblue;
   flex: 1 1 auto;
   max-width: 100%;
   padding-top: 102px;

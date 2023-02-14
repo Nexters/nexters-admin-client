@@ -8,7 +8,7 @@ import {
   Session,
   Users,
   Weekly,
-} from '~/assets/svgs';
+} from '../assets/svgs';
 
 type IconName = keyof typeof icons;
 
@@ -33,4 +33,4 @@ const Container = styled.div`
   display: flex;
 `;
 
-export default Icon;
+export { Icon };

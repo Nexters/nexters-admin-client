@@ -1,7 +1,6 @@
-import { styled } from '@weekly/ui';
+import { Icon, styled } from '@weekly/ui';
 
 import { Menu } from '~/components/components/dashboard/SidebarMenu';
-import Icon from '~/components/icons/Icon';
 import { menus } from '~/data';
 
 interface DashboardSidebarProps {}

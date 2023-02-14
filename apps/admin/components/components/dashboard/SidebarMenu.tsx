@@ -1,7 +1,6 @@
-import { css, styled } from '@weekly/ui';
+import { css, Icon, styled } from '@weekly/ui';
 import { useRouter } from 'next/router';
 
-import Icon from '~/components/icons/Icon';
 import { MenuKey } from '~/data';
 
 type AdminMenuMapType = Record<

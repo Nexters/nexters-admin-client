@@ -12,7 +12,7 @@ import type {
   KeyboardEventHandler,
   MouseEventHandler,
 } from 'react';
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 
 function LoginForm() {
   const router = useRouter();
@@ -46,17 +46,14 @@ function LoginForm() {
       },
     );
   };
-  const onChangeEmail = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     emailState.onChange(value);
-  }, []);
-  const onChangePassword = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      passwordState.onChange(value);
-    },
-    [],
-  );
+  };
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    passwordState.onChange(value);
+  };
   const onEnterEmailInput: KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
       passwordInputRef.current?.focus();

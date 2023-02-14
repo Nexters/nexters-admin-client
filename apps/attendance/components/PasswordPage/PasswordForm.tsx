@@ -10,7 +10,6 @@ import {
   ChangeEvent,
   KeyboardEventHandler,
   MouseEventHandler,
-  useCallback,
   useEffect,
   useRef,
 } from 'react';
@@ -24,20 +23,14 @@ function PasswordForm() {
     validatePassword,
     validatePasswordCheck(passwordState.value),
   ]);
-  const onChangePassword = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      passwordState.onChange(value);
-    },
-    [],
-  );
-  const onChangePasswordCheck = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      passwordCheckState.onChange(value);
-    },
-    [],
-  );
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    passwordState.onChange(value);
+  };
+  const onChangePasswordCheck = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    passwordCheckState.onChange(value);
+  };
   const submitPasswordForm = () => {
     if (passwordState.error || passwordCheckState.error) {
       openErrorSnackBar('비밀번호 형식이 맞지 않습니다.');

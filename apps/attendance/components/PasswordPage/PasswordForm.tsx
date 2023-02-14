@@ -1,4 +1,4 @@
-import { useUpdatePasswordMutation } from '@weekly/api';
+import { handleCommonError, useUpdatePasswordMutation } from '@weekly/api';
 import { Button, openErrorSnackBar, styled, TextField } from '@weekly/ui';
 import {
   useValidateState,
@@ -43,9 +43,8 @@ function PasswordForm() {
     mutate(
       { password: passwordState.value },
       {
-        // TODO: 에러처리 깔끔하게 하기
-        onError() {
-          openErrorSnackBar('알 수 없는 오류가 발생했습니다.');
+        onError(error) {
+          openErrorSnackBar(handleCommonError(error));
         },
         onSuccess() {
           router.push('/attendance');

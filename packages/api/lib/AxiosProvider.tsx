@@ -1,4 +1,4 @@
-import type { AxiosInstance } from 'axios';
+import type { AxiosError, AxiosInstance } from 'axios';
 import axios from 'axios';
 import type { PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo } from 'react';
@@ -39,7 +39,7 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
 
         return response;
       },
-      (error) => {
+      (error: AxiosError) => {
         return Promise.reject(error);
       },
     );

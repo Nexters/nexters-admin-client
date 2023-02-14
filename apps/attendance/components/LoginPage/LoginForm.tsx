@@ -1,11 +1,10 @@
-import { useLoginMuttion } from '@weekly/api';
+import { handleLoginError, useLoginMuttion } from '@weekly/api';
 import { Button, openErrorSnackBar, styled, TextField } from '@weekly/ui';
 import {
   useValidateState,
   validateEmail,
   validatePassword,
 } from '@weekly/utils';
-import type { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import type {
   ChangeEvent,
@@ -27,20 +26,10 @@ function LoginForm() {
         password: passwordState.value,
       },
       {
-        // TODO: 에러처리 깔끔하게 하기
         onError(error) {
-          const { response } = error as AxiosError;
-          if (response?.status === 401) {
-            openErrorSnackBar('유저 정보와 일치하지 않습니다.');
-            return;
-          }
-          openErrorSnackBar('알 수 없는 오류가 발생했습니다.');
+          openErrorSnackBar(handleLoginError(error));
         },
-        onSuccess(response) {
-          if (response.isInitalLogin) {
-            router.push('/authentication/password');
-            return;
-          }
+        onSuccess() {
           router.push('/attendance');
         },
       },

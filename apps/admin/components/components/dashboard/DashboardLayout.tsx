@@ -29,6 +29,7 @@ const DashboardRoot = styled.div`
   padding-top: 102px;
   padding-left: 132px;
 `;
+
 const Main = styled.main`
   display: flex;
   flex: 1 1 auto;

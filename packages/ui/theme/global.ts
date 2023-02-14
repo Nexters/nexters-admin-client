@@ -2,14 +2,11 @@ import { css } from '@emotion/react';
 import reset from 'emotion-reset';
 
 const globalStyle = css`
-  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css');
-
   ${reset}
+  * {
+    font-family: inherit;
+  }
   body {
-    font-family: 'Pretendard', Pretendard, -apple-system, BlinkMacSystemFont,
-      system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
-      'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
-      'Segoe UI Symbol', sans-serif;
     box-sizing: border-box;
     line-height: 160%;
     letter-spacing: -0.005em;

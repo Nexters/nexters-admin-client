@@ -12,11 +12,16 @@ const ERROR_STATUS = {
   FORBIDDEN: 403,
 } as const;
 
-const LOGIN_ERROR: ERROR_MESSAGE_MAP = {
-  [ERROR_STATUS.BAD_REQUEST]: '유저 정보와 일치하지 않습니다.',
-  [ERROR_STATUS.UNAUTHORIZED]: '유저 정보와 일치하지 않습니다.',
-  [ERROR_STATUS.FORBIDDEN]: '유저 정보와 일치하지 않습니다.',
+const BASE_ERROR: ERROR_MESSAGE_MAP = {
+  [ERROR_STATUS.BAD_REQUEST]: '잘못된 요청입니다.',
+  [ERROR_STATUS.UNAUTHORIZED]: '유저 정보를 확인할 수 없습니다.',
+  [ERROR_STATUS.FORBIDDEN]: '권한이 없습니다.',
   [ERROR_STATUS.INTERNAL_SERVER]: '알 수 없는 오류가 발생했습니다.',
+};
+
+const LOGIN_ERROR: ERROR_MESSAGE_MAP = {
+  ...BASE_ERROR,
+  [ERROR_STATUS.UNAUTHORIZED]: '유저 정보와 일치하지 않습니다.',
 };
 
 function getStatusFromAxiosError(error: AxiosError) {
@@ -36,5 +41,6 @@ function handleError(messageMap: ERROR_MESSAGE_MAP) {
 }
 
 const handleLoginError = handleError(LOGIN_ERROR);
+const handleCommonError = handleError(BASE_ERROR);
 
-export { handleLoginError };
+export { handleCommonError, handleLoginError };

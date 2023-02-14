@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { DashboardLayout } from '~/components/components/dashboard/DashboardLayout';
+
 function Activity() {
   return (
     <div>
@@ -14,6 +16,9 @@ function Activity() {
         <Link href='/user'>회원관리</Link>
       </div>
       <div>
+        <Link href='/session'>세션관리</Link>
+      </div>
+      <div>
         <Link href='/authentication/login'>로그인</Link>
       </div>
       <div>
@@ -22,5 +27,9 @@ function Activity() {
     </div>
   );
 }
+
+Activity.getLayout = function getLayout(page: React.ReactElement) {
+  return <DashboardLayout>{page}</DashboardLayout>;
+};
 
 export default Activity;

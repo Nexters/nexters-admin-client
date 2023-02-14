@@ -5,19 +5,22 @@ function Logout() {
     <div>
       <h1>Logout</h1>
       <div>
-        <Link href='/admin/attendance'>출석관리</Link>
+        <Link href='/attendance'>출석관리</Link>
       </div>
       <div>
-        <Link href='/admin/activity'>활동관리</Link>
+        <Link href='/activity'>활동관리</Link>
       </div>
       <div>
-        <Link href='/admin/user'>회원관리</Link>
+        <Link href='/user'>회원관리</Link>
       </div>
       <div>
-        <Link href='/admin/authentication/login'>로그인</Link>
+        <Link href='/session'>세션관리</Link>
       </div>
       <div>
-        <Link href='/admin/authentication/logout'>로그아웃</Link>
+        <Link href='/authentication/login'>로그인</Link>
+      </div>
+      <div>
+        <Link href='/authentication/logout'>로그아웃</Link>
       </div>
     </div>
   );

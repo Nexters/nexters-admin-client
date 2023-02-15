@@ -21,9 +21,13 @@ function HomePage() {
           alt='활동 시작을 기다려 볼까요?'
         />
       </SessionInfo>
-      <Description>넥스터즈의 정보를 빠르게 받아보세요 :)</Description>
-      <SubButtonContainer isEmpty={isEmpty}>
-        {isEmpty ? (
+      <Description>
+        {isEmpty
+          ? '넥스터즈의 정보를 빠르게 받아보세요 :)'
+          : '스크린의 QR코드를 찍으면 출석체크 할 수 있어요.'}
+      </Description>
+      {isEmpty ? (
+        <SubButtonContainer>
           <Fragment>
             <SubButton>
               <Icon name='link' />
@@ -35,12 +39,14 @@ function HomePage() {
               <Icon name='instagram' />
             </SubButton>
           </Fragment>
-        ) : (
+        </SubButtonContainer>
+      ) : (
+        <CameraSubButtonContainer>
           <SubButton>
             <Icon name='camera' />
           </SubButton>
-        )}
-      </SubButtonContainer>
+        </CameraSubButtonContainer>
+      )}
     </Container>
   );
 }
@@ -86,9 +92,15 @@ const Description = styled.p`
   color: ${({ theme }) => theme.palette.grayScale.white};
 `;
 
-const SubButtonContainer = styled.div<{ isEmpty: boolean }>`
-  margin-top: ${({ isEmpty, theme }) =>
-    isEmpty ? theme.rem(12) : theme.rem(118)};
+const SubButtonContainer = styled.div`
+  margin-top: ${({ theme }) => theme.rem(12)};
+`;
+
+const CameraSubButtonContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: ${({ theme }) => theme.rem(32)};
 `;
 
 const SubButton = styled.button`

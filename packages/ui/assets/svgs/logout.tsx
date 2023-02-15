@@ -1,4 +1,4 @@
-const Logout = () => {
+function Logout() {
   return (
     <svg
       width='16'
@@ -13,6 +13,6 @@ const Logout = () => {
       />
     </svg>
   );
-};
+}
 
 export { Logout };

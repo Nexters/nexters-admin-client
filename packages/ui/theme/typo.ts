@@ -63,7 +63,7 @@ type ExcludedSemiBold =
   | 'h1Semibold'
   | 'h2Semibold'
   | 'h3Semibold'
-  | 'body1Semibod'
+  | 'body1Semibold'
   | 'body2Semibold'
   | 'captionSemibold';
 type TypoObject = Record<

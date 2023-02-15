@@ -1,4 +1,4 @@
-const Attendance = () => {
+function Attendance() {
   return (
     <svg
       width='24'
@@ -16,6 +16,6 @@ const Attendance = () => {
       />
     </svg>
   );
-};
+}
 
 export { Attendance };

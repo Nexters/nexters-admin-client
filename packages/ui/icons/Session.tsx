@@ -1,4 +1,4 @@
-const Session = () => {
+function Session() {
   return (
     <svg
       width='24'
@@ -16,6 +16,6 @@ const Session = () => {
       />
     </svg>
   );
-};
+}
 
 export { Session };

@@ -1,6 +1,6 @@
 import { styled } from '../emotion';
 
-export interface ButtonProps extends React.ComponentProps<'button'> {
+interface ButtonProps extends React.ComponentProps<'button'> {
   fullWidth: boolean;
 }
 

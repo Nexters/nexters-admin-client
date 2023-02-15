@@ -1,4 +1,4 @@
-import { Snackbar, styled } from '@weekly/ui';
+import { styled } from '@weekly/ui';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import type { PropsWithChildren } from 'react';
@@ -36,7 +36,6 @@ function Layout(props: Props) {
         titleTemplate='WEEKLY | %s'
         description='Nexters 22기 출출팀 당신의 한 주의 출석을 책임지는 웹 "위클리"'
       />
-      <Snackbar />
       {children}
     </Container>
   );

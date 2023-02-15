@@ -1,14 +1,10 @@
 import { Icon, styled } from '@weekly/ui';
 
-import { Menu } from '~/components/components/dashboard/SidebarMenu';
 import { menus } from '~/data';
 
-interface DashboardSidebarProps {}
+import { Menu } from './SidebarMenu';
 
-type Props = Partial<DashboardSidebarProps>;
-
-function DashboardSidebar(props: Props) {
-  const {} = props;
+function DashboardSidebar() {
   return (
     <Wrapper>
       <Logo>
@@ -66,6 +62,7 @@ const Bottom = styled.div`
   bottom: ${({ theme }) => theme.rem(32)};
   left: ${({ theme }) => theme.rem(35)};
 `;
+
 const LogOutButton = styled.button`
   color: ${({ theme }) => theme.palette.grayScale.white};
   ${({ theme }) => theme.typo.captionBold}
@@ -78,6 +75,7 @@ const LogOutButton = styled.button`
     padding-top: ${({ theme }) => theme.rem(1)};
   }
 `;
+
 const Version = styled.div`
   color: ${({ theme }) => theme.palette.grayScale.g60};
   ${({ theme }) => theme.typo.captionMedium}

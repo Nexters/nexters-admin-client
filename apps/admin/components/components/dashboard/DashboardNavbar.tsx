@@ -1,11 +1,11 @@
 import { styled } from '@weekly/ui';
-import React from 'react';
+import type { PropsWithChildren } from 'react';
 
 interface DashboardNavbarProps {}
 
 type Props = Partial<DashboardNavbarProps>;
 
-function DashboardNavbar(props: React.PropsWithChildren<Props>) {
+function DashboardNavbar(props: PropsWithChildren<Props>) {
   const { children } = props;
   return <Container>{children}</Container>;
 }

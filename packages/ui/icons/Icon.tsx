@@ -1,14 +1,14 @@
-import { styled } from '@weekly/ui';
-import React from 'react';
+import type { SVGProps } from 'react';
+import { createElement } from 'react';
 
-import {
-  Attendance,
-  Certificate,
-  Logout,
-  Session,
-  Users,
-  Weekly,
-} from '../assets/svgs';
+import { Attendance } from './Attendance';
+import { Certificate } from './Certificate';
+import { Close } from './Close';
+import { Error } from './Error';
+import { Logout } from './Logout';
+import { Session } from './Session';
+import { Users } from './Users';
+import { Weekly } from './Weekly';
 
 type IconName = keyof typeof icons;
 
@@ -19,18 +19,17 @@ const icons = {
   session: Session,
   users: Users,
   weekly: Weekly,
+  error: Error,
+  close: Close,
 } as const;
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
+interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
 }
 
-const Icon = ({ name, ...rest }: IconProps) => {
-  return <Container>{React.createElement(icons[name], rest)}</Container>;
-};
-
-const Container = styled.div`
-  display: flex;
-`;
+function Icon(props: IconProps) {
+  const { name, ...rest } = props;
+  return createElement(icons[name], rest);
+}
 
 export { Icon };

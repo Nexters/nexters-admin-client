@@ -1,5 +1,6 @@
 import { css, Icon, styled } from '@weekly/ui';
 import { useRouter } from 'next/router';
+import type { ComponentProps } from 'react';
 
 import { MenuKey } from '~/data';
 
@@ -35,7 +36,7 @@ const adminMenuMap: AdminMenuMapType = {
   },
 };
 
-interface MenuProps extends React.ComponentProps<'button'> {
+interface MenuProps extends ComponentProps<'button'> {
   variant: MenuKey;
 }
 

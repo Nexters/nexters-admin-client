@@ -1,4 +1,4 @@
-const Weekly = () => {
+function Weekly() {
   return (
     <svg
       width='75'
@@ -33,6 +33,6 @@ const Weekly = () => {
       />
     </svg>
   );
-};
+}
 
 export { Weekly };

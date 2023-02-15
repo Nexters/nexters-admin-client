@@ -16,10 +16,10 @@ function DashboardSidebar() {
         ))}
       </Menus>
       <Bottom>
-        <LogOutButton>
+        <LogoutButton>
           <Icon name='logout' />
-          <span>로그아웃</span>
-        </LogOutButton>
+          <LogoutButtonText>로그아웃</LogoutButtonText>
+        </LogoutButton>
         <Version>v.1.0.0</Version>
       </Bottom>
     </Wrapper>
@@ -63,17 +63,17 @@ const Bottom = styled.div`
   left: ${({ theme }) => theme.rem(35)};
 `;
 
-const LogOutButton = styled.button`
+const LogoutButton = styled.button`
   color: ${({ theme }) => theme.palette.grayScale.white};
   ${({ theme }) => theme.typo.captionBold}
 
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.rem(4)};
+`;
 
-  & > span {
-    padding-top: ${({ theme }) => theme.rem(1)};
-  }
+const LogoutButtonText = styled.span`
+  padding-top: ${({ theme }) => theme.rem(1)};
 `;
 
 const Version = styled.div`

@@ -4,14 +4,12 @@ import type { ComponentProps } from 'react';
 
 import { MenuKey } from '~/data';
 
-type AdminMenuMapType = Record<
-  MenuKey,
-  {
-    icon: JSX.Element;
-    label: string;
-    route: string;
-  }
->;
+type MenuItem = {
+  icon: JSX.Element;
+  label: string;
+  route: string;
+};
+type AdminMenuMapType = Record<MenuKey, MenuItem>;
 
 const adminMenuMap: AdminMenuMapType = {
   attendance: {

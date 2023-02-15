@@ -22,7 +22,8 @@ function BottomSheet() {
         <Description>
           이메일 혹은 비밀번호를 잊었을 때는 운영진에게 문의해 주세요.
           <br />
-          email: <span>teamnexters@gmail.com</span>
+          email:{' '}
+          <UnderlineDescription>teamnexters@gmail.com</UnderlineDescription>
         </Description>
       </Contents>
     </Container>
@@ -78,12 +79,13 @@ const SubTitle = styled.span`
 
 const Description = styled.p`
   ${({ theme }) => theme.typo.body2Regular};
-  & > span {
-    text-decoration: underline;
-  }
   &:not(:last-of-type) {
     margin-bottom: ${({ theme }) => theme.rem(16)};
   }
+`;
+
+const UnderlineDescription = styled.span`
+  text-decoration: underline;
 `;
 
 const CloseButton = styled.a`

@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Certificate = () => {
+function Certificate() {
   return (
     <svg
       width='24'
@@ -18,6 +16,6 @@ const Certificate = () => {
       />
     </svg>
   );
-};
+}
 
 export { Certificate };

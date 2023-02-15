@@ -1,4 +1,4 @@
-const Users = () => {
+function Users() {
   return (
     <svg
       width='24'
@@ -16,6 +16,6 @@ const Users = () => {
       />
     </svg>
   );
-};
+}
 
 export { Users };

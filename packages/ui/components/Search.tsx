@@ -1,16 +1,11 @@
 import { styled } from '../emotion';
 import { Icon } from '../icons/Icon';
 
-interface SearchProps extends React.ComponentProps<'input'> {
-  width?: number;
-}
+interface SearchProps extends React.ComponentProps<'input'> {}
 
 type Props = Partial<SearchProps>;
 type ContainerProps = Pick<SearchProps, 'width'>;
 
-/**
- * @param width ?? fullWidth
- */
 function Search(props: Props) {
   const { width } = props;
   return (
@@ -22,7 +17,7 @@ function Search(props: Props) {
 }
 
 const Container = styled.div<ContainerProps>`
-  width: ${({ theme, width }) => (width ? `${theme.rem(width)}` : '100%')};
+  width: 100%;
   padding: ${({ theme }) => `${theme.rem(12)} ${theme.rem(16)}`};
   background-color: ${({ theme }) => theme.palette.grayScale.g20};
   border-radius: ${({ theme }) => theme.rem(12)};

@@ -38,15 +38,14 @@ const Input = styled.input<SearchProps>`
   background-color: transparent;
   width: 100%;
   padding: 0;
-  ${({ theme }) => theme.typo.body1Semibold}
+
+  ${({ theme }) => theme.typo.body1Medium}
   color : ${({ theme }) => theme.palette.grayScale.g95};
 
   &:focus {
-    ${({ theme }) => theme.typo.body1Medium}
-    color : ${({ theme }) => theme.palette.grayScale.g80};
+    color: ${({ theme }) => theme.palette.grayScale.g80};
   }
   &::placeholder {
-    ${({ theme }) => theme.typo.body1Medium}
     color: ${({ theme }) => theme.palette.grayScale.g50};
   }
 `;

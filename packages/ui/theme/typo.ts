@@ -37,7 +37,7 @@ const typoSchema: Record<TypoKey, Array<WeightKey>> = {
   h2: ['bold', 'medium', 'regular'],
   h3: ['bold', 'medium', 'regular'],
   h4: ['bold', 'medium', 'regular', 'semibold'],
-  body1: ['bold', 'medium', 'regular', 'semibold'],
+  body1: ['bold', 'medium', 'regular'],
   body2: ['bold', 'medium', 'regular'],
   caption: ['bold', 'medium', 'regular'],
 };
@@ -63,6 +63,7 @@ type ExcludedSemiBold =
   | 'h1Semibold'
   | 'h2Semibold'
   | 'h3Semibold'
+  | 'body1Semibold'
   | 'body2Semibold'
   | 'captionSemibold';
 type TypoObject = Record<

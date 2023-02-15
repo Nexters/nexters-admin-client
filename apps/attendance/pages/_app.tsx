@@ -62,9 +62,9 @@ function App(props: AppProps) {
           `}
         </style>
         <Layout>
-          <Snackbar />
           <Component {...pageProps} />
         </Layout>
+        <Snackbar />
       </ThemeProvider>
     </QueryClientProvider>
   );

@@ -2,11 +2,16 @@ import type { SVGProps } from 'react';
 import { createElement } from 'react';
 
 import { Attendance } from './Attendance';
+import { Camera } from './Camera';
 import { Certificate } from './Certificate';
 import { Close } from './Close';
 import { Error } from './Error';
+import { Facebook } from './Facebook';
+import { Instagram } from './Instagram';
+import { Link } from './Link';
 import { Logout } from './Logout';
 import { Session } from './Session';
+import { User } from './User';
 import { Users } from './Users';
 import { Weekly } from './Weekly';
 
@@ -21,6 +26,11 @@ const icons = {
   weekly: Weekly,
   error: Error,
   close: Close,
+  user: User,
+  link: Link,
+  facebook: Facebook,
+  instagram: Instagram,
+  camera: Camera,
 } as const;
 
 interface IconProps extends SVGProps<SVGSVGElement> {

@@ -7,7 +7,7 @@ interface DropdownProps extends ComponentProps<'div'> {
   size: DropdownSize;
   placeholder: string;
   width: number;
-  option: string[];
+  options: string[];
   disabled: boolean;
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
@@ -16,7 +16,10 @@ interface DropdownProps extends ComponentProps<'div'> {
 type DropdownSize = 'large' | 'small';
 type Props = Partial<DropdownProps>;
 type ContainerProps = Pick<Props, 'size' | 'disabled' | 'width'>;
-type DropdownOptionsProps = Pick<DropdownProps, 'size' | 'option' | 'setValue'>;
+type DropdownOptionsProps = Pick<
+  DropdownProps,
+  'size' | 'options' | 'setValue'
+>;
 
 /**
  * @param size 기본값 : small
@@ -30,7 +33,7 @@ function Dropdown(props: Props) {
   const {
     size = 'small',
     disabled = false,
-    option = [],
+    options = [],
     placeholder,
     value,
     setValue,
@@ -48,30 +51,28 @@ function Dropdown(props: Props) {
       onClick={onToggleDropdown}
       width={width}
     >
-      {value ? <p>{value}</p> : <p className='placeholder'>{placeholder}</p>}
+      {value ? <p>{value}</p> : <Placeholder>{placeholder}</Placeholder>}
       <Icon name='chevron' className='chevron' />
       {isOpen && (
-      // TODO : Partial로 props을 받아와 사용하면, 필수여야 하는 prop이면 어떻게 해야할까요..? 일단 non null assertion..으로 하고 올리겠습니다ㅠ
-
-        <DropdownOptions size={size} option={option} setValue={setValue!} />
+        <DropdownOptions size={size} options={options} setValue={setValue!} />
       )}
     </Container>
   );
 }
 
 function DropdownOptions(props: DropdownOptionsProps) {
-  const { size, option, setValue } = props;
+  const { size, options, setValue } = props;
   return (
     <DropdownOptionsContainer size={size}>
-      {option.map((v) => (
+      {options.map((option) => (
         <DropdownTable
-          key={v}
+          key={option}
           size={size}
           onClick={() => {
-            setValue(v);
+            setValue(option);
           }}
         >
-          {v}
+          {option}
         </DropdownTable>
       ))}
     </DropdownOptionsContainer>
@@ -124,10 +125,9 @@ const Container = styled.div<ContainerProps>`
       cursor: default;
       color: ${theme.palette.grayScale.g50}:;
     `}
-
-    .placeholder {
-    color: ${({ theme }) => theme.palette.grayScale.g50};
-  }
+`;
+const Placeholder = styled.div`
+  color: ${({ theme }) => theme.palette.grayScale.g50};
 `;
 
 const DropdownOptionsContainer = styled.div<{ size: DropdownSize }>`

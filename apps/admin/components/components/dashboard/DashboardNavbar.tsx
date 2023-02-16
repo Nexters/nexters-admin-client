@@ -1,4 +1,5 @@
 import { Dropdown, styled } from '@weekly/ui';
+import { useSearchParams } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -39,30 +40,33 @@ const navBarMap: AdminMenuMapType = {
   },
 };
 
-function DashboardNavbar(props: Props) {
-  const { pathname, push } = useRouter();
-  const matchedPath = menus.find((v) => pathname.includes(v));
-  const [gen, setGen] = useState<string>('');
+//TODO : api fetching
+const generation = ['22기', '21기'];
 
-  //TODO : api fetching
-  const generation = ['22기', '21기'];
+function DashboardNavbar(props: Props) {
+  const { pathname } = useRouter();
+  const { setSearchParams } = useSearchParams();
+  const matchedPath = menus.find((v) => pathname.includes(v));
+  const [gen, setGen] = useState<string>(generation[0]);
 
   useEffect(() => {
-    gen !== '' && push(`/${pathname}?generation=${gen.split('기')[0]}`);
+    matchedPath &&
+      navBarMap[matchedPath].selectGeneration &&
+      setSearchParams([{ key: 'generation', value: gen.split('기')[0] }]);
   }, [gen]);
 
   return (
     <Container>
-      {matchedPath && (
+      {matchedPath && navBarMap[matchedPath] && (
         <NavBarContent>
           <Title>{navBarMap[matchedPath].label}</Title>
           {navBarMap[matchedPath].selectGeneration && (
             <Dropdown
               size='small'
-              width={89}
-              value={generation[0]}
+              width={92}
+              value={gen}
               setValue={setGen}
-              option={generation}
+              options={generation}
             />
           )}
         </NavBarContent>

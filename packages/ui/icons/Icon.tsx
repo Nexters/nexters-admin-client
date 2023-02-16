@@ -10,6 +10,7 @@ import { Facebook } from './Facebook';
 import { Instagram } from './Instagram';
 import { Link } from './Link';
 import { Logout } from './Logout';
+import { Search } from './Search';
 import { Session } from './Session';
 import { User } from './User';
 import { Users } from './Users';
@@ -31,6 +32,7 @@ const icons = {
   facebook: Facebook,
   instagram: Instagram,
   camera: Camera,
+  search: Search,
 } as const;
 
 interface IconProps extends SVGProps<SVGSVGElement> {

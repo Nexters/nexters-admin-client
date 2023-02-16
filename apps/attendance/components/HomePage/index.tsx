@@ -10,7 +10,12 @@ function HomePage() {
       <MenuButton>
         <Icon name='user' />
       </MenuButton>
-      <SessionCard type='empty' />
+      <SessionCard
+        type='session'
+        date={new Date()}
+        week={1}
+        description='OT & 팀빌딩'
+      />
       <Description>
         {isEmpty
           ? '넥스터즈의 정보를 빠르게 받아보세요 :)'

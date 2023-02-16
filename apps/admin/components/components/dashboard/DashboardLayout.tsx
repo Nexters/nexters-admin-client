@@ -16,7 +16,7 @@ function DashboardLayout(props: React.PropsWithChildren<Props>) {
       <DashboardRoot>
         <Main>{children}</Main>
       </DashboardRoot>
-      <DashboardNavbar>HEADER</DashboardNavbar>
+      <DashboardNavbar />
       <DashboardSidebar />
     </>
   );

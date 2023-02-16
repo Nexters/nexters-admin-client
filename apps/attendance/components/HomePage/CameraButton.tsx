@@ -13,7 +13,7 @@ const Container = styled.label`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;

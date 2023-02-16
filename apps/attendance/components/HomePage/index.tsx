@@ -1,8 +1,7 @@
 import { Icon, styled } from '@weekly/ui';
-import Image from 'next/image';
 import { Fragment } from 'react';
 
-import empty from '~/images/home/empty.png';
+import { SessionCard } from './SessionCard';
 
 function HomePage() {
   const isEmpty = true;
@@ -11,16 +10,7 @@ function HomePage() {
       <MenuButton>
         <Icon name='user' />
       </MenuButton>
-      <SessionInfo>
-        <SessionInfoText>활동 시작을 기다려 볼까요?</SessionInfoText>
-        <Image
-          src={empty}
-          width={168}
-          height={196}
-          placeholder='blur'
-          alt='활동 시작을 기다려 볼까요?'
-        />
-      </SessionInfo>
+      <SessionCard type='empty' />
       <Description>
         {isEmpty
           ? '넥스터즈의 정보를 빠르게 받아보세요 :)'
@@ -67,23 +57,6 @@ const MenuButton = styled.button`
   right: ${({ theme }) => theme.rem(-4)};
   width: ${({ theme }) => theme.rem(24)};
   height: ${({ theme }) => theme.rem(24)};
-`;
-
-const SessionInfo = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: ${({ theme }) => theme.rem(335)};
-  height: ${({ theme }) => theme.rem(360)};
-  border-radius: ${({ theme }) => theme.rem(24)};
-  background-color: ${({ theme }) => theme.palette.grayScale.g90};
-`;
-
-const SessionInfoText = styled.h2`
-  ${({ theme }) => theme.typo.h2Bold}
-  margin-bottom: ${({ theme }) => theme.rem(36)};
-  color: ${({ theme }) => theme.palette.grayScale.g10};
 `;
 
 const Description = styled.p`

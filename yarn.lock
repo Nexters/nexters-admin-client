@@ -1198,6 +1198,7 @@ __metadata:
     axios: ^1.3.2
     eslint: 7.32.0
     eslint-config-weekly: "*"
+    jotai: ^2.0.2
     msw: ^1.0.0
     next: ^13.1.6
     next-seo: ^5.15.0
@@ -3739,6 +3740,18 @@ __metadata:
   version: 2.0.0
   resolution: "isexe@npm:2.0.0"
   checksum: 26bf6c5480dda5161c820c5b5c751ae1e766c587b1f951ea3fcfc973bafb7831ae5b54a31a69bd670220e42e99ec154475025a468eae58ea262f813fdc8d1c62
+  languageName: node
+  linkType: hard
+
+"jotai@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "jotai@npm:2.0.2"
+  peerDependencies:
+    react: ">=17.0.0"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: f107d2b8e3b0853cf3fb3978e3a8b0d5b4925957d1901d038ddf534de7f1967d6bfd81b1ef69442fc3d8047176933bf3d9c9b5830d8a01b02ee1daae6d412ef3
   languageName: node
   linkType: hard
 

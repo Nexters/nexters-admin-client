@@ -1,5 +1,6 @@
-import { Icon, styled } from '@weekly/ui';
+import { styled } from '@weekly/ui';
 
+import { MenuButton } from '../MenuButton';
 import { CameraButton } from './CameraButton';
 import { SessionCard } from './SessionCard';
 import { SocialLinks } from './SocialLinks';
@@ -13,9 +14,7 @@ function HomePage() {
   };
   return (
     <Container>
-      <MenuButton>
-        <Icon name='user' />
-      </MenuButton>
+      <MenuButton />
       <SessionCard
         type='session'
         date={data.date}
@@ -40,14 +39,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
-
-const MenuButton = styled.button`
-  position: absolute;
-  top: ${({ theme }) => theme.rem(40)};
-  right: ${({ theme }) => theme.rem(-4)};
-  width: ${({ theme }) => theme.rem(24)};
-  height: ${({ theme }) => theme.rem(24)};
 `;
 
 const Description = styled.p`

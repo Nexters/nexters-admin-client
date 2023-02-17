@@ -1532,6 +1532,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:1.3.2"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
+            ["jotai", "virtual:10960cd070cd127ab29c1f998d5d39e8b7ade98339984da9273756de37fd9f57aca595a61d2f547b6222f36fba4e2c70621a2dd7c7c1a1a70c4045bdfa7ad24e#npm:2.0.2"],\
             ["msw", "virtual:e0664ecf96a74da8ee95d962322b98313769824253283f7e26885bed878e141af80dc67b82bae219e1be20a163a63ce9b39f840b2f9f0444e21789c59f5a99af#npm:1.0.0"],\
             ["next", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:13.1.6"],\
             ["next-seo", "virtual:10960cd070cd127ab29c1f998d5d39e8b7ade98339984da9273756de37fd9f57aca595a61d2f547b6222f36fba4e2c70621a2dd7c7c1a1a70c4045bdfa7ad24e#npm:5.15.0"],\
@@ -4619,6 +4620,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/isexe-npm-2.0.0-b58870bd2e-26bf6c5480.zip/node_modules/isexe/",\
           "packageDependencies": [\
             ["isexe", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jotai", [\
+        ["npm:2.0.2", {\
+          "packageLocation": "./.yarn/cache/jotai-npm-2.0.2-178d3c317a-f107d2b8e3.zip/node_modules/jotai/",\
+          "packageDependencies": [\
+            ["jotai", "npm:2.0.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:10960cd070cd127ab29c1f998d5d39e8b7ade98339984da9273756de37fd9f57aca595a61d2f547b6222f36fba4e2c70621a2dd7c7c1a1a70c4045bdfa7ad24e#npm:2.0.2", {\
+          "packageLocation": "./.yarn/__virtual__/jotai-virtual-d1e0063569/0/cache/jotai-npm-2.0.2-178d3c317a-f107d2b8e3.zip/node_modules/jotai/",\
+          "packageDependencies": [\
+            ["jotai", "virtual:10960cd070cd127ab29c1f998d5d39e8b7ade98339984da9273756de37fd9f57aca595a61d2f547b6222f36fba4e2c70621a2dd7c7c1a1a70c4045bdfa7ad24e#npm:2.0.2"],\
+            ["@types/react", "npm:18.0.26"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

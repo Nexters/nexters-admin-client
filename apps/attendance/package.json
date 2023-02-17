@@ -15,6 +15,7 @@
     "@weekly/ui": "*",
     "@weekly/utils": "*",
     "axios": "^1.3.2",
+    "jotai": "^2.0.2",
     "next": "^13.1.6",
     "next-seo": "^5.15.0",
     "react": "^18.2.0",

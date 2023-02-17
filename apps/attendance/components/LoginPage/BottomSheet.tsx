@@ -1,22 +1,11 @@
-import { styled } from '@weekly/ui';
+import { Icon, styled } from '@weekly/ui';
 
 function BottomSheet() {
   return (
     <Container id='help-login'>
       <Contents className='contents'>
         <CloseButton href='#'>
-          <svg
-            width='14'
-            height='14'
-            viewBox='0 0 14 14'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              d='M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z'
-              fill='currentColor'
-            />
-          </svg>
+          <Icon name='close' />
         </CloseButton>
         <Title>로그인, 이렇게 가능해요!</Title>
         <SubTitle>[이메일]</SubTitle>
@@ -33,7 +22,8 @@ function BottomSheet() {
         <Description>
           이메일 혹은 비밀번호를 잊었을 때는 운영진에게 문의해 주세요.
           <br />
-          email: <span>teamnexters@gmail.com</span>
+          email:{' '}
+          <UnderlineDescription>teamnexters@gmail.com</UnderlineDescription>
         </Description>
       </Contents>
     </Container>
@@ -89,12 +79,13 @@ const SubTitle = styled.span`
 
 const Description = styled.p`
   ${({ theme }) => theme.typo.body2Regular};
-  & > span {
-    text-decoration: underline;
-  }
   &:not(:last-of-type) {
     margin-bottom: ${({ theme }) => theme.rem(16)};
   }
+`;
+
+const UnderlineDescription = styled.span`
+  text-decoration: underline;
 `;
 
 const CloseButton = styled.a`

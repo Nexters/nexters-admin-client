@@ -8,14 +8,12 @@ import { MenuKey, menus } from '~/data';
 interface DashboardNavbarProps {}
 type Props = Partial<DashboardNavbarProps>;
 
-type AdminMenuMapType = Record<
-  MenuKey,
-  {
-    label: string;
-    route: string;
-    selectGeneration: boolean;
-  }
->;
+type AdminMenuItem = {
+  label: string;
+  route: string;
+  selectGeneration: boolean;
+};
+type AdminMenuMapType = Record<MenuKey, AdminMenuItem>;
 
 const navBarMap: AdminMenuMapType = {
   attendance: {
@@ -65,7 +63,7 @@ function DashboardNavbar(props: Props) {
           {navBarMap[matchedPath].selectGeneration && (
             <Dropdown
               size='small'
-              width={92}
+              width={96}
               value={gen}
               setValue={setGen}
               options={generation}
@@ -79,20 +77,22 @@ function DashboardNavbar(props: Props) {
 
 const Container = styled.header`
   position: fixed;
-  left: 132px;
+  left: ${({ theme }) => theme.rem(132)};
   top: 0;
   display: flex;
 
-  min-height: 102px;
+  min-height: ${({ theme }) => theme.rem(102)};
   width: calc(100% - 132px);
-  padding-inline: 40px;
+  padding-inline: ${({ theme }) => theme.rem(40)};
   box-sizing: border-box;
 `;
+
 const NavBarContent = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.rem(16)};
   padding-top: ${({ theme }) => theme.rem(48)};
 `;
+
 const Title = styled.h2`
   height: 38px;
   ${({ theme }) => theme.typo.h2Bold};

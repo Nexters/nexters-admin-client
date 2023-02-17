@@ -1,5 +1,5 @@
 import { Global, ThemeProvider as BaseThemeProvider } from '@emotion/react';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { rem } from './common';
 import { globalStyle } from './global';

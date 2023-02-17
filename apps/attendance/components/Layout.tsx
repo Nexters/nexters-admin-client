@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import type { PropsWithChildren } from 'react';
 
+import { Sidebar } from './Sidebar';
+
 interface LayoutProps extends PropsWithChildren<unknown> {}
 
 type Props = Partial<LayoutProps>;
@@ -37,6 +39,7 @@ function Layout(props: Props) {
         description='Nexters 22기 출출팀 당신의 한 주의 출석을 책임지는 웹 "위클리"'
       />
       {children}
+      <Sidebar />
     </Container>
   );
 }

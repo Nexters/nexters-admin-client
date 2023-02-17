@@ -8,12 +8,15 @@ import { Chevron } from './Chevron';
 import { Close } from './Close';
 import { Error } from './Error';
 import { Facebook } from './Facebook';
+import { Inbox } from './Inbox';
 import { Instagram } from './Instagram';
 import { Link } from './Link';
 import { Logout } from './Logout';
+import { Password } from './Password';
 import { Search } from './Search';
 import { Session } from './Session';
 import { User } from './User';
+import { UserLogout } from './UserLogout';
 import { Users } from './Users';
 import { Weekly } from './Weekly';
 
@@ -35,6 +38,9 @@ const icons = {
   camera: Camera,
   search: Search,
   chevron: Chevron,
+  inbox: Inbox,
+  password: Password,
+  userLogout: UserLogout,
 } as const;
 
 interface IconProps extends SVGProps<SVGSVGElement> {

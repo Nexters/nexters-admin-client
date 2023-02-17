@@ -45,14 +45,16 @@ const generation = ['22기', '21기'];
 
 function DashboardNavbar(props: Props) {
   const { pathname } = useRouter();
-  const { setSearchParams } = useSearchParams();
+  const searchParams = useSearchParams();
   const matchedPath = menus.find((v) => pathname.includes(v));
   const [gen, setGen] = useState<string>(generation[0]);
 
   useEffect(() => {
     matchedPath &&
       navBarMap[matchedPath].selectGeneration &&
-      setSearchParams([{ key: 'generation', value: gen.split('기')[0] }]);
+      searchParams.set([{ key: 'generation', value: gen.split('기')[0] }], {
+        replace: true,
+      });
   }, [gen]);
 
   return (

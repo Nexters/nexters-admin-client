@@ -2,6 +2,8 @@ import { Icon, styled } from '@weekly/ui';
 
 import { useSidebarState } from '~/atoms/sidebar';
 
+import { UserCard } from './UserCard';
+
 function Sidebar() {
   const { value, close } = useSidebarState();
   return (
@@ -9,6 +11,7 @@ function Sidebar() {
       <CloseButton onClick={close}>
         <Icon name='close' />
       </CloseButton>
+      <UserCard name='최다예' generation={19} position='디자이너' />
     </Container>
   );
 }
@@ -36,6 +39,7 @@ const CloseButton = styled.button`
   align-self: flex-end;
   width: ${({ theme }) => theme.rem(24)};
   height: ${({ theme }) => theme.rem(24)};
+  margin-bottom: ${({ theme }) => theme.rem(56)};
   color: ${({ theme }) => theme.palette.grayScale.white};
 `;
 

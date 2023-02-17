@@ -1,25 +1,29 @@
 import { Icon, styled } from '@weekly/ui';
 
+import { useSidebarState } from '~/atoms/sidebar';
+
 function Sidebar() {
+  const { value, close } = useSidebarState();
   return (
-    <Container>
-      <CloseButton>
+    <Container open={value}>
+      <CloseButton onClick={close}>
         <Icon name='close' />
       </CloseButton>
     </Container>
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ open: boolean }>`
   position: fixed;
   display: flex;
   flex-direction: column;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
   width: 100vw;
   height: 100vh;
+  top: 0;
+  left: 50%;
+  transition: transform 0.4s ease;
   min-width: ${({ theme }) => theme.rem(320)};
+  transform: ${({ open }) => (open ? 'translateX(-50%)' : 'translateX(-150%)')};
   max-width: ${({ theme }) => theme.rem(743)};
   padding: ${({ theme }) => `${theme.rem(40)} ${theme.rem(20)}`};
   background-color: ${({ theme }) => theme.palette.grayScale.g100};

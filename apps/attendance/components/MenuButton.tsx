@@ -1,8 +1,11 @@
 import { Icon, styled } from '@weekly/ui';
 
+import { useSidebarState } from '~/atoms/sidebar';
+
 function MenuButton() {
+  const { open } = useSidebarState();
   return (
-    <Container>
+    <Container onClick={open}>
       <Icon name='user' />
     </Container>
   );

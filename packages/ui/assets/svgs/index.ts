@@ -1,5 +1,6 @@
 export * from './Attendance';
 export * from './Certificate';
+export * from './Chevron';
 export * from './logout';
 export * from './Search';
 export * from './Session';

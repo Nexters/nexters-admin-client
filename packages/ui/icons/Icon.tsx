@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Attendance,
   Certificate,
+  Chevron,
   Logout,
   Search,
   Session,
@@ -21,14 +22,20 @@ const icons = {
   users: Users,
   weekly: Weekly,
   search: Search,
+  chevron: Chevron,
 } as const;
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
+  className?: string;
 }
 
-const Icon = ({ name, ...rest }: IconProps) => {
-  return <Container>{React.createElement(icons[name], rest)}</Container>;
+const Icon = ({ name, className, ...rest }: IconProps) => {
+  return (
+    <Container className={className}>
+      {React.createElement(icons[name], rest)}
+    </Container>
+  );
 };
 
 const Container = styled.div`

@@ -32,6 +32,10 @@ const WeekText = styled.h1`
 `;
 
 const DescriptionText = styled.h3`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
   ${({ theme }) => theme.typo.h3Bold}
   color: ${({ theme }) => theme.palette.grayScale.g100};
   border-radius: ${({ theme }) => theme.rem(12)};

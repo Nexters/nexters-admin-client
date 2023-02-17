@@ -9,7 +9,7 @@ function HomePage() {
     type: 'session',
     date: new Date(),
     week: 1,
-    description: 'OT & 팀빌딩',
+    description: '레크레이션 & 팀 작업 & 뭐 어쩌고 저쩌고 긴 글자',
   };
   return (
     <Container>

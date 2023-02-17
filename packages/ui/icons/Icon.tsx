@@ -4,6 +4,7 @@ import { createElement } from 'react';
 import { Attendance } from './Attendance';
 import { Camera } from './Camera';
 import { Certificate } from './Certificate';
+import { Chevron } from './Chevron';
 import { Close } from './Close';
 import { Error } from './Error';
 import { Facebook } from './Facebook';
@@ -33,10 +34,12 @@ const icons = {
   instagram: Instagram,
   camera: Camera,
   search: Search,
+  chevron: Chevron,
 } as const;
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
+  className?: string;
 }
 
 function Icon(props: IconProps) {

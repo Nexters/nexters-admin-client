@@ -16,7 +16,7 @@ function DashboardLayout(props: PropsWithChildren<Props>) {
       <DashboardRoot>
         <Main>{children}</Main>
       </DashboardRoot>
-      <DashboardNavbar>HEADER</DashboardNavbar>
+      <DashboardNavbar />
       <DashboardSidebar />
     </Fragment>
   );

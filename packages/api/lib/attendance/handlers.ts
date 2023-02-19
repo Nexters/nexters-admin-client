@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 import { qr } from './data';
 import type { QRResponse } from './types';
-import { API_URL } from './url';
+import { API_URL } from './urls';
 import { VARIABLES } from './variables';
 
 // 사용자 출석 mock API

@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import type { Session } from '@weekly/msw';
-import { API_URL } from '@weekly/msw';
 
-import { useAxios } from './AxiosProvider';
+import { useAxios } from '../AxiosProvider';
+import type { Session } from './types';
+import { API_URL } from './urls';
 
 function useSessionQuery() {
   const axios = useAxios();

@@ -45,7 +45,7 @@ function App(props: EnhancedAppProps) {
   );
   useEffect(() => {
     async function init() {
-      const { initMocks } = await import('@weekly/msw');
+      const { initMocks } = await import('@weekly/api');
       await initMocks();
       setShouldRender(true);
     }

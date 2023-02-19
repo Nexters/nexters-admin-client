@@ -2,7 +2,7 @@ import type { DefaultBodyType, ResponseComposition, RestContext } from 'msw';
 import { rest } from 'msw';
 
 import type { LoginResponse } from './types';
-import { API_URL } from './url';
+import { API_URL } from './urls';
 import { VARIABLES } from './variables';
 
 function authentication(

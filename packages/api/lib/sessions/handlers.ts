@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 import { session } from './data';
 import type { Session } from './types';
-import { API_URL } from './url';
+import { API_URL } from './urls';
 
 // 사용자 세션 정보 mock API
 const home = rest.get(

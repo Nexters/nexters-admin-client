@@ -1,5 +1,7 @@
 // TODO: 반환 타입 없는 것들 확인하기
 import { useMutation, useQuery } from '@tanstack/react-query';
+
+import { useAxios } from '../AxiosProvider';
 import type {
   CreateMemberBulkBody,
   MemberPositionBody,
@@ -8,10 +10,8 @@ import type {
   MemberStatusBody,
   MeResponseBody,
   UpdatePasswordBody,
-} from '@weekly/msw';
-import { API_URL } from '@weekly/msw';
-
-import { useAxios } from './AxiosProvider';
+} from './types';
+import { API_URL } from './urls';
 
 function useUpdatePasswordMutation() {
   const axios = useAxios();

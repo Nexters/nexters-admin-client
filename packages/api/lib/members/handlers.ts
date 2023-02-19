@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 import { membersData } from './data';
 import type { MembersResponseBody, MeResponseBody } from './types';
-import { API_URL } from './url';
+import { API_URL } from './urls';
 import { VARIABLES } from './variables';
 
 // 사용자 비밀번호 변경 mock API

@@ -1,9 +1,9 @@
 // TODO: 반환 타입 없는 것들 확인하기
 import { useMutation, useQuery } from '@tanstack/react-query';
-import type { MemberAttendanceBody } from '@weekly/msw';
-import { API_URL } from '@weekly/msw';
 
-import { useAxios } from './AxiosProvider';
+import { useAxios } from '../AxiosProvider';
+import type { MemberAttendanceBody } from './types';
+import { API_URL } from './urls';
 
 function useMemberAttendanceMutation() {
   const axios = useAxios();

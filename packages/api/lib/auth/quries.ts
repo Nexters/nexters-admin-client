@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
+
+import { useAxios } from '../AxiosProvider';
 import type {
   AdminLoginRequestBody,
   LoginRequestBody,
   LoginResponse,
-} from '@weekly/msw';
-import { API_URL } from '@weekly/msw';
-
-import { useAxios } from './AxiosProvider';
+} from './types';
+import { API_URL } from './urls';
 
 function useLoginMuttion() {
   const axios = useAxios();
@@ -33,4 +33,3 @@ function useAdminLoginMutation() {
 }
 
 export { useAdminLoginMutation, useLoginMuttion };
-export type { LoginResponse };

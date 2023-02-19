@@ -30,7 +30,7 @@ function LoginForm() {
           openErrorSnackBar(handleLoginError(error));
         },
         onSuccess() {
-          router.push('/attendance');
+          router.push('/');
         },
       },
     );

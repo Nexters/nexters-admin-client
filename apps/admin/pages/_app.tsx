@@ -47,11 +47,9 @@ function App(props: EnhancedAppProps) {
     async function init() {
       const { initMocks } = await import('@weekly/api');
       await initMocks();
-      setShouldRender(true);
     }
-    if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-      init();
-    }
+    init();
+    setShouldRender(true);
   }, []);
   if (!shouldRender) {
     return null;

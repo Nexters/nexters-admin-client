@@ -1204,6 +1204,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     typescript: ^4.9.4
+    use-debounce: ^9.0.3
   languageName: unknown
   linkType: soft
 
@@ -5828,6 +5829,15 @@ prettier@latest:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"use-debounce@npm:^9.0.3":
+  version: 9.0.3
+  resolution: "use-debounce@npm:9.0.3"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: e9aa3b89abe28bd746cfb5e7edc281d786788b6afe4063cfd8e34c4fff58af212809f13bffa16ff291bead199abb497325330e66d1e772d1843853edbd4646ba
   languageName: node
   linkType: hard
 

@@ -13,6 +13,9 @@ import {
   useEffect,
   useRef,
 } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+
+import { PAGE_URLS } from '~/constants/urls';
 
 function PasswordForm() {
   const router = useRouter();
@@ -31,7 +34,7 @@ function PasswordForm() {
     const value = event.target.value;
     passwordCheckState.onChange(value);
   };
-  const submitPasswordForm = () => {
+  const submitPasswordForm = useDebouncedCallback(() => {
     if (passwordState.error || passwordCheckState.error) {
       openErrorSnackBar('비밀번호 형식이 맞지 않습니다.');
       return;
@@ -47,11 +50,11 @@ function PasswordForm() {
           openErrorSnackBar(handleCommonError(error));
         },
         onSuccess() {
-          router.push('/attendance');
+          router.push(PAGE_URLS.LOGOUT);
         },
       },
     );
-  };
+  }, 1000);
   const onEnterPasswordInput: KeyboardEventHandler<HTMLInputElement> = (
     event,
   ) => {

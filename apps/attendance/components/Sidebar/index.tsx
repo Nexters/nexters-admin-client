@@ -2,18 +2,19 @@ import { Icon, styled } from '@weekly/ui';
 import type { ComponentProps } from 'react';
 
 import { useSidebarState } from '~/atoms/sidebar';
+import { PAGE_URLS } from '~/constants/urls';
 
 import { MenuItem } from './MenuItem';
 import { UserCard } from './UserCard';
 
 const menuItems: ComponentProps<typeof MenuItem>[] = [
-  { iconName: 'inbox', label: '내 출석 정보', href: '/attendance/me' },
+  { iconName: 'inbox', label: '내 출석 정보', href: PAGE_URLS.ME },
   {
     iconName: 'password',
     label: '비밀번호 재설정',
-    href: 'authentication/password',
+    href: PAGE_URLS.PASSWORD,
   },
-  { iconName: 'userLogout', label: '로그아웃', href: '/authentication/logout' },
+  { iconName: 'userLogout', label: '로그아웃', href: PAGE_URLS.LOGOUT },
 ];
 
 function Sidebar() {

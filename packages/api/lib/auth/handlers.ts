@@ -1,7 +1,7 @@
 import type { DefaultBodyType, ResponseComposition, RestContext } from 'msw';
 import { rest } from 'msw';
 
-import type { LoginResponse } from './types';
+import type { MemberLoginResponse } from './types';
 import { API_URL } from './urls';
 import { VARIABLES } from './variables';
 
@@ -13,9 +13,9 @@ function authentication(
   if (predicate()) {
     return response(
       context.status(200),
-      context.json<LoginResponse>({
-        data: VARIABLES.SUCCESS_TOKEN,
-        isInitalLogin: true,
+      context.json<MemberLoginResponse>({
+        token: VARIABLES.SUCCESS_TOKEN,
+        needPasswordReset: true,
       }),
     );
   }

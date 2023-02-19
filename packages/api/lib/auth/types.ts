@@ -8,9 +8,9 @@ type AdminLoginRequestBody = {
   password: string;
 };
 
-type LoginResponse = {
-  data: string; // JWT Token
-  isInitalLogin: boolean;
+type MemberLoginResponse = {
+  token: string;
+  needPasswordReset: boolean;
 };
 
-export type { AdminLoginRequestBody, LoginRequestBody, LoginResponse };
+export type { AdminLoginRequestBody, LoginRequestBody, MemberLoginResponse };

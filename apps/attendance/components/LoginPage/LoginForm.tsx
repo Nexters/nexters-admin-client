@@ -12,6 +12,9 @@ import type {
   MouseEventHandler,
 } from 'react';
 import { useRef } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+
+import { PAGE_URLS } from '~/constants/urls';
 
 function LoginForm() {
   const router = useRouter();
@@ -19,7 +22,7 @@ function LoginForm() {
   const emailState = useValidateState<string>('', [validateEmail]);
   const passwordState = useValidateState<string>('', [validatePassword]);
   const { mutate } = useLoginMuttion();
-  const submitLoginForm = () => {
+  const submitLoginForm = useDebouncedCallback(() => {
     mutate(
       {
         email: emailState.value,
@@ -29,12 +32,16 @@ function LoginForm() {
         onError(error) {
           openErrorSnackBar(handleLoginError(error));
         },
-        onSuccess() {
-          router.push('/');
+        onSuccess(response) {
+          const { token, needPasswordReset } = response;
+          if (!needPasswordReset) {
+            localStorage.setItem('@weekly/token', token);
+          }
+          router.push(needPasswordReset ? PAGE_URLS.PASSWORD : PAGE_URLS.MAIN);
         },
       },
     );
-  };
+  }, 1000);
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     emailState.onChange(value);

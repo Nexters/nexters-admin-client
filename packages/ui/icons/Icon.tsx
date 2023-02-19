@@ -15,6 +15,7 @@ import { Logout } from './Logout';
 import { Password } from './Password';
 import { Search } from './Search';
 import { Session } from './Session';
+import { ThumbsUp } from './ThumbsUp';
 import { User } from './User';
 import { UserLogout } from './UserLogout';
 import { Users } from './Users';
@@ -41,6 +42,7 @@ const icons = {
   inbox: Inbox,
   password: Password,
   userLogout: UserLogout,
+  thumbsUp: ThumbsUp,
 } as const;
 
 interface IconProps extends SVGProps<SVGSVGElement> {

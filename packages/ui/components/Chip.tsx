@@ -15,9 +15,11 @@ function Chip(props: Props) {
 }
 
 const Container = styled.div<ChipProps>`
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   ${({ type, theme }) =>
-    type === 'info' ? theme.typo.h4Semibold : theme.typo.body1Bold}
+    type !== 'info' ? theme.typo.h4Semibold : theme.typo.body1Bold}
   border-radius: ${({ theme }) => theme.rem(12)};
   padding: ${({ theme }) => theme.rem(4)} ${({ theme }) => theme.rem(12)};
   color: ${({ type, theme }) =>

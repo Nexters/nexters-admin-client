@@ -1,9 +1,21 @@
 import { Icon, styled } from '@weekly/ui';
+import { useEventListener, useOnClickOutside } from '@weekly/utils';
+import { useRef } from 'react';
 
 function BottomSheet() {
+  const ref = useRef<HTMLDivElement>(null);
+  const close = () => {
+    window.location.hash = '';
+  };
+  useOnClickOutside(ref, close);
+  useEventListener('keyup', (event) => {
+    if (event.key === 'Escape') {
+      close();
+    }
+  });
   return (
     <Container id='help-login'>
-      <Contents className='contents'>
+      <Contents className='contents' ref={ref}>
         <CloseButton href='#'>
           <Icon name='close' />
         </CloseButton>

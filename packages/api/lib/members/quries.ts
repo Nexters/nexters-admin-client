@@ -24,17 +24,13 @@ function useUpdatePasswordMutation() {
   return useMutation({ mutationFn });
 }
 
-function useMeQuery({
-  onSuccess,
-}: {
-  onSuccess: (data: MeResponseBody) => void;
-}) {
+function useMeQuery() {
   const axios = useAxios();
   const queryFn = async () => {
     const { data } = await axios.get<MeResponseBody>(API_URL.ME);
     return data;
   };
-  return useQuery({ queryKey: ['members', 'me'], queryFn, onSuccess });
+  return useQuery({ queryKey: ['members', 'me'], queryFn });
 }
 
 function useMembersQuery() {

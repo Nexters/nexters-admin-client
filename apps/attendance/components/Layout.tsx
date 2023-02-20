@@ -3,15 +3,12 @@ import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import type { PropsWithChildren } from 'react';
 
-import { useResetSidebarStateEffect } from '~/atoms/sidebar';
-
 interface LayoutProps extends PropsWithChildren<unknown> {}
 
 type Props = Partial<LayoutProps>;
 
 function Layout(props: Props) {
   const { children } = props;
-  useResetSidebarStateEffect();
   return (
     <Container>
       <Head>

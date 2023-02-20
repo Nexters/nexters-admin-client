@@ -1,18 +1,22 @@
 import { styled } from '@weekly/ui';
 
-import { useUserState } from '~/atoms/user';
+type Props = {
+  name: string;
+  generation: number;
+  position: string;
+};
 
-function UserCard() {
-  const userState = useUserState();
-  return userState ? (
+function UserCard(props: Props) {
+  const { name, generation, position } = props;
+  return (
     <Container>
-      <NameText>{userState.name}</NameText>
+      <NameText>{name}</NameText>
       <DetailContainer>
-        <GenerationText>{userState.generation}기</GenerationText>
-        <PositionText>{userState.position}</PositionText>
+        <GenerationText>{generation}기</GenerationText>
+        <PositionText>{position}</PositionText>
       </DetailContainer>
     </Container>
-  ) : null;
+  );
 }
 
 const Container = styled.div`

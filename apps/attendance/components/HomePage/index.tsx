@@ -1,7 +1,7 @@
 import { useMeQuery } from '@weekly/api';
 import { styled } from '@weekly/ui';
-
-import { useSetUserState } from '~/atoms/user';
+import { useRouter } from 'next/router';
+import { useLayoutEffect, useState } from 'react';
 
 import { CameraButton } from './CameraButton';
 import { MenuButton } from './MenuButton';
@@ -10,30 +10,40 @@ import { Sidebar } from './Sidebar';
 import { SocialLinks } from './SocialLinks';
 
 function HomePage() {
-  const data = {
+  const dummy = {
     type: 'session',
     date: new Date(),
     week: 1,
     description: '레크레이션 & 팀 작업 & 뭐 어쩌고 저쩌고 긴 글자',
   };
-  const setUser = useSetUserState();
-  useMeQuery({ onSuccess: setUser });
+  const { pathname } = useRouter();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { isLoading, data } = useMeQuery();
+  const onClickMenuButton = () => setSidebarOpen(true);
+  const onCloseSidebar = () => setSidebarOpen(false);
+  useLayoutEffect(() => {
+    if (sidebarOpen) {
+      onCloseSidebar();
+    }
+  }, [pathname]);
   return (
     <Container>
-      <MenuButton />
+      <MenuButton onClick={onClickMenuButton} disabled={isLoading} />
       <SessionCard
         type='session'
-        date={data.date}
-        week={data.week}
-        description={data.description}
+        date={dummy.date}
+        week={dummy.week}
+        description={dummy.description}
       />
       <Description>
-        {data.type === 'empty'
+        {dummy.type === 'empty'
           ? '넥스터즈의 정보를 빠르게 받아보세요 :)'
           : '스크린의 QR코드를 찍으면 출석체크 할 수 있어요.'}
       </Description>
-      {data.type === 'empty' ? <SocialLinks /> : <CameraButton />}
-      <Sidebar />
+      {dummy.type === 'empty' ? <SocialLinks /> : <CameraButton />}
+      {data && (
+        <Sidebar open={sidebarOpen} onClose={onCloseSidebar} user={data} />
+      )}
     </Container>
   );
 }

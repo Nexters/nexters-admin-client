@@ -1,13 +1,11 @@
 import { Icon, styled } from '@weekly/ui';
 
-import { useSidebarState } from '~/atoms/sidebar';
-import { useUserState } from '~/atoms/user';
+interface Props extends React.ComponentProps<'button'> {}
 
-function MenuButton() {
-  const { open } = useSidebarState();
-  const user = useUserState();
+function MenuButton(props: Props) {
+  const { onClick, disabled } = props;
   return (
-    <Container onClick={open} disabled={!user}>
+    <Container onClick={onClick} disabled={disabled}>
       <Icon name='user' />
     </Container>
   );

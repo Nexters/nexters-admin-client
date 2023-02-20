@@ -1,7 +1,6 @@
 import { Icon, styled } from '@weekly/ui';
 import type { ComponentProps } from 'react';
 
-import { useSidebarState } from '~/atoms/sidebar';
 import { PAGE_URLS } from '~/constants/urls';
 
 import { MenuItem } from './MenuItem';
@@ -17,14 +16,20 @@ const menuItems: ComponentProps<typeof MenuItem>[] = [
   { iconName: 'userLogout', label: '로그아웃', href: PAGE_URLS.LOGOUT },
 ];
 
-function Sidebar() {
-  const { value, close } = useSidebarState();
+type Props = {
+  open: boolean;
+  onClose: VoidFunction;
+  user: ComponentProps<typeof UserCard>;
+};
+
+function Sidebar(props: Props) {
+  const { open, onClose, user } = props;
   return (
-    <Container open={value}>
-      <CloseButton onClick={close}>
+    <Container open={open}>
+      <CloseButton onClick={onClose}>
         <Icon name='close' />
       </CloseButton>
-      <UserCard />
+      <UserCard {...user} />
       <MenuList>
         {menuItems.map((menuItem) => (
           <MenuItem key={menuItem.href} {...menuItem} />

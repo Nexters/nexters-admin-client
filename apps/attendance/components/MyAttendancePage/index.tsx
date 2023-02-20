@@ -10,7 +10,7 @@ import { Empty } from './Empty';
 
 function MyAttendancePage() {
   const { data } = useMeAttendanceQuery({
-    onError: (error) => onInvalidTokenError(error),
+    onError: onInvalidTokenError,
   });
   const isCompletable = data?.attendanceData.isCompletable ?? true;
   const score = data?.attendanceData.score ?? 0;

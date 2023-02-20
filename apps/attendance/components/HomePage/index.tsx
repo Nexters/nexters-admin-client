@@ -21,7 +21,7 @@ function HomePage() {
   const { pathname } = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { isLoading, data } = useMeQuery({
-    onError: (error) => onInvalidTokenError(error),
+    onError: onInvalidTokenError,
   });
   const onClickMenuButton = () => setSidebarOpen(true);
   const onCloseSidebar = () => setSidebarOpen(false);

@@ -3,8 +3,8 @@ import { styled } from '@weekly/ui';
 
 import { useSetUserState } from '~/atoms/user';
 
-import { MenuButton } from '../MenuButton';
 import { CameraButton } from './CameraButton';
+import { MenuButton } from './MenuButton';
 import { SessionCard } from './SessionCard';
 import { Sidebar } from './Sidebar';
 import { SocialLinks } from './SocialLinks';

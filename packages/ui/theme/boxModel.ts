@@ -1,21 +1,23 @@
 import { css } from '@emotion/react';
 
+import { rem } from './common';
+
 export const boxModel = (sizePrefix = '') => {
   return css`
     .border${sizePrefix} {
-      border: 1px solid black !important;
+      border: ${rem(1)} solid black !important;
     }
     .border-top${sizePrefix} {
-      border-top: 1px solid black !important;
+      border-top: ${rem(1)} solid black !important;
     }
     .border-right${sizePrefix} {
-      border-right: 1px solid black !important;
+      border-right: ${rem(1)} solid black !important;
     }
     .border-bottom${sizePrefix} {
-      border-bottom: 1px solid black !important;
+      border-bottom: ${rem(1)} solid black !important;
     }
     .border-left${sizePrefix} {
-      border-left: 1px solid black !important;
+      border-left: ${rem(1)} solid black !important;
     }
     .border${sizePrefix}-0 {
       border: 0 !important;
@@ -190,50 +192,50 @@ export const boxModel = (sizePrefix = '') => {
       width: 100% !important;
     }
     .m-half {
-      margin: 4px;
+      margin: ${rem(4)};
     }
     .mt-half {
-      margin-top: 4px;
+      margin-top: ${rem(4)};
     }
     .mb-half {
-      margin-bottom: 4px;
+      margin-bottom: ${rem(4)};
     }
     .ml-half {
-      margin-left: 4px;
+      margin-left: ${rem(4)};
     }
     .mr-half {
-      margin-right: 4px;
+      margin-right: ${rem(4)};
     }
     .mx-half {
-      margin-left: 4px;
-      margin-right: 4px;
+      margin-left: ${rem(4)};
+      margin-right: ${rem(4)};
     }
     .my-half {
-      margin-top: 4px;
-      margin-bottom: 4px;
+      margin-top: ${rem(4)};
+      margin-bottom: ${rem(4)};
     }
     .p-half {
-      padding: 4px;
+      padding: ${rem(4)};
     }
     .pt-half {
-      padding-top: 4px;
+      padding-top: ${rem(4)};
     }
     .pb-half {
-      padding-bottom: 4px;
+      padding-bottom: ${rem(4)};
     }
     .pl-half {
-      padding-left: 4px;
+      padding-left: ${rem(4)};
     }
     .pr-half {
-      padding-right: 4px;
+      padding-right: ${rem(4)};
     }
     .px-half {
-      padding-left: 4px;
-      padding-right: 4px;
+      padding-left: ${rem(4)};
+      padding-right: ${rem(4)};
     }
     .py-half {
-      padding-top: 4px;
-      padding-bottom: 4px;
+      padding-top: ${rem(4)};
+      padding-bottom: ${rem(4)};
     }
     ${Array(12)
     .fill(1)
@@ -242,96 +244,96 @@ export const boxModel = (sizePrefix = '') => {
       return css`
           ${previousValue}
           .m${sizePrefix}-${index} {
-            margin: ${index * 8}px !important;
+            margin: ${rem(index * 8)} !important;
           }
           .mt${sizePrefix}-${index} {
-            margin-top: ${index * 8}px !important;
+            margin-top: ${rem(index * 8)} !important;
           }
           .mr${sizePrefix}-${index} {
-            margin-right: ${index * 8}px !important;
+            margin-right: ${rem(index * 8)} !important;
           }
           .mb${sizePrefix}-${index} {
-            margin-bottom: ${index * 8}px !important;
+            margin-bottom: ${rem(index * 8)} !important;
           }
           .ml${sizePrefix}-${index} {
-            margin-left: ${index * 8}px !important;
+            margin-left: ${rem(index * 8)} !important;
           }
           .mx${sizePrefix}-${index} {
-            margin-left: ${index * 8}px !important;
-            margin-right: ${index * 8}px !important;
+            margin-left: ${rem(index * 8)} !important;
+            margin-right: ${rem(index * 8)} !important;
           }
           .my${sizePrefix}-${index} {
-            margin-top: ${index * 8}px !important;
-            margin-bottom: ${index * 8}px !important;
+            margin-top: ${rem(index * 8)} !important;
+            margin-bottom: ${rem(index * 8)} !important;
           }
           .m${sizePrefix}-m-${index} {
-            margin: ${index * -8}px !important;
+            margin: ${rem(-8)} !important;
           }
           .mt${sizePrefix}-m-${index} {
-            margin-top: ${index * -8}px !important;
+            margin-top: ${rem(-8)} !important;
           }
           .mr${sizePrefix}-m-${index} {
-            margin-right: ${index * -8}px !important;
+            margin-right: ${rem(-8)} !important;
           }
           .mb${sizePrefix}-m-${index} {
-            margin-bottom: ${index * -8}px !important;
+            margin-bottom: ${rem(-8)} !important;
           }
           .ml${sizePrefix}-m-${index} {
-            margin-left: ${index * -8}px !important;
+            margin-left: ${rem(-8)} !important;
           }
           .mx${sizePrefix}-m-${index} {
-            margin-left: ${index * -8}px !important;
-            margin-right: ${index * -8}px !important;
+            margin-left: ${rem(-8)} !important;
+            margin-right: ${rem(-8)} !important;
           }
           .my${sizePrefix}-m-${index} {
-            margin-top: ${index * -8}px !important;
-            margin-bottom: ${index * -8}px !important;
+            margin-top: ${rem(-8)} !important;
+            margin-bottom: ${rem(-8)} !important;
           }
           .p${sizePrefix}-${index} {
-            padding: ${index * 8}px !important;
+            padding: ${rem(index * 8)} !important;
           }
           .pt${sizePrefix}-${index} {
-            padding-top: ${index * 8}px !important;
+            padding-top: ${rem(index * 8)} !important;
           }
           .pr${sizePrefix}-${index} {
-            padding-right: ${index * 8}px !important;
+            padding-right: ${rem(index * 8)} !important;
           }
           .pb${sizePrefix}-${index} {
-            padding-bottom: ${index * 8}px !important;
+            padding-bottom: ${rem(index * 8)} !important;
           }
           .pl${sizePrefix}-${index} {
-            padding-left: ${index * 8}px !important;
+            padding-left: ${rem(index * 8)} !important;
           }
           .px${sizePrefix}-${index} {
-            padding-left: ${index * 8}px !important;
-            padding-right: ${index * 8}px !important;
+            padding-left: ${rem(index * 8)} !important;
+            padding-right: ${rem(index * 8)} !important;
           }
           .py${sizePrefix}-${index} {
-            padding-top: ${index * 8}px !important;
-            padding-bottom: ${index * 8}px !important;
+            padding-top: ${rem(index * 8)} !important;
+            padding-bottom: ${rem(index * 8)} !important;
           }
           .p${sizePrefix}-m-${index} {
-            padding: ${index * -8}px !important;
+            padding: ${rem(-8)} !important;
           }
           .pt${sizePrefix}-m-${index} {
-            padding-top: ${index * -8}px !important;
+            padding-top: ${rem(-8)} !important;
           }
           .pr${sizePrefix}-m-${index} {
-            padding-right: ${index * -8}px !important;
+            padding-right: ${rem(-8)} !important;
           }
           .pb${sizePrefix}-m-${index} {
-            padding-bottom: ${index * -8}px !important;
+            padding-bottom: ${rem(-8)} !important;
           }
           .pl${sizePrefix}-m-${index} {
-            padding-left: ${index * -8}px !important;
+            padding-left: ${rem(-8)} !important;
           }
           .px${sizePrefix}-m-${index} {
-            padding-left: ${index * -8}px !important;
-            padding-right: ${index * -8}px !important;
+            padding-left: ${rem(-8)} !important;
+            padding-right: ${rem(-8)} !important;
           }
           .py${sizePrefix}-m-${index} {
-            padding-top: ${index * -8}px !important;
-            padding-bottom: ${index * -8}px !important;
+            padding-top: ${rem(-8)} !important;
+            padding-bottom: ${rem(-8)} !important;
           }
         `;
     }, '')}

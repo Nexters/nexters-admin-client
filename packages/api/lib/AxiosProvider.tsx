@@ -1,4 +1,4 @@
-import type { AxiosError, AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 import type { PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo } from 'react';
@@ -25,24 +25,6 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
 
       return config;
     });
-
-    instance.interceptors.response.use(
-      (response) => {
-        const { config } = response;
-
-        if (config.url?.includes('/auth/login')) {
-          const token = response?.data?.data;
-          if (token) {
-            localStorage.setItem('@weekly/token', token);
-          }
-        }
-
-        return response;
-      },
-      (error: AxiosError) => {
-        return Promise.reject(error);
-      },
-    );
 
     return instance;
   }, []);

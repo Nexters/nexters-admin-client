@@ -1035,7 +1035,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^18.13.0":
+"@types/node@npm:*":
   version: 18.13.0
   resolution: "@types/node@npm:18.13.0"
   checksum: 4ea10f8802848b01672bce938f678b6774ca2cee0c9774f12275ab064ae07818419c3e2e41d6257ce7ba846d1ea26c63214aa1dfa4166fa3746291752b8c6416
@@ -1191,7 +1191,6 @@ __metadata:
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
     "@weekly/api": "*"
-    "@weekly/msw": "*"
     "@weekly/tsconfig": "*"
     "@weekly/ui": "*"
     "@weekly/utils": "*"
@@ -1205,6 +1204,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     typescript: ^4.9.4
+    use-debounce: ^9.0.3
   languageName: unknown
   linkType: soft
 
@@ -1218,7 +1218,6 @@ __metadata:
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
     "@weekly/api": "*"
-    "@weekly/msw": "*"
     "@weekly/tsconfig": "*"
     "@weekly/ui": "*"
     "@weekly/utils": "*"
@@ -1244,7 +1243,6 @@ __metadata:
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
     "@weekly/api": "*"
-    "@weekly/msw": "*"
     "@weekly/tsconfig": "*"
     "@weekly/ui": "*"
     "@weekly/utils": "*"
@@ -1268,22 +1266,8 @@ __metadata:
     "@types/node": ^17.0.12
     "@types/react": ^17.0.37
     "@types/react-dom": ^17.0.11
-    "@weekly/msw": "*"
     "@weekly/tsconfig": "*"
     axios: ^1.3.2
-    eslint: ^7.32.0
-    eslint-config-weekly: "*"
-    react: ^18.2.0
-    typescript: ^4.9.4
-  languageName: unknown
-  linkType: soft
-
-"@weekly/msw@*, @weekly/msw@workspace:packages/msw":
-  version: 0.0.0-use.local
-  resolution: "@weekly/msw@workspace:packages/msw"
-  dependencies:
-    "@types/node": ^18.13.0
-    "@weekly/tsconfig": "*"
     eslint: ^7.32.0
     eslint-config-weekly: "*"
     msw: ^1.0.0
@@ -5845,6 +5829,15 @@ prettier@latest:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"use-debounce@npm:^9.0.3":
+  version: 9.0.3
+  resolution: "use-debounce@npm:9.0.3"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: e9aa3b89abe28bd746cfb5e7edc281d786788b6afe4063cfd8e34c4fff58af212809f13bffa16ff291bead199abb497325330e66d1e772d1843853edbd4646ba
   languageName: node
   linkType: hard
 

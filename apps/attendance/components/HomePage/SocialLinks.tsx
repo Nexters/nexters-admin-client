@@ -1,15 +1,17 @@
 import { Icon, styled } from '@weekly/ui';
 
+import { SNS_URLS } from '~/constants/urls';
+
 function SocialLinks() {
   return (
     <Container>
-      <Link href='https://teamnexters.com/' target='_blank'>
+      <Link href={SNS_URLS.NEXTERS} target='_blank'>
         <Icon name='link' />
       </Link>
-      <Link href='https://www.facebook.com/Nexterspage/' target='_blank'>
+      <Link href={SNS_URLS.FACEBOOK} target='_blank'>
         <Icon name='facebook' />
       </Link>
-      <Link href='https://www.instagram.com/team_nexters/' target='_blank'>
+      <Link href={SNS_URLS.INSTAGRAM} target='_blank'>
         <Icon name='instagram' />
       </Link>
     </Container>

@@ -1,8 +1,12 @@
+import { useMeQuery } from '@weekly/api';
 import { styled } from '@weekly/ui';
+
+import { useSetUserState } from '~/atoms/user';
 
 import { MenuButton } from '../MenuButton';
 import { CameraButton } from './CameraButton';
 import { SessionCard } from './SessionCard';
+import { Sidebar } from './Sidebar';
 import { SocialLinks } from './SocialLinks';
 
 function HomePage() {
@@ -12,6 +16,8 @@ function HomePage() {
     week: 1,
     description: '레크레이션 & 팀 작업 & 뭐 어쩌고 저쩌고 긴 글자',
   };
+  const setUser = useSetUserState();
+  const { isLoading } = useMeQuery({ onSuccess: setUser });
   return (
     <Container>
       <MenuButton />
@@ -27,6 +33,7 @@ function HomePage() {
           : '스크린의 QR코드를 찍으면 출석체크 할 수 있어요.'}
       </Description>
       {data.type === 'empty' ? <SocialLinks /> : <CameraButton />}
+      {!isLoading && <Sidebar />}
     </Container>
   );
 }

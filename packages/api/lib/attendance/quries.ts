@@ -2,7 +2,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { useAxios } from '../AxiosProvider';
-import type { MemberAttendanceBody } from './types';
+import type { MemberAttendanceBody, MeResponseBody } from './types';
 import { API_URL } from './urls';
 
 function useMemberAttendanceMutation() {
@@ -14,6 +14,15 @@ function useMemberAttendanceMutation() {
     return data;
   };
   return useMutation({ mutationFn });
+}
+
+function useMeAttendanceQuey() {
+  const axios = useAxios();
+  const queryFn = async () => {
+    const { data } = await axios.get<MeResponseBody>(API_URL.ME);
+    return data;
+  };
+  return useQuery({ queryKey: ['attendance', 'me'], queryFn });
 }
 
 function useQRCodeQuey() {
@@ -46,6 +55,7 @@ function useDeleteQRCodeMutation() {
 export {
   useCreateQRCodeMutation,
   useDeleteQRCodeMutation,
+  useMeAttendanceQuey,
   useMemberAttendanceMutation,
   useQRCodeQuey,
 };

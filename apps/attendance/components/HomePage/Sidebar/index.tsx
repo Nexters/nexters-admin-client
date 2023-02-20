@@ -24,7 +24,7 @@ function Sidebar() {
       <CloseButton onClick={close}>
         <Icon name='close' />
       </CloseButton>
-      <UserCard name='최다예' generation={19} position='디자이너' />
+      <UserCard />
       <MenuList>
         {menuItems.map((menuItem) => (
           <MenuItem key={menuItem.href} {...menuItem} />
@@ -41,10 +41,10 @@ const Container = styled.div<{ open: boolean }>`
   width: 100vw;
   height: 100vh;
   top: 0;
-  left: 50%;
-  transition: transform 0.4s ease;
+  left: ${({ open }) => (open ? '50%' : '0%')};
+  transition: transform 0.4s ease, left 0.4s ease;
   min-width: ${({ theme }) => theme.rem(320)};
-  transform: ${({ open }) => (open ? 'translateX(-50%)' : 'translateX(-200%)')};
+  transform: ${({ open }) => (open ? 'translateX(-50%)' : 'translateX(-100%)')};
   max-width: ${({ theme }) => theme.rem(743)};
   padding: ${({ theme }) => `${theme.rem(40)} ${theme.rem(20)}`};
   background-color: ${({ theme }) => theme.palette.grayScale.g100};

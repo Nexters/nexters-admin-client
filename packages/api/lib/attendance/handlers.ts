@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
-import { qr } from './data';
-import type { QRResponse } from './types';
+import { me, qr } from './data';
+import type { MeAttendanceResponseBody, QRResponse } from './types';
 import { API_URL } from './urls';
 import { VARIABLES } from './variables';
 
@@ -28,6 +28,22 @@ const memberAttendance = rest.post(
     }
 
     return response(context.status(400));
+  },
+);
+
+// 내 출석 정보 조회 mock API
+const meAttendance = rest.get(
+  process.env.NEXT_PUBLIC_API_URL + API_URL.ME,
+  async (request, response, context) => {
+    // 인증 관련 검증 따로 진행하지 않음
+    const token = request.headers.get('Authorization');
+
+    console.log(`%c[GET:${API_URL.ME}]: { token: ${token} }`, 'color: orange');
+
+    return response(
+      context.status(200),
+      context.json<MeAttendanceResponseBody>(me),
+    );
   },
 );
 
@@ -81,6 +97,7 @@ const deleteQrCode = rest.delete(
 
 const handlers = [
   memberAttendance,
+  meAttendance,
   getQrCode,
   postQrCode,
   deleteQrCode,

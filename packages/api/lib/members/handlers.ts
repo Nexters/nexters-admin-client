@@ -23,7 +23,7 @@ const password = rest.put(
       'color: orange',
     );
 
-    return response(context.status(204));
+    return response(context.status(200));
   },
 );
 

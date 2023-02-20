@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 import reset from 'emotion-reset';
 
+import { boxModel } from './boxModel';
+
 const globalStyle = css`
   ${reset}
+  ${boxModel('')};
   * {
     font-family: inherit;
   }

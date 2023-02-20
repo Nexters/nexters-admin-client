@@ -1,11 +1,13 @@
 import { Icon, styled } from '@weekly/ui';
 
 import { useSidebarState } from '~/atoms/sidebar';
+import { useUserState } from '~/atoms/user';
 
 function MenuButton() {
   const { open } = useSidebarState();
+  const user = useUserState();
   return (
-    <Container onClick={open}>
+    <Container onClick={open} disabled={!user}>
       <Icon name='user' />
     </Container>
   );

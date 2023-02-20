@@ -1,5 +1,5 @@
+import { useMeAttendanceQuery } from '@weekly/api';
 import { styled } from '@weekly/ui';
-import type { ComponentProps } from 'react';
 import { Fragment } from 'react';
 
 import { AttendanceList } from './AttendanceList';
@@ -7,75 +7,12 @@ import { CompletableInfo } from './CompletableInfo';
 import { Empty } from './Empty';
 
 function MyAttendancePage() {
-  const score = 100;
-  const isCompletable = true;
-  const attendances: ComponentProps<typeof AttendanceList>['attendances'] = [
-    {
-      attendanceStatus: 'ATTENDED',
-      title: '1주차 세션',
-      week: 1,
-      attendanceTime: Date.now().toString(),
-      sessionDate: Date.now().toString(),
-      penaltyScore: 0,
-    },
-    {
-      attendanceStatus: 'TARDY',
-      title: '2주차 세션',
-      week: 2,
-      attendanceTime: Date.now().toString(),
-      sessionDate: Date.now().toString(),
-      penaltyScore: 5,
-    },
-    {
-      attendanceStatus: 'UNAUTHORIZED_ABSENCE',
-      title: '3주차 세션',
-      week: 3,
-      sessionDate: Date.now().toString(),
-      penaltyScore: 15,
-    },
-    {
-      attendanceStatus: 'AUTHORIZED_ABSENCE',
-      title: '4주차 세션',
-      week: 4,
-      sessionDate: Date.now().toString(),
-      penaltyScore: 10,
-    },
-    {
-      attendanceStatus: 'UNAUTHORIZED_ABSENCE',
-      title: '5주차 세션',
-      week: 5,
-      sessionDate: Date.now().toString(),
-      penaltyScore: 15,
-    },
-    {
-      attendanceStatus: 'AUTHORIZED_ABSENCE',
-      title: '6주차 세션',
-      week: 6,
-      sessionDate: Date.now().toString(),
-      penaltyScore: 10,
-    },
-    {
-      attendanceStatus: 'UNAUTHORIZED_ABSENCE',
-      title: '7주차 세션',
-      week: 7,
-      sessionDate: Date.now().toString(),
-      penaltyScore: 15,
-    },
-    // {
-    //   attendanceStatus: 'UNAUTHORIZED_ABSENCE',
-    //   title: '8주차 세션',
-    //   week: 8,
-    //   sessionDate: Date.now().toString(),
-    //   penaltyScore: 15,
-    // },
-  ];
-  const attendanceData = {
-    score,
-    isCompletable,
-    attendances,
-  };
-  const isEmpty = attendanceData.attendances.length === 0;
-  const isFull = attendanceData.attendances.length === 8;
+  const { data } = useMeAttendanceQuery();
+  const isCompletable = data?.attendanceData.isCompletable ?? true;
+  const score = data?.attendanceData.score ?? 0;
+  const attendances = data?.attendanceData.attendances ?? [];
+  const isFull = attendances.length === 8;
+  const isEmpty = attendances.length === 0;
   return (
     <Container>
       <HeaderContainer isFull={isFull}>
@@ -90,11 +27,7 @@ function MyAttendancePage() {
         <CompletableInfo score={score} isCompletable={isCompletable} />
       )}
       <AttendanceContainer>
-        {isEmpty ? (
-          <Empty />
-        ) : (
-          <AttendanceList attendances={attendanceData.attendances} />
-        )}
+        {isEmpty ? <Empty /> : <AttendanceList attendances={attendances} />}
       </AttendanceContainer>
     </Container>
   );

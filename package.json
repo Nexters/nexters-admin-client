@@ -31,5 +31,8 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "yarn@3.3.1"
+  "packageManager": "yarn@3.3.1",
+  "dependencies": {
+    "@next/font": "^13.1.6"
+  }
 }

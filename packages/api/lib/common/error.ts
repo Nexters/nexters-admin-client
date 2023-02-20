@@ -1,3 +1,4 @@
+import type { QueryObserverOptions } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 import { isAxiosError } from 'axios';
 
@@ -43,4 +44,22 @@ function handleError(messageMap: ERROR_MESSAGE_MAP) {
 const handleLoginError = handleError(LOGIN_ERROR);
 const handleCommonError = handleError(BASE_ERROR);
 
-export { handleCommonError, handleLoginError };
+const onUnAuthorizedError = (callback: VoidFunction) => {
+  const errorHandler: QueryObserverOptions['onError'] = (error) => {
+    if (isAxiosError(error)) {
+      const { response } = error;
+      const status = response?.status;
+      if (status === ERROR_STATUS.UNAUTHORIZED) {
+        callback?.();
+      }
+    }
+  };
+  return errorHandler;
+};
+
+export {
+  ERROR_STATUS,
+  handleCommonError,
+  handleLoginError,
+  onUnAuthorizedError,
+};

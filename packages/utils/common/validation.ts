@@ -27,4 +27,19 @@ function validatePasswordCheck(password: string) {
   };
 }
 
-export { validateEmail, validatePassword, validatePasswordCheck };
+/**
+ *
+ * @param name - 어드민 로그인 name 한글자 이상 입력
+ * @returns 이름 형식이 맞는지 여부
+ */
+function validateUsername(name: string) {
+  const length = name.length;
+  return 1 <= length;
+}
+
+export {
+  validateEmail,
+  validatePassword,
+  validatePasswordCheck,
+  validateUsername,
+};

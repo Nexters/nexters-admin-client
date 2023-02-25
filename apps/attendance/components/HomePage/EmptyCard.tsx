@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import empty from '~/images/home/empty.png';
 
-function Empty() {
+function EmptyCard() {
   return (
     <Container>
       <Text>활동 시작을 기다려 볼까요?</Text>
@@ -36,4 +36,4 @@ const Text = styled.h2`
   color: ${({ theme }) => theme.palette.grayScale.g10};
 `;
 
-export { Empty };
+export { EmptyCard };

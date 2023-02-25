@@ -1,5 +1,5 @@
 type Session = {
-  sessionDate: Date;
+  sessionDate: string;
   title: string;
   description: string;
   sessionStatus: 'PENDING' | 'ONGOING' | 'EXPIRED';
@@ -9,7 +9,7 @@ type Session = {
     | 'ATTENDED'
     | 'UNAUTHORIZED_ABSENCE'
     | 'AUTHORIZED_ABSENCE';
-  attendanceTime: Date;
+  attendanceTime: string;
 };
 
 export type { Session };

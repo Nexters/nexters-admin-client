@@ -1,4 +1,4 @@
-import { useMeQuery } from '@weekly/api';
+import { useMeQuery, useSessionQuery } from '@weekly/api';
 import { styled } from '@weekly/ui';
 import { useRouter } from 'next/router';
 import { useLayoutEffect, useState } from 'react';
@@ -6,21 +6,17 @@ import { useLayoutEffect, useState } from 'react';
 import { onInvalidTokenError } from '~/utils/error';
 
 import { CameraButton } from './CameraButton';
+import { EmptyCard } from './EmptyCard';
 import { MenuButton } from './MenuButton';
 import { SessionCard } from './SessionCard';
 import { Sidebar } from './Sidebar';
 import { SocialLinks } from './SocialLinks';
 
 function HomePage() {
-  const dummy = {
-    type: 'session',
-    sessionTime: new Date(2023, 3, 2),
-    week: 1,
-    title: '레크레이션 & 팀 작업 & 뭐 어쩌고 저쩌고 긴 글자',
-  };
   const { pathname } = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { isLoading, data } = useMeQuery({
+  const sessionQueryResult = useSessionQuery();
+  const meQueryResult = useMeQuery({
     onError: onInvalidTokenError,
   });
   const onClickMenuButton = () => setSidebarOpen(true);
@@ -30,23 +26,34 @@ function HomePage() {
       onCloseSidebar();
     }
   }, [pathname]);
+  console.log(sessionQueryResult.data);
   return (
     <Container>
-      <MenuButton onClick={onClickMenuButton} disabled={isLoading} />
-      <SessionCard
-        type='session'
-        sessionTime={dummy.sessionTime.toString()}
-        week={dummy.week}
-        title={dummy.title}
+      <MenuButton
+        onClick={onClickMenuButton}
+        disabled={meQueryResult.isLoading}
       />
+      {sessionQueryResult.data ? (
+        <SessionCard
+          title={sessionQueryResult.data.title}
+          description={sessionQueryResult.data.description}
+          sessionDate={sessionQueryResult.data.sessionDate}
+        />
+      ) : (
+        <EmptyCard />
+      )}
       <Description>
-        {dummy.type === 'empty'
+        {true
           ? '넥스터즈의 정보를 빠르게 받아보세요 :)'
           : '스크린의 QR코드를 찍으면 출석체크 할 수 있어요.'}
       </Description>
-      {dummy.type === 'empty' ? <SocialLinks /> : <CameraButton />}
-      {data && (
-        <Sidebar open={sidebarOpen} onClose={onCloseSidebar} user={data} />
+      {true ? <SocialLinks /> : <CameraButton />}
+      {meQueryResult.data && (
+        <Sidebar
+          open={sidebarOpen}
+          onClose={onCloseSidebar}
+          user={meQueryResult.data}
+        />
       )}
     </Container>
   );

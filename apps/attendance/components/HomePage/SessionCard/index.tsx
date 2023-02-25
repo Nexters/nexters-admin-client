@@ -1,4 +1,3 @@
-import { styled } from '@weekly/ui';
 import type { ComponentProps } from 'react';
 
 import { Empty } from './Empty';
@@ -10,31 +9,15 @@ type Props = EmptyType | SessionType;
 
 function SessionCard(props: Props) {
   const { type } = props;
-  return (
-    <Container>
-      {type === 'empty' ? (
-        <Empty />
-      ) : (
-        <Session
-          date={props.date}
-          week={props.week}
-          description={props.description}
-        />
-      )}
-    </Container>
+  return type === 'empty' ? (
+    <Empty />
+  ) : (
+    <Session
+      sessionTime={props.sessionTime}
+      week={props.week}
+      title={props.title}
+    />
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: ${({ theme }) => theme.rem(335)};
-  height: ${({ theme }) => theme.rem(360)};
-  border-radius: ${({ theme }) => theme.rem(24)};
-  padding: ${({ theme }) => theme.rem(22)};
-  background-color: ${({ theme }) => theme.palette.grayScale.g90};
-`;
 
 export { SessionCard };

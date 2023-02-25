@@ -14,9 +14,9 @@ import { SocialLinks } from './SocialLinks';
 function HomePage() {
   const dummy = {
     type: 'session',
-    date: new Date(),
+    sessionTime: new Date(2023, 3, 2),
     week: 1,
-    description: '레크레이션 & 팀 작업 & 뭐 어쩌고 저쩌고 긴 글자',
+    title: '레크레이션 & 팀 작업 & 뭐 어쩌고 저쩌고 긴 글자',
   };
   const { pathname } = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -35,9 +35,9 @@ function HomePage() {
       <MenuButton onClick={onClickMenuButton} disabled={isLoading} />
       <SessionCard
         type='session'
-        date={dummy.date}
+        sessionTime={dummy.sessionTime.toString()}
         week={dummy.week}
-        description={dummy.description}
+        title={dummy.title}
       />
       <Description>
         {dummy.type === 'empty'

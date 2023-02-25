@@ -53,7 +53,12 @@ function HomePage() {
             <EmptyCard />
           )}
           <Description>
-            {getSessionDescriptionMessage({ isEmptySession, isTodaySession, isSessionPending, isDisplayCameraButton })}
+            {getSessionDescriptionMessage({
+              isEmptySession,
+              isTodaySession,
+              isSessionPending,
+              isDisplayCameraButton,
+            })}
           </Description>
           {isEmptySession && <SocialLinks />}
           {isDisplayCameraButton && <CameraButton />}

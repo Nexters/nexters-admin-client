@@ -33,8 +33,8 @@ function HomePage() {
   return (
     <Container>
       {sessionQueryResult.isLoading ||
-      meQueryResult.isLoading ||
-      isOneSecondLoading ? (
+        meQueryResult.isLoading ||
+        isOneSecondLoading ? (
           <Loader />
         ) : (
           <Fragment>

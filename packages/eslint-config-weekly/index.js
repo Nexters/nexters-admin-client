@@ -1,6 +1,7 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
   plugins: ['import', 'eslint-plugin-simple-import-sort', 'unused-imports'],
-  extends: ['next', 'prettier', 'plugin:import/recommended'],
+  extends: ['next', 'prettier', 'plugin:import/recommended', 'plugin:@typescript-eslint/recommended'],
   rules: {
     'react/jsx-key': 'off',
     'react/no-unescaped-entities': 'off',
@@ -28,5 +29,7 @@ module.exports = {
     'comma-spacing': ['error', { before: false, after: true }],
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
     'import/newline-after-import': ['error', { count: 1, considerComments: true }],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error']
   },
 };

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import type { PropsWithChildren } from 'react';
 
-interface LayoutProps extends PropsWithChildren<unknown> {}
+type LayoutProps = PropsWithChildren<unknown>;
 
 type Props = Partial<LayoutProps>;
 

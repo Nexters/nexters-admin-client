@@ -1,5 +1,6 @@
 import { useAdminSessionQuery } from '@weekly/api';
 import { styled } from '@weekly/ui';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
@@ -10,6 +11,7 @@ function Attendance() {
   const {
     query: { generation },
   } = useRouter();
+
   const { data: sessions, isSuccess } = useAdminSessionQuery(
     generation as string,
   );
@@ -18,7 +20,9 @@ function Attendance() {
       {isSuccess && (
         <Fragment>
           {sessions.map((session) => (
-            <SessionItem session={session} />
+            <Link href={`/attendance/${generation}/${session.id}`}>
+              <SessionItem session={session} />
+            </Link>
           ))}
         </Fragment>
       )}
@@ -26,7 +30,10 @@ function Attendance() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  gap: 24px;
+`;
 
 export default Attendance;
 

@@ -1,6 +1,5 @@
 import { useGenerationQuery } from '@weekly/api';
 import { Dropdown, styled } from '@weekly/ui';
-import { useSearchParams } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -43,8 +42,7 @@ const navBarMap: AdminMenuMapType = {
 const generation = ['22기', '21기'];
 
 function DashboardNavbar(props: Props) {
-  const { pathname } = useRouter();
-  const searchParams = useSearchParams();
+  const { pathname, replace, query } = useRouter();
   const matchedPath = menus.find((v) => pathname.includes(v));
 
   const { data } = useGenerationQuery();
@@ -52,9 +50,10 @@ function DashboardNavbar(props: Props) {
 
   useEffect(() => {
     if (matchedPath && navBarMap[matchedPath].selectGeneration) {
-      searchParams.set([{ key: 'generation', value: gen.split('기')[0] }], {
+      /* searchParams.set([{ key: 'generation', value: gen.split('기')[0] }], {
         replace: true,
-      });
+      }); */
+      replace(`${navBarMap[matchedPath].route}/${gen.split('기')[0]}`);
     }
   }, [gen, pathname]);
 

@@ -6,6 +6,7 @@ import { Camera } from './Camera';
 import { Certificate } from './Certificate';
 import { Chevron } from './Chevron';
 import { Close } from './Close';
+import { Edit } from './Edit';
 import { Error } from './Error';
 import { Facebook } from './Facebook';
 import { Inbox } from './Inbox';
@@ -43,6 +44,7 @@ const icons = {
   password: Password,
   userLogout: UserLogout,
   thumbsUp: ThumbsUp,
+  edit: Edit,
 } as const;
 
 interface IconProps extends SVGProps<SVGSVGElement> {

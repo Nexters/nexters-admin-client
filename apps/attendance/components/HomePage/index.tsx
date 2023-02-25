@@ -32,34 +32,36 @@ function HomePage() {
   }, [pathname]);
   return (
     <Container>
-      <MenuButton
-        onClick={onClickMenuButton}
-        disabled={meQueryResult.isLoading}
-      />
-      {sessionQueryResult.isLoading || isOneSecondLoading ? (
-        <Loader />
-      ) : (
-        <Fragment>
-          {!isEmptySession ? (
-            <SessionCard {...sessionQueryResult.data} />
-          ) : (
-            <EmptyCard />
-          )}
-          <Description>
-            {isEmptySession
-              ? '넥스터즈의 정보를 빠르게 받아보세요 :)'
-              : '스크린의 QR코드를 찍으면 출석체크 할 수 있어요.'}
-          </Description>
-          {isEmptySession ? <SocialLinks /> : <CameraButton />}
-        </Fragment>
-      )}
-      {meQueryResult.data && (
-        <Sidebar
-          open={sidebarOpen}
-          onClose={onCloseSidebar}
-          user={meQueryResult.data}
-        />
-      )}
+      {sessionQueryResult.isLoading ||
+      meQueryResult.isLoading ||
+      isOneSecondLoading ? (
+          <Loader />
+        ) : (
+          <Fragment>
+            <MenuButton
+              onClick={onClickMenuButton}
+              disabled={meQueryResult.isLoading}
+            />
+            {!isEmptySession ? (
+              <SessionCard {...sessionQueryResult.data} />
+            ) : (
+              <EmptyCard />
+            )}
+            <Description>
+              {isEmptySession
+                ? '넥스터즈의 정보를 빠르게 받아보세요 :)'
+                : '스크린의 QR코드를 찍으면 출석체크 할 수 있어요.'}
+            </Description>
+            {isEmptySession ? <SocialLinks /> : <CameraButton />}
+            {meQueryResult.data && (
+              <Sidebar
+                open={sidebarOpen}
+                onClose={onCloseSidebar}
+                user={meQueryResult.data}
+              />
+            )}
+          </Fragment>
+        )}
     </Container>
   );
 }

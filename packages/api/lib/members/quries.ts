@@ -2,6 +2,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { useAxios } from '../AxiosProvider';
+import type { QueryParams } from '../common/types';
 import type {
   CreateMemberBulkBody,
   MemberPositionBody,
@@ -24,22 +25,22 @@ function useUpdatePasswordMutation() {
   return useMutation({ mutationFn });
 }
 
-function useMeQuery() {
+function useMeQuery(params?: QueryParams<MeResponseBody>) {
   const axios = useAxios();
   const queryFn = async () => {
     const { data } = await axios.get<MeResponseBody>(API_URL.ME);
     return data;
   };
-  return useQuery({ queryKey: ['members', 'me'], queryFn });
+  return useQuery({ queryKey: ['members', 'me'], queryFn, ...params });
 }
 
-function useMembersQuery() {
+function useMembersQuery(params?: QueryParams<MembersResponseBody>) {
   const axios = useAxios();
   const queryFn = async () => {
     const { data } = await axios.get<MembersResponseBody>(API_URL.MEMBERS);
     return data;
   };
-  return useQuery({ queryKey: ['members'], queryFn });
+  return useQuery({ queryKey: ['members'], queryFn, ...params });
 }
 
 function useCreateMemberMutation() {

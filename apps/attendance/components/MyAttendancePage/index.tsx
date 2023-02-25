@@ -2,12 +2,16 @@ import { useMeAttendanceQuery } from '@weekly/api';
 import { styled } from '@weekly/ui';
 import { Fragment } from 'react';
 
+import { onInvalidTokenError } from '~/utils/error';
+
 import { AttendanceList } from './AttendanceList';
 import { CompletableInfo } from './CompletableInfo';
 import { Empty } from './Empty';
 
 function MyAttendancePage() {
-  const { data } = useMeAttendanceQuery();
+  const { data } = useMeAttendanceQuery({
+    onError: onInvalidTokenError,
+  });
   const isCompletable = data?.attendanceData.isCompletable ?? true;
   const score = data?.attendanceData.score ?? 0;
   const attendances = data?.attendanceData.attendances ?? [];

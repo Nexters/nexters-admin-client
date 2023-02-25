@@ -25,7 +25,6 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
 
       return config;
     });
-
     return instance;
   }, []);
   return <AxiosContext.Provider value={api}>{children}</AxiosContext.Provider>;

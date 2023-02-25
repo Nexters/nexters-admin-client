@@ -2,6 +2,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { useAxios } from '../AxiosProvider';
+import type { QueryParams } from '../common/types';
 import type { MeAttendanceResponseBody, MemberAttendanceBody } from './types';
 import { API_URL } from './urls';
 
@@ -16,22 +17,22 @@ function useMemberAttendanceMutation() {
   return useMutation({ mutationFn });
 }
 
-function useMeAttendanceQuery() {
+function useMeAttendanceQuery(params?: QueryParams<MeAttendanceResponseBody>) {
   const axios = useAxios();
   const queryFn = async () => {
     const { data } = await axios.get<MeAttendanceResponseBody>(API_URL.ME);
     return data;
   };
-  return useQuery({ queryKey: ['attendance', 'me'], queryFn });
+  return useQuery({ queryKey: ['attendance', 'me'], queryFn, ...params });
 }
 
-function useQRCodeQuey() {
+function useQRCodeQuey(params?: QueryParams<unknown>) {
   const axios = useAxios();
   const queryFn = async () => {
     const { data } = await axios.get(API_URL.QR_CODE);
     return data;
   };
-  return useQuery({ queryKey: ['attendance', 'qr'], queryFn });
+  return useQuery({ queryKey: ['attendance', 'qr'], queryFn, ...params });
 }
 
 function useCreateQRCodeMutation() {

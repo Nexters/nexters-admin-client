@@ -3,6 +3,8 @@ import { styled } from '@weekly/ui';
 import { useRouter } from 'next/router';
 import { useLayoutEffect, useState } from 'react';
 
+import { onInvalidTokenError } from '~/utils/error';
+
 import { CameraButton } from './CameraButton';
 import { MenuButton } from './MenuButton';
 import { SessionCard } from './SessionCard';
@@ -18,7 +20,9 @@ function HomePage() {
   };
   const { pathname } = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { isLoading, data } = useMeQuery();
+  const { isLoading, data } = useMeQuery({
+    onError: onInvalidTokenError,
+  });
   const onClickMenuButton = () => setSidebarOpen(true);
   const onCloseSidebar = () => setSidebarOpen(false);
   useLayoutEffect(() => {

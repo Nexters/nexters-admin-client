@@ -4,6 +4,7 @@ import { createElement } from 'react';
 import { Attendance } from './Attendance';
 import { Camera } from './Camera';
 import { Certificate } from './Certificate';
+import { CheckCircle } from './CheckCircle';
 import { Chevron } from './Chevron';
 import { Close } from './Close';
 import { Error } from './Error';
@@ -43,6 +44,7 @@ const icons = {
   password: Password,
   userLogout: UserLogout,
   thumbsUp: ThumbsUp,
+  checkCircle: CheckCircle,
 } as const;
 
 interface IconProps extends SVGProps<SVGSVGElement> {

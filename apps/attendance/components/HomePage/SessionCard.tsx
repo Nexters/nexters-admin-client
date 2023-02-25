@@ -5,12 +5,12 @@ import { formatKoreanMonthDate, getDecimalDay, isAfter } from '@weekly/utils';
 type Props = SessionHomeResponse;
 
 function SessionCard(props: Props) {
-  const { sessionDate, title, description } = props;
+  const { sessionDate, title, week } = props;
   return (
     <Container>
       <DateText>{formatKoreanMonthDate(sessionDate)}</DateText>
+      <SessionWeekText>{week}주차 세션</SessionWeekText>
       <TitleText>{title}</TitleText>
-      <DescriptionText>{description}</DescriptionText>
       {isAfter(sessionDate) && (
         <DecimalDayText>D - {getDecimalDay(sessionDate)}</DecimalDayText>
       )}
@@ -36,13 +36,13 @@ const DateText = styled.h3`
   color: ${({ theme }) => theme.palette.grayScale.g10};
 `;
 
-const TitleText = styled.h1`
+const SessionWeekText = styled.h1`
   ${({ theme }) => theme.typo.h1Bold}
   color: ${({ theme }) => theme.palette.grayScale.g10};
   margin-top: ${({ theme }) => theme.rem(4)};
 `;
 
-const DescriptionText = styled.h3`
+const TitleText = styled.h3`
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;

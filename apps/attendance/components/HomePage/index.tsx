@@ -1,13 +1,14 @@
 import { useMeQuery, useSessionQuery } from '@weekly/api';
-import { styled } from '@weekly/ui';
-import { isToday, useMinimumWaiting } from '@weekly/utils';
+import { Icon, styled } from '@weekly/ui';
+import { formatHHMMSS, isToday, useMinimumWaiting } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import { Fragment, useLayoutEffect, useState } from 'react';
 
 import { onInvalidTokenError } from '~/utils/error';
-import { getSessionDescriptionMessage } from '~/utils/message';
+import { getAttendanceStatusMessage, getSessionDescriptionMessage } from '~/utils/message';
 
 import { Loader } from '../Loader';
+import { AttendanceCard } from './AttendanceCard';
 import { CameraButton } from './CameraButton';
 import { EmptyCard } from './EmptyCard';
 import { MenuButton } from './MenuButton';
@@ -30,6 +31,11 @@ function HomePage() {
   const isDisplayCameraButton = !!sessionQueryResult.data
     && sessionQueryResult.data.attendanceStatus === 'PENDING'
     && !isSessionPending;
+  const isAttendanceComplete = !!sessionQueryResult.data && (
+    sessionQueryResult.data.attendanceStatus === 'ATTENDED' || sessionQueryResult.data.attendanceStatus === 'TARDY');
+  const attendanceMessage = sessionQueryResult.data
+    ? getAttendanceStatusMessage(sessionQueryResult.data.attendanceStatus)
+    : undefined;
   const onClickMenuButton = () => setSidebarOpen(true);
   const onCloseSidebar = () => setSidebarOpen(false);
   useLayoutEffect(() => {
@@ -47,19 +53,30 @@ function HomePage() {
         <Loader />
       ) : (
         <Fragment>
-          {!isEmptySession ? (
-            <SessionCard {...sessionQueryResult.data} />
-          ) : (
-            <EmptyCard />
-          )}
-          <Description>
-            {getSessionDescriptionMessage({
-              isEmptySession,
-              isTodaySession,
-              isSessionPending,
-              isDisplayCameraButton,
-            })}
-          </Description>
+          {isEmptySession
+            ? <EmptyCard />
+            : isAttendanceComplete
+              ? <AttendanceCard {...sessionQueryResult.data} />
+              : <SessionCard {...sessionQueryResult.data} />}
+          {isAttendanceComplete && attendanceMessage
+            ? (
+              <AttendanceCompleteText>
+                <Icon name='checkCircle' />
+                {attendanceMessage}
+                <AttendanceTimeText>
+                  {formatHHMMSS(sessionQueryResult.data.attendanceTime)}
+                </AttendanceTimeText>
+              </AttendanceCompleteText>
+            )
+            : (<Description>
+              {getSessionDescriptionMessage({
+                isEmptySession,
+                isTodaySession,
+                isSessionPending,
+                isDisplayCameraButton,
+              })}
+            </Description>
+            )}
           {isEmptySession && <SocialLinks />}
           {isDisplayCameraButton && <CameraButton />}
         </Fragment>
@@ -89,6 +106,23 @@ const Description = styled.p`
   ${({ theme }) => theme.typo.body2Medium}
   margin-top: ${({ theme }) => theme.rem(20)};
   color: ${({ theme }) => theme.palette.grayScale.white};
+`;
+
+const AttendanceCompleteText = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${({ theme }) => theme.typo.body1Bold}
+  margin-top: ${({ theme }) => theme.rem(16)};
+  color: ${({ theme }) => theme.palette.grayScale.white};
+
+  svg {
+    margin-right: ${({ theme }) => theme.rem(6)};
+  }
+`;
+
+const AttendanceTimeText = styled.span`
+  margin-left:${({ theme }) => theme.rem(8)};
 `;
 
 export { HomePage };

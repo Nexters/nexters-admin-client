@@ -1,3 +1,5 @@
+import { SessionHomeResponse } from '@weekly/api/dto/attendance';
+
 function getSessionDescriptionMessage({
   isEmptySession,
   isTodaySession,
@@ -20,5 +22,16 @@ function getSessionDescriptionMessage({
   }
 }
 
+function getAttendanceStatusMessage(status: SessionHomeResponse['attendanceStatus']) {
+  switch (status) {
+  case 'ATTENDED':
+    return '출석';
+  case 'TARDY':
+    return '지각';
+  default:
+    return undefined;
+  }
+}
 
-export { getSessionDescriptionMessage };
+
+export { getAttendanceStatusMessage, getSessionDescriptionMessage };

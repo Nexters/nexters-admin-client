@@ -6,6 +6,10 @@ function isAfter(date: string) {
   return new Date(date).valueOf() > new Date().valueOf();
 }
 
+function isToday(date: string) {
+  return new Date(date).toDateString() === new Date().toDateString();
+}
+
 function getDecimalDay(date: string) {
   const diff = new Date(date).valueOf() - new Date().valueOf();
   return Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -38,4 +42,5 @@ export {
   getDecimalDay,
   isAfter,
   isBefore,
+  isToday,
 };

@@ -1,10 +1,11 @@
 import { useMeQuery, useSessionQuery } from '@weekly/api';
 import { styled } from '@weekly/ui';
-import { useMinimumWaiting } from '@weekly/utils';
+import { isToday, useMinimumWaiting } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import { Fragment, useLayoutEffect, useState } from 'react';
 
 import { onInvalidTokenError } from '~/utils/error';
+import { getSessionDescriptionMessage } from '~/utils/message';
 
 import { Loader } from '../Loader';
 import { CameraButton } from './CameraButton';
@@ -23,6 +24,11 @@ function HomePage() {
     onError: onInvalidTokenError,
   });
   const isEmptySession = sessionQueryResult.data == null;
+  const isTodaySession = !!sessionQueryResult.data && isToday(sessionQueryResult.data.sessionDate);
+  const isSessionPending = !!sessionQueryResult.data && sessionQueryResult.data.sessionStatus === 'PENDING';
+  const isDisplayCameraButton = !!sessionQueryResult.data
+    && sessionQueryResult.data.attendanceStatus === 'PENDING'
+    && !isSessionPending;
   const onClickMenuButton = () => setSidebarOpen(true);
   const onCloseSidebar = () => setSidebarOpen(false);
   useLayoutEffect(() => {
@@ -48,11 +54,10 @@ function HomePage() {
               <EmptyCard />
             )}
             <Description>
-              {isEmptySession
-                ? '넥스터즈의 정보를 빠르게 받아보세요 :)'
-                : '스크린의 QR코드를 찍으면 출석체크 할 수 있어요.'}
+              {getSessionDescriptionMessage({ isEmptySession, isTodaySession, isSessionPending, isDisplayCameraButton })}
             </Description>
-            {isEmptySession ? <SocialLinks /> : <CameraButton />}
+            {isEmptySession && <SocialLinks />}
+            {isDisplayCameraButton && <CameraButton />}
             {meQueryResult.data && (
               <Sidebar
                 open={sidebarOpen}

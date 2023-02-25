@@ -18,11 +18,12 @@ import { SocialLinks } from './SocialLinks';
 function HomePage() {
   const { pathname } = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const isOneSecondLoading = useMinimumWaiting();
+  const wait = useMinimumWaiting();
   const sessionQueryResult = useSessionQuery();
   const meQueryResult = useMeQuery({
     onError: onInvalidTokenError,
   });
+  const isLoading = sessionQueryResult.isLoading || meQueryResult.isLoading || wait;
   const isEmptySession = sessionQueryResult.data == null;
   const isTodaySession = !!sessionQueryResult.data && isToday(sessionQueryResult.data.sessionDate);
   const isSessionPending = !!sessionQueryResult.data && sessionQueryResult.data.sessionStatus === 'PENDING';
@@ -38,35 +39,33 @@ function HomePage() {
   }, [pathname]);
   return (
     <Container>
-      {sessionQueryResult.isLoading ||
-        meQueryResult.isLoading ||
-        isOneSecondLoading ? (
-          <Loader />
-        ) : (
-          <Fragment>
-            <MenuButton
-              onClick={onClickMenuButton}
-              disabled={meQueryResult.isLoading}
-            />
-            {!isEmptySession ? (
-              <SessionCard {...sessionQueryResult.data} />
-            ) : (
-              <EmptyCard />
-            )}
-            <Description>
-              {getSessionDescriptionMessage({ isEmptySession, isTodaySession, isSessionPending, isDisplayCameraButton })}
-            </Description>
-            {isEmptySession && <SocialLinks />}
-            {isDisplayCameraButton && <CameraButton />}
-            {meQueryResult.data && (
-              <Sidebar
-                open={sidebarOpen}
-                onClose={onCloseSidebar}
-                user={meQueryResult.data}
-              />
-            )}
-          </Fragment>
-        )}
+      <MenuButton
+        onClick={onClickMenuButton}
+        disabled={isLoading}
+      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          {!isEmptySession ? (
+            <SessionCard {...sessionQueryResult.data} />
+          ) : (
+            <EmptyCard />
+          )}
+          <Description>
+            {getSessionDescriptionMessage({ isEmptySession, isTodaySession, isSessionPending, isDisplayCameraButton })}
+          </Description>
+          {isEmptySession && <SocialLinks />}
+          {isDisplayCameraButton && <CameraButton />}
+        </Fragment>
+      )}
+      {meQueryResult.data && (
+        <Sidebar
+          open={sidebarOpen}
+          onClose={onCloseSidebar}
+          user={meQueryResult.data}
+        />
+      )}
     </Container>
   );
 }

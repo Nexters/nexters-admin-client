@@ -4,7 +4,7 @@ function useMinimumWaiting() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 800);
+    setTimeout(() => setIsLoading(false), 600);
   }, []);
 
   return isLoading;

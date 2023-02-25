@@ -1,6 +1,7 @@
 import { handleLoginError, useLoginMuttion } from '@weekly/api';
 import { Button, openErrorSnackBar, styled, TextField } from '@weekly/ui';
 import {
+  useAuthToken,
   useValidateState,
   validateEmail,
   validatePassword,
@@ -21,6 +22,7 @@ function LoginForm() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const emailState = useValidateState<string>('', [validateEmail]);
   const passwordState = useValidateState<string>('', [validatePassword]);
+  const { setToken } = useAuthToken();
   const { mutate } = useLoginMuttion();
   const submitLoginForm = useDebouncedCallback(() => {
     mutate(
@@ -34,9 +36,7 @@ function LoginForm() {
         },
         onSuccess(response) {
           const { token, needPasswordReset } = response;
-          if (!needPasswordReset) {
-            localStorage.setItem('@weekly/token', token);
-          }
+          setToken(token);
           router.push(needPasswordReset ? PAGE_URLS.PASSWORD : PAGE_URLS.MAIN);
         },
       },

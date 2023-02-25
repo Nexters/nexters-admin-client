@@ -1,3 +1,4 @@
+export * from './useAuthToken';
 export * from './useEventListener';
 export * from './useIsomorphicLayoutEffect';
 export * from './useOnClickoutside';

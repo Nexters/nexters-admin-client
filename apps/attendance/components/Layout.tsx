@@ -1,14 +1,24 @@
 import { styled } from '@weekly/ui';
+import { useAuthToken, useRedirectEffect } from '@weekly/utils';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import type { PropsWithChildren } from 'react';
 
-interface LayoutProps extends PropsWithChildren<unknown> {}
+import { PAGE_URLS } from '~/constants/urls';
+
+type LayoutProps = PropsWithChildren<unknown>
 
 type Props = Partial<LayoutProps>;
 
 function Layout(props: Props) {
+  const { pathname } = useRouter();
+  const { token } = useAuthToken();
   const { children } = props;
+  useRedirectEffect(
+    PAGE_URLS.LOGOUT,
+    () => !token && !pathname.includes('login'),
+  );
   return (
     <Container>
       <Head>

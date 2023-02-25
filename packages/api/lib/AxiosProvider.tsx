@@ -1,3 +1,4 @@
+import { useAuthToken } from '@weekly/utils';
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 import type { PropsWithChildren } from 'react';
@@ -7,6 +8,7 @@ const AxiosContext = createContext<AxiosInstance | null>(null);
 
 function AxiosProvider(props: PropsWithChildren<unknown>) {
   const { children } = props;
+  const { token } = useAuthToken();
   const api = useMemo(() => {
     const instance = axios.create({
       baseURL: process.env.NEXT_PUBLIC_API_URL ?? 'https://mock-api-server',
@@ -17,8 +19,6 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
     });
 
     instance.interceptors.request.use((config) => {
-      const token = localStorage.getItem('@weekly/token');
-
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }

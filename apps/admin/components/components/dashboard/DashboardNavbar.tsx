@@ -1,11 +1,11 @@
+import { useGenerationQuery } from '@weekly/api';
 import { Dropdown, styled } from '@weekly/ui';
-import { useSearchParams } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { MenuKey, menus } from '~/data';
 
-interface DashboardNavbarProps {}
+type DashboardNavbarProps = {};
 type Props = Partial<DashboardNavbarProps>;
 
 type AdminMenuItem = {
@@ -42,18 +42,20 @@ const navBarMap: AdminMenuMapType = {
 const generation = ['22기', '21기'];
 
 function DashboardNavbar(props: Props) {
-  const { pathname } = useRouter();
-  const searchParams = useSearchParams();
+  const { pathname, replace, query } = useRouter();
   const matchedPath = menus.find((v) => pathname.includes(v));
+
+  const { data } = useGenerationQuery();
   const [gen, setGen] = useState<string>(generation[0]);
 
   useEffect(() => {
-    matchedPath &&
-      navBarMap[matchedPath].selectGeneration &&
-      searchParams.set([{ key: 'generation', value: gen.split('기')[0] }], {
+    if (matchedPath && navBarMap[matchedPath].selectGeneration) {
+      /* searchParams.set([{ key: 'generation', value: gen.split('기')[0] }], {
         replace: true,
-      });
-  }, [gen]);
+      }); */
+      replace(`${navBarMap[matchedPath].route}/${gen.split('기')[0]}`);
+    }
+  }, [gen, pathname]);
 
   return (
     <Container>

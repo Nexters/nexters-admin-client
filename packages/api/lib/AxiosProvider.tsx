@@ -17,12 +17,13 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
     });
 
     instance.interceptors.request.use((config) => {
-      const token = localStorage.getItem('@weekly/token');
+      if (typeof window !== undefined) {
+        const token = window.localStorage.getItem('@weekly/token');
 
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
       }
-
       return config;
     });
     return instance;

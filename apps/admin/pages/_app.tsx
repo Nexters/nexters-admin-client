@@ -5,6 +5,7 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
 
+
 type EnhancedAppProps = AppProps & {
   Component: NextPage;
   pageProps: Record<string, unknown>;

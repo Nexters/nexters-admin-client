@@ -3,7 +3,7 @@ import {
   QueryClientProvider as BaseQueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import type {PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { AxiosProvider } from './AxiosProvider';
 
@@ -11,7 +11,6 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,
-      suspense: true,
       refetchOnMount: false,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,

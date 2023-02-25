@@ -13,4 +13,9 @@ function formatHHMMSS(datetime: string) {
     .join(':');
 }
 
-export { formatHHMMSS, formatYYMMDD };
+function formatKRmmdd(datetime: string) {
+  const date = new Date(datetime);
+  return `${date.getMonth() + 1}월 ${date.getDate()}일`;
+}
+
+export { formatHHMMSS, formatKRmmdd, formatYYMMDD };

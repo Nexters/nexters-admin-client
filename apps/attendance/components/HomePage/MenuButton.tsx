@@ -1,6 +1,6 @@
 import { Icon, styled } from '@weekly/ui';
 
-interface Props extends React.ComponentProps<'button'> {}
+type Props = React.ComponentProps<'button'>;
 
 function MenuButton(props: Props) {
   const { onClick, disabled } = props;

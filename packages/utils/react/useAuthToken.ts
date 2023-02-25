@@ -1,4 +1,4 @@
-import { useCookies } from 'react-cookie';
+import { Cookies, useCookies } from 'react-cookie';
 
 const COOKIE_KEY = '@weekly/token' as const;
 
@@ -13,4 +13,9 @@ function useAuthToken() {
   };
 }
 
-export { useAuthToken };
+function getAuthToken() {
+  const cookies = new Cookies();
+  return cookies.get(COOKIE_KEY) as string | undefined;
+}
+
+export { COOKIE_KEY, getAuthToken, useAuthToken };

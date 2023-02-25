@@ -26,7 +26,6 @@ function HomePage() {
       onCloseSidebar();
     }
   }, [pathname]);
-  console.log(sessionQueryResult.data);
   return (
     <Container>
       <MenuButton

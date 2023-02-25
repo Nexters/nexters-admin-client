@@ -26,18 +26,18 @@ export interface FindSessionHomeResponse {
 
 export interface SessionHomeResponse {
   /** @format date */
-  sessionDate?: string;
-  title?: string;
-  description?: string;
-  sessionStatus?: 'PENDING' | 'ONGOING' | 'EXPIRED';
-  attendanceStatus?:
+  sessionDate: string;
+  title: string;
+  description: string;
+  sessionStatus: 'PENDING' | 'ONGOING' | 'EXPIRED';
+  attendanceStatus:
     | 'PENDING'
     | 'ATTENDED'
     | 'TARDY'
     | 'UNAUTHORIZED_ABSENCE'
     | 'AUTHORIZED_ABSENCE';
   /** @format date-time */
-  attendanceTime?: string;
+  attendanceTime: string;
 }
 
 export interface FindAllMembersResponse {

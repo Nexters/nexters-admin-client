@@ -1,11 +1,8 @@
+import type { SessionHomeResponse } from '@weekly/api/dto/attendance';
 import { styled } from '@weekly/ui';
 import { formatKoreanMonthDate, getDecimalDay, isAfter } from '@weekly/utils';
 
-type Props = {
-  sessionDate: string;
-  title: string;
-  description: string;
-};
+type Props = SessionHomeResponse;
 
 function SessionCard(props: Props) {
   const { sessionDate, title, description } = props;

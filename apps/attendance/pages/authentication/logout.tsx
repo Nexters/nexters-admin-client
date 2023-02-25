@@ -1,9 +1,10 @@
-import { useRedirectEffect } from '@weekly/utils';
+import { useAuthToken, useRedirectEffect } from '@weekly/utils';
 import { useEffect } from 'react';
 
 function Logout() {
+  const { removeToken } = useAuthToken();
   useEffect(() => {
-    localStorage.removeItem('@weekly/token');
+    removeToken();
   }, []);
   useRedirectEffect('/authentication/login');
   return null;

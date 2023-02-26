@@ -1,21 +1,34 @@
-import { Session } from '@weekly/api/dto/admin';
 import { Icon, styled } from '@weekly/ui';
 import { formatKRmmdd } from '@weekly/utils';
 import { ComponentProps } from 'react';
 
 interface SessionItemProps extends ComponentProps<'button'> {
-  session: Session;
-  isManage?: boolean;
+  title: string;
+  description: string;
+  generation: number;
+  sessionDate: string;
+  week: number;
 }
 
-function SessionItem({ session, isManage = false, onClick }: SessionItemProps) {
+type Props = PartialPick<
+  SessionItemProps,
+  'title' | 'generation' | 'sessionDate' | 'week'
+>;
+
+function SessionItem({
+  title,
+  description = '',
+  sessionDate,
+  week,
+  onClick,
+}: Props) {
   return (
-    <Container onClick={onClick}>
-      {isManage && <Icon name='edit' />}
-      <Date>{formatKRmmdd(session.sessionTime!)}</Date>
-      <Week>{session.week}주차 세션</Week>
-      <Title>{session.title}</Title>
-      <Description>{session.description}</Description>
+    <Container type='button' onClick={onClick}>
+      <Icon name='edit' />
+      <Date>{formatKRmmdd(sessionDate!)}</Date>
+      <Week>{week}주차 세션</Week>
+      <Title>{title}</Title>
+      <Description>{description}</Description>
     </Container>
   );
 }

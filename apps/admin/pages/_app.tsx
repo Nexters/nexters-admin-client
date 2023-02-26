@@ -1,10 +1,10 @@
 import localFont from '@next/font/local';
-import { QueryClientProvider } from '@weekly/api';
+import { Hydrate, QueryClientProvider } from '@weekly/api';
+import { initAuthorization } from '@weekly/api/lib/admin/api';
 import { ThemeProvider } from '@weekly/ui/theme';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { useEffect, useState } from 'react';
-
+import { useEffect } from 'react';
 
 type EnhancedAppProps = AppProps & {
   Component: NextPage;
@@ -41,32 +41,26 @@ function App(props: EnhancedAppProps) {
   const { Component, pageProps } = props;
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  const [shouldRender, setShouldRender] = useState(
-    !process.env.NEXT_PUBLIC_API_MOCKING,
-  );
   useEffect(() => {
-    async function init() {
-      const { initMocks } = await import('@weekly/api');
-      await initMocks();
+    if (typeof window !== 'undefined') {
+      initAuthorization();
     }
-    init();
-    setShouldRender(true);
   }, []);
-  if (!shouldRender) {
-    return null;
-  }
+
   return (
     <QueryClientProvider>
-      <ThemeProvider>
-        <style global jsx>
-          {`
-            html {
-              font-family: ${pretandard.style.fontFamily};
-            }
-          `}
-        </style>
-        {getLayout(<Component {...pageProps} />)}
-      </ThemeProvider>
+      <Hydrate state={pageProps.dehydratedState}>
+        <ThemeProvider>
+          <style global jsx>
+            {`
+              html {
+                font-family: ${pretandard.style.fontFamily};
+              }
+            `}
+          </style>
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+      </Hydrate>
     </QueryClientProvider>
   );
 }

@@ -1,5 +1,5 @@
 export interface TokenResponse {
-  data: string;
+  token: string;
 }
 
 export interface UpdateSessionRequest {
@@ -9,7 +9,7 @@ export interface UpdateSessionRequest {
   /** @format int32 */
   generation: number;
   /** @format date */
-  sessionTime: string;
+  sessionDate: string;
   /** @format int32 */
   week: number;
 }
@@ -43,7 +43,7 @@ export interface CreateSessionRequest {
   /** @format int32 */
   generation: number;
   /** @format date */
-  sessionTime: string;
+  sessionDate: string;
   /** @format int32 */
   week: number;
 }
@@ -90,24 +90,6 @@ export interface CreateAdministratorRequest {
   password: string;
 }
 
-export interface Session {
-  title?: string;
-  description?: string;
-  message?: string;
-  /** @format int32 */
-  generation: number;
-  /** @format date */
-  sessionTime?: string;
-  /** @format int32 */
-  week: number;
-  /** @format date-time */
-  startAttendTime?: string;
-  /** @format date-time */
-  endAttendTime?: string;
-  /** @format int64 */
-  id: number;
-}
-
 export interface GenerationResponse {
   /** @format int64 */
   generation: number;
@@ -122,4 +104,25 @@ export interface CurrentQrCodeResponse {
   qrCodeType: string;
   /** @format date-time */
   expirationTime: string;
+}
+
+export interface FindSessionResponses {
+  data: FindSessionResponse[];
+}
+
+export interface FindSessionResponse {
+  /** @format int64 */
+  id: number;
+  title: string;
+  description?: string;
+  /** @format int64 */
+  generation: number;
+  /** @format date */
+  sessionDate: string;
+  /** @format int64 */
+  week: number;
+  /** @format date-time */
+  startAttendTime?: string;
+  /** @format date-time */
+  endAttendTime?: string;
 }

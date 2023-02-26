@@ -1,4 +1,3 @@
-import { useGenerationQuery } from '@weekly/api';
 import { Dropdown, styled } from '@weekly/ui';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -45,7 +44,6 @@ function DashboardNavbar(props: Props) {
   const { pathname, replace, query } = useRouter();
   const matchedPath = menus.find((v) => pathname.includes(v));
 
-  const { data } = useGenerationQuery();
   const [gen, setGen] = useState<string>(generation[0]);
 
   useEffect(() => {

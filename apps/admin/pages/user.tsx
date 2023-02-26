@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { DashboardLayout } from '~/components/components/dashboard/DashboardLayout';
+import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 
 function User() {
   return (

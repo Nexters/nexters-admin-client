@@ -1,9 +1,9 @@
-import type { SVGProps } from 'react';
 import { createElement } from 'react';
 
 import { Attendance } from './Attendance';
 import { Camera } from './Camera';
 import { Certificate } from './Certificate';
+import { CheckCircle } from './CheckCircle';
 import { Chevron } from './Chevron';
 import { Close } from './Close';
 import { Edit } from './Edit';
@@ -44,10 +44,11 @@ const icons = {
   password: Password,
   userLogout: UserLogout,
   thumbsUp: ThumbsUp,
+  checkCircle: CheckCircle,
   edit: Edit,
 } as const;
 
-interface IconProps extends SVGProps<SVGSVGElement> {
+interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
   className?: string;
 }

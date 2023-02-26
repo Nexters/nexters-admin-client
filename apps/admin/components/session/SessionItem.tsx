@@ -1,5 +1,5 @@
 import { Icon, styled } from '@weekly/ui';
-import { formatKRmmdd } from '@weekly/utils';
+import { formatKoreanMonthDate } from '@weekly/utils';
 import { ComponentProps } from 'react';
 
 interface SessionItemProps extends ComponentProps<'button'> {
@@ -25,7 +25,7 @@ function SessionItem({
   return (
     <Container type='button' onClick={onClick}>
       <Icon name='edit' />
-      <Date>{formatKRmmdd(sessionDate!)}</Date>
+      <Date>{formatKoreanMonthDate(sessionDate!)}</Date>
       <Week>{week}주차 세션</Week>
       <Title>{title}</Title>
       <Description>{description}</Description>

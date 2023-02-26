@@ -26,18 +26,19 @@ export interface FindSessionHomeResponse {
 
 export interface SessionHomeResponse {
   /** @format date */
-  sessionDate?: string;
-  title?: string;
+  sessionDate: string;
+  week: number;
+  title: string;
   description?: string;
-  sessionStatus?: 'PENDING' | 'ONGOING' | 'EXPIRED';
-  attendanceStatus?:
-    | 'PENDING'
-    | 'ATTENDED'
-    | 'TARDY'
-    | 'UNAUTHORIZED_ABSENCE'
-    | 'AUTHORIZED_ABSENCE';
+  sessionStatus: 'PENDING' | 'ONGOING' | 'EXPIRED';
+  attendanceStatus:
+  | 'PENDING'
+  | 'ATTENDED'
+  | 'TARDY'
+  | 'UNAUTHORIZED_ABSENCE'
+  | 'AUTHORIZED_ABSENCE';
   /** @format date-time */
-  attendanceTime?: string;
+  attendanceTime: string;
 }
 
 export interface FindAllMembersResponse {
@@ -79,11 +80,11 @@ export interface AttendanceResponse {
   /** @format date */
   sessionDate?: string;
   attendanceStatus:
-    | 'PENDING'
-    | 'ATTENDED'
-    | 'TARDY'
-    | 'UNAUTHORIZED_ABSENCE'
-    | 'AUTHORIZED_ABSENCE';
+  | 'PENDING'
+  | 'ATTENDED'
+  | 'TARDY'
+  | 'UNAUTHORIZED_ABSENCE'
+  | 'AUTHORIZED_ABSENCE';
   /** @format date-time */
   attendanceTime?: string;
   /** @format int32 */

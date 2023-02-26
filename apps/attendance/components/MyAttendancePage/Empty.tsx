@@ -12,6 +12,7 @@ function Empty() {
 const Container = styled.div`
   text-align: center;
   align-self: center;
+  margin-top: ${({ theme }) => theme.rem(240)};
 `;
 
 const Title = styled.h2`

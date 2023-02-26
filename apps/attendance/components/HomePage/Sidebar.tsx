@@ -46,10 +46,10 @@ const Container = styled.div<{ open: boolean }>`
   width: 100vw;
   height: 100vh;
   top: 0;
-  left: ${({ open }) => (open ? '50%' : '0%')};
-  transition: transform 0.4s ease, left 0.4s ease;
+  right: ${({ open }) => (open ? '50%' : '0%')};
+  transition: transform 0.4s ease, right 0.4s ease;
   min-width: ${({ theme }) => theme.rem(320)};
-  transform: ${({ open }) => (open ? 'translateX(-50%)' : 'translateX(-100%)')};
+  transform: ${({ open }) => (open ? 'translateX(50%)' : 'translateX(100%)')};
   max-width: ${({ theme }) => theme.rem(743)};
   padding: ${({ theme }) => `${theme.rem(40)} ${theme.rem(20)}`};
   background-color: ${({ theme }) => theme.palette.grayScale.g100};

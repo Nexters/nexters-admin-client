@@ -1,9 +1,8 @@
 import { Icon, styled } from '@weekly/ui';
 import _Link from 'next/link';
-import type { ComponentProps } from 'react';
 
 interface Props {
-  iconName: ComponentProps<typeof Icon>['name'];
+  iconName: React.ComponentProps<typeof Icon>['name'];
   label: string;
   href: string;
 }

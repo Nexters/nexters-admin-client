@@ -1,5 +1,5 @@
 import QRCodeStyling from 'qr-code-styling';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const qrCode = new QRCodeStyling({
   width: 300,

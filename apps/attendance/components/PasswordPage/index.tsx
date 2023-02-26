@@ -9,18 +9,15 @@ import { PasswordForm } from './PasswordForm';
 function PasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const onClickBackButton = () => {
-    router.push(
-      searchParams.get('entry') === 'main'
-        ? PAGE_URLS.MAIN
-        : PAGE_URLS.LOGIN,
-    );
-  };
+  const isFromMain = searchParams.get('entry') === 'main';
+  const onClickBackButton = () => router.push(PAGE_URLS.MAIN);
   return (
     <Container>
-      <BackButton onClick={onClickBackButton}>
-        <Icon name='chevronLeft' />
-      </BackButton>
+      {isFromMain && (
+        <BackButton onClick={onClickBackButton}>
+          <Icon name='chevronLeft' />
+        </BackButton>
+      )}
       <Description>
         {`비밀번호를
         다시 설정해 주세요!`}

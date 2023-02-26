@@ -3,6 +3,7 @@ import type {
   AxiosRequestConfig,
   AxiosResponse,
   HeadersDefaults,
+  Method,
   ResponseType,
 } from 'axios';
 import axios from 'axios';
@@ -19,6 +20,7 @@ export interface FullRequestParams
   query?: QueryParamsType;
   format?: ResponseType;
   body?: unknown;
+  method?: Method;
 }
 
 export type RequestParams = Omit<
@@ -35,13 +37,10 @@ export interface ApiConfig<SecureData = unknown>
   format?: ResponseType;
 }
 
-// ContentType to Object Style
-export const ContentTypeMap = {
-  Json: 'application/json',
-  FormData: 'multipart/form-data',
-};
-
-export type ContentType = keyof typeof ContentTypeMap;
+export enum ContentType {
+  Json = 'application/json',
+  FormData = 'multipart/form-data',
+}
 
 export class HttpClient<SecureData = unknown> {
   public instance: AxiosInstance;
@@ -117,7 +116,7 @@ export class HttpClient<SecureData = unknown> {
     }, new FormData());
   }
 
-  public request = async <T = any>({
+  public request = async <T>({
     secure,
     path,
     type,
@@ -135,7 +134,7 @@ export class HttpClient<SecureData = unknown> {
     const responseFormat = format || this.format || undefined;
 
     if (
-      type === ContentTypeMap.FormData &&
+      type === ContentType.FormData &&
       body &&
       body !== null &&
       typeof body === 'object'
@@ -147,9 +146,7 @@ export class HttpClient<SecureData = unknown> {
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type && type !== ContentTypeMap.FormData
-          ? { 'Content-Type': type }
-          : {}),
+        ...(type && type !== ContentType.Json ? { 'Content-Type': type } : {}),
       },
       params: query,
       responseType: responseFormat,

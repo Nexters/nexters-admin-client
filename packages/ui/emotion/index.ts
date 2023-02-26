@@ -16,7 +16,7 @@ interface CreateStyled<Theme> {
   <
     C extends React.ComponentClass<React.ComponentProps<C>>,
     ForwardedProps extends keyof React.ComponentProps<C> &
-      string = keyof React.ComponentProps<C> & string
+    string = keyof React.ComponentProps<C> & string
   >(
     component: C,
     options: FilteringStyledOptions<React.ComponentProps<C>, ForwardedProps>
@@ -24,7 +24,7 @@ interface CreateStyled<Theme> {
     Pick<PropsOf<C>, ForwardedProps> & {
       theme?: Theme;
     },
-    {},
+    object,
     {
       ref?: React.Ref<InstanceType<C>>;
     }
@@ -37,7 +37,7 @@ interface CreateStyled<Theme> {
     PropsOf<C> & {
       theme?: Theme;
     },
-    {},
+    object,
     {
       ref?: React.Ref<InstanceType<C>>;
     }
@@ -46,7 +46,7 @@ interface CreateStyled<Theme> {
   <
     C extends React.ComponentType<React.ComponentProps<C>>,
     ForwardedProps extends keyof React.ComponentProps<C> &
-      string = keyof React.ComponentProps<C> & string
+    string = keyof React.ComponentProps<C> & string
   >(
     component: C,
     options: FilteringStyledOptions<React.ComponentProps<C>, ForwardedProps>
@@ -68,7 +68,7 @@ interface CreateStyled<Theme> {
   <
     Tag extends keyof JSX.IntrinsicElements,
     ForwardedProps extends keyof JSX.IntrinsicElements[Tag] &
-      string = keyof JSX.IntrinsicElements[Tag] & string
+    string = keyof JSX.IntrinsicElements[Tag] & string
   >(
     tag: Tag,
     options: FilteringStyledOptions<JSX.IntrinsicElements[Tag], ForwardedProps>

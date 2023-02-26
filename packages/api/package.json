@@ -14,9 +14,11 @@
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@weekly/tsconfig": "*",
+    "@weekly/utils": "*",
     "eslint": "^7.32.0",
     "eslint-config-weekly": "*",
     "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
     "typescript": "^4.9.4"
   },
   "dependencies": {

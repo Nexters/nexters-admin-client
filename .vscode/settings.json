@@ -3,6 +3,11 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
+  "files.watcherExclude": {
+    "**/.yarn/cache/**": true,
+    "**/node_modules": true,
+    "**/dist/**": true
+  },
   "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true

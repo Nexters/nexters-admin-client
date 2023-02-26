@@ -1,32 +1,35 @@
-import Link from 'next/link';
+import { useAdminSessionQuery } from '@weekly/api';
+import { Button, styled } from '@weekly/ui';
+import { Fragment } from 'react';
 
 import { DashboardLayout } from '~/components/components/dashboard/DashboardLayout';
+import SessionItem from '~/components/components/session/SessionItem';
 
 function Session() {
+  const { data: sessions, isSuccess } = useAdminSessionQuery('22');
+
   return (
-    <div>
-      <h1>Session</h1>
-      <div>
-        <Link href='/attendance'>출석관리</Link>
-      </div>
-      <div>
-        <Link href='/activity'>활동관리</Link>
-      </div>
-      <div>
-        <Link href='/user'>회원관리</Link>
-      </div>
-      <div>
-        <Link href='/session'>세션관리</Link>
-      </div>
-      <div>
-        <Link href='/authentication/login'>로그인</Link>
-      </div>
-      <div>
-        <Link href='/authentication/logout'>로그아웃</Link>
-      </div>
-    </div>
+    <Container>
+      <Button size='small'>세션 추가</Button>
+      <SessionList>
+        {isSuccess && (
+          <Fragment>
+            {sessions.map((session) => (
+              <SessionItem session={session} />
+            ))}
+          </Fragment>
+        )}
+      </SessionList>
+    </Container>
   );
 }
+
+const Container = styled.div``;
+
+const SessionList = styled.div`
+  display: flex;
+  gap: 24px;
+`;
 
 Session.getLayout = function getLayout(page: React.ReactElement) {
   return <DashboardLayout>{page}</DashboardLayout>;

@@ -5,8 +5,7 @@ import { Fragment } from 'react';
 import { DashboardNavbar } from './DashboardNavbar';
 import { DashboardSidebar } from './DashboardSidebar';
 
-interface DashboardLayoutProps {}
-
+type DashboardLayoutProps = {};
 type Props = Partial<DashboardLayoutProps>;
 
 function DashboardLayout(props: PropsWithChildren<Props>) {

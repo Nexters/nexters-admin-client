@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { Session } from '../../dto/admin';
 import type {
   FindSessionHomeResponse,
   SessionHomeResponse,
@@ -17,4 +18,15 @@ function useSessionQuery(params?: QueryParams<SessionHomeResponse>) {
   return useQuery({ queryKey: ['sessions', 'home'], queryFn, ...params });
 }
 
-export { useSessionQuery };
+function useAdminSessionQuery(generation: string) {
+  const axios = useAxios();
+  const queryFn = async () => {
+    const { data } = await axios.get<Session[]>(
+      `${API_URL.ADMIN}?generation=${generation}`,
+    );
+    return data;
+  };
+  return useQuery({ queryKey: ['session', generation], queryFn });
+}
+
+export { useAdminSessionQuery, useSessionQuery };

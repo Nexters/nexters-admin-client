@@ -7,6 +7,7 @@ import { Certificate } from './Certificate';
 import { CheckCircle } from './CheckCircle';
 import { Chevron } from './Chevron';
 import { Close } from './Close';
+import { Edit } from './Edit';
 import { Error } from './Error';
 import { Facebook } from './Facebook';
 import { Inbox } from './Inbox';
@@ -45,6 +46,7 @@ const icons = {
   userLogout: UserLogout,
   thumbsUp: ThumbsUp,
   checkCircle: CheckCircle,
+  edit: Edit,
 } as const;
 
 interface IconProps extends SVGProps<SVGSVGElement> {

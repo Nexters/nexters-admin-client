@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useAxios } from '../AxiosProvider';
 import type {
   AdminLoginRequestBody,
+  AdminLoginResponse,
   LoginRequestBody,
   MemberLoginResponse,
 } from './types';
@@ -26,13 +27,10 @@ function useLoginMuttion() {
 function useAdminLoginMutation() {
   const axios = useAxios();
   const mutationFn = async (body: AdminLoginRequestBody) => {
-    const { data } = await axios.post<MemberLoginResponse>(
-      API_URL.ADMIN_LOGIN,
-      {
-        username: body.username,
-        password: body.password,
-      },
-    );
+    const { data } = await axios.post<AdminLoginResponse>(API_URL.ADMIN_LOGIN, {
+      username: body.username,
+      password: body.password,
+    });
     return data;
   };
   return useMutation({ mutationFn });

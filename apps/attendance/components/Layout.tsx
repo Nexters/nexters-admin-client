@@ -5,9 +5,7 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import type { PropsWithChildren } from 'react';
 
-import { PAGE_URLS } from '~/constants/urls';
-
-type LayoutProps = PropsWithChildren<unknown>
+type LayoutProps = PropsWithChildren<unknown>;
 
 type Props = Partial<LayoutProps>;
 

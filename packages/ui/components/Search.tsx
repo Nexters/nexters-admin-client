@@ -1,8 +1,7 @@
 import { styled } from '../emotion';
 import { Icon } from '../icons/Icon';
 
-type SearchProps = React.ComponentProps<'input'>
-
+type SearchProps = React.ComponentProps<'input'>;
 type Props = Partial<SearchProps>;
 type ContainerProps = Pick<SearchProps, 'width'>;
 

@@ -19,11 +19,9 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
     });
     instance.interceptors.request.use((config) => {
       const token = getAuthToken();
-
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
-
       return config;
     });
     return instance;

@@ -13,4 +13,13 @@ type MemberLoginResponse = {
   needPasswordReset: boolean;
 };
 
-export type { AdminLoginRequestBody, LoginRequestBody, MemberLoginResponse };
+type AdminLoginResponse = {
+  data: string;
+};
+
+export type {
+  AdminLoginRequestBody,
+  AdminLoginResponse,
+  LoginRequestBody,
+  MemberLoginResponse,
+};

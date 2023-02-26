@@ -1,10 +1,9 @@
 import { styled } from '@weekly/ui';
 import Image from 'next/image';
-import { Fragment } from 'react';
 
 import empty from '~/images/home/empty.png';
 
-function Empty() {
+function EmptyCard() {
   return (
     <Container>
       <Text>활동 시작을 기다려 볼까요?</Text>
@@ -19,7 +18,17 @@ function Empty() {
   );
 }
 
-const Container = Fragment;
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: ${({ theme }) => theme.rem(335)};
+  height: ${({ theme }) => theme.rem(360)};
+  border-radius: ${({ theme }) => theme.rem(24)};
+  padding: ${({ theme }) => theme.rem(22)};
+  background-color: ${({ theme }) => theme.palette.grayScale.g90};
+`;
 
 const Text = styled.h2`
   ${({ theme }) => theme.typo.h2Bold}
@@ -27,4 +36,4 @@ const Text = styled.h2`
   color: ${({ theme }) => theme.palette.grayScale.g10};
 `;
 
-export { Empty };
+export { EmptyCard };

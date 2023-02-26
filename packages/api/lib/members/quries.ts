@@ -1,4 +1,3 @@
-// TODO: 반환 타입 없는 것들 확인하기
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { useAxios } from '../AxiosProvider';

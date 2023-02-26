@@ -1,11 +1,12 @@
+import { getAuthToken } from '@weekly/utils';
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
-import type { PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo } from 'react';
+import { CookiesProvider } from 'react-cookie';
 
 const AxiosContext = createContext<AxiosInstance | null>(null);
 
-function AxiosProvider(props: PropsWithChildren<unknown>) {
+function AxiosProvider(props: React.PropsWithChildren<unknown>) {
   const { children } = props;
   const api = useMemo(() => {
     const instance = axios.create({
@@ -15,20 +16,20 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
         accept: 'application/json,',
       },
     });
-
     instance.interceptors.request.use((config) => {
-      if (typeof window !== undefined) {
-        const token = window.localStorage.getItem('@weekly/token');
-
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
+      const token = getAuthToken();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
       }
       return config;
     });
     return instance;
   }, []);
-  return <AxiosContext.Provider value={api}>{children}</AxiosContext.Provider>;
+  return (
+    <CookiesProvider>
+      <AxiosContext.Provider value={api}>{children}</AxiosContext.Provider>
+    </CookiesProvider>
+  );
 }
 
 function useAxios() {

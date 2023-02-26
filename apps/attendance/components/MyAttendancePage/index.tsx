@@ -1,9 +1,11 @@
 import { useMeAttendanceQuery, useMeQuery } from '@weekly/api';
-import { styled } from '@weekly/ui';
+import { Icon, styled } from '@weekly/ui';
 import { formatMonthDate, useMinimumWaiting } from '@weekly/utils';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
 import { Loader } from '~/components/Loader';
+import { PAGE_URLS } from '~/constants/urls';
 import { onInvalidTokenError } from '~/utils/error';
 
 import { AttendanceList } from './AttendanceList';
@@ -13,6 +15,7 @@ import { Empty } from './Empty';
 const FULL_SESSION_COUNT = 8 as const;
 
 function MyAttendancePage() {
+  const router = useRouter();
   const meAttendanceQueryResult = useMeAttendanceQuery({
     onError: onInvalidTokenError,
   });
@@ -26,6 +29,7 @@ function MyAttendancePage() {
   const isFull = attendances.length === FULL_SESSION_COUNT;
   const isEmpty = attendances.length === 0;
   const lastSessionDate = attendances[FULL_SESSION_COUNT - 1]?.sessionDate;
+  const onClickBackButton = () => router.push(PAGE_URLS.MAIN);
   return (
     <Container>
       {isLoading
@@ -33,6 +37,9 @@ function MyAttendancePage() {
         : (
           <Fragment>
             <HeaderContainer isFull={isFull}>
+              <BackButton onClick={onClickBackButton}>
+                <Icon name='chevronLeft' />
+              </BackButton>
               <Title>내 출석 정보</Title>
               {isFull && generation && lastSessionDate && (
                 <Description>
@@ -55,8 +62,19 @@ function MyAttendancePage() {
 const Container = Fragment;
 
 const HeaderContainer = styled.header<{ isFull: boolean }>`
+  position: relative;
+  width: 100%;
   text-align: center;
   margin-bottom: ${({ isFull, theme }) => theme.rem(isFull ? 24 : 64)};
+`;
+
+const BackButton = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(50%);
+  width: ${({ theme }) => theme.rem(24)};
+  height: ${({ theme }) => theme.rem(24)};
 `;
 
 const Title = styled.h3`

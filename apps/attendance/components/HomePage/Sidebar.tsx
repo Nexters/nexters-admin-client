@@ -11,7 +11,7 @@ const menuItems: ComponentProps<typeof MenuItem>[] = [
   {
     iconName: 'password',
     label: '비밀번호 재설정',
-    href: PAGE_URLS.PASSWORD,
+    href: PAGE_URLS.PASSWORD + '?entry=main',
   },
   { iconName: 'userLogout', label: '로그아웃', href: PAGE_URLS.LOGOUT },
 ];

@@ -7,11 +7,6 @@ import {
   validatePassword,
 } from '@weekly/utils';
 import { useRouter } from 'next/router';
-import type {
-  ChangeEvent,
-  KeyboardEventHandler,
-  MouseEventHandler,
-} from 'react';
 import { useRef } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -42,27 +37,27 @@ function LoginForm() {
       },
     );
   }, 1000);
-  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     emailState.onChange(value);
   };
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     passwordState.onChange(value);
   };
-  const onEnterEmailInput: KeyboardEventHandler<HTMLInputElement> = (event) => {
+  const onEnterEmailInput: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
       passwordInputRef.current?.focus();
     }
   };
-  const onEnterPasswordInput: KeyboardEventHandler<HTMLInputElement> = (
+  const onEnterPasswordInput: React.KeyboardEventHandler<HTMLInputElement> = (
     event,
   ) => {
     if (event.key === 'Enter') {
       submitLoginForm();
     }
   };
-  const onClickLoginButton: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const onClickLoginButton: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     submitLoginForm();
   };

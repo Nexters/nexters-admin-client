@@ -1,9 +1,7 @@
-import type { PropsWithChildren } from 'react';
-
 import { styled } from '../emotion';
 
 type ChipType = 'alert' | 'success' | 'info';
-interface ChipProps extends PropsWithChildren<unknown> {
+interface ChipProps extends React.PropsWithChildren<unknown> {
   type: ChipType;
 }
 
@@ -31,10 +29,9 @@ const Container = styled.div<ChipProps>`
   background-color: ${({ type, theme }) =>
     type === 'info'
       ? theme.palette.grayScale.g80
-      : `${
-        type === 'alert'
-          ? theme.palette.main.red100
-          : theme.palette.main.green50
+      : `${type === 'alert'
+        ? theme.palette.main.red100
+        : theme.palette.main.green50
       }1E`};
 `;
 

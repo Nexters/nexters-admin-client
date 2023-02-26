@@ -3,9 +3,10 @@ import { useAuthToken, useRedirectEffect } from '@weekly/utils';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import type { PropsWithChildren } from 'react';
 
-type LayoutProps = PropsWithChildren<unknown>;
+import { PAGE_URLS } from '~/constants/urls';
+
+type LayoutProps = React.PropsWithChildren<unknown>;
 
 type Props = Partial<LayoutProps>;
 

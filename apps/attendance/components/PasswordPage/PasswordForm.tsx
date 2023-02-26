@@ -7,9 +7,6 @@ import {
 } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import {
-  ChangeEvent,
-  KeyboardEventHandler,
-  MouseEventHandler,
   useEffect,
   useRef,
 } from 'react';
@@ -26,11 +23,11 @@ function PasswordForm() {
     validatePassword,
     validatePasswordCheck(passwordState.value),
   ]);
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     passwordState.onChange(value);
   };
-  const onChangePasswordCheck = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangePasswordCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     passwordCheckState.onChange(value);
   };
@@ -55,21 +52,21 @@ function PasswordForm() {
       },
     );
   }, 1000);
-  const onEnterPasswordInput: KeyboardEventHandler<HTMLInputElement> = (
+  const onEnterPasswordInput: React.KeyboardEventHandler<HTMLInputElement> = (
     event,
   ) => {
     if (event.key === 'Enter') {
       passwordCheckInputRef.current?.focus();
     }
   };
-  const onEnterPasswordCheckInput: KeyboardEventHandler<HTMLInputElement> = (
+  const onEnterPasswordCheckInput: React.KeyboardEventHandler<HTMLInputElement> = (
     event,
   ) => {
     if (event.key === 'Enter') {
       submitPasswordForm();
     }
   };
-  const onClickCompleteButton: MouseEventHandler<HTMLButtonElement> = (
+  const onClickCompleteButton: React.MouseEventHandler<HTMLButtonElement> = (
     event,
   ) => {
     event.preventDefault();

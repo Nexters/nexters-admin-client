@@ -3,7 +3,6 @@ import {
   QueryClientProvider as BaseQueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import type { PropsWithChildren } from 'react';
 
 import { AxiosProvider } from './AxiosProvider';
 
@@ -19,7 +18,7 @@ const queryClient = new QueryClient({
   },
 });
 
-function QueryClientProvider(props: PropsWithChildren<unknown>) {
+function QueryClientProvider(props: React.PropsWithChildren<unknown>) {
   const { children } = props;
   return (
     <AxiosProvider>

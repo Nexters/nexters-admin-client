@@ -1,4 +1,3 @@
-import type { SVGProps } from 'react';
 import { createElement } from 'react';
 
 import { Attendance } from './Attendance';
@@ -49,7 +48,7 @@ const icons = {
   edit: Edit,
 } as const;
 
-interface IconProps extends SVGProps<SVGSVGElement> {
+interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
   className?: string;
 }

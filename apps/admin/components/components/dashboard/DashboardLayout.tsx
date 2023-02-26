@@ -1,5 +1,4 @@
 import { styled } from '@weekly/ui';
-import type { PropsWithChildren } from 'react';
 import { Fragment } from 'react';
 
 import { DashboardNavbar } from './DashboardNavbar';
@@ -8,7 +7,7 @@ import { DashboardSidebar } from './DashboardSidebar';
 type DashboardLayoutProps = {};
 type Props = Partial<DashboardLayoutProps>;
 
-function DashboardLayout(props: PropsWithChildren<Props>) {
+function DashboardLayout(props: React.PropsWithChildren<Props>) {
   const { children } = props;
   return (
     <Fragment>

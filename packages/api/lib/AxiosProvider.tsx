@@ -1,13 +1,12 @@
 import { getAuthToken } from '@weekly/utils';
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
-import type { PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo } from 'react';
 import { CookiesProvider } from 'react-cookie';
 
 const AxiosContext = createContext<AxiosInstance | null>(null);
 
-function AxiosProvider(props: PropsWithChildren<unknown>) {
+function AxiosProvider(props: React.PropsWithChildren<unknown>) {
   const { children } = props;
   const api = useMemo(() => {
     const instance = axios.create({

@@ -42,7 +42,7 @@ function App(props: EnhancedAppProps) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   const [shouldRender, setShouldRender] = useState(
-    !process.env.NEXT_PUBLIC_API_MOCKING,
+    process.env.NEXT_PUBLIC_API_MOCKING !== 'enabled',
   );
   useEffect(() => {
     async function init() {

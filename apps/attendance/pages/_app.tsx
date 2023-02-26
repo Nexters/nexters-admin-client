@@ -35,7 +35,7 @@ const pretandard = localFont({
 function App(props: AppProps) {
   const { Component, pageProps } = props;
   const [shouldRender, setShouldRender] = useState(
-    !process.env.NEXT_PUBLIC_API_MOCKING,
+    process.env.NEXT_PUBLIC_API_MOCKING !== 'enabled',
   );
   useEffect(() => {
     async function init() {

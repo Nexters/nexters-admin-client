@@ -1,14 +1,13 @@
 import type {
   AxiosInstance,
   AxiosRequestConfig,
-  AxiosResponse,
   HeadersDefaults,
   Method,
   ResponseType,
 } from 'axios';
 import axios from 'axios';
 
-export type QueryParamsType = Record<string | number, any>;
+export type QueryParamsType = Record<string | number, unknown>;
 
 export interface FullRequestParams
   extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
@@ -101,8 +100,7 @@ export class HttpClient<SecureData = unknown> {
   protected createFormData(input: Record<string, unknown>): FormData {
     return Object.keys(input || {}).reduce((formData, key) => {
       const property = input[key];
-      const propertyContent: any[] =
-        property instanceof Array ? property : [property];
+      const propertyContent = property instanceof Array ? property : [property];
 
       for (const formItem of propertyContent) {
         const isFileType = formItem instanceof Blob || formItem instanceof File;
@@ -124,7 +122,7 @@ export class HttpClient<SecureData = unknown> {
     format,
     body,
     ...params
-  }: FullRequestParams): Promise<AxiosResponse<T>> => {
+  }: FullRequestParams): Promise<T> => {
     const secureParams =
       ((typeof secure === 'boolean' ? secure : this.secure) &&
         this.secureWorker &&
@@ -142,7 +140,7 @@ export class HttpClient<SecureData = unknown> {
       body = this.createFormData(body as Record<string, unknown>);
     }
 
-    return this.instance.request({
+    const response = await this.instance.request({
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
@@ -153,5 +151,7 @@ export class HttpClient<SecureData = unknown> {
       data: body,
       url: path,
     });
+
+    return response.data;
   };
 }

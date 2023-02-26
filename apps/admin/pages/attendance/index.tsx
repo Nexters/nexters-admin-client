@@ -1,7 +1,5 @@
-import { useRedirectEffect } from '@weekly/utils';
 
 function AttendanceHome() {
-  useRedirectEffect('/attendance/22');
-  return null;
+  return <>Attendance</>;
 }
 export default AttendanceHome;

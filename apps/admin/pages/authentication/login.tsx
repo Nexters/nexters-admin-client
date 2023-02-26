@@ -1,6 +1,6 @@
 import { styled } from '@weekly/ui';
 
-import { LoginPage } from '~/components/LoginPage';
+import { Login as LoginPage } from '~/components/authentication/Login';
 
 function Login() {
   return (

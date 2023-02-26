@@ -1,4 +1,6 @@
 import {
+  dehydrate,
+  Hydrate,
   QueryClient,
   QueryClientProvider as BaseQueryClientProvider,
 } from '@tanstack/react-query';
@@ -13,6 +15,7 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
+      staleTime: 15000,
     },
     mutations: { retry: false },
   },
@@ -32,4 +35,4 @@ function QueryClientProvider(props: React.PropsWithChildren<unknown>) {
   );
 }
 
-export { queryClient, QueryClientProvider };
+export { dehydrate, Hydrate, QueryClient, queryClient, QueryClientProvider };

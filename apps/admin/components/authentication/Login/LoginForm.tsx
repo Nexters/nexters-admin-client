@@ -1,4 +1,4 @@
-import { handleLoginError, useAdminLoginMutation } from '@weekly/api';
+import { handleLoginError, useAdminLogin } from '@weekly/api';
 import { Button, openErrorSnackBar, styled, TextField } from '@weekly/ui';
 import {
   useValidateState,
@@ -19,7 +19,7 @@ function LoginForm() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const usernameState = useValidateState<string>('', [validateUsername]);
   const passwordState = useValidateState<string>('', [validatePassword]);
-  const { mutate } = useAdminLoginMutation();
+  const { mutate } = useAdminLogin();
   const submitLoginForm = useDebouncedCallback(() => {
     mutate(
       {
@@ -30,10 +30,10 @@ function LoginForm() {
         onError(error) {
           openErrorSnackBar(handleLoginError(error));
         },
-        onSuccess(response) {
-          const { data } = response;
-          localStorage.setItem('@weekly/token', data);
-          router.push('/attendance');
+        onSuccess() {
+          const returnUrl =
+            (router.query.returnUrl as string | undefined) || '/attendance';
+          router.push(returnUrl).catch(console.error);
         },
       },
     );

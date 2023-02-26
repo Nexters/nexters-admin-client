@@ -6,7 +6,7 @@ import logo from '~/assets/images/logo.png';
 
 import { LoginForm } from './LoginForm';
 
-function LoginPage() {
+function Login() {
   return (
     <Container>
       <ImageContainer>
@@ -45,4 +45,4 @@ const Description = styled.h2`
   color: ${({ theme }) => theme.palette.grayScale.white};
 `;
 
-export { LoginPage };
+export { Login };

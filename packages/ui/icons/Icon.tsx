@@ -5,6 +5,7 @@ import { Camera } from './Camera';
 import { Certificate } from './Certificate';
 import { CheckCircle } from './CheckCircle';
 import { Chevron } from './Chevron';
+import { ChevronLeft } from './ChevronLeft';
 import { Close } from './Close';
 import { Edit } from './Edit';
 import { Error } from './Error';
@@ -46,6 +47,7 @@ const icons = {
   thumbsUp: ThumbsUp,
   checkCircle: CheckCircle,
   edit: Edit,
+  chevronLeft: ChevronLeft,
 } as const;
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

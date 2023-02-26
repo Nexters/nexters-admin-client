@@ -6,7 +6,7 @@ function Logout() {
   const { removeToken } = useAuthToken();
   useEffect(() => {
     removeToken();
-    queryClient.invalidateQueries();
+    queryClient.removeQueries();
   }, []);
   useRedirectEffect('/authentication/login');
   return null;

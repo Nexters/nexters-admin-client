@@ -3,6 +3,7 @@ import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 import type { PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo } from 'react';
+import { CookiesProvider } from 'react-cookie';
 
 const AxiosContext = createContext<AxiosInstance | null>(null);
 
@@ -16,7 +17,6 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
         accept: 'application/json,',
       },
     });
-
     instance.interceptors.request.use((config) => {
       const token = getAuthToken();
 
@@ -28,7 +28,11 @@ function AxiosProvider(props: PropsWithChildren<unknown>) {
     });
     return instance;
   }, []);
-  return <AxiosContext.Provider value={api}>{children}</AxiosContext.Provider>;
+  return (
+    <CookiesProvider>
+      <AxiosContext.Provider value={api}>{children}</AxiosContext.Provider>
+    </CookiesProvider>
+  );
 }
 
 function useAxios() {

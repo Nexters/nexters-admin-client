@@ -83,7 +83,7 @@ function DropdownOptions(props: DropdownOptionsProps) {
           size={size}
           onClick={() => {
             option.onClick();
-            onClickOption && onClickOption();
+            onClickOption?.();
           }}
         >
           {option.title}

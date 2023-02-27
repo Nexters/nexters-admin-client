@@ -1,15 +1,14 @@
 import { css } from '@emotion/react';
-import { ComponentProps, useRef, useState } from 'react';
+import { PropsWithChildren, useRef, useState } from 'react';
 
 import { styled } from '../emotion';
 
-interface DropdownProps extends ComponentProps<'div'> {
+interface DropdownProps extends React.ComponentProps<'div'> {
   size: DropdownSize;
   width: number;
   options: PopupOptions[];
   disabled: boolean;
   onClickOption: () => void;
-  renderElement: JSX.Element;
 }
 export type PopupOptions = { title: string; onClick: () => void };
 type DropdownSize = 'large' | 'small';
@@ -26,19 +25,18 @@ type DropdownOptionsProps = Pick<
  * @param width (size === 'small'일 때) 기본적으로 auto, width 지정하면 fix
  * @param value 외부 state
  * @param setValue 외부 setState
- * @param renderElement 팝업을 열 버튼
  */
-function Popup(props: Props) {
+function Popup(props: PropsWithChildren<Props>) {
   const {
     size = 'small',
     disabled = false,
     options = [],
     onClickOption,
     width = 90,
-    renderElement,
+    children,
   } = props;
   const ref = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
@@ -62,7 +60,7 @@ function Popup(props: Props) {
       onClick={onToggleDropdown}
       ref={ref}
     >
-      {renderElement}
+      <>{children}</>
       {isOpen && (
         <DropdownOptions
           size={size}
@@ -110,12 +108,10 @@ const DropdownOptionsContainer = styled.div<{
   ${({ theme, size }) =>
     size === 'large'
       ? css`
-          top: ${theme.rem(56)};
           border: 1px solid ${theme.palette.grayScale.g30};
           ${theme.typo.body1Medium}
         `
       : css`
-          top: ${theme.rem(38)};
           border: 1px solid ${theme.palette.grayScale.g50};
           ${theme.typo.body2Medium}
         `}
@@ -144,10 +140,12 @@ const DropdownTable = styled.div<{ size: DropdownSize }>`
   }
 
   &:first-of-type {
-    border-radius: ${({ theme }) => `${theme.rem(8)} ${theme.rem(8)} 0 0`};
+    border-top-left-radius: ${({ theme }) => theme.rem(8)};
+    border-top-right-radius: ${({ theme }) => theme.rem(8)};
   }
   &:last-of-type {
-    border-radius: ${({ theme }) => `0 0 ${theme.rem(8)} ${theme.rem(8)}`};
+    border-bottom-left-radius: ${({ theme }) => theme.rem(8)};
+    border-bottom-right-radius: ${({ theme }) => theme.rem(8)};
   }
 `;
 

@@ -48,12 +48,17 @@ function DashboardNavbar(props: DashboardNavbarProps) {
   const [selectedGeneration, setSelectedGeneration] = useState<number>(
     generatationsValue[0],
   );
-  console.log(splitedPathname[splitedPathname.length - 1]);
+
   useEffect(() => {
+    const attendancePageGuard =
+      matchedPath === 'attendance'
+        ? splitedPathname[splitedPathname.length - 1] === '[generation]'
+        : true;
+
     if (
       matchedPath &&
       navBarMap[matchedPath].selectGeneration &&
-      splitedPathname[splitedPathname.length - 1] === '[generation]'
+      attendancePageGuard
     ) {
       replace(`${navBarMap[matchedPath].route}/${selectedGeneration}`);
     }

@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { PAGE_URLS } from '~/constants/urls';
 
-import { AuthGuard } from '../AuthGuard';
 import { PasswordForm } from './PasswordForm';
 
 function PasswordPage() {
@@ -13,20 +12,18 @@ function PasswordPage() {
   const isFromMain = searchParams.get('entry') === 'main';
   const onClickBackButton = () => router.push(PAGE_URLS.MAIN);
   return (
-    <AuthGuard>
-      <Container>
-        {isFromMain && (
-          <BackButton onClick={onClickBackButton}>
-            <Icon name='chevronLeft' />
-          </BackButton>
-        )}
-        <Description>
-          {`비밀번호를
+    <Container>
+      {isFromMain && (
+        <BackButton onClick={onClickBackButton}>
+          <Icon name='chevronLeft' />
+        </BackButton>
+      )}
+      <Description>
+        {`비밀번호를
         다시 설정해 주세요!`}
-        </Description>
-        <PasswordForm />
-      </Container>
-    </AuthGuard>
+      </Description>
+      <PasswordForm />
+    </Container>
   );
 }
 

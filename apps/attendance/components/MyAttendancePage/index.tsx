@@ -8,7 +8,6 @@ import { Loader } from '~/components/Loader';
 import { PAGE_URLS } from '~/constants/urls';
 import { onInvalidTokenError } from '~/utils/error';
 
-import { AuthGuard } from '../AuthGuard';
 import { AttendanceList } from './AttendanceList';
 import { CompletableInfo } from './CompletableInfo';
 import { Empty } from './Empty';
@@ -34,33 +33,31 @@ function MyAttendancePage() {
   const onClickBackButton = () => router.push(PAGE_URLS.MAIN);
 
   return (
-    <AuthGuard>
-      <Container>
-        {isLoading
-          ? <Loader />
-          : (
-            <Fragment>
-              <HeaderContainer isFull={isFull}>
-                <BackButton onClick={onClickBackButton}>
-                  <Icon name='chevronLeft' />
-                </BackButton>
-                <Title>내 출석 정보</Title>
-                {isFull && generation && lastSessionDate && (
-                  <Description>
-                    {`${generation}기`} 내 출석 정보는 {formatMonthDate(lastSessionDate)}까지 확인 가능해요.
-                  </Description>
-                )}
-              </HeaderContainer>
-              {!isEmpty && (
-                <CompletableInfo score={score} isCompletable={isCompletable} />
+    <Container>
+      {isLoading
+        ? <Loader />
+        : (
+          <Fragment>
+            <HeaderContainer isFull={isFull}>
+              <BackButton onClick={onClickBackButton}>
+                <Icon name='chevronLeft' />
+              </BackButton>
+              <Title>내 출석 정보</Title>
+              {isFull && generation && lastSessionDate && (
+                <Description>
+                  {`${generation}기`} 내 출석 정보는 {formatMonthDate(lastSessionDate)}까지 확인 가능해요.
+                </Description>
               )}
-              <AttendanceContainer>
-                {isEmpty ? <Empty /> : <AttendanceList attendances={attendances} />}
-              </AttendanceContainer>
-            </Fragment>
-          )}
-      </Container>
-    </AuthGuard>
+            </HeaderContainer>
+            {!isEmpty && (
+              <CompletableInfo score={score} isCompletable={isCompletable} />
+            )}
+            <AttendanceContainer>
+              {isEmpty ? <Empty /> : <AttendanceList attendances={attendances} />}
+            </AttendanceContainer>
+          </Fragment>
+        )}
+    </Container>
   );
 }
 

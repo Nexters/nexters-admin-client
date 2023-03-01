@@ -7,7 +7,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { onInvalidTokenError } from '~/utils/error';
 import { getAttendanceStatusMessage, getSessionDescriptionMessage } from '~/utils/message';
 
-import { AuthGuard } from '../AuthGuard';
 import { Loader } from '../Loader';
 import { AttendanceCard } from './AttendanceCard';
 import { CameraButton } from './CameraButton';
@@ -51,53 +50,51 @@ function HomePage() {
   }, [pathname]);
 
   return (
-    <AuthGuard>
-      <Container>
-        <MenuButton
-          onClick={onClickMenuButton}
-          disabled={isLoading}
+    <Container>
+      <MenuButton
+        onClick={onClickMenuButton}
+        disabled={isLoading}
+      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          {isEmptySession
+            ? <EmptyCard />
+            : isAttendanceComplete
+              ? <AttendanceCard {...sessionQueryResult.data} />
+              : <SessionCard {...sessionQueryResult.data} />}
+          {isAttendanceComplete && attendanceMessage && attendanceTime
+            ? (
+              <AttendanceCompleteText>
+                <Icon name='checkCircle' />
+                {attendanceMessage}
+                <AttendanceTimeText>
+                  {formatHHMMSS(attendanceTime)}
+                </AttendanceTimeText>
+              </AttendanceCompleteText>
+            )
+            : (<Description>
+              {getSessionDescriptionMessage({
+                isEmptySession,
+                isTodaySession,
+                isSessionPending,
+                isDisplayCameraButton,
+              })}
+            </Description>
+            )}
+          {isEmptySession && <SocialLinks />}
+          {isDisplayCameraButton && <CameraButton />}
+        </Fragment>
+      )}
+      {meQueryResult.data && (
+        <Sidebar
+          open={sidebarOpen}
+          onClose={onCloseSidebar}
+          user={meQueryResult.data}
         />
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <Fragment>
-            {isEmptySession
-              ? <EmptyCard />
-              : isAttendanceComplete
-                ? <AttendanceCard {...sessionQueryResult.data} />
-                : <SessionCard {...sessionQueryResult.data} />}
-            {isAttendanceComplete && attendanceMessage && attendanceTime
-              ? (
-                <AttendanceCompleteText>
-                  <Icon name='checkCircle' />
-                  {attendanceMessage}
-                  <AttendanceTimeText>
-                    {formatHHMMSS(attendanceTime)}
-                  </AttendanceTimeText>
-                </AttendanceCompleteText>
-              )
-              : (<Description>
-                {getSessionDescriptionMessage({
-                  isEmptySession,
-                  isTodaySession,
-                  isSessionPending,
-                  isDisplayCameraButton,
-                })}
-              </Description>
-              )}
-            {isEmptySession && <SocialLinks />}
-            {isDisplayCameraButton && <CameraButton />}
-          </Fragment>
-        )}
-        {meQueryResult.data && (
-          <Sidebar
-            open={sidebarOpen}
-            onClose={onCloseSidebar}
-            user={meQueryResult.data}
-          />
-        )}
-      </Container>
-    </AuthGuard >
+      )}
+    </Container>
   );
 }
 

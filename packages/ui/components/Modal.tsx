@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { ReactNode, useState } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { styled } from '../emotion';
 
-export interface ModalProps extends React.ComponentProps<'div'> {
+export interface ModalProps
+  extends PropsWithChildren<React.ComponentProps<'div'>> {
   isOpen: boolean;
   onDismiss: () => void;
-  children: ReactNode;
 }
 type Props = Partial<ModalProps>;
 
@@ -17,19 +17,6 @@ function Modal({ isOpen = false, onDismiss, children, ...props }: Props) {
       <ModalBox {...props}>{children}</ModalBox>
     </Wrapper>
   );
-}
-function useModal() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
-  return { isOpen, openModal, closeModal };
 }
 
 const Wrapper = styled.div<{ isOpen: boolean }>`
@@ -86,4 +73,4 @@ const Overlay = styled.div`
   height: 100%;
 `;
 
-export { Modal, useModal };
+export { Modal };

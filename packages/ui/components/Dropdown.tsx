@@ -7,10 +7,11 @@ interface DropdownProps extends ComponentProps<'div'> {
   size: DropdownSize;
   placeholder: string;
   width: number;
-  options: string[];
+  options: string[] | number[];
   disabled: boolean;
   value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  setValue: Dispatch<SetStateAction<any>>;
+  postfix: string;
 }
 
 type DropdownSize = 'large' | 'small';
@@ -38,6 +39,7 @@ function Dropdown(props: Props) {
     value,
     setValue,
     width,
+    postfix,
   } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onToggleDropdown = () => {
@@ -51,7 +53,14 @@ function Dropdown(props: Props) {
       onClick={onToggleDropdown}
       width={width}
     >
-      {value ? <p>{value}</p> : <Placeholder>{placeholder}</Placeholder>}
+      {value ? (
+        <p>
+          {value}
+          {postfix}
+        </p>
+      ) : (
+        <Placeholder>{placeholder}</Placeholder>
+      )}
       <Icon name='chevron' className='chevron' />
       {isOpen && (
         <DropdownOptions size={size} options={options} setValue={setValue!} />

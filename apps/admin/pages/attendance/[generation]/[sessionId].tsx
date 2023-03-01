@@ -2,7 +2,7 @@ import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
 
 function AttendanceSession() {
-  return <div />;
+  return <div>asasdf</div>;
 }
 
 export default AttendanceSession;

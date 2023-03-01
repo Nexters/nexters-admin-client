@@ -90,6 +90,10 @@ export interface CreateAdministratorRequest {
   password: string;
 }
 
+export interface GenerationResponses {
+  data: GenerationResponse[];
+}
+
 export interface GenerationResponse {
   /** @format int64 */
   generation: number;

@@ -1,4 +1,12 @@
-import { dehydrate, QueryClient, useSessionByGeneration } from '@weekly/api';
+import {
+  dehydrate,
+  DehydratedState,
+  QueryClient,
+  queryClient,
+} from '@weekly/api';
+import {
+  FindSessionResponses,
+} from '@weekly/api/dto/admin';
 import { api } from '@weekly/api/lib/admin/api';
 import { sessionKeys } from '@weekly/api/lib/admin/queryKeyFactories/sessionKeys';
 import { styled } from '@weekly/ui';
@@ -11,15 +19,22 @@ import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 import SessionItem from '~/components//session/SessionItem';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
 
-function Attendance() {
-  const { data: sessions } = useSessionByGeneration({ generation: 22 });
+interface AttendanceProps {
+  dehydrateState: DehydratedState;
+  generation: string;
+}
+
+function Attendance(props: AttendanceProps) {
+  const sessions = queryClient.getQueryData<FindSessionResponses>(
+    sessionKeys.list({ generation: Number(props.generation) }),
+  );
 
   return (
     <Container>
       <Fragment>
         {sessions?.data.map(
           ({ id, title, description, generation, sessionDate, week }) => (
-            <Link key={id} href={''}>
+            <Link key={id} href={`${generation}/${id}`}>
               <SessionItem
                 title={title}
                 description={description}

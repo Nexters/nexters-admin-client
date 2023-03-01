@@ -4,9 +4,7 @@ import {
   QueryClient,
   queryClient,
 } from '@weekly/api';
-import {
-  FindSessionResponses,
-} from '@weekly/api/dto/admin';
+import { FindSessionResponses } from '@weekly/api/dto/admin';
 import { api } from '@weekly/api/lib/admin/api';
 import { sessionKeys } from '@weekly/api/lib/admin/queryKeyFactories/sessionKeys';
 import { styled } from '@weekly/ui';

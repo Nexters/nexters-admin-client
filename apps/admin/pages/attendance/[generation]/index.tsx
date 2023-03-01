@@ -1,6 +1,5 @@
 import {
   dehydrate,
-  DehydratedState,
   QueryClient,
   queryClient,
 } from '@weekly/api';
@@ -18,7 +17,6 @@ import SessionItem from '~/components//session/SessionItem';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
 
 interface AttendanceProps {
-  dehydrateState: DehydratedState;
   generation: string;
 }
 

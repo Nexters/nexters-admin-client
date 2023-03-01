@@ -39,10 +39,12 @@ function MyAttendancePage() {
         : (
           <Fragment>
             <HeaderContainer isFull={isFull}>
-              <BackButton onClick={onClickBackButton}>
-                <Icon name='chevronLeft' />
-              </BackButton>
-              <Title>내 출석 정보</Title>
+              <Title>
+                내 출석 정보
+                <BackButton onClick={onClickBackButton}>
+                  <Icon name='chevronLeft' />
+                </BackButton>
+              </Title>
               {isFull && generation && lastSessionDate && (
                 <Description>
                   {`${generation}기`} 내 출석 정보는 {formatMonthDate(lastSessionDate)}까지 확인 가능해요.
@@ -64,7 +66,6 @@ function MyAttendancePage() {
 const Container = Fragment;
 
 const HeaderContainer = styled.header<{ isFull: boolean }>`
-  position: relative;
   width: 100%;
   text-align: center;
   margin-bottom: ${({ isFull, theme }) => theme.rem(isFull ? 24 : 64)};
@@ -74,12 +75,13 @@ const BackButton = styled.button`
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translateY(50%);
+  transform: translateY(-50%);
   width: ${({ theme }) => theme.rem(24)};
   height: ${({ theme }) => theme.rem(24)};
 `;
 
 const Title = styled.h3`
+  position: relative;
   ${({ theme }) => theme.typo.h3Bold};
   color: ${({ theme }) => theme.palette.grayScale.white};
   margin-top: ${({ theme }) => theme.rem(36)};

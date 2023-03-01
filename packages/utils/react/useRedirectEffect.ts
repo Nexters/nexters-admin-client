@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 /**
  * next/router를 이용해 Redirect를 시키는 이펙트
@@ -10,7 +10,7 @@ import { useLayoutEffect } from 'react';
  */
 function useRedirectEffect(url: string, predicate?: () => boolean) {
   const router = useRouter();
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!predicate || predicate?.()) {
       router.replace(url);
     }

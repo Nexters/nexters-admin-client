@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next/types';
 
 export function removeCookie(name: string) {
-  document.cookie = `${name}=; Max-Age=0`;
+  document.cookie = `${name}=; path=/; Max-Age=0`;
 }
 
 export function setCookie(name: string, value: string) {

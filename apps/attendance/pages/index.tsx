@@ -1,7 +1,7 @@
 import { NextSeo } from 'next-seo';
 import { Fragment } from 'react';
 
-import { HomePage } from '~/components';
+import { AuthGuard, HomePage, Layout } from '~/components';
 
 function Home() {
   return (
@@ -11,5 +11,13 @@ function Home() {
     </Fragment>
   );
 }
+
+Home.getLayout = function getLayout(page: React.ReactElement) {
+  return (
+    <AuthGuard>
+      <Layout>{page}</Layout>
+    </AuthGuard>
+  );
+};
 
 export default Home;

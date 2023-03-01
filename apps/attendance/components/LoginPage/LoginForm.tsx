@@ -1,7 +1,6 @@
-import { handleLoginError, useLoginMuttion } from '@weekly/api';
+import { handleLoginError, useMemberLogin } from '@weekly/api';
 import { Button, openErrorSnackBar, styled, TextField } from '@weekly/ui';
 import {
-  useAuthToken,
   useValidateState,
   validateEmail,
   validatePassword,
@@ -17,8 +16,7 @@ function LoginForm() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const emailState = useValidateState<string>('', [validateEmail]);
   const passwordState = useValidateState<string>('', [validatePassword]);
-  const { setToken } = useAuthToken();
-  const { mutate } = useLoginMuttion();
+  const { mutate } = useMemberLogin();
   const submitLoginForm = useDebouncedCallback(() => {
     mutate(
       {
@@ -30,8 +28,7 @@ function LoginForm() {
           openErrorSnackBar(handleLoginError(error));
         },
         onSuccess(response) {
-          const { token, needPasswordReset } = response;
-          setToken(token);
+          const { needPasswordReset } = response;
           router.push(needPasswordReset ? PAGE_URLS.PASSWORD : PAGE_URLS.MAIN);
         },
       },

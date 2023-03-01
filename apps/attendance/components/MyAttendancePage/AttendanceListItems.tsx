@@ -1,3 +1,4 @@
+import { AttendanceResponse } from '@weekly/api/lib/types/attendance';
 import { Chip, Icon, styled } from '@weekly/ui';
 import {
   formatHHMMSS,
@@ -5,20 +6,7 @@ import {
   getAttendanceStatusLabel,
 } from '@weekly/utils';
 
-type Status =
-  | 'PENDING'
-  | 'ATTENDED'
-  | 'TARDY'
-  | 'UNAUTHORIZED_ABSENCE'
-  | 'AUTHORIZED_ABSENCE';
-type Props = {
-  title: string;
-  week: number;
-  penaltyScore: number;
-  sessionDate: string;
-  attendanceStatus: Status;
-  attendanceTime?: string;
-};
+type Props = AttendanceResponse;
 
 function AttendacneListItem(props: Props) {
   const { attendanceStatus, title, attendanceTime, sessionDate, penaltyScore } =
@@ -27,7 +15,7 @@ function AttendacneListItem(props: Props) {
     <Container>
       <SessionInfoContainer>
         <Title>{title}</Title>
-        <SessionDate>{formatYYMMDD(sessionDate)}</SessionDate>
+        {sessionDate && <SessionDate>{formatYYMMDD(sessionDate)}</SessionDate>}
       </SessionInfoContainer>
       <StatusContainer>
         <StatusDetail>

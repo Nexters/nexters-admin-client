@@ -1,3 +1,4 @@
+import { ContentType, HttpClient, RequestParams } from '../HttpClient';
 import {
   AdminLoginRequest,
   CreateAdministratorRequest,
@@ -10,9 +11,8 @@ import {
   UpdateMemberRequest,
   UpdateMemberStatusRequest,
   UpdateSessionRequest,
-} from '../../dto/admin';
-import { FindAllMembersResponse } from '../../dto/attendance';
-import { ContentType, HttpClient, RequestParams } from '../HttpClient';
+} from '../types/admin';
+import { FindAllMembersResponse } from '../types/attendance';
 
 /**
  * @title 넥스터즈 출석체크 백엔드 API

@@ -12,5 +12,5 @@ function fetcher({ queryKey: [{ filters }] }: QueryKey) {
 
 export default function useSessionByGeneration(param: Params) {
   const queryKey = sessionKeys.list(param);
-  return useQuery(queryKey, fetcher);
+  return useQuery({ queryFn: fetcher, queryKey });
 }

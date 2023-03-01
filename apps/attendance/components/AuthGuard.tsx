@@ -2,7 +2,7 @@ import { getCookie } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
-const LOGIN_PATH = '/authentication/login';
+import { PAGE_URLS } from '~/constants/urls';
 
 function AuthGuard(props: React.PropsWithChildren<unknown>) {
   const { children } = props;
@@ -18,7 +18,7 @@ function AuthGuard(props: React.PropsWithChildren<unknown>) {
     if (!accessToken) {
       router
         .push({
-          pathname: LOGIN_PATH,
+          pathname: PAGE_URLS.LOGIN,
           query: { returnUrl: router.asPath },
         })
         .catch(console.error);

@@ -1,11 +1,10 @@
 import { queryClient } from '@weekly/api';
-import { useAuthToken, useRedirectEffect } from '@weekly/utils';
+import { removeCookie, useRedirectEffect } from '@weekly/utils';
 import { useEffect } from 'react';
 
 function Logout() {
-  const { removeToken } = useAuthToken();
   useEffect(() => {
-    removeToken();
+    removeCookie('accessToken');
     queryClient.removeQueries();
   }, []);
   useRedirectEffect('/authentication/login');

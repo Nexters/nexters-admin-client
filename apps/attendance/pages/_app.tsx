@@ -1,8 +1,9 @@
 import localFont from '@next/font/local';
 import { QueryClientProvider } from '@weekly/api';
+import { initAuthorization } from '@weekly/api/lib/attendance/api';
 import { palette, Snackbar, ThemeProvider } from '@weekly/ui';
 import type { AppProps } from 'next/app';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Layout } from '~/components';
 
@@ -34,20 +35,13 @@ const pretandard = localFont({
 
 function App(props: AppProps) {
   const { Component, pageProps } = props;
-  const [shouldRender, setShouldRender] = useState(
-    process.env.NEXT_PUBLIC_API_MOCKING !== 'enabled',
-  );
+
   useEffect(() => {
-    async function init() {
-      const { initMocks } = await import('@weekly/api');
-      await initMocks();
+    if (typeof window !== 'undefined') {
+      initAuthorization();
     }
-    init();
-    setShouldRender(true);
   }, []);
-  if (!shouldRender) {
-    return null;
-  }
+
   return (
     <QueryClientProvider>
       <ThemeProvider>

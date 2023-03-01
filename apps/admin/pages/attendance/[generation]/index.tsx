@@ -7,7 +7,7 @@ import {
 import { FindSessionResponses } from '@weekly/api/dto/admin';
 import { api } from '@weekly/api/lib/admin/api';
 import { sessionKeys } from '@weekly/api/lib/admin/queryKeyFactories/sessionKeys';
-import { styled } from '@weekly/ui';
+import { Icon, styled } from '@weekly/ui';
 import { isString } from '@weekly/utils';
 import Link from 'next/link';
 import { GetServerSidePropsContext } from 'next/types';
@@ -43,6 +43,12 @@ function Attendance(props: AttendanceProps) {
             </Link>
           ),
         )}
+        {sessions?.data.length === 0 && (
+          <EmptySession>
+            <Icon name='box' />
+            <p>{'출석 관리에 필요한 정보가\n존재하지 않습니다.'}</p>
+          </EmptySession>
+        )}
       </Fragment>
     </Container>
   );
@@ -51,6 +57,20 @@ function Attendance(props: AttendanceProps) {
 const Container = styled.div`
   display: flex;
   gap: 24px;
+`;
+
+const EmptySession = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${({ theme }) => theme.palette.grayScale.g50};
+  margin: auto;
+  padding-top: 200px;
+  p {
+    margin-top: 14px;
+    white-space: pre-wrap;
+    text-align: center;
+  }
 `;
 
 export async function getServerSideProps({

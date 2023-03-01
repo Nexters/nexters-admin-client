@@ -2,7 +2,7 @@ import { useMemberMe, useSessionHome } from '@weekly/api';
 import { Icon, styled } from '@weekly/ui';
 import { formatHHMMSS, isToday, useMinimumWaiting } from '@weekly/utils';
 import { useRouter } from 'next/router';
-import { Fragment, useLayoutEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import { onInvalidTokenError } from '~/utils/error';
 import { getAttendanceStatusMessage, getSessionDescriptionMessage } from '~/utils/message';
@@ -44,7 +44,7 @@ function HomePage() {
   const onClickMenuButton = () => setSidebarOpen(true);
   const onCloseSidebar = () => setSidebarOpen(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (sidebarOpen) {
       onCloseSidebar();
     }

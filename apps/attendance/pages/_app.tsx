@@ -2,10 +2,9 @@ import localFont from '@next/font/local';
 import { QueryClientProvider } from '@weekly/api';
 import { initAuthorization } from '@weekly/api/lib/attendance/api';
 import { palette, Snackbar, ThemeProvider } from '@weekly/ui';
+import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
-
-import { Layout } from '~/components';
 
 const pretandard = localFont({
   src: [
@@ -33,8 +32,14 @@ const pretandard = localFont({
   variable: '--font-pretendard',
 });
 
-function App(props: AppProps) {
+type EnhancedAppProps = AppProps & {
+  Component: NextPage;
+  pageProps: Record<string, unknown>;
+};
+
+function App(props: EnhancedAppProps) {
   const { Component, pageProps } = props;
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -53,9 +58,7 @@ function App(props: AppProps) {
             }
           `}
         </style>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        {getLayout(<Component {...pageProps} />)}
         <Snackbar />
       </ThemeProvider>
     </QueryClientProvider>

@@ -1,4 +1,5 @@
-import { DashboardLayout } from '~/components/components/dashboard/DashboardLayout';
+import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
+import { AuthGuard } from '~/components/authentication/AuthGuard';
 
 function AttendanceSession() {
   return <div />;
@@ -7,5 +8,9 @@ function AttendanceSession() {
 export default AttendanceSession;
 
 AttendanceSession.getLayout = function getLayout(page: React.ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>;
+  return (
+    <AuthGuard>
+      <DashboardLayout>{page}</DashboardLayout>
+    </AuthGuard>
+  );
 };

@@ -1,27 +1,24 @@
-import { useAdminSessionQuery } from '@weekly/api';
-import { Button, styled } from '@weekly/ui';
-import { Fragment } from 'react';
+import { styled } from '@weekly/ui';
 
-import { DashboardLayout } from '~/components/components/dashboard/DashboardLayout';
-import SessionItem from '~/components/components/session/SessionItem';
+import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 
 function Session() {
-  const { data: sessions, isSuccess } = useAdminSessionQuery('22');
+  return null;
 
-  return (
-    <Container>
-      <Button size='small'>세션 추가</Button>
-      <SessionList>
-        {isSuccess && (
-          <Fragment>
-            {sessions.map((session) => (
-              <SessionItem session={session} />
-            ))}
-          </Fragment>
-        )}
-      </SessionList>
-    </Container>
-  );
+  // return (
+  //   <Container>
+  //     <Button size='small'>세션 추가</Button>
+  //     <SessionList>
+  //       {isSuccess && (
+  //         <Fragment>
+  //           {sessions.map((session) => (
+  //             <SessionItem session={session} />
+  //           ))}
+  //         </Fragment>
+  //       )}
+  //     </SessionList>
+  //   </Container>
+  // );
 }
 
 const Container = styled.div``;

@@ -15,6 +15,11 @@ function getDecimalDay(date: string) {
   return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
+function formatMonthDate(date: string, separator = '.') {
+  const dateObject = new Date(date);
+  return `${dateObject.getMonth() + 1}${separator} ${dateObject.getDate()}`;
+}
+
 function formatKoreanMonthDate(date: string) {
   const dateObject = new Date(date);
   return `${dateObject.getMonth() + 1}월 ${dateObject.getDate()}일`;
@@ -38,6 +43,7 @@ function formatHHMMSS(datetime: string) {
 export {
   formatHHMMSS,
   formatKoreanMonthDate,
+  formatMonthDate,
   formatYYMMDD,
   getDecimalDay,
   isAfter,

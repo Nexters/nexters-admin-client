@@ -20,7 +20,9 @@ function HomePage() {
   const { pathname } = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const wait = useMinimumWaiting();
-  const sessionQueryResult = useSessionQuery();
+  const sessionQueryResult = useSessionQuery({
+    onError: onInvalidTokenError,
+  });
   const meQueryResult = useMeQuery({
     onError: onInvalidTokenError,
   });

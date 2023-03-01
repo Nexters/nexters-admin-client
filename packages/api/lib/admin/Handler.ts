@@ -2,10 +2,14 @@ import {
   AdminLoginRequest,
   CreateAdministratorRequest,
   CreateMemberRequest,
+  CreateSessionRequest,
+  CreateSessionResponse,
+  FindSessionResponses,
   TokenResponse,
   UpdateMemberPositionRequest,
   UpdateMemberRequest,
   UpdateMemberStatusRequest,
+  UpdateSessionRequest,
 } from '../../dto/admin';
 import { FindAllMembersResponse } from '../../dto/attendance';
 import { ContentType, HttpClient, RequestParams } from '../HttpClient';
@@ -16,10 +20,8 @@ import { ContentType, HttpClient, RequestParams } from '../HttpClient';
  * @baseUrl http://www.chulchul.site
  */
 export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
-  api = {
+  admin = {
     /**
-     * No description
-     *
      * @tags Auth
      * @name LoginAdmin
      * @summary 관리자 로그인
@@ -189,6 +191,81 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
       this.request<void>({
         path: `/api/members/${id}/position`,
         method: 'PUT',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+    /**
+     * @tags Session
+     * @name UpdateSession
+     * @summary [관리자 페이지] 세션 수정
+     * @request PUT:/api/sessions/{id}
+     * @secure
+     */
+    updateSession: (
+      id: number,
+      data: UpdateSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<void>({
+        path: `/api/sessions/${id}`,
+        method: 'PUT',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * @tags Session
+     * @name DeleteSession
+     * @summary [관리자 페이지] 세션 삭제
+     * @request DELETE:/api/sessions/{id}
+     * @secure
+     */
+    deleteSession: (id: number, params: RequestParams = {}) =>
+      this.request<void>({
+        path: `/api/sessions/${id}`,
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Session
+     * @name FindSessionByGeneration
+     * @summary [관리자 페이지] 특정 기수의 세션 조회
+     * @request GET:/api/sessions
+     * @secure
+     */
+    findSessionByGeneration: (
+      query: {
+        /** @format int32 */
+        generation: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<FindSessionResponses>({
+        path: '/api/sessions',
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * @tags Session
+     * @name CreateSession
+     * @summary [관리자 페이지] 세션 생성
+     * @request POST:/api/sessions
+     * @secure
+     */
+    createSession: (data: CreateSessionRequest, params: RequestParams = {}) =>
+      this.request<CreateSessionResponse>({
+        path: '/api/sessions',
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,

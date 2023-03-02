@@ -1,6 +1,7 @@
 export * from './Button';
 export * from './Chip';
 export * from './Dropdown';
+export * from './Inputs';
 export * from './Modal';
 export * from './PopupSelect';
 export * from './Search';

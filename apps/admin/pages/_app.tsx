@@ -1,6 +1,7 @@
 import localFont from '@next/font/local';
 import { Hydrate, QueryClientProvider } from '@weekly/api';
 import { initAuthorization } from '@weekly/api/lib/admin/api';
+import { Snackbar } from '@weekly/ui';
 import { ThemeProvider } from '@weekly/ui/theme';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
@@ -59,6 +60,7 @@ function App(props: EnhancedAppProps) {
             `}
           </style>
           {getLayout(<Component {...pageProps} />)}
+          <Snackbar />
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>

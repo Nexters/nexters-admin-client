@@ -46,6 +46,8 @@ function Snackbar() {
 
 const Container = styled(ToastContainer)`
   .Toastify__toast-icon {
+    display: flex;
+    align-items: center;
     width: ${rem(24)};
     height: ${rem(24)};
     color: ${palette.grayScale.white};
@@ -57,4 +59,8 @@ function openErrorSnackBar(message: string) {
   return toast(message, { icon: <Icon name='error' /> });
 }
 
-export { openErrorSnackBar, Snackbar };
+function openConfirmSnackBar(message: string) {
+  return toast(message, { icon: <Icon name='checkCircle' /> });
+}
+
+export { openConfirmSnackBar, openErrorSnackBar, Snackbar };

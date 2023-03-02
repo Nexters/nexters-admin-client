@@ -1,12 +1,6 @@
 import { useSession } from '@weekly/api';
 import { FindSessionResponse } from '@weekly/api/lib/types/admin';
-import {
-  Button,
-  Icon,
-  Input,
-  openConfirmSnackBar,
-  styled,
-} from '@weekly/ui';
+import { Button, Icon, Input, openConfirmSnackBar, styled } from '@weekly/ui';
 import { useInputs, validateDate } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
@@ -59,6 +53,7 @@ function SessionModal({ session, closeModal }: Props) {
   const onSubmit = () => {
     session ? updateSessionMutate() : createSessionMutate();
     closeModal?.();
+    reset();
   };
 
   const onDelete = (week: number) => {

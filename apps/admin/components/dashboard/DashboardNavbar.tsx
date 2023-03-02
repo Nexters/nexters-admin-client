@@ -1,10 +1,11 @@
+import { GenerationResponses } from '@weekly/api/lib/types/admin';
 import { Dropdown, styled } from '@weekly/ui';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { MenuKey, menus } from '~/data';
 
-type DashboardNavbarProps = {};
+type DashboardNavbarProps = { generations: GenerationResponses };
 type Props = Partial<DashboardNavbarProps>;
 
 type AdminMenuItem = {
@@ -37,23 +38,31 @@ const navBarMap: AdminMenuMapType = {
   },
 };
 
-//TODO : api fetching
-const generation = ['22기', '21기'];
+function DashboardNavbar(props: DashboardNavbarProps) {
+  const { generations } = props;
+  const generatationsValue = generations.data.map((gen) => gen.generation);
 
-function DashboardNavbar(props: Props) {
-  const { pathname, replace, query } = useRouter();
+  const { pathname, replace } = useRouter();
   const matchedPath = menus.find((v) => pathname.includes(v));
-
-  const [gen, setGen] = useState<string>(generation[0]);
+  const splitedPathname = pathname.split('/');
+  const [selectedGeneration, setSelectedGeneration] = useState<number>(
+    generatationsValue[0],
+  );
 
   useEffect(() => {
-    if (matchedPath && navBarMap[matchedPath].selectGeneration) {
-      /* searchParams.set([{ key: 'generation', value: gen.split('기')[0] }], {
-        replace: true,
-      }); */
-      replace(`${navBarMap[matchedPath].route}/${gen.split('기')[0]}`);
+    const attendancePageGuard =
+      matchedPath === 'attendance'
+        ? splitedPathname[splitedPathname.length - 1] === '[generation]'
+        : true;
+
+    if (
+      matchedPath &&
+      navBarMap[matchedPath].selectGeneration &&
+      attendancePageGuard
+    ) {
+      replace(`${navBarMap[matchedPath].route}/${selectedGeneration}`);
     }
-  }, [gen, pathname]);
+  }, [selectedGeneration, pathname]);
 
   return (
     <Container>
@@ -64,9 +73,10 @@ function DashboardNavbar(props: Props) {
             <Dropdown
               size='small'
               width={96}
-              value={gen}
-              setValue={setGen}
-              options={generation}
+              value={`${selectedGeneration}`}
+              setValue={setSelectedGeneration}
+              options={generatationsValue.map((gen) => `${gen}`)}
+              postfix={'기'}
             />
           )}
         </NavBarContent>

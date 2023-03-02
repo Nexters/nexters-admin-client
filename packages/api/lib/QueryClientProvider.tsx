@@ -1,3 +1,4 @@
+import type { DehydratedState } from '@tanstack/react-query';
 import {
   dehydrate,
   Hydrate,
@@ -30,3 +31,4 @@ function QueryClientProvider(props: React.PropsWithChildren<unknown>) {
 }
 
 export { dehydrate, Hydrate, QueryClient, queryClient, QueryClientProvider };
+export type { DehydratedState };

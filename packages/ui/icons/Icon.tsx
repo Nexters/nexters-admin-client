@@ -1,6 +1,7 @@
 import { createElement } from 'react';
 
 import { Attendance } from './Attendance';
+import { Box } from './Box';
 import { Camera } from './Camera';
 import { Certificate } from './Certificate';
 import { CheckCircle } from './CheckCircle';
@@ -48,6 +49,7 @@ const icons = {
   checkCircle: CheckCircle,
   edit: Edit,
   chevronLeft: ChevronLeft,
+  box: Box,
 } as const;
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

@@ -275,7 +275,7 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
       }),
     /**
      * @tags Generation
-     * @name GetAllGeneratino
+     * @name GetAllGeneration
      * @summary [관리자 페이지] 전체 기수 조회
      * @request GET:/api/generation
      * @secure
@@ -284,6 +284,20 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
       this.request<GenerationResponses>({
         path: '/api/generation',
         method: 'get',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Generation
+     * @name DeleteGeneration
+     * @summary [관리자 페이지] 전체 기수 조회
+     * @request GET:/api/generation
+     * @secure
+     */
+    deleteGeneration: (generation: number, params: RequestParams = {}) =>
+      this.request<GenerationResponses>({
+        path: `/api/generation/${generation}`,
+        method: 'delete',
         secure: true,
         ...params,
       }),

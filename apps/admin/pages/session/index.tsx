@@ -1,7 +1,9 @@
 import { useGeneration } from '@weekly/api';
-import { styled } from '@weekly/ui';
+import { Button, styled } from '@weekly/ui';
 
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
+import { AuthGuard } from '~/components/authentication/AuthGuard';
+import GenerationStatus from '~/components/session/GenerationStatus';
 import { Column, Table } from '~/components/tables/Table';
 
 const COLUMNS: Column[] = [
@@ -17,12 +19,23 @@ function SessionHome() {
   const { data: generations } = useGeneration();
   return (
     <Container>
+      <CreateGenerationButton
+        size='small'
+        onClick={() => {
+          console.log('');
+        }}
+      >
+        기수 추가
+      </CreateGenerationButton>
       {generations && (
         <Table columns={COLUMNS}>
           {generations.data.map((generation) => (
-            <Table.Row>
+            <Table.Row key={generation.generation}>
               <Table.Cell item={generation.generation} />
-              <Table.Cell item={generation.status} align='right' />
+              <Table.Cell
+                item={<GenerationStatus generation={generation} />}
+                align='right'
+              />
             </Table.Row>
           ))}
         </Table>
@@ -32,9 +45,17 @@ function SessionHome() {
 }
 
 const Container = styled.div``;
+const CreateGenerationButton = styled(Button)`
+  display: block;
+  margin-left: auto;
+`;
 
 SessionHome.getLayout = function getLayout(page: React.ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>;
+  return (
+    <AuthGuard>
+      <DashboardLayout>{page}</DashboardLayout>
+    </AuthGuard>
+  );
 };
 
 export default SessionHome;

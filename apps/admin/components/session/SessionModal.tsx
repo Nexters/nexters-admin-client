@@ -1,6 +1,12 @@
 import { useSession } from '@weekly/api';
 import { FindSessionResponse } from '@weekly/api/lib/types/admin';
-import { Button, Icon, Input, styled } from '@weekly/ui';
+import {
+  Button,
+  Icon,
+  Input,
+  openConfirmSnackBar,
+  styled,
+} from '@weekly/ui';
 import { useInputs, validateDate } from '@weekly/utils';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
@@ -47,22 +53,29 @@ function SessionModal({ session, closeModal }: Props) {
     }
   }, [form]);
 
-  const { updateSessionMutate, createSessionMutate } = useSession(
-    form,
-    Number(generation),
-    session?.id,
-  );
+  const { updateSessionMutate, createSessionMutate, deleteSessionMutate } =
+    useSession(form, Number(generation), session?.id);
 
   const onSubmit = () => {
     session ? updateSessionMutate() : createSessionMutate();
     closeModal?.();
   };
 
+  const onDelete = (week: number) => {
+    deleteSessionMutate();
+    closeModal?.();
+    openConfirmSnackBar(`${week}주차 세션이 삭제되었습니다.`);
+  };
+
   return (
     <Fragment>
       <ModalTitle>
         <h4>{session ? '세션 수정' : '세션 추가'}</h4>
-        {session && <Icon name='trash' />}
+        {session && (
+          <button onClick={() => onDelete(session.week)}>
+            <Icon name='trash' />
+          </button>
+        )}
       </ModalTitle>
       <InputField>
         <p>날짜</p>
@@ -119,6 +132,9 @@ const ModalTitle = styled.div`
   padding: ${({ theme }) => `${theme.rem(16)} ${theme.rem(4)}`};
   svg {
     color: ${({ theme }) => theme.palette.grayScale.g50};
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 

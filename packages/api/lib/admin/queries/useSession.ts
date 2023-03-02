@@ -40,5 +40,16 @@ export default function useSession(
     },
   );
 
-  return { updateSessionMutate, createSessionMutate };
+  const { mutate: deleteSessionMutate } = useMutation(
+    () => api.admin.deleteSession(id!),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(
+          sessionKeys.list({ generation: Number(generation) }),
+        );
+      },
+    },
+  );
+
+  return { updateSessionMutate, createSessionMutate, deleteSessionMutate };
 }

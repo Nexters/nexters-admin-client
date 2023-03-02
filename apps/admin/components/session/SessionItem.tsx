@@ -59,7 +59,7 @@ const Container = styled.button`
   position: relative;
 `;
 
-const Edit = styled.button`
+const Edit = styled.div`
   position: absolute;
   display: flex;
   right: 16px;

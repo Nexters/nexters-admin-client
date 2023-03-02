@@ -84,8 +84,10 @@ function Table({
           >
             <TableHead>
               <TableRow>
-                {columns.map(({ label, align }) => (
-                  <TableCell align={align}>{label}</TableCell>
+                {columns.map(({ label, align }, index) => (
+                  <TableCell align={align} key={`${label}${index}`}>
+                    {label}
+                  </TableCell>
                 ))}
               </TableRow>
             </TableHead>
@@ -126,15 +128,18 @@ Table.Row = ({
 Table.Cell = ({
   item,
   align = 'left',
+  width,
 }: {
   item: React.ReactNode;
   align?: Align;
+  width?: number;
 }) => {
   return (
     <TableCell
       align={align}
       sx={{
         maxWidth: 150,
+        width: width,
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
         overflow: 'hidden',

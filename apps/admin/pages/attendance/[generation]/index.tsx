@@ -2,7 +2,7 @@ import { dehydrate, QueryClient, queryClient } from '@weekly/api';
 import { api } from '@weekly/api/lib/admin/api';
 import { sessionKeys } from '@weekly/api/lib/admin/queryKeyFactories/sessionKeys';
 import { FindSessionResponses } from '@weekly/api/lib/types/admin';
-import { Icon, styled } from '@weekly/ui';
+import { styled } from '@weekly/ui';
 import { isString } from '@weekly/utils';
 import Link from 'next/link';
 import { GetServerSidePropsContext } from 'next/types';
@@ -11,6 +11,7 @@ import { Fragment } from 'react';
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 import SessionItem from '~/components//session/SessionItem';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
+import Empty from '~/components/dashboard/\bEmpty';
 
 interface AttendanceProps {
   generation: string;
@@ -38,10 +39,7 @@ function Attendance(props: AttendanceProps) {
           ),
         )}
         {sessions?.data.length === 0 && (
-          <EmptySession>
-            <Icon name='box' />
-            <p>{'출석 관리에 필요한 정보가\n존재하지 않습니다.'}</p>
-          </EmptySession>
+          <Empty message={'출석 관리에 필요한 정보가\n존재하지 않습니다.'} />
         )}
       </Fragment>
     </Container>

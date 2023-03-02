@@ -10,6 +10,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 import SessionItem from '~/components//session/SessionItem';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
+import Empty from '~/components/dashboard/\bEmpty';
 import SessionModal from '~/components/session/SessionModal';
 
 interface SessionProps {
@@ -39,7 +40,7 @@ function Session({ generation }: SessionProps) {
       <CreateSessionButton size='small' onClick={() => setModalOpen(true)}>
         세션 추가
       </CreateSessionButton>
-      {sessions ? (
+      {sessions?.data.length ? (
         <SessionContainer>
           <Fragment>
             {sessions.data.map((session) => (
@@ -63,7 +64,7 @@ function Session({ generation }: SessionProps) {
           </Modal>
         </SessionContainer>
       ) : (
-        <></>
+        <Empty message={'아직 세션이 없어요.\n세션을 추가해주세요.'} />
       )}
     </Fragment>
   );

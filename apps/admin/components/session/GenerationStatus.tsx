@@ -29,6 +29,8 @@ function GenerationStatus({ generation }: { generation: GenerationResponse }) {
 }
 const Delete = styled.div`
   color: #424957;
+  width: 20px;
+  margin-left: auto;
 `;
 const During = styled.div`
   ${({ theme }) => theme.typo.body2Regular}

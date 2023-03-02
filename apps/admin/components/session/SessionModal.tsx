@@ -1,5 +1,5 @@
 import { useSession } from '@weekly/api';
-import { FindSessionResponse } from '@weekly/api/dto/admin';
+import { FindSessionResponse } from '@weekly/api/lib/types/admin';
 import { Button, Icon, Input, styled } from '@weekly/ui';
 import { useInputs, validateDate } from '@weekly/utils';
 import { useRouter } from 'next/router';

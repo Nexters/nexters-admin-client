@@ -1,4 +1,4 @@
-import { useMeAttendanceQuery, useMeQuery } from '@weekly/api';
+import { useAttendanceMe, useMemberMe } from '@weekly/api';
 import { Icon, styled } from '@weekly/ui';
 import { formatMonthDate, useMinimumWaiting } from '@weekly/utils';
 import { useRouter } from 'next/router';
@@ -16,20 +16,22 @@ const FULL_SESSION_COUNT = 8 as const;
 
 function MyAttendancePage() {
   const router = useRouter();
-  const meAttendanceQueryResult = useMeAttendanceQuery({
+  const meAttendanceQueryResult = useAttendanceMe({
     onError: onInvalidTokenError,
   });
-  const meQueryResult = useMeQuery({ onError: onInvalidTokenError });
+  const meQueryResult = useMemberMe({ onError: onInvalidTokenError });
   const wait = useMinimumWaiting();
-  const generation = meQueryResult.data?.generation;
+
+  const { isCompletable = true, score = 0, attendances = [] } = meAttendanceQueryResult.data ?? {};
+  const { generation } = meQueryResult.data ?? {};
+  const lastSessionDate = attendances[FULL_SESSION_COUNT - 1]?.sessionDate;
+
   const isLoading = meAttendanceQueryResult.isLoading || meQueryResult.isLoading || wait;
-  const isCompletable = meAttendanceQueryResult.data?.attendanceData.isCompletable ?? true;
-  const score = meAttendanceQueryResult.data?.attendanceData.score ?? 0;
-  const attendances = meAttendanceQueryResult.data?.attendanceData.attendances ?? [];
   const isFull = attendances.length === FULL_SESSION_COUNT;
   const isEmpty = attendances.length === 0;
-  const lastSessionDate = attendances[FULL_SESSION_COUNT - 1]?.sessionDate;
+
   const onClickBackButton = () => router.push(PAGE_URLS.MAIN);
+
   return (
     <Container>
       {isLoading
@@ -37,10 +39,12 @@ function MyAttendancePage() {
         : (
           <Fragment>
             <HeaderContainer isFull={isFull}>
-              <BackButton onClick={onClickBackButton}>
-                <Icon name='chevronLeft' />
-              </BackButton>
-              <Title>내 출석 정보</Title>
+              <Title>
+                내 출석 정보
+                <BackButton onClick={onClickBackButton}>
+                  <Icon name='chevronLeft' />
+                </BackButton>
+              </Title>
               {isFull && generation && lastSessionDate && (
                 <Description>
                   {`${generation}기`} 내 출석 정보는 {formatMonthDate(lastSessionDate)}까지 확인 가능해요.
@@ -62,7 +66,6 @@ function MyAttendancePage() {
 const Container = Fragment;
 
 const HeaderContainer = styled.header<{ isFull: boolean }>`
-  position: relative;
   width: 100%;
   text-align: center;
   margin-bottom: ${({ isFull, theme }) => theme.rem(isFull ? 24 : 64)};
@@ -72,12 +75,13 @@ const BackButton = styled.button`
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translateY(50%);
+  transform: translateY(-50%);
   width: ${({ theme }) => theme.rem(24)};
   height: ${({ theme }) => theme.rem(24)};
 `;
 
 const Title = styled.h3`
+  position: relative;
   ${({ theme }) => theme.typo.h3Bold};
   color: ${({ theme }) => theme.palette.grayScale.white};
   margin-top: ${({ theme }) => theme.rem(36)};

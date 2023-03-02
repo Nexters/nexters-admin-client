@@ -1,7 +1,7 @@
 import { NextSeo } from 'next-seo';
 import { Fragment } from 'react';
 
-import { LoginPage } from '~/components';
+import { Layout, LoginPage } from '~/components';
 
 function Login() {
   return (
@@ -11,5 +11,11 @@ function Login() {
     </Fragment>
   );
 }
+
+Login.getLayout = function getLayout(page: React.ReactElement) {
+  return (
+    <Layout>{page}</Layout>
+  );
+};
 
 export default Login;

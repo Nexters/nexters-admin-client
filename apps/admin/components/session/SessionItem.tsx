@@ -8,6 +8,8 @@ interface SessionItemProps extends ComponentProps<'button'> {
   generation: number;
   sessionDate: string;
   week: number;
+  isEdit: boolean;
+  onClickEdit?: () => void;
 }
 
 type Props = PartialPick<
@@ -15,16 +17,27 @@ type Props = PartialPick<
   'title' | 'generation' | 'sessionDate' | 'week'
 >;
 
+/**
+ *
+ * @param isEdit 세션관리에서 isEdit : true
+ * @param onClickEdit 세션관리에서 사용
+ */
 function SessionItem({
   title,
   description = '',
   sessionDate,
   week,
   onClick,
+  isEdit = false,
+  onClickEdit,
 }: Props) {
   return (
     <Container type='button' onClick={onClick}>
-      <Icon name='edit' />
+      {isEdit && (
+        <Edit onClick={onClickEdit}>
+          <Icon name='edit' />
+        </Edit>
+      )}
       <Date>{formatKoreanMonthDate(sessionDate!)}</Date>
       <Week>{week}주차 세션</Week>
       <Title>{title}</Title>
@@ -41,14 +54,21 @@ const Container = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: ${({ theme }) => theme.rem(20)};
+  padding: ${({ theme }) => theme.rem(16)};
   gap: ${({ theme }) => theme.rem(10)};
+  position: relative;
+`;
+
+const Edit = styled.button`
+  position: absolute;
+  display: flex;
+  right: 16px;
 `;
 
 const Date = styled.div`
   ${({ theme }) => theme.typo.body1Medium}
   color: ${({ theme }) => theme.palette.grayScale.g95};
-  margin-top: ${({ theme }) => theme.rem(24)};
+  margin-top: ${({ theme }) => theme.rem(28)};
 `;
 const Week = styled.div`
   ${({ theme }) => theme.typo.h2Bold}

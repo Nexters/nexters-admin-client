@@ -1,15 +1,15 @@
 import { getCookie } from '@weekly/utils';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 const LOGIN_PATH = '/authentication/login';
 
 function AuthGuard(props: React.PropsWithChildren<unknown>) {
   const { children } = props;
   const router = useRouter();
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const accessToken = getCookie('accessToken');
     if (!router.isReady) {
       return;
@@ -31,7 +31,7 @@ function AuthGuard(props: React.PropsWithChildren<unknown>) {
     return null;
   }
 
-  return <>{children}</>;
+  return <Fragment>{children}</Fragment>;
 }
 
 export { AuthGuard };

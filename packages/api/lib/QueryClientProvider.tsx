@@ -1,3 +1,4 @@
+import type { DehydratedState } from '@tanstack/react-query';
 import {
   dehydrate,
   Hydrate,
@@ -5,8 +6,6 @@ import {
   QueryClientProvider as BaseQueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
-import { AxiosProvider } from './AxiosProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,15 +23,12 @@ const queryClient = new QueryClient({
 function QueryClientProvider(props: React.PropsWithChildren<unknown>) {
   const { children } = props;
   return (
-    <AxiosProvider>
-      <BaseQueryClientProvider client={queryClient}>
-        {children}
-        {process.env.NODE_ENV !== 'production' && (
-          <ReactQueryDevtools initialIsOpen={false} />
-        )}
-      </BaseQueryClientProvider>
-    </AxiosProvider>
+    <BaseQueryClientProvider client={queryClient}>
+      {children}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </BaseQueryClientProvider>
   );
 }
 
 export { dehydrate, Hydrate, QueryClient, queryClient, QueryClientProvider };
+export type { DehydratedState };

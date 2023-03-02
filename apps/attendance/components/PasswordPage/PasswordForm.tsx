@@ -1,4 +1,4 @@
-import { handleCommonError, useUpdatePasswordMutation } from '@weekly/api';
+import { handleCommonError, useUpdatePassword } from '@weekly/api';
 import { Button, openErrorSnackBar, styled, TextField } from '@weekly/ui';
 import {
   useValidateState,
@@ -17,7 +17,7 @@ import { PAGE_URLS } from '~/constants/urls';
 function PasswordForm() {
   const router = useRouter();
   const passwordCheckInputRef = useRef<HTMLInputElement>(null);
-  const { mutate } = useUpdatePasswordMutation();
+  const { mutate } = useUpdatePassword();
   const passwordState = useValidateState<string>('', [validatePassword]);
   const passwordCheckState = useValidateState<string>('', [
     validatePassword,

@@ -1,3 +1,4 @@
+import { useGeneration } from '@weekly/api';
 import { styled } from '@weekly/ui';
 import { Fragment } from 'react';
 
@@ -9,13 +10,18 @@ type Props = Partial<DashboardLayoutProps>;
 
 function DashboardLayout(props: React.PropsWithChildren<Props>) {
   const { children } = props;
+  const { data: generations, isSuccess } = useGeneration();
   return (
     <Fragment>
-      <DashboardRoot>
-        <Main>{children}</Main>
-      </DashboardRoot>
-      <DashboardNavbar />
-      <DashboardSidebar />
+      {isSuccess && (
+        <Fragment>
+          <DashboardRoot>
+            <Main>{children}</Main>
+          </DashboardRoot>
+          <DashboardNavbar generations={generations} />
+          <DashboardSidebar />
+        </Fragment>
+      )}
     </Fragment>
   );
 }

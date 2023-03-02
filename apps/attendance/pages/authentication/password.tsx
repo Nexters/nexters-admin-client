@@ -1,7 +1,7 @@
 import { NextSeo } from 'next-seo';
 import { Fragment } from 'react';
 
-import { PasswordPage } from '~/components';
+import { AuthGuard, Layout, PasswordPage } from '~/components';
 
 function Password() {
   return (
@@ -11,5 +11,13 @@ function Password() {
     </Fragment>
   );
 }
+
+Password.getLayout = function getLayout(page: React.ReactElement) {
+  return (
+    <AuthGuard>
+      <Layout>{page}</Layout>
+    </AuthGuard>
+  );
+};
 
 export default Password;

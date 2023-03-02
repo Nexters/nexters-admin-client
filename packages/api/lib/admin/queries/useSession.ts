@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { formatYYMMDD } from '@weekly/utils';
 
-import { CreateSessionRequest, UpdateSessionRequest } from '../../../dto/admin';
 import { queryClient } from '../../QueryClientProvider';
+import { CreateSessionRequest, UpdateSessionRequest } from '../../types/admin';
 import { api } from '../api';
 import { sessionKeys } from '../queryKeyFactories/sessionKeys';
 

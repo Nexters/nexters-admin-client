@@ -1,4 +1,3 @@
-export * from './useAuthToken';
 export * from './useEventListener';
 export * from './useInputs';
 export * from './useIsomorphicLayoutEffect';

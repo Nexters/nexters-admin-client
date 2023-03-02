@@ -1,3 +1,4 @@
+import { ContentType, HttpClient, RequestParams } from '../HttpClient';
 import {
   AdminLoginRequest,
   CreateAdministratorRequest,
@@ -5,14 +6,14 @@ import {
   CreateSessionRequest,
   CreateSessionResponse,
   FindSessionResponses,
+  GenerationResponses,
   TokenResponse,
   UpdateMemberPositionRequest,
   UpdateMemberRequest,
   UpdateMemberStatusRequest,
   UpdateSessionRequest,
-} from '../../dto/admin';
-import { FindAllMembersResponse } from '../../dto/attendance';
-import { ContentType, HttpClient, RequestParams } from '../HttpClient';
+} from '../types/admin';
+import { FindAllMembersResponse } from '../types/attendance';
 
 /**
  * @title 넥스터즈 출석체크 백엔드 API
@@ -270,6 +271,20 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
         secure: true,
         type: ContentType.Json,
         format: 'json',
+        ...params,
+      }),
+    /**
+     * @tags Generation
+     * @name GetAllGeneratino
+     * @summary [관리자 페이지] 전체 기수 조회
+     * @request GET:/api/generation
+     * @secure
+     */
+    getAllGeneration: (params: RequestParams = {}) =>
+      this.request<GenerationResponses>({
+        path: '/api/generation',
+        method: 'get',
+        secure: true,
         ...params,
       }),
   };

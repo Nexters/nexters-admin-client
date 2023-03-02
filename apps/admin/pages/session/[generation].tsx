@@ -1,7 +1,7 @@
 import { dehydrate, QueryClient, useSessionByGeneration } from '@weekly/api';
-import { FindSessionResponse } from '@weekly/api/dto/admin';
 import { api } from '@weekly/api/lib/admin/api';
 import { sessionKeys } from '@weekly/api/lib/admin/queryKeyFactories/sessionKeys';
+import { FindSessionResponse } from '@weekly/api/lib/types/admin';
 import { Button, Modal, styled } from '@weekly/ui';
 import { isString } from '@weekly/utils';
 import { GetServerSidePropsContext } from 'next/types';

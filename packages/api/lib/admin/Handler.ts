@@ -2,6 +2,7 @@ import { ContentType, HttpClient, RequestParams } from '../HttpClient';
 import {
   AdminLoginRequest,
   CreateAdministratorRequest,
+  CreateGenerationRequest,
   CreateMemberRequest,
   CreateSessionRequest,
   CreateSessionResponse,
@@ -290,14 +291,32 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
     /**
      * @tags Generation
      * @name DeleteGeneration
-     * @summary [관리자 페이지] 전체 기수 조회
-     * @request GET:/api/generation
+     * @summary [관리자 페이지] 기수 삭제
+     * @request GET:/api/generation/{generation}
      * @secure
      */
     deleteGeneration: (generation: number, params: RequestParams = {}) =>
       this.request<GenerationResponses>({
         path: `/api/generation/${generation}`,
         method: 'delete',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Generation
+     * @name CreateGeneration
+     * @summary [관리자 페이지] 기수 삭제
+     * @request GET:/api/generation/{generation}
+     * @secure
+     */
+    createGeneration: (
+      data: CreateGenerationRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<GenerationResponses>({
+        path: '/api/generation/',
+        body: data,
+        method: 'post',
         secure: true,
         ...params,
       }),

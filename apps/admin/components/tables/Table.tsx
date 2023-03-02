@@ -13,14 +13,15 @@ import {
 
 import { Scrollbar } from './Scrollbar';
 
+type Align = 'center' | 'left' | 'right' | 'inherit' | 'justify';
 export interface Column {
   label: string;
-  align?: 'center' | 'left' | 'right' | 'inherit' | 'justify';
+  align?: Align;
 }
 
 interface Props {
   columns: Column[];
-  pagination: {
+  pagination?: {
     page: number;
     rowsPerPage: number;
     count: number;
@@ -69,12 +70,18 @@ function Table({
     <Box
       sx={{
         minHeight: '100%',
-        p: 3,
+        //p: 3,
       }}
     >
-      <Card>
+      <Card sx={{ boxShadow: 'none' }}>
         <Scrollbar>
-          <MuiTable sx={{ minWidth: 1150 }}>
+          <MuiTable
+            sx={
+              {
+                /* minWidth: 1150 */
+              }
+            }
+          >
             <TableHead>
               <TableRow>
                 {columns.map(({ label, align }) => (
@@ -85,20 +92,22 @@ function Table({
             <Body>{children}</Body>
           </MuiTable>
         </Scrollbar>
-        <TablePagination
-          component='div'
-          labelRowsPerPage='페이지 당 행 개수:'
-          count={pagination.count}
-          onPageChange={() => {
-            console.log('onPageChange');
-          }}
-          onRowsPerPageChange={() => {
-            console.log('onRowsPerPageChange');
-          }}
-          page={pagination.page}
-          rowsPerPage={pagination.rowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
-        />
+        {pagination && (
+          <TablePagination
+            component='div'
+            labelRowsPerPage='페이지 당 행 개수:'
+            count={pagination.count}
+            onPageChange={() => {
+              console.log('onPageChange');
+            }}
+            onRowsPerPageChange={() => {
+              console.log('onRowsPerPageChange');
+            }}
+            page={pagination.page}
+            rowsPerPage={pagination.rowsPerPage}
+            rowsPerPageOptions={[5, 10, 25]}
+          />
+        )}
       </Card>
     </Box>
   );
@@ -114,10 +123,16 @@ Table.Row = ({
   return <TableRow onClick={onClick}>{children}</TableRow>;
 };
 
-Table.Cell = ({ item }: { item: React.ReactNode }) => {
+Table.Cell = ({
+  item,
+  align = 'left',
+}: {
+  item: React.ReactNode;
+  align?: Align;
+}) => {
   return (
     <TableCell
-      align='center'
+      align={align}
       sx={{
         maxWidth: 150,
         whiteSpace: 'nowrap',

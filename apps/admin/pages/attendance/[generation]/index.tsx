@@ -1,11 +1,7 @@
-import {
-  dehydrate,
-  QueryClient,
-  queryClient,
-} from '@weekly/api';
-import { FindSessionResponses } from '@weekly/api/dto/admin';
+import { dehydrate, QueryClient, queryClient } from '@weekly/api';
 import { api } from '@weekly/api/lib/admin/api';
 import { sessionKeys } from '@weekly/api/lib/admin/queryKeyFactories/sessionKeys';
+import { FindSessionResponses } from '@weekly/api/lib/types/admin';
 import { Icon, styled } from '@weekly/ui';
 import { isString } from '@weekly/utils';
 import Link from 'next/link';

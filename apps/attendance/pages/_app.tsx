@@ -1,10 +1,10 @@
 import localFont from '@next/font/local';
 import { QueryClientProvider } from '@weekly/api';
+import { initAuthorization } from '@weekly/api/lib/attendance/api';
 import { palette, Snackbar, ThemeProvider } from '@weekly/ui';
+import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { useEffect, useState } from 'react';
-
-import { Layout } from '~/components';
+import { useEffect } from 'react';
 
 const pretandard = localFont({
   src: [
@@ -32,22 +32,21 @@ const pretandard = localFont({
   variable: '--font-pretendard',
 });
 
-function App(props: AppProps) {
+type EnhancedAppProps = AppProps & {
+  Component: NextPage;
+  pageProps: Record<string, unknown>;
+};
+
+function App(props: EnhancedAppProps) {
   const { Component, pageProps } = props;
-  const [shouldRender, setShouldRender] = useState(
-    process.env.NEXT_PUBLIC_API_MOCKING !== 'enabled',
-  );
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   useEffect(() => {
-    async function init() {
-      const { initMocks } = await import('@weekly/api');
-      await initMocks();
+    if (typeof window !== 'undefined') {
+      initAuthorization();
     }
-    init();
-    setShouldRender(true);
   }, []);
-  if (!shouldRender) {
-    return null;
-  }
+
   return (
     <QueryClientProvider>
       <ThemeProvider>
@@ -59,9 +58,7 @@ function App(props: AppProps) {
             }
           `}
         </style>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        {getLayout(<Component {...pageProps} />)}
         <Snackbar />
       </ThemeProvider>
     </QueryClientProvider>

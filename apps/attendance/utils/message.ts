@@ -1,4 +1,4 @@
-import { SessionHomeResponse } from '@weekly/api/dto/attendance';
+import { SessionHomeResponse } from '@weekly/api/lib/types/attendance';
 
 function getSessionDescriptionMessage({
   isEmptySession,

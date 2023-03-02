@@ -5,7 +5,7 @@ import { api, initAuthorization } from '../api';
 
 export default function useAdminLogin() {
   const { mutate } = useMutation({
-    mutationFn: api.admin.loginAdmin,
+    mutationFn: api.attendance.memberLogin,
     onSuccess({ token }) {
       setCookie('accessToken', token);
       initAuthorization();

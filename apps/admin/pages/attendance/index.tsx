@@ -1,5 +1,5 @@
 import { queryClient } from '@weekly/api';
-import { GenerationResponses } from '@weekly/api/dto/admin';
+import { GenerationResponses } from '@weekly/api/lib/types/admin';
 import { useRedirectEffect } from '@weekly/utils';
 
 import { AuthGuard } from '~/components/authentication/AuthGuard';

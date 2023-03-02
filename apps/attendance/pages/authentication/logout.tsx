@@ -1,15 +1,22 @@
 import { queryClient } from '@weekly/api';
-import { useAuthToken, useRedirectEffect } from '@weekly/utils';
+import { removeCookie, useRedirectEffect } from '@weekly/utils';
 import { useEffect } from 'react';
 
+import { Layout } from '~/components';
+
 function Logout() {
-  const { removeToken } = useAuthToken();
   useEffect(() => {
-    removeToken();
+    removeCookie('accessToken');
     queryClient.removeQueries();
   }, []);
   useRedirectEffect('/authentication/login');
   return null;
 }
+
+Logout.getLayout = function getLayout(page: React.ReactElement) {
+  return (
+    <Layout>{page}</Layout>
+  );
+};
 
 export default Logout;

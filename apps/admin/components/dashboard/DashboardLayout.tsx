@@ -1,4 +1,4 @@
-import { useGenerationQuery } from '@weekly/api';
+import { useGeneration } from '@weekly/api';
 import { styled } from '@weekly/ui';
 import { Fragment } from 'react';
 
@@ -10,7 +10,7 @@ type Props = Partial<DashboardLayoutProps>;
 
 function DashboardLayout(props: React.PropsWithChildren<Props>) {
   const { children } = props;
-  const { data: generations, isSuccess } = useGenerationQuery();
+  const { data: generations, isSuccess } = useGeneration();
   return (
     <Fragment>
       {isSuccess && (

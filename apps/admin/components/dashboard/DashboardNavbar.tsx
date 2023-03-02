@@ -1,4 +1,4 @@
-import { GenerationResponses } from '@weekly/api/dto/admin';
+import { GenerationResponses } from '@weekly/api/lib/types/admin';
 import { Dropdown, styled } from '@weekly/ui';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';

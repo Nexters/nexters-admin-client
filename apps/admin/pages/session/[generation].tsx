@@ -35,10 +35,10 @@ function Session({ generation }: SessionProps) {
   }, [modalOpen]);
 
   return (
-    <Container>
-      <Button size='small' onClick={() => setModalOpen(true)}>
+    <Fragment>
+      <CreateSessionButton size='small' onClick={() => setModalOpen(true)}>
         세션 추가
-      </Button>
+      </CreateSessionButton>
       {sessions ? (
         <SessionContainer>
           <Fragment>
@@ -54,6 +54,7 @@ function Session({ generation }: SessionProps) {
                 generation={session.generation}
                 sessionDate={session.sessionDate}
                 week={session.week}
+                isEdit
               />
             ))}
           </Fragment>
@@ -64,16 +65,23 @@ function Session({ generation }: SessionProps) {
       ) : (
         <></>
       )}
-    </Container>
+    </Fragment>
   );
 }
 
-const Container = styled.div``;
+const CreateSessionButton = styled(Button)`
+  display: block;
+  margin-left: auto;
+`;
 
 const SessionContainer = styled.div`
   display: flex;
   margin-top: 24px;
-  column-gap: 24px;
+  gap: 24px;
+  flex-wrap: wrap;
+  button {
+    flex-shrink: 0;
+  }
 `;
 
 export async function getServerSideProps({

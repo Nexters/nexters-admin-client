@@ -51,6 +51,7 @@ function Attendance(props: AttendanceProps) {
 const Container = styled.div`
   display: flex;
   gap: 24px;
+  flex-wrap: wrap;
 `;
 
 const EmptySession = styled.div`

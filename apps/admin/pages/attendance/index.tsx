@@ -9,9 +9,9 @@ function AttendanceHome() {
   const generations = queryClient.getQueryData<GenerationResponses>([
     'generation',
   ]);
-  const latestGenration = generations?.data[0].generation;
+  const latestGeneration = generations?.data[0].generation;
 
-  useRedirectEffect(`/attendance/${latestGenration}`);
+  useRedirectEffect(`/attendance/${latestGeneration}`);
   return null;
 }
 export default AttendanceHome;

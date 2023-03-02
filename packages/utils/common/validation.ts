@@ -37,7 +37,18 @@ function validateUsername(name: string) {
   return 1 <= length;
 }
 
+/**
+ * 날짜 형식 검증 함수
+ *
+ * @param date - 날짜 형식인지 확인할 문자열 (YY.MM.DD)
+ * @returns 날짜 형식이 맞는지 여부
+ */
+function validateDate(date: string) {
+  return new RegExp(/^\d{4}.\d{2}.\d{2}$/).test(date);
+}
+
 export {
+  validateDate,
   validateEmail,
   validatePassword,
   validatePasswordCheck,

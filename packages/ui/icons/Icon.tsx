@@ -18,6 +18,7 @@ import { Password } from './Password';
 import { Search } from './Search';
 import { Session } from './Session';
 import { ThumbsUp } from './ThumbsUp';
+import { Trash } from './Trash';
 import { User } from './User';
 import { UserLogout } from './UserLogout';
 import { Users } from './Users';
@@ -48,6 +49,7 @@ const icons = {
   checkCircle: CheckCircle,
   edit: Edit,
   chevronLeft: ChevronLeft,
+  trash: Trash,
 } as const;
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

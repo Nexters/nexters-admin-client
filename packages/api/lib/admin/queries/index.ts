@@ -1,3 +1,4 @@
+import useActivity from './useActivity';
 import useAdminLogin from './useAdminLogin';
 import useAttendanceAdditionalScore from './useAttendanceAdditionalScore';
 import useAttendanceQr from './useAttendanceQr';
@@ -9,6 +10,7 @@ import useSession from './useSession';
 import useSessionByGeneration from './useSessionByGeneration';
 
 export {
+  useActivity,
   useAdminLogin,
   useAttendanceAdditionalScore,
   useAttendanceQr,

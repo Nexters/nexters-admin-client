@@ -1,6 +1,7 @@
 import { ContentType, HttpClient, RequestParams } from '../HttpClient';
 import {
   AdminLoginRequest,
+  AttendanceActivityResponses,
   AttendanceSessionResponses,
   CreateAdministratorRequest,
   CreateGenerationRequest,
@@ -359,7 +360,7 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
       }),
     /**
      * @tags Attendance
-     * @name UpdateAttendanceAdditionalScore: (
+     * @name UpdateAttendanceAdditionalScore
      * @summary [관리자 페이지] 출석 가산점/감점 부여
      * @request GET:/api/attendance/{attendanceId}/addtional-score
      * @secure
@@ -378,7 +379,7 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
       }),
     /**
      * @tags Attendance
-     * @name CreateAttendanceQr: (
+     * @name CreateAttendanceQr
      * @summary [관리자 페이지] 출석 시작
      * @request GET:/api/attendance/qr
      * @secure
@@ -391,6 +392,22 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
         path: '/api/attendance/qr',
         method: 'POST',
         body: data,
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name FindActivityByGeneration
+     * @summary [관리자 페이지] 활동 관리 조회
+     * @request GET:/api/attendance/activity/{generation}
+     * @secure
+     */ findActivityByGeneration: (
+      generation: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<AttendanceActivityResponses>({
+        path: `/api/attendance/activity/${generation}`,
+        method: 'GET',
         secure: true,
         ...params,
       }),

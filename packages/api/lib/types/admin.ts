@@ -162,3 +162,18 @@ export interface AttendanceSessionResponse {
   extraScoreNote?: string;
   note?: string;
 }
+
+export interface AttendanceActivityResponses {
+  data: AttendanceActivityResponse[];
+}
+
+export interface AttendanceActivityResponse {
+  generationMemberId: number;
+  name: string;
+  position?: string;
+  subPosition: string;
+  initialGeneration: number;
+  score?: number;
+  isCompletable: boolean;
+  isManager?: boolean;
+}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
+import { AuthGuard } from '~/components/authentication/AuthGuard';
 
 function User() {
   return (
@@ -26,7 +27,11 @@ function User() {
 }
 
 User.getLayout = function getLayout(page: React.ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>;
+  return (
+    <AuthGuard>
+      <DashboardLayout>{page}</DashboardLayout>
+    </AuthGuard>
+  );
 };
 
 export default User;

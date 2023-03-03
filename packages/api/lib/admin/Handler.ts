@@ -14,7 +14,10 @@ import {
   UpdateMemberStatusRequest,
   UpdateSessionRequest,
 } from '../types/admin';
-import { FindAllMembersResponse } from '../types/attendance';
+import {
+  AttendanceSessionResponses,
+  FindAllMembersResponse,
+} from '../types/attendance';
 
 /**
  * @title 넥스터즈 출석체크 백엔드 API
@@ -317,6 +320,20 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
         path: '/api/generation/',
         body: data,
         method: 'post',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Generation
+     * @name FindAttendanceBySession
+     * @summary [관리자 페이지] 해당 세션에 대한 출석 정보 조회
+     * @request GET:/api/attendance/{sessionId}
+     * @secure
+     */
+    findAttendanceBySession: (sessionId: number, params: RequestParams = {}) =>
+      this.request<AttendanceSessionResponses>({
+        path: `/api/attendance/${sessionId}`,
+        method: 'GET',
         secure: true,
         ...params,
       }),

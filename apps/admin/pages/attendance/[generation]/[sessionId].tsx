@@ -1,40 +1,48 @@
+import { useAttendanceSession } from '@weekly/api';
+import { css, Icon, Popup, PopupOptions, styled  } from '@weekly/ui';
+import { useRouter } from 'next/router';
+
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
 import { Column, Table } from '~/components/tables/Table';
 
-// SAMPLE
-const COLUMNS: Column[] = [
-  {
-    label: '이름',
-  },
-  {
-    label: '직군',
-  },
-  {
-    label: '세부 직군',
-  },
-  {
-    label: '최초 기수',
-    align: 'right',
-  },
+const attendanceColumnData = [
+  '이름',
+  '직군',
+  '세부 직군',
+  '최초 기수',
+  '변동',
+  '점수',
+  '출결',
+  '기타 점수',
+  '비고',
+  '',
 ];
+const COLUMNS: Column[] = attendanceColumnData.map((column) => {
+  return { label: column };
+});
 
-const ROWS = [
+const attendanceOption: PopupOptions[] = [
   {
-    name: '김철수',
-    position: '프론트엔드',
-    detailPosition: '개발자',
-    generation: '22기',
+    title: '출결 설정',
+    onClick: () => {
+      console.log('TODO');
+    },
   },
   {
-    name: '안철수',
-    position: '백엔드',
-    detailPosition: '개발자',
-    generation: '20기',
+    title: '기타 점수',
+    onClick: () => {
+      console.log('TODO');
+    },
   },
 ];
 
 function AttendanceSession() {
+  const router = useRouter();
+  const { sessionId } = router.query;
+  const { data: attendances, isSuccess } = useAttendanceSession(
+    Number(sessionId),
+  );
   return (
     <Table
       columns={COLUMNS}
@@ -43,18 +51,44 @@ function AttendanceSession() {
         rowsPerPage: 5,
         count: 30,
       }}
+      minWidth={800}
     >
-      {ROWS.map((row) => (
+      {attendances?.data.map((row) => (
         <Table.Row>
           <Table.Cell item={row.name} />
           <Table.Cell item={row.position} />
-          <Table.Cell item={row.detailPosition} />
-          <Table.Cell item={row.generation} align='right' />
+          <Table.Cell item={row.subPosition} />
+          <Table.Cell item={row.initialGeneration} />
+          <Table.Cell item={row.scoreChanged} />
+          <Table.Cell item={row.score} />
+          <Table.Cell
+            item={row.attendanceStatus === '대기' ? '-' : row.attendanceStatus}
+          />
+          <Table.Cell item={row.extraScoreNote} />
+          <Table.Cell item={row.note} />
+          <Table.Cell
+            item={
+              <Popup
+                options={attendanceOption}
+                sx={css`
+                  margin-right: 10px;
+                `}
+              >
+                <ThreeDotMenu>
+                  <Icon name='threeDot' />
+                </ThreeDotMenu>
+              </Popup>
+            }
+          />
         </Table.Row>
       ))}
     </Table>
   );
 }
+
+const ThreeDotMenu = styled.button`
+  cursor: pointer;
+`;
 
 export default AttendanceSession;
 

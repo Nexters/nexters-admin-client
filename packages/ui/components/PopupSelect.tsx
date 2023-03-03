@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { PropsWithChildren, useRef, useState } from 'react';
 
 import { styled } from '../emotion';
@@ -9,6 +9,7 @@ interface DropdownProps extends React.ComponentProps<'div'> {
   options: PopupOptions[];
   disabled: boolean;
   onClickOption: () => void;
+  sx: SerializedStyles;
 }
 export type PopupOptions = { title: string; onClick: () => void };
 type DropdownSize = 'large' | 'small';
@@ -16,7 +17,7 @@ type Props = Partial<DropdownProps>;
 type WapperProps = Pick<Props, 'size' | 'disabled' | 'width'>;
 type DropdownOptionsProps = Pick<
   DropdownProps,
-  'size' | 'options' | 'onClickOption' | 'width'
+  'size' | 'options' | 'onClickOption' | 'width' | 'sx'
 >;
 
 /**
@@ -34,6 +35,7 @@ function Popup(props: PropsWithChildren<Props>) {
     onClickOption,
     width = 90,
     children,
+    sx,
   } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -67,6 +69,7 @@ function Popup(props: PropsWithChildren<Props>) {
           options={options}
           onClickOption={onClickOption!}
           width={width}
+          sx={sx || css``}
         />
       )}
     </Wrapper>
@@ -74,9 +77,9 @@ function Popup(props: PropsWithChildren<Props>) {
 }
 
 function DropdownOptions(props: DropdownOptionsProps) {
-  const { size, options, onClickOption, width } = props;
+  const { size, options, onClickOption, width, sx } = props;
   return (
-    <DropdownOptionsContainer size={size} width={width}>
+    <DropdownOptionsContainer size={size} width={width} sx={sx}>
       {options.map((option) => (
         <DropdownTable
           key={option.title}
@@ -93,16 +96,18 @@ function DropdownOptions(props: DropdownOptionsProps) {
   );
 }
 
-const Wrapper = styled.div<WapperProps>`
-  position: relative;
-`;
+const Wrapper = styled.div<WapperProps>``;
 
 const DropdownOptionsContainer = styled.div<{
   size: DropdownSize;
   width: number;
+  sx: SerializedStyles;
 }>`
   position: absolute;
   z-index: 5;
+
+  ${({ sx }) => sx};
+
   width: ${({ width }) => width}px;
 
   ${({ theme, size }) =>

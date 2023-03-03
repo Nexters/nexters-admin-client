@@ -32,11 +32,11 @@ export interface SessionHomeResponse {
   description?: string;
   sessionStatus: 'PENDING' | 'ONGOING' | 'EXPIRED';
   attendanceStatus:
-  | 'PENDING'
-  | 'ATTENDED'
-  | 'TARDY'
-  | 'UNAUTHORIZED_ABSENCE'
-  | 'AUTHORIZED_ABSENCE';
+    | 'PENDING'
+    | 'ATTENDED'
+    | 'TARDY'
+    | 'UNAUTHORIZED_ABSENCE'
+    | 'AUTHORIZED_ABSENCE';
   /** @format date-time */
   attendanceTime: string;
 }
@@ -80,11 +80,11 @@ export interface AttendanceResponse {
   /** @format date */
   sessionDate?: string;
   attendanceStatus:
-  | 'PENDING'
-  | 'ATTENDED'
-  | 'TARDY'
-  | 'UNAUTHORIZED_ABSENCE'
-  | 'AUTHORIZED_ABSENCE';
+    | 'PENDING'
+    | 'ATTENDED'
+    | 'TARDY'
+    | 'UNAUTHORIZED_ABSENCE'
+    | 'AUTHORIZED_ABSENCE';
   /** @format date-time */
   attendanceTime?: string;
   /** @format int32 */
@@ -94,4 +94,27 @@ export interface AttendanceResponse {
 export interface FindAttendanceProfileResponse {
   isGenerationMember: boolean;
   attendanceData?: AttendanceProfileResponse;
+}
+
+export interface AttendanceSessionResponses {
+  week: number;
+  sessionDate: string;
+  attended: number;
+  tardy: number;
+  absense: number;
+  data: AttendanceSessionResponse[];
+}
+
+export interface AttendanceSessionResponse {
+  name: string;
+  number: string;
+  attendanceId: number;
+  position?: string;
+  subPosition?: string;
+  initialGeneration: number;
+  scoreChanged: number;
+  score?: number;
+  attendanceStatus: string;
+  extraScoreNote?: string;
+  note?: string;
 }

@@ -129,3 +129,8 @@ export interface FindSessionResponse {
   /** @format date-time */
   endAttendTime?: string;
 }
+
+export interface UpdateAttendanceStatusRequest {
+  attendanceStatus: string;
+  note: string;
+}

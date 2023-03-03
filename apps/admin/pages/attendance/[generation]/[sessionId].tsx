@@ -1,17 +1,15 @@
 import { useAttendanceSession } from '@weekly/api';
 import {
   Button,
-  css,
-  Icon,
-  Popup,
-  PopupOptions,
-  rem,
   Search,
   styled,
 } from '@weekly/ui';
+import { formatYYMMDD } from '@weekly/utils';
 import { useRouter } from 'next/router';
 
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
+import AttendancePopup from '~/components/attendance/AttendancePopup';
+import AttendanceStatus from '~/components/attendance/AttendanceStatus';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
 import { Column, Table } from '~/components/tables/Table';
 
@@ -27,24 +25,18 @@ const attendanceColumnData = [
   '비고',
   ' ',
 ];
-const COLUMNS: Column[] = attendanceColumnData.map((column) => {
-  return { label: column };
-});
 
-const attendanceOption: PopupOptions[] = [
-  {
-    title: '출결 설정',
-    onClick: () => {
-      console.log('TODO');
-    },
-  },
-  {
-    title: '기타 점수',
-    onClick: () => {
-      console.log('TODO');
-    },
-  },
-];
+const centerAlignColumns = ['변동', '점수', '출결', '기타 점수'];
+const COLUMNS: Column[] = attendanceColumnData.map((column) => {
+  return {
+    label: column,
+    align: centerAlignColumns.find(
+      (centerAligncolumn) => centerAligncolumn === column,
+    )
+      ? 'center'
+      : 'left',
+  };
+});
 
 function AttendanceSession() {
   const router = useRouter();
@@ -52,8 +44,14 @@ function AttendanceSession() {
   const { data: attendances, isSuccess } = useAttendanceSession(
     Number(sessionId),
   );
+
   return (
     <Container>
+      <AttendanceSessionTitle>
+        <p>{attendances?.week}주차 세션</p>
+        {isSuccess && <p>{formatYYMMDD(attendances?.sessionDate)}</p>}
+      </AttendanceSessionTitle>
+
       <AttendanceSessionHeader>
         <Search width={335} />
         <AttendanceSessionRemote>
@@ -71,61 +69,89 @@ function AttendanceSession() {
           <Button size='small'>출석 시작</Button>
         </AttendanceSessionRemote>
       </AttendanceSessionHeader>
-      <Table
-        columns={COLUMNS}
-        pagination={{
-          page: 0,
-          rowsPerPage: 5,
-          count: 30,
-        }}
-        minWidth={800}
-      >
-        {attendances?.data.map((row) => (
-          <Table.Row>
-            <Table.Cell item={row.name} />
-            <Table.Cell item={row.position} />
-            <Table.Cell item={row.subPosition} />
-            <Table.Cell item={row.initialGeneration} />
-            <Table.Cell item={row.scoreChanged} />
-            <Table.Cell item={row.score} />
-            <Table.Cell
-              item={
-                row.attendanceStatus === '대기' ? '-' : row.attendanceStatus
-              }
-            />
-            <Table.Cell item={row.extraScoreNote} />
-            <Table.Cell item={row.note} />
-            <Table.Cell
-              align='right'
-              item={
-                <Popup
-                  options={attendanceOption}
-                  sx={css`
-                    margin-right: ${rem(16)};
-                  `}
-                >
-                  <ThreeDotMenu>
-                    <Icon name='threeDot' />
-                  </ThreeDotMenu>
-                </Popup>
-              }
-            />
-          </Table.Row>
-        ))}
-      </Table>
+      <AttendanceTable>
+        <Table
+          columns={COLUMNS}
+          pagination={{
+            page: 0,
+            rowsPerPage: 5,
+            count: 30,
+          }}
+          minWidth={800}
+        >
+          {attendances?.data.map((row, idx) => (
+            <Table.Row>
+              <Table.Cell item={row.name} />
+              <Table.Cell item={row.position} />
+              <Table.Cell item={row.subPosition} />
+              <Table.Cell item={row.initialGeneration} />
+              <Table.Cell
+                align='center'
+                item={
+                  row.scoreChanged === 0 ? (
+                    '-'
+                  ) : (
+                    <ScoreChanged plus={row.scoreChanged > 0}>
+                      {row.scoreChanged}
+                    </ScoreChanged>
+                  )
+                }
+              />
+              <Table.Cell item={row.score} align='center' />
+              <Table.Cell
+                align='center'
+                item={
+                  row.attendanceStatus === '대기' ? (
+                    '-'
+                  ) : (
+                    <AttendanceStatus status={row.attendanceStatus} />
+                  )
+                }
+              />
+              <Table.Cell item={row.extraScoreNote} />
+              <Table.Cell item={row.note} />
+              <Table.Cell
+                align='right'
+                item={
+                  <AttendancePopup
+                    attendanceMember={row}
+                    isLast={idx > attendances.data.length - 3}
+                  />
+                }
+              />
+            </Table.Row>
+          ))}
+        </Table>
+      </AttendanceTable>
     </Container>
   );
 }
 
 const Container = styled.div``;
+const AttendanceSessionTitle = styled.div`
+  display: flex;
+  position: fixed;
+  top: 54px;
+  left: 277px;
+  p:first-of-type {
+    ${({ theme }) => theme.typo.body1Bold}
+  }
+  p:last-of-type {
+    margin-left: 8px;
+    ${({ theme }) => theme.typo.body1Regular}
+  }
+  z-index: 10;
+`;
 const AttendanceSessionHeader = styled.div`
   margin-bottom: ${({ theme }) => theme.rem(20)};
   display: flex;
+
   justify-content: space-between;
 `;
 const AttendanceSessionRemote = styled.div`
   display: flex;
   flex-shrink: 0;
+
   align-items: center;
   margin-left: 12px;
 
@@ -157,9 +183,11 @@ const Indicator = styled.div`
     background-color: ${({ theme }) => theme.palette.grayScale.g30};
   }
 `;
-const ThreeDotMenu = styled.button`
-  cursor: pointer;
+const ScoreChanged = styled.div<{ plus: boolean }>`
+  color: ${({ theme, plus }) =>
+    plus ? `${theme.palette.main.blue100}` : `${theme.palette.main.red100}`};
 `;
+const AttendanceTable = styled.div``;
 
 export default AttendanceSession;
 

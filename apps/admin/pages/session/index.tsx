@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
-import Empty from '~/components/dashboard/\bEmpty';
+import Empty from '~/components/dashboard/Empty';
 import GenerationStatus from '~/components/session/GenerationStatus';
 import { Column, Table } from '~/components/tables/Table';
 

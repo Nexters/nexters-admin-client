@@ -48,13 +48,12 @@ function DashboardNavbar(props: DashboardNavbarProps) {
   const [selectedGeneration, setSelectedGeneration] = useState<number>(
     generatationsValue[0],
   );
+  const attendancePageGuard =
+    matchedPath === 'attendance'
+      ? splitedPathname[splitedPathname.length - 1] === '[generation]'
+      : true;
 
   useEffect(() => {
-    const attendancePageGuard =
-      matchedPath === 'attendance'
-        ? splitedPathname[splitedPathname.length - 1] === '[generation]'
-        : true;
-
     if (
       matchedPath &&
       navBarMap[matchedPath].selectGeneration &&
@@ -69,7 +68,7 @@ function DashboardNavbar(props: DashboardNavbarProps) {
       {matchedPath && navBarMap[matchedPath] && (
         <NavBarContent>
           <Title>{navBarMap[matchedPath].label}</Title>
-          {navBarMap[matchedPath].selectGeneration && (
+          {navBarMap[matchedPath].selectGeneration && attendancePageGuard && (
             <Dropdown
               size='small'
               width={96}
@@ -90,11 +89,11 @@ const Container = styled.header`
   left: ${({ theme }) => theme.rem(132)};
   top: 0;
   display: flex;
-
   min-height: ${({ theme }) => theme.rem(102)};
   width: calc(100% - 132px);
   padding-inline: ${({ theme }) => theme.rem(40)};
   box-sizing: border-box;
+  z-index: 0;
 `;
 
 const NavBarContent = styled.div`

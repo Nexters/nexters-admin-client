@@ -11,7 +11,7 @@ import { Fragment } from 'react';
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 import SessionItem from '~/components//session/SessionItem';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
-import Empty from '~/components/dashboard/\bEmpty';
+import Empty from '~/components/dashboard/Empty';
 
 interface AttendanceProps {
   generation: string;

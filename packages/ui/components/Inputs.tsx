@@ -25,7 +25,7 @@ const Container = styled.input<Props>`
   color: ${({ theme }) => theme.palette.grayScale.g100};
   outline: none;
 
-  &:placeholder-shown {
+  &::placeholder {
     color: ${({ theme }) => theme.palette.grayScale.g50};
   }
 `;

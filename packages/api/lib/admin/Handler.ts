@@ -9,6 +9,7 @@ import {
   FindSessionResponses,
   GenerationResponses,
   TokenResponse,
+  UpdateAttendanceStatusRequest,
   UpdateMemberPositionRequest,
   UpdateMemberRequest,
   UpdateMemberStatusRequest,
@@ -324,7 +325,7 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
         ...params,
       }),
     /**
-     * @tags Generation
+     * @tags Attendance
      * @name FindAttendanceBySession
      * @summary [관리자 페이지] 해당 세션에 대한 출석 정보 조회
      * @request GET:/api/attendance/{sessionId}
@@ -334,6 +335,25 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
       this.request<AttendanceSessionResponses>({
         path: `/api/attendance/${sessionId}`,
         method: 'GET',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name FindAttendanceBySession
+     * @summary [관리자 페이지] 해당 세션에 대한 출석 정보 조회
+     * @request GET:/api/attendance/{sessionId}
+     * @secure
+     */
+    updateAttendanceStatus: (
+      attendanceId: number,
+      data: UpdateAttendanceStatusRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request({
+        path: `/api/attendance/${attendanceId}/status`,
+        method: 'PUT',
+        body: data,
         secure: true,
         ...params,
       }),

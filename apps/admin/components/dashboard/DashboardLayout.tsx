@@ -13,15 +13,13 @@ function DashboardLayout(props: React.PropsWithChildren<Props>) {
   const { data: generations, isSuccess } = useGeneration();
   return (
     <Fragment>
-      {isSuccess && (
-        <Fragment>
-          <DashboardRoot>
-            <Main>{children}</Main>
-          </DashboardRoot>
-          <DashboardNavbar generations={generations} />
-          <DashboardSidebar />
-        </Fragment>
-      )}
+      <Fragment>
+        <DashboardRoot>
+          <Main>{children}</Main>
+        </DashboardRoot>
+        {isSuccess && <DashboardNavbar generations={generations} />}
+        <DashboardSidebar />
+      </Fragment>
     </Fragment>
   );
 }

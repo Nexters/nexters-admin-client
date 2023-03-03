@@ -142,8 +142,8 @@ Table.Cell = ({
         width: width,
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
-        overflow: 'hidden',
         border: 'none',
+        overflow: 'visible',
       }}
     >
       {item}

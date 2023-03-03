@@ -101,7 +101,7 @@ export interface AttendanceSessionResponses {
   sessionDate: string;
   attended: number;
   tardy: number;
-  absense: number;
+  absence: number;
   data: AttendanceSessionResponse[];
 }
 

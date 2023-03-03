@@ -1,5 +1,5 @@
 import { css, SerializedStyles } from '@emotion/react';
-import { PropsWithChildren, useRef, useState } from 'react';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import { styled } from '../emotion';
 
@@ -43,7 +43,7 @@ function Popup(props: PropsWithChildren<Props>) {
     setIsOpen((prev) => !prev);
   };
 
-  /* useEffect(() => {
+  useEffect(() => {
     const handleClickOutside = (e: MouseEvent): void => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setIsOpen(false);
@@ -53,7 +53,7 @@ function Popup(props: PropsWithChildren<Props>) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref]); */
+  }, [ref]);
 
   return (
     <Wrapper
@@ -105,7 +105,6 @@ const DropdownOptionsContainer = styled.div<{
 }>`
   position: absolute;
   z-index: 5;
-
   ${({ sx }) => sx};
 
   width: ${({ width }) => width}px;
@@ -130,6 +129,7 @@ const DropdownOptionsContainer = styled.div<{
 `;
 
 const DropdownTable = styled.div<{ size: DropdownSize }>`
+  text-align: center;
   ${({ theme, size }) =>
     size === 'large'
       ? css`
@@ -142,6 +142,7 @@ const DropdownTable = styled.div<{ size: DropdownSize }>`
         `}
   &:hover {
     background-color: ${({ theme }) => theme.palette.grayScale.g20};
+    cursor: pointer;
   }
 
   &:first-of-type {

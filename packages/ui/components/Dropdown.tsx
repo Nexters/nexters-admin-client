@@ -1,4 +1,11 @@
-import { ComponentProps, Dispatch, SetStateAction, useState } from 'react';
+import {
+  ComponentProps,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { css, styled } from '../emotion';
 import { Icon } from '../icons/Icon';
@@ -41,10 +48,23 @@ function Dropdown(props: Props) {
     width,
     postfix,
   } = props;
+  const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onToggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent): void => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   return (
     <Container
@@ -52,6 +72,7 @@ function Dropdown(props: Props) {
       disabled={disabled}
       onClick={onToggleDropdown}
       width={width}
+      ref={ref}
     >
       {value ? (
         <p>

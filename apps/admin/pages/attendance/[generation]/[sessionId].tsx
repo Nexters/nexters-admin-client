@@ -2,6 +2,8 @@ import { useAttendanceSession } from '@weekly/api';
 import { Button, Search, styled } from '@weekly/ui';
 import { formatYYMMDD } from '@weekly/utils';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
 import AttendancePopup from '~/components/attendance/AttendancePopup';
@@ -37,27 +39,37 @@ const COLUMNS: Column[] = attendanceColumnData.map((column) => {
 function AttendanceSession() {
   const router = useRouter();
   const { sessionId } = router.query;
-  const { data: attendances, isSuccess } = useAttendanceSession(
-    Number(sessionId),
+  const [search, setSearch] = useState('');
+  const { data, isSuccess } = useAttendanceSession(Number(sessionId));
+  const [attendances, setAttendances] = useState(data?.data);
+
+  const onChangeSearch = useDebouncedCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) =>
+      setSearch(event.target.value),
+    400,
   );
+
+  useEffect(() => {
+    setAttendances(data?.data.filter((member) => member.name.includes(search)));
+  }, [search]);
 
   return (
     <Container>
       <AttendanceSessionTitle>
-        <p>{attendances?.week}주차 세션</p>
-        {isSuccess && <p>{formatYYMMDD(attendances?.sessionDate)}</p>}
+        <p>{data?.week}주차 세션</p>
+        {isSuccess && <p>{formatYYMMDD(data?.sessionDate)}</p>}
       </AttendanceSessionTitle>
 
       <AttendanceSessionHeader>
-        <Search width={335} />
+        <Search width={335} onChange={onChangeSearch} />
         <AttendanceSessionRemote>
           <Indicator>
             <p>출석</p>
-            <p>{attendances?.attended}명</p>
+            <p>{data?.attended}명</p>
             <p>지각</p>
-            <p>{attendances?.tardy}명</p>
+            <p>{data?.tardy}명</p>
             <p>결석</p>
-            <p>{attendances?.absence}명</p>
+            <p>{data?.absence}명</p>
           </Indicator>
           <Button size='small' varient='secondary'>
             지각 시작
@@ -68,14 +80,14 @@ function AttendanceSession() {
       <AttendanceTable>
         <Table
           columns={COLUMNS}
-          pagination={{
+          /* pagination={{
             page: 0,
             rowsPerPage: 5,
             count: 30,
-          }}
+          }} */
           minWidth={800}
         >
-          {attendances?.data.map((row, idx) => (
+          {attendances?.map((row, idx) => (
             <Table.Row>
               <Table.Cell item={row.name} />
               <Table.Cell item={row.position} />
@@ -113,7 +125,7 @@ function AttendanceSession() {
                 item={
                   <AttendancePopup
                     attendanceMember={row}
-                    isLast={idx > attendances.data.length - 3}
+                    isLast={idx > attendances.length - 3}
                   />
                 }
               />

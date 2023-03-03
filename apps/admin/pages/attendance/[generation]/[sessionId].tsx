@@ -1,9 +1,5 @@
 import { useAttendanceSession } from '@weekly/api';
-import {
-  Button,
-  Search,
-  styled,
-} from '@weekly/ui';
+import { Button, Search, styled } from '@weekly/ui';
 import { formatYYMMDD } from '@weekly/utils';
 import { useRouter } from 'next/router';
 
@@ -108,7 +104,9 @@ function AttendanceSession() {
                   )
                 }
               />
-              <Table.Cell item={row.extraScoreNote} />
+              <Table.Cell
+                item={<ExtraScoreNote>{row.extraScoreNote}</ExtraScoreNote>}
+              />
               <Table.Cell item={row.note} />
               <Table.Cell
                 align='right'
@@ -186,6 +184,9 @@ const Indicator = styled.div`
 const ScoreChanged = styled.div<{ plus: boolean }>`
   color: ${({ theme, plus }) =>
     plus ? `${theme.palette.main.blue100}` : `${theme.palette.main.red100}`};
+`;
+const ExtraScoreNote = styled.div`
+  color: ${({ theme }) => theme.palette.main.blue100};
 `;
 const AttendanceTable = styled.div``;
 

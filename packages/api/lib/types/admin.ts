@@ -134,3 +134,8 @@ export interface UpdateAttendanceStatusRequest {
   attendanceStatus: string;
   note: string;
 }
+
+export interface UpdateExtraAttendanceScoreChangeRequest {
+  extraScoreChange: number;
+  extraScoreNote?: string;
+}

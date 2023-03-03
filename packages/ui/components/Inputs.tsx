@@ -28,6 +28,12 @@ const Container = styled.input<Props>`
   &::placeholder {
     color: ${({ theme }) => theme.palette.grayScale.g50};
   }
+
+  &::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
 `;
 
 export { Input };

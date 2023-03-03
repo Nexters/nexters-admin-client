@@ -1,7 +1,9 @@
+import { useAttendanceAdditionalScore } from '@weekly/api';
 import { AttendanceSessionResponse } from '@weekly/api/lib/types/attendance';
 import { Button, Input, styled } from '@weekly/ui';
 import { useValidateState } from '@weekly/utils';
-import { Fragment, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { Fragment } from 'react';
 
 function ExtraScoreModal({
   closeModal,
@@ -10,24 +12,33 @@ function ExtraScoreModal({
   closeModal: () => void;
   data: AttendanceSessionResponse;
 }) {
-  const attendanceState = useValidateState<string>(
-    data.attendanceStatus === '대기' ? '' : data.attendanceStatus,
+  const { query } = useRouter();
+  const scoreState = useValidateState<number>(0, []);
+  const scoreNoteState = useValidateState<string>(
+    data.extraScoreNote || '',
     [],
   );
-  const noteState = useValidateState<string>(data.note || '', []);
-  const onChangeNote = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeScore = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    noteState.onChange(value);
+    scoreState.onChange(Number(value));
+  };
+  const onChangeScoreNote = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    scoreNoteState.onChange(value);
   };
 
+  const { mutate } = useAttendanceAdditionalScore(
+    data.attendanceId,
+    {
+      extraScoreChange: scoreState.value,
+      extraScoreNote: scoreNoteState.value,
+    },
+    Number(query.sessionId),
+  );
   const onSubmit = () => {
-    console.log('TODO');
+    mutate();
+    closeModal();
   };
-
-  useEffect(() => {
-    console.log(attendanceState.isInital);
-    console.log(noteState.isInital);
-  }, [attendanceState.value, noteState.value]);
 
   return (
     <Fragment>
@@ -39,8 +50,8 @@ function ExtraScoreModal({
         <Input
           placeholder='점수 내용 입력'
           name={'week'}
-          value={noteState.value}
-          onChange={onChangeNote}
+          value={scoreNoteState.value}
+          onChange={onChangeScoreNote}
         />
       </InputField>
       <InputField>
@@ -48,8 +59,9 @@ function ExtraScoreModal({
         <Input
           placeholder='점수 입력'
           name={'week'}
-          value={noteState.value}
-          onChange={onChangeNote}
+          type='number'
+          value={scoreState.value === 0 ? '' : scoreState.value}
+          onChange={onChangeScore}
         />
       </InputField>
       <ButtonSet>
@@ -59,7 +71,7 @@ function ExtraScoreModal({
         <Button
           fullWidth
           onClick={onSubmit}
-          disabled={attendanceState.isInital || noteState.isInital}
+          disabled={scoreState.isInital || scoreNoteState.isInital}
         >
           완료
         </Button>

@@ -10,6 +10,7 @@ import {
   GenerationResponses,
   TokenResponse,
   UpdateAttendanceStatusRequest,
+  UpdateExtraAttendanceScoreChangeRequest,
   UpdateMemberPositionRequest,
   UpdateMemberRequest,
   UpdateMemberStatusRequest,
@@ -342,7 +343,7 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
      * @tags Attendance
      * @name FindAttendanceBySession
      * @summary [관리자 페이지] 해당 세션에 대한 출석 정보 조회
-     * @request GET:/api/attendance/{sessionId}
+     * @request GET:/api/attendance/{attendanceId}
      * @secure
      */
     updateAttendanceStatus: (
@@ -353,6 +354,25 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
       this.request({
         path: `/api/attendance/${attendanceId}/status`,
         method: 'PUT',
+        body: data,
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name UpdateAttendanceAdditionalScore: (
+     * @summary [관리자 페이지] 출석 가산점/감점 부여
+     * @request GET:/api/attendance/{attendanceId}/addtional-score
+     * @secure
+     */
+    updateAttendanceAdditionalScore: (
+      attendanceId: number,
+      data: UpdateExtraAttendanceScoreChangeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request({
+        path: `/api/attendance/${attendanceId}/additional-score`,
+        method: 'POST',
         body: data,
         secure: true,
         ...params,

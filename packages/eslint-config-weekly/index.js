@@ -41,6 +41,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['warn'],
     '@typescript-eslint/ban-types': 'warn',
     'import/named' : 'off',
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "@typescript-eslint/no-empty-function" : "off"
   },
 };

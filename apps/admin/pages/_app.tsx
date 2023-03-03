@@ -6,6 +6,7 @@ import { ThemeProvider } from '@weekly/ui/theme';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 type EnhancedAppProps = AppProps & {
   Component: NextPage;
@@ -51,6 +52,7 @@ function App(props: EnhancedAppProps) {
   return (
     <QueryClientProvider>
       <Hydrate state={pageProps.dehydratedState}>
+        <Toaster position='top-center' />
         <ThemeProvider>
           <style global jsx>
             {`

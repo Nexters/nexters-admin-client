@@ -139,3 +139,26 @@ export interface UpdateExtraAttendanceScoreChangeRequest {
   extraScoreChange: number;
   extraScoreNote?: string;
 }
+
+export interface AttendanceSessionResponses {
+  week: number;
+  sessionDate: string;
+  attended: number;
+  tardy: number;
+  absence: number;
+  data: AttendanceSessionResponse[];
+}
+
+export interface AttendanceSessionResponse {
+  name: string;
+  number: string;
+  attendanceId: number;
+  position?: string;
+  subPosition?: string;
+  initialGeneration: number;
+  scoreChanged: number;
+  score?: number;
+  attendanceStatus: string;
+  extraScoreNote?: string;
+  note?: string;
+}

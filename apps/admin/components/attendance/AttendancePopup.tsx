@@ -1,4 +1,4 @@
-import { AttendanceSessionResponse } from '@weekly/api/lib/types/attendance';
+import { AttendanceSessionResponse } from '@weekly/api/lib/types/admin';
 import { Icon, Modal, Popup, PopupOptions, styled } from '@weekly/ui';
 import { Fragment, useState } from 'react';
 

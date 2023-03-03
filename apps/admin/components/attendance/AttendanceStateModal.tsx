@@ -1,5 +1,5 @@
 import useAttendanceStatus from '@weekly/api/lib/admin/queries/useAttendanceStatus';
-import { AttendanceSessionResponse } from '@weekly/api/lib/types/attendance';
+import { AttendanceSessionResponse } from '@weekly/api/lib/types/admin';
 import { Button, Dropdown, Input, styled } from '@weekly/ui';
 import { useValidateState } from '@weekly/utils';
 import { useRouter } from 'next/router';

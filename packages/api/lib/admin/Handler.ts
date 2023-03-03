@@ -1,6 +1,7 @@
 import { ContentType, HttpClient, RequestParams } from '../HttpClient';
 import {
   AdminLoginRequest,
+  AttendanceSessionResponses,
   CreateAdministratorRequest,
   CreateGenerationRequest,
   CreateMemberRequest,
@@ -8,6 +9,7 @@ import {
   CreateSessionResponse,
   FindSessionResponses,
   GenerationResponses,
+  InitializeQrCodesRequest,
   TokenResponse,
   UpdateAttendanceStatusRequest,
   UpdateExtraAttendanceScoreChangeRequest,
@@ -16,10 +18,7 @@ import {
   UpdateMemberStatusRequest,
   UpdateSessionRequest,
 } from '../types/admin';
-import {
-  AttendanceSessionResponses,
-  FindAllMembersResponse,
-} from '../types/attendance';
+import { FindAllMembersResponse } from '../types/attendance';
 
 /**
  * @title 넥스터즈 출석체크 백엔드 API
@@ -372,6 +371,24 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
     ) =>
       this.request({
         path: `/api/attendance/${attendanceId}/additional-score`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name CreateAttendanceQr: (
+     * @summary [관리자 페이지] 출석 시작
+     * @request GET:/api/attendance/qr
+     * @secure
+     */
+    createAttendanceQr: (
+      data: InitializeQrCodesRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request({
+        path: '/api/attendance/qr',
         method: 'POST',
         body: data,
         secure: true,

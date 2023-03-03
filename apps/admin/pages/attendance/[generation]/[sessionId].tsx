@@ -1,4 +1,5 @@
-import { useAttendanceSession } from '@weekly/api';
+import { useAttendanceQr, useAttendanceSession } from '@weekly/api';
+import { AttendanceSessionResponse } from '@weekly/api/lib/types/admin';
 import { Button, Search, styled } from '@weekly/ui';
 import { formatYYMMDD } from '@weekly/utils';
 import { useRouter } from 'next/router';
@@ -6,52 +7,37 @@ import { useEffect, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
-import AttendancePopup from '~/components/attendance/AttendancePopup';
-import AttendanceStatus from '~/components/attendance/AttendanceStatus';
+import AttendanceTable from '~/components/attendance/AttendanceTable';
 import { AuthGuard } from '~/components/authentication/AuthGuard';
-import { Column, Table } from '~/components/tables/Table';
-
-const attendanceColumnData = [
-  '이름',
-  '직군',
-  '세부 직군',
-  '최초 기수',
-  '변동',
-  '점수',
-  '출결',
-  '기타 점수',
-  '비고',
-  ' ',
-];
-
-const centerAlignColumns = ['변동', '점수', '출결', '기타 점수'];
-const COLUMNS: Column[] = attendanceColumnData.map((column) => {
-  return {
-    label: column,
-    align: centerAlignColumns.find(
-      (centerAligncolumn) => centerAligncolumn === column,
-    )
-      ? 'center'
-      : 'left',
-  };
-});
 
 function AttendanceSession() {
   const router = useRouter();
   const { sessionId } = router.query;
   const [search, setSearch] = useState('');
   const { data, isSuccess } = useAttendanceSession(Number(sessionId));
-  const [attendances, setAttendances] = useState(data?.data);
+  const [attendances, setAttendances] = useState<AttendanceSessionResponse[]>();
 
   const onChangeSearch = useDebouncedCallback(
     (event: React.ChangeEvent<HTMLInputElement>) =>
       setSearch(event.target.value),
     400,
   );
+  const { mutate: attendedMutate } = useAttendanceQr({
+    sessionId: Number(sessionId),
+    qrCodeType: 'ATTENDED',
+  });
+  const { mutate: tardyMutate } = useAttendanceQr({
+    sessionId: Number(sessionId),
+    qrCodeType: 'TARDY',
+  });
 
   useEffect(() => {
-    setAttendances(data?.data.filter((member) => member.name.includes(search)));
-  }, [search]);
+    search
+      ? setAttendances(
+        data?.data.filter((member) => member.name.includes(search)),
+      )
+      : setAttendances(data?.data);
+  }, [search, data]);
 
   return (
     <Container>
@@ -71,68 +57,19 @@ function AttendanceSession() {
             <p>결석</p>
             <p>{data?.absence}명</p>
           </Indicator>
-          <Button size='small' varient='secondary'>
+          <Button
+            size='small'
+            varient='secondary'
+            onClick={() => tardyMutate()}
+          >
             지각 시작
           </Button>
-          <Button size='small'>출석 시작</Button>
+          <Button size='small' onClick={() => attendedMutate()}>
+            출석 시작
+          </Button>
         </AttendanceSessionRemote>
       </AttendanceSessionHeader>
-      <AttendanceTable>
-        <Table
-          columns={COLUMNS}
-          /* pagination={{
-            page: 0,
-            rowsPerPage: 5,
-            count: 30,
-          }} */
-          minWidth={800}
-        >
-          {attendances?.map((row, idx) => (
-            <Table.Row>
-              <Table.Cell item={row.name} />
-              <Table.Cell item={row.position} />
-              <Table.Cell item={row.subPosition} />
-              <Table.Cell item={row.initialGeneration} />
-              <Table.Cell
-                align='center'
-                item={
-                  row.scoreChanged === 0 ? (
-                    '-'
-                  ) : (
-                    <ScoreChanged plus={row.scoreChanged > 0}>
-                      {row.scoreChanged}
-                    </ScoreChanged>
-                  )
-                }
-              />
-              <Table.Cell item={row.score} align='center' />
-              <Table.Cell
-                align='center'
-                item={
-                  row.attendanceStatus === '대기' ? (
-                    '-'
-                  ) : (
-                    <AttendanceStatus status={row.attendanceStatus} />
-                  )
-                }
-              />
-              <Table.Cell
-                item={<ExtraScoreNote>{row.extraScoreNote}</ExtraScoreNote>}
-              />
-              <Table.Cell item={row.note} />
-              <Table.Cell
-                align='right'
-                item={
-                  <AttendancePopup
-                    attendanceMember={row}
-                    isLast={idx > attendances.length - 3}
-                  />
-                }
-              />
-            </Table.Row>
-          ))}
-        </Table>
-      </AttendanceTable>
+      <AttendanceTable attendances={attendances} />
     </Container>
   );
 }
@@ -193,14 +130,6 @@ const Indicator = styled.div`
     background-color: ${({ theme }) => theme.palette.grayScale.g30};
   }
 `;
-const ScoreChanged = styled.div<{ plus: boolean }>`
-  color: ${({ theme, plus }) =>
-    plus ? `${theme.palette.main.blue100}` : `${theme.palette.main.red100}`};
-`;
-const ExtraScoreNote = styled.div`
-  color: ${({ theme }) => theme.palette.main.blue100};
-`;
-const AttendanceTable = styled.div``;
 
 export default AttendanceSession;
 

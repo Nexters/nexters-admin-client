@@ -1,4 +1,11 @@
-import { ComponentProps, Dispatch, SetStateAction, useState } from 'react';
+import {
+  ComponentProps,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { css, styled } from '../emotion';
 import { Icon } from '../icons/Icon';
@@ -24,7 +31,6 @@ type DropdownOptionsProps = Pick<
 
 /**
  * @param size 기본값 : small
- * @param value 선택된 값(string)
  * @param placeholder value가 null이면 placeholder가 표시됩니다
  * @param width (size === 'small'일 때) 기본적으로 auto, width 지정하면 fix
  * @param value 외부 state
@@ -41,10 +47,23 @@ function Dropdown(props: Props) {
     width,
     postfix,
   } = props;
+  const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onToggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent): void => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   return (
     <Container
@@ -52,6 +71,7 @@ function Dropdown(props: Props) {
       disabled={disabled}
       onClick={onToggleDropdown}
       width={width}
+      ref={ref}
     >
       {value ? (
         <p>
@@ -135,7 +155,7 @@ const Container = styled.div<ContainerProps>`
       color: ${theme.palette.grayScale.g50}:;
     `}
 `;
-const Placeholder = styled.div`
+const Placeholder = styled.p`
   color: ${({ theme }) => theme.palette.grayScale.g50};
 `;
 

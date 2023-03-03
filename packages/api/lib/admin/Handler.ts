@@ -1,6 +1,7 @@
 import { ContentType, HttpClient, RequestParams } from '../HttpClient';
 import {
   AdminLoginRequest,
+  AttendanceSessionResponses,
   CreateAdministratorRequest,
   CreateGenerationRequest,
   CreateMemberRequest,
@@ -8,7 +9,10 @@ import {
   CreateSessionResponse,
   FindSessionResponses,
   GenerationResponses,
+  InitializeQrCodesRequest,
   TokenResponse,
+  UpdateAttendanceStatusRequest,
+  UpdateExtraAttendanceScoreChangeRequest,
   UpdateMemberPositionRequest,
   UpdateMemberRequest,
   UpdateMemberStatusRequest,
@@ -317,6 +321,76 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
         path: '/api/generation/',
         body: data,
         method: 'post',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name FindAttendanceBySession
+     * @summary [관리자 페이지] 해당 세션에 대한 출석 정보 조회
+     * @request GET:/api/attendance/{sessionId}
+     * @secure
+     */
+    findAttendanceBySession: (sessionId: number, params: RequestParams = {}) =>
+      this.request<AttendanceSessionResponses>({
+        path: `/api/attendance/${sessionId}`,
+        method: 'GET',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name FindAttendanceBySession
+     * @summary [관리자 페이지] 해당 세션에 대한 출석 정보 조회
+     * @request GET:/api/attendance/{attendanceId}
+     * @secure
+     */
+    updateAttendanceStatus: (
+      attendanceId: number,
+      data: UpdateAttendanceStatusRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request({
+        path: `/api/attendance/${attendanceId}/status`,
+        method: 'PUT',
+        body: data,
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name UpdateAttendanceAdditionalScore: (
+     * @summary [관리자 페이지] 출석 가산점/감점 부여
+     * @request GET:/api/attendance/{attendanceId}/addtional-score
+     * @secure
+     */
+    updateAttendanceAdditionalScore: (
+      attendanceId: number,
+      data: UpdateExtraAttendanceScoreChangeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request({
+        path: `/api/attendance/${attendanceId}/additional-score`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name CreateAttendanceQr: (
+     * @summary [관리자 페이지] 출석 시작
+     * @request GET:/api/attendance/qr
+     * @secure
+     */
+    createAttendanceQr: (
+      data: InitializeQrCodesRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request({
+        path: '/api/attendance/qr',
+        method: 'POST',
+        body: data,
         secure: true,
         ...params,
       }),

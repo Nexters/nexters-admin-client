@@ -32,11 +32,11 @@ export interface SessionHomeResponse {
   description?: string;
   sessionStatus: 'PENDING' | 'ONGOING' | 'EXPIRED';
   attendanceStatus:
-  | 'PENDING'
-  | 'ATTENDED'
-  | 'TARDY'
-  | 'UNAUTHORIZED_ABSENCE'
-  | 'AUTHORIZED_ABSENCE';
+    | 'PENDING'
+    | 'ATTENDED'
+    | 'TARDY'
+    | 'UNAUTHORIZED_ABSENCE'
+    | 'AUTHORIZED_ABSENCE';
   /** @format date-time */
   attendanceTime: string;
 }
@@ -80,11 +80,11 @@ export interface AttendanceResponse {
   /** @format date */
   sessionDate?: string;
   attendanceStatus:
-  | 'PENDING'
-  | 'ATTENDED'
-  | 'TARDY'
-  | 'UNAUTHORIZED_ABSENCE'
-  | 'AUTHORIZED_ABSENCE';
+    | 'PENDING'
+    | 'ATTENDED'
+    | 'TARDY'
+    | 'UNAUTHORIZED_ABSENCE'
+    | 'AUTHORIZED_ABSENCE';
   /** @format date-time */
   attendanceTime?: string;
   /** @format int32 */

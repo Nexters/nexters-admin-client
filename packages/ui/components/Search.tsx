@@ -1,9 +1,12 @@
 import { styled } from '../emotion';
 import { Icon } from '../icons/Icon';
 
-type SearchProps = React.ComponentProps<'input'>;
+interface SearchProps extends React.ComponentProps<'input'> {
+  width: number;
+}
 type Props = Partial<SearchProps>;
-type ContainerProps = Pick<SearchProps, 'width'>;
+type ContainerProps = Pick<Props, 'width'>;
+type InputProps = Omit<Props, 'width'>;
 
 function Search(props: Props) {
   const { width } = props;
@@ -16,7 +19,7 @@ function Search(props: Props) {
 }
 
 const Container = styled.div<ContainerProps>`
-  width: 100%;
+  width: ${({ theme, width }) => (width ? theme.rem(width) : '100%')};
   padding: ${({ theme }) => `${theme.rem(12)} ${theme.rem(16)}`};
   background-color: ${({ theme }) => theme.palette.grayScale.g20};
   border-radius: ${({ theme }) => theme.rem(12)};
@@ -27,7 +30,7 @@ const Container = styled.div<ContainerProps>`
   gap: ${({ theme }) => theme.rem(8)};
 `;
 
-const Input = styled.input<SearchProps>`
+const Input = styled.input<InputProps>`
   border: none;
   background-color: transparent;
   width: 100%;

@@ -1,5 +1,5 @@
-import { css } from '@emotion/react';
-import { PropsWithChildren, useRef, useState } from 'react';
+import { css, SerializedStyles } from '@emotion/react';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import { styled } from '../emotion';
 
@@ -9,6 +9,8 @@ interface DropdownProps extends React.ComponentProps<'div'> {
   options: PopupOptions[];
   disabled: boolean;
   onClickOption: () => void;
+  sx: SerializedStyles;
+  direction: 'top' | 'bottom';
 }
 export type PopupOptions = { title: string; onClick: () => void };
 type DropdownSize = 'large' | 'small';
@@ -16,7 +18,7 @@ type Props = Partial<DropdownProps>;
 type WapperProps = Pick<Props, 'size' | 'disabled' | 'width'>;
 type DropdownOptionsProps = Pick<
   DropdownProps,
-  'size' | 'options' | 'onClickOption' | 'width'
+  'size' | 'options' | 'onClickOption' | 'width' | 'sx' | 'direction'
 >;
 
 /**
@@ -25,6 +27,7 @@ type DropdownOptionsProps = Pick<
  * @param width (size === 'small'일 때) 기본적으로 auto, width 지정하면 fix
  * @param value 외부 state
  * @param setValue 외부 setState
+ * @param direction top | bottom 테이블 맨 아래있는건 위로 띄워주기..
  */
 function Popup(props: PropsWithChildren<Props>) {
   const {
@@ -34,6 +37,8 @@ function Popup(props: PropsWithChildren<Props>) {
     onClickOption,
     width = 90,
     children,
+    sx,
+    direction = 'bottom',
   } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +46,7 @@ function Popup(props: PropsWithChildren<Props>) {
     setIsOpen((prev) => !prev);
   };
 
-  /* useEffect(() => {
+  useEffect(() => {
     const handleClickOutside = (e: MouseEvent): void => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setIsOpen(false);
@@ -51,7 +56,7 @@ function Popup(props: PropsWithChildren<Props>) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref]); */
+  }, [ref]);
 
   return (
     <Wrapper
@@ -67,6 +72,8 @@ function Popup(props: PropsWithChildren<Props>) {
           options={options}
           onClickOption={onClickOption!}
           width={width}
+          sx={sx || css``}
+          direction={direction}
         />
       )}
     </Wrapper>
@@ -74,9 +81,14 @@ function Popup(props: PropsWithChildren<Props>) {
 }
 
 function DropdownOptions(props: DropdownOptionsProps) {
-  const { size, options, onClickOption, width } = props;
+  const { size, options, onClickOption, width, sx, direction } = props;
   return (
-    <DropdownOptionsContainer size={size} width={width}>
+    <DropdownOptionsContainer
+      size={size}
+      width={width}
+      sx={sx}
+      direction={direction}
+    >
       {options.map((option) => (
         <DropdownTable
           key={option.title}
@@ -100,9 +112,19 @@ const Wrapper = styled.div<WapperProps>`
 const DropdownOptionsContainer = styled.div<{
   size: DropdownSize;
   width: number;
+  sx: SerializedStyles;
+  direction: 'bottom' | 'top';
 }>`
   position: absolute;
-  z-index: 5;
+  right: 0;
+  ${({ direction }) =>
+    direction === 'top' &&
+    css`
+      bottom: 33px;
+    `}
+  z-index: 101;
+  ${({ sx }) => sx};
+
   width: ${({ width }) => width}px;
 
   ${({ theme, size }) =>
@@ -115,8 +137,6 @@ const DropdownOptionsContainer = styled.div<{
           border: 1px solid ${theme.palette.grayScale.g50};
           ${theme.typo.body2Medium}
         `}
-
-  right: 0;
   margin-top: 4px;
 
   background-color: ${({ theme }) => theme.palette.grayScale.white};
@@ -125,6 +145,7 @@ const DropdownOptionsContainer = styled.div<{
 `;
 
 const DropdownTable = styled.div<{ size: DropdownSize }>`
+  text-align: center;
   ${({ theme, size }) =>
     size === 'large'
       ? css`
@@ -137,6 +158,7 @@ const DropdownTable = styled.div<{ size: DropdownSize }>`
         `}
   &:hover {
     background-color: ${({ theme }) => theme.palette.grayScale.g20};
+    cursor: pointer;
   }
 
   &:first-of-type {

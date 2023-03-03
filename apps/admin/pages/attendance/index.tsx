@@ -10,7 +10,6 @@ function AttendanceHome() {
     'generation',
   ]);
   const latestGeneration = generations?.data[0].generation;
-
   useRedirectEffect(`/attendance/${latestGeneration}`);
   return null;
 }

@@ -25,8 +25,14 @@ const Container = styled.input<Props>`
   color: ${({ theme }) => theme.palette.grayScale.g100};
   outline: none;
 
-  &:placeholder-shown {
+  &::placeholder {
     color: ${({ theme }) => theme.palette.grayScale.g50};
+  }
+
+  &::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
   }
 `;
 

@@ -27,21 +27,25 @@ function Button(props: Props) {
 
 const Container = styled.button<ButtonProps>`
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
-  ${({ theme }) => theme.typo.body1Bold}
 
-  ${({ theme, size }) =>
+  ${({ theme, size, varient }) =>
     size === 'small'
       ? css`
-          ${theme.typo.body1Bold}
-          padding: ${theme.rem(10)} ${theme.rem(24)};
+          ${theme.typo.body1Medium}
+          padding: ${varient === 'primary'
+    ? `${theme.rem(10)} ${theme.rem(24)}`
+    : `${theme.rem(9)} ${theme.rem(23)}`};
           border-radius: ${theme.rem(8)};
         `
       : css`
-          padding: ${theme.rem(16)} ${theme.rem(24)};
+          ${theme.typo.body1Bold}
+          padding: ${varient === 'primary'
+    ? `${theme.rem(16)} ${theme.rem(24)}`
+    : `${theme.rem(16)} ${theme.rem(23)}`};
           border-radius: ${theme.rem(16)};
         `}
 
-        ${({ theme, varient }) =>
+  ${({ theme, varient }) =>
     varient === 'primary'
       ? css`
           color: ${theme.palette.grayScale.g100};

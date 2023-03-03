@@ -26,6 +26,7 @@ interface Props {
     rowsPerPage: number;
     count: number;
   };
+  minWidth?: number;
 }
 
 /**
@@ -65,6 +66,7 @@ function Table({
   columns,
   pagination,
   children,
+  minWidth,
 }: React.PropsWithChildren<Props>) {
   return (
     <Box
@@ -76,11 +78,9 @@ function Table({
       <Card sx={{ boxShadow: 'none' }}>
         <Scrollbar>
           <MuiTable
-            sx={
-              {
-                /* minWidth: 1150 */
-              }
-            }
+            sx={{
+              minWidth: minWidth,
+            }}
           >
             <TableHead>
               <TableRow>
@@ -142,8 +142,8 @@ Table.Cell = ({
         width: width,
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
-        overflow: 'hidden',
         border: 'none',
+        overflow: 'visible',
       }}
     >
       {item}

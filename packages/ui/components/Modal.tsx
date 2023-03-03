@@ -63,6 +63,7 @@ const ModalBox = styled.div`
   width: ${({ theme }) => theme.rem(400)};
   padding: ${({ theme }) => theme.rem(20)};
   padding-top: ${({ theme }) => theme.rem(16)};
+  border: 1px solid black;
 `;
 
 const Overlay = styled.div`
@@ -70,6 +71,7 @@ const Overlay = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  z-index: 100;
 `;
 
 export { Modal };

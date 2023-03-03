@@ -18,6 +18,7 @@ import { Logout } from './Logout';
 import { Password } from './Password';
 import { Search } from './Search';
 import { Session } from './Session';
+import { ThreeDot } from './ThreeDot';
 import { ThumbsUp } from './ThumbsUp';
 import { Trash } from './Trash';
 import { User } from './User';
@@ -52,6 +53,7 @@ const icons = {
   chevronLeft: ChevronLeft,
   trash: Trash,
   box: Box,
+  threeDot: ThreeDot,
 } as const;
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

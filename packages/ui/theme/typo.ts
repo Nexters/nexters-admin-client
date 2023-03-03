@@ -26,9 +26,9 @@ const lineHeightMap: Record<TypoKey, number> = {
   h1: 1.6,
   h2: 1.6,
   h3: 1.6,
-  h4: 1.5,
-  body1: 1.5,
-  body2: 1.5,
+  h4: 1.6,
+  body1: 1.6,
+  body2: 1.6,
   caption: 1.6,
 };
 

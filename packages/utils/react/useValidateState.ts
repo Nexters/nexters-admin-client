@@ -28,6 +28,7 @@ function useValidateState<T>(
     error,
     onChange,
     validate,
+    setValue,
   } as const;
 }
 

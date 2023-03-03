@@ -71,7 +71,6 @@ export interface CreateMemberRequest {
 export interface CreateGenerationRequest {
   /** @format int64 */
   generation: number;
-  ceo: string;
 }
 
 export interface AdminLoginRequest {

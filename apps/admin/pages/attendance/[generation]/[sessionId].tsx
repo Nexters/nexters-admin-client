@@ -49,7 +49,7 @@ function AttendanceSession() {
           <Table.Cell item={row.name} />
           <Table.Cell item={row.position} />
           <Table.Cell item={row.detailPosition} />
-          <Table.Cell item={row.generation} />
+          <Table.Cell item={row.generation} align='right' />
         </Table.Row>
       ))}
     </Table>

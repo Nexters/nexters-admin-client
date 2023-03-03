@@ -177,3 +177,16 @@ export interface AttendanceActivityResponse {
   isCompletable: boolean;
   isManager?: boolean;
 }
+
+export interface AttendanceActivityHistoryResponses {
+  data: AttendanceActivityHistoryResponse[];
+}
+
+export interface AttendanceActivityHistoryResponse {
+  title: string;
+  week: number;
+  sessionDate: string;
+  attendanceStatus: string;
+  attendanceTime?: string;
+  penaltyScore: number;
+}

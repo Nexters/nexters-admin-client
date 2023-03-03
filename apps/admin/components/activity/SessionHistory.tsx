@@ -1,16 +1,22 @@
+import { AttendanceActivityHistoryResponse } from '@weekly/api/lib/types/admin';
 import { styled } from '@weekly/ui';
+import { formatHHMMSS } from '@weekly/utils';
 
 import AttendanceStatus from '../attendance/AttendanceStatus';
 
-function SessionHistory() {
+function SessionHistory({
+  history,
+}: {
+  history: AttendanceActivityHistoryResponse;
+}) {
   return (
     <Container>
       <Header>
-        <h3>8주차 세션</h3>
-        <p>2023.02.11</p>
+        <h3>{history.week}주차 세션</h3>
+        <p>{formatHHMMSS(history.sessionDate)}</p>
       </Header>
       <Content>
-        <AttendanceStatus status='통보결석' />
+        <AttendanceStatus status={history.attendanceStatus} />
         <PenaltyScore>-10점</PenaltyScore>
       </Content>
     </Container>

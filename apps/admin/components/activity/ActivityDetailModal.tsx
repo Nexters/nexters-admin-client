@@ -1,18 +1,30 @@
+import { useActivityHistory } from '@weekly/api';
 import { Button, styled } from '@weekly/ui';
+import { useRouter } from 'next/router';
 
 import SessionHistory from './SessionHistory';
 
-function ActivityDetailModal({ closeModal }: { closeModal: () => void }) {
+function ActivityDetailModal({
+  closeModal,
+  memberId,
+}: {
+  closeModal: () => void;
+  memberId: number;
+}) {
+  const { query } = useRouter();
+  const { data: histories } = useActivityHistory(
+    memberId,
+    Number(query.generation),
+  );
   return (
     <Container>
       <ModalTitle>
         <h4>히스토리</h4>
       </ModalTitle>
       <Content>
-        <SessionHistory />
-        <SessionHistory />
-        <SessionHistory />
-        <SessionHistory />
+        {histories?.data.map((history) => (
+          <SessionHistory history={history} />
+        ))}
       </Content>
       <ConfirmButton>
         <Button fullWidth onClick={closeModal}>

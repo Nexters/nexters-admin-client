@@ -38,10 +38,17 @@ function Activity() {
   const { generation } = router.query;
   const [search, setSearch] = useState('');
   const [attendances, setAttendances] = useState();
+  const [selectedMemberId, setSelectedMemberId] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const { data: activity } = useActivity(Number(generation));
+
+  const openModal = (id: number) => {
+    setModalOpen(true);
+    setSelectedMemberId(id);
+  };
   const closeModal = () => {
     setModalOpen(false);
+    setSelectedMemberId(null);
   };
 
   const onChangeSearch = useDebouncedCallback(
@@ -63,7 +70,11 @@ function Activity() {
               <Table.Cell item={row.initialGeneration} />
               <Table.Cell item={row.score} align='center' />
               <Table.Cell
-                item={<ViewDetail>자세히보기</ViewDetail>}
+                item={
+                  <ViewDetail onClick={() => openModal(row.generationMemberId)}>
+                    자세히보기
+                  </ViewDetail>
+                }
                 align='center'
               />
               <Table.Cell
@@ -85,9 +96,14 @@ function Activity() {
           ))}
         </Table>
       </ActivityTable>
-      <Modal isOpen={modalOpen}>
-        <ActivityDetailModal closeModal={closeModal} />
-      </Modal>
+      {selectedMemberId && (
+        <Modal isOpen={modalOpen} onDismiss={closeModal}>
+          <ActivityDetailModal
+            closeModal={closeModal}
+            memberId={selectedMemberId}
+          />
+        </Modal>
+      )}
     </Fragment>
   );
 }
@@ -119,9 +135,6 @@ const SwitchContainer = styled.div`
     + .MuiSwitch-track {
     background-color: ${({ theme }) => theme.palette.grayScale.g50};
   }
-  /* .css-jsexje-MuiSwitch-thumb {
-    background-color: #fafafa;
-  } */
 
   .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
     color: ${({ theme }) => theme.palette.main.green50};

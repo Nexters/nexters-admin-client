@@ -14,7 +14,7 @@ export const api = new Handler({
 });
 
 export function initAuthorization() {
-  const token = getCookie('accessToken');
+  const token = getCookie('@weekly/token');
 
   if (token) {
     api.setSecureData(token);

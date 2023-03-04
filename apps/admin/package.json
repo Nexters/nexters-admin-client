@@ -22,6 +22,8 @@
     "next": "^13.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "14.2.2",
+    "react-hot-toast": "^2.4.0",
     "simplebar": "5.3.8",
     "simplebar-react": "2.4.1",
     "use-debounce": "^9.0.3"

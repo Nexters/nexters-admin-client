@@ -145,7 +145,7 @@ const DropdownOptionsContainer = styled.div<{
 `;
 
 const DropdownTable = styled.div<{ size: DropdownSize }>`
-  text-align: center;
+  text-align: left;
   ${({ theme, size }) =>
     size === 'large'
       ? css`

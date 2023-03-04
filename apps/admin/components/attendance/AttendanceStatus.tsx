@@ -18,7 +18,7 @@ function AttendanceStatus({ status }: { status: string }) {
   case '통보결석':
     return <Tag color={'red'}>통보 결석</Tag>;
   default:
-    return <></>;
+    return <div />;
   }
 }
 const Tag = styled.div<{ color: TagColor }>`

@@ -77,6 +77,7 @@ function AttendanceTable({ attendances }: AttendanceTableProps) {
               }
             />
             <Table.Cell
+              align='center'
               item={<ExtraScoreNote>{row.extraScoreNote}</ExtraScoreNote>}
             />
             <Table.Cell item={row.note} />

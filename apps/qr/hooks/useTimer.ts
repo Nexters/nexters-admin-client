@@ -4,6 +4,8 @@ function useTimer() {
   const [value, setValue] = useState(0);
   const timerId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const reset = () => setValue(0);
+
   useEffect(() => {
     timerId.current = setTimeout(function tick() {
       setValue((prev) => prev + 1000);
@@ -15,7 +17,7 @@ function useTimer() {
     };
   }, []);
 
-  return value;
+  return { timer: value, reset } as const;
 }
 
 export { useTimer };

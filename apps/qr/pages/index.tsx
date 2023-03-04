@@ -12,6 +12,7 @@ function Home() {
   const { data, refetch } = useAttendanceQr();
   const { mutate } = useDeleteAttendanceQr();
   const { qrCode, expirationTime } = data ?? {};
+  // TODO: URL 교체
   const baseURL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/attendance/qr'
     : 'https://chulchul.site/attendance/qr';
@@ -23,6 +24,7 @@ function Home() {
     mutate();
   };
   const refetchAttendanceQr = () => refetch();
+
   return (
     <Container>
       <DateText>

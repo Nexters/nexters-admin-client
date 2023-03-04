@@ -33,6 +33,7 @@ const pretandard = localFont({
   variable: '--font-pretendard',
 });
 
+// TODO: URL이 달라지면 토큰 인증 처리 어떻게하지
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
   useEffect(() => {

@@ -4,6 +4,7 @@ import { InitializeQrCodesRequest } from '../../types/admin';
 import { api } from '../api';
 
 export default function useCreateAttendanceQr(body: InitializeQrCodesRequest) {
+  // TODO: URL 교체
   const QrUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3002'

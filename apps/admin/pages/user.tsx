@@ -1,32 +1,61 @@
-import Link from 'next/link';
+import { Box } from '@mui/material';
+import { useMembers } from '@weekly/api';
+import { Button, Search } from '@weekly/ui';
+import React from 'react';
 
 import { DashboardLayout } from '~/components//dashboard/DashboardLayout';
+import { AuthGuard } from '~/components/authentication/AuthGuard';
+import { MemberRegisterModal } from '~/components/user/MemberRegisterModal';
+import { MemberTable } from '~/components/user/MemberTable';
 
+const style = {
+  position: 'absolute' as const,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '401px',
+  bgcolor: '#fff',
+  padding: '16px 20px',
+  borderRadius: '8px',
+};
 function User() {
+  const { data: members } = useMembers({});
+  const [fileUploadModalOpen, toggleFileUploadModal] = React.useReducer(
+    (open) => !open,
+    false,
+  );
+
   return (
-    <div>
-      <h1>User</h1>
-      <div>
-        <Link href='/attendance'>출석관리</Link>
-      </div>
-      <div>
-        <Link href='/activity'>활동관리</Link>
-      </div>
-      <div>
-        <Link href='/user'>회원관리</Link>
-      </div>
-      <div>
-        <Link href='/authentication/login'>로그인</Link>
-      </div>
-      <div>
-        <Link href='/authentication/logout'>로그아웃</Link>
-      </div>
-    </div>
+    <Box>
+      <MemberRegisterModal
+        open={fileUploadModalOpen}
+        toggleModal={toggleFileUploadModal}
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginBottom: '20px',
+        }}
+      >
+        <Search width={355} />
+        <Button size='small' onClick={toggleFileUploadModal}>
+          회원 등록
+        </Button>
+      </Box>
+      <Box>
+        <MemberTable members={members} />
+      </Box>
+    </Box>
   );
 }
 
 User.getLayout = function getLayout(page: React.ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>;
+  return (
+    <AuthGuard>
+      <DashboardLayout>{page}</DashboardLayout>
+    </AuthGuard>
+  );
 };
 
 export default User;

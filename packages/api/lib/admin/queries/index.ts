@@ -1,3 +1,5 @@
+import useMembers from './member/useMembers';
+import useUploadMemberExcel from './member/useUploadMemberExcel';
 import useAdminLogin from './useAdminLogin';
 import useAttendanceAdditionalScore from './useAttendanceAdditionalScore';
 import useAttendanceQr from './useAttendanceQr';
@@ -16,6 +18,8 @@ export {
   useCreateGeneration,
   useDeleteGeneration,
   useGeneration,
+  useMembers,
   useSession,
   useSessionByGeneration,
+  useUploadMemberExcel,
 };

@@ -1,20 +1,27 @@
 import { Icon, styled } from '@weekly/ui';
-import { useRef } from 'react';
+import { addZero } from '@weekly/utils';
+import { useEffect, useRef } from 'react';
 
 import { useTimer } from '~/hooks/useTimer';
 
 type Props = {
   expirationTime: string;
+  refetchAttendanceQr: VoidFunction;
 }
 
 function Timer(props: Props) {
-  const { expirationTime } = props;
+  const { expirationTime, refetchAttendanceQr } = props;
   const startTime = useRef(new Date());
   const timer = useTimer();
   const expirationTimeDate = new Date(expirationTime);
   const diff = expirationTimeDate.getTime() - startTime.current.getTime() - timer;
-  const minutes = ('00' + Math.floor(diff / 1000 / 60)).slice(-2);
-  const seconds = ('00' + Math.floor(diff / 1000 % 60)).slice(-2);
+  const minutes = Math.max(Math.floor(diff / 1000 / 60), 0);
+  const seconds = Math.max(Math.floor(diff / 1000 % 60), 0);
+  useEffect(() => {
+    if (minutes === 0 && seconds === 0) {
+      refetchAttendanceQr();
+    }
+  }, [minutes, seconds]);
   return (
     <TimerContainer>
       <Icon name='clock' />
@@ -22,7 +29,7 @@ function Timer(props: Props) {
         QR 코드 유효 시간
       </TimerLabel>
       <TimerText>
-        {minutes}:{seconds}
+        {addZero(minutes)}:{addZero(seconds)}
       </TimerText>
     </TimerContainer>
   );

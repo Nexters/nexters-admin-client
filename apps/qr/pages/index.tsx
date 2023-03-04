@@ -9,7 +9,7 @@ const QRCode = dynamic(() => import('../components/QRCode'), {
 });
 
 function Home() {
-  const { data } = useAttendanceQr();
+  const { data, refetch } = useAttendanceQr();
   const { mutate } = useDeleteAttendanceQr();
   const { qrCode, expirationTime } = data ?? {};
   const baseURL = process.env.NODE_ENV === 'development'
@@ -22,6 +22,7 @@ function Home() {
     event.preventDefault();
     mutate();
   };
+  const refetchAttendanceQr = () => refetch();
   return (
     <Container>
       <DateText>
@@ -36,7 +37,11 @@ function Home() {
           출석 종료
         </Button>
       </ButtonContainer>
-      {expirationTime && <Timer expirationTime={expirationTime} />}
+      {expirationTime && (
+        <Timer
+          expirationTime={expirationTime}
+          refetchAttendanceQr={refetchAttendanceQr} />
+      )}
     </Container>
   );
 }

@@ -22,9 +22,7 @@ function Home(props: Props) {
       <SessionTitle>
         1주차 세션
       </SessionTitle>
-      <QRCodeContainer>
-        <QRCode url={callbackUrl} />
-      </QRCodeContainer>
+      <QRCode url={callbackUrl} />
       <ButtonContainer>
         <Button fullWidth>
           출석 종료
@@ -57,12 +55,6 @@ const SessionTitle = styled.h1`
   ${({ theme }) => theme.typo.h1Bold};
   color: ${({ theme }) => theme.palette.grayScale.white};
   margin-bottom: ${({ theme }) => theme.rem(24)};
-`;
-
-const QRCodeContainer = styled.div`
-  padding: ${({ theme }) => theme.rem(10)};
-  border-radius: ${({ theme }) => theme.rem(20)};
-  background-color: ${({ theme }) => theme.palette.grayScale.white};
 `;
 
 const ButtonContainer = styled.div`

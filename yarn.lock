@@ -1674,6 +1674,7 @@ __metadata:
     eslint-config-weekly: "*"
     msw: ^1.0.0
     next: ^13.1.6
+    next-seo: ^5.15.0
     qr-code-styling: ^1.6.0-rc.1
     react: ^18.2.0
     react-dom: ^18.2.0

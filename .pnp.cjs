@@ -2209,6 +2209,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-weekly", "workspace:packages/eslint-config-weekly"],\
             ["msw", "virtual:f5ed35bf4980f7f26fa3c6ec40b1aba25ad4ba5b20d33a57817e4590a2d56638806757ff2d8b113ccdcb0a2f51e6814a1523d3a228d0658550d10e69f1908c2d#npm:1.0.0"],\
             ["next", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:13.1.6"],\
+            ["next-seo", "virtual:10960cd070cd127ab29c1f998d5d39e8b7ade98339984da9273756de37fd9f57aca595a61d2f547b6222f36fba4e2c70621a2dd7c7c1a1a70c4045bdfa7ad24e#npm:5.15.0"],\
             ["qr-code-styling", "npm:1.6.0-rc.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:782ba616a9aa9e10433c3b0e2d28fa0637fd60366afa75de3d2fa35b860ffa155d865e7fbe07a75b49b416765cf2a3354d826d0572434981c021c75807a1b922#npm:18.2.0"],\

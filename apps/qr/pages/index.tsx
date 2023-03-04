@@ -11,7 +11,6 @@ const QRCode = dynamic(() => import('../components/QRCode'), {
 function Home() {
   const { data } = useAttendanceQr();
   const { mutate } = useDeleteAttendanceQr();
-
   const { qrCode, expirationTime } = data ?? {};
   const baseURL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/attendance/qr'
@@ -23,9 +22,6 @@ function Home() {
     event.preventDefault();
     mutate();
   };
-
-  console.log(attendanceURL);
-
   return (
     <Container>
       <DateText>

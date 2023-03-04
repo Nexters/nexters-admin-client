@@ -7,6 +7,7 @@ import { Certificate } from './Certificate';
 import { CheckCircle } from './CheckCircle';
 import { Chevron } from './Chevron';
 import { ChevronLeft } from './ChevronLeft';
+import { Clock } from './Clock';
 import { Close } from './Close';
 import { Edit } from './Edit';
 import { Error } from './Error';
@@ -54,6 +55,7 @@ const icons = {
   trash: Trash,
   box: Box,
   threeDot: ThreeDot,
+  clock: Clock,
 } as const;
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

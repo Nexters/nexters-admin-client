@@ -1,6 +1,6 @@
 import localFont from '@next/font/local';
 import { QueryClientProvider } from '@weekly/api';
-import { ThemeProvider } from '@weekly/ui/theme';
+import { palette, ThemeProvider } from '@weekly/ui';
 import type { AppProps } from 'next/app';
 
 const pretandard = localFont({
@@ -36,6 +36,7 @@ const App = (props: AppProps) => {
       <style global jsx>
         {`
           html {
+            background: ${palette.grayScale.g100};
             font-family: ${pretandard.style.fontFamily};
           }
         `}

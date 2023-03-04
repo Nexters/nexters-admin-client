@@ -2,38 +2,31 @@ import QRCodeStyling from 'qr-code-styling';
 import { useEffect, useRef } from 'react';
 
 const qrCode = new QRCodeStyling({
-  width: 300,
-  height: 300,
+  width: 320,
+  height: 320,
   image: '/logo.svg',
-  dotsOptions: {
-    color: '#AFF856',
-    type: 'rounded',
-  },
   imageOptions: {
     crossOrigin: 'anonymous',
   },
 });
 
 interface Props {
-  callbackUrl: string;
+  url: string;
 }
 
 export default function GenerateQrcode(props: Props) {
+  const { url } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (ref.current) qrCode.append(ref.current);
+    if (ref.current) {
+      qrCode.append(ref.current);
+    }
   }, []);
 
   useEffect(() => {
-    qrCode.update({
-      data: props.callbackUrl,
-    });
-  }, []);
+    qrCode.update({ data: url });
+  }, [url]);
 
-  return (
-    <div className='App'>
-      <div ref={ref} />
-    </div>
-  );
+  return <div ref={ref} />;
 }

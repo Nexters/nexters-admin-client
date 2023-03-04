@@ -10,7 +10,7 @@ function AuthGuard(props: React.PropsWithChildren<unknown>) {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    const accessToken = getCookie('accessToken');
+    const accessToken = getCookie('@weekly/token');
     if (!router.isReady) {
       return;
     }

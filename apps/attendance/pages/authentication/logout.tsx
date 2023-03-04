@@ -6,7 +6,7 @@ import { Layout } from '~/components';
 
 function Logout() {
   useEffect(() => {
-    removeCookie('accessToken');
+    removeCookie('@weelky/token');
     queryClient.removeQueries();
   }, []);
   useRedirectEffect('/authentication/login');

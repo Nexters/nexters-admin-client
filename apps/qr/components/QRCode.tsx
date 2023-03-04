@@ -11,10 +11,11 @@ const qrCode = new QRCodeStyling({
 });
 
 interface Props {
-  callbackUrl: string;
+  url: string;
 }
 
 export default function GenerateQrcode(props: Props) {
+  const { url } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,8 +25,8 @@ export default function GenerateQrcode(props: Props) {
   }, []);
 
   useEffect(() => {
-    qrCode.update({ data: props.callbackUrl });
-  }, []);
+    qrCode.update({ data: url });
+  }, [url]);
 
   return <div ref={ref} />;
 }

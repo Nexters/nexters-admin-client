@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 import { Timer } from '~/components/Timer';
 
-const QRCode = dynamic(() => import('../components/GenerateQrcode'), {
+const QRCode = dynamic(() => import('../components/QRCode'), {
   ssr: false,
 });
 
@@ -23,7 +23,7 @@ function Home(props: Props) {
         1주차 세션
       </SessionTitle>
       <QRCodeContainer>
-        <QRCode callbackUrl={callbackUrl} />
+        <QRCode url={callbackUrl} />
       </QRCodeContainer>
       <ButtonContainer>
         <Button fullWidth>

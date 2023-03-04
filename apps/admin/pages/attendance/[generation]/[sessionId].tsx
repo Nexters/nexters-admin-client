@@ -1,4 +1,4 @@
-import { useAttendanceQr, useAttendanceSession } from '@weekly/api';
+import { useAttendanceSession, useCreateAttendanceQr } from '@weekly/api';
 import { AttendanceSessionResponse } from '@weekly/api/lib/types/admin';
 import { Button, Search, styled } from '@weekly/ui';
 import { formatYYMMDD } from '@weekly/utils';
@@ -22,11 +22,11 @@ function AttendanceSession() {
       setSearch(event.target.value),
     400,
   );
-  const { mutate: attendedMutate } = useAttendanceQr({
+  const { mutate: attendedMutate } = useCreateAttendanceQr({
     sessionId: Number(sessionId),
     qrCodeType: 'ATTENDED',
   });
-  const { mutate: tardyMutate } = useAttendanceQr({
+  const { mutate: tardyMutate } = useCreateAttendanceQr({
     sessionId: Number(sessionId),
     qrCodeType: 'TARDY',
   });

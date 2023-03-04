@@ -41,6 +41,7 @@ function formatHHMMSS(datetime: string) {
 }
 
 export {
+  addZero,
   formatHHMMSS,
   formatKoreanMonthDate,
   formatMonthDate,

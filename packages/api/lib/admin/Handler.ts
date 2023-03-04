@@ -9,6 +9,7 @@ import {
   CreateMemberRequest,
   CreateSessionRequest,
   CreateSessionResponse,
+  CurrentQrCodeResponse,
   FindSessionResponses,
   GenerationResponses,
   InitializeQrCodesRequest,
@@ -382,7 +383,7 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
      * @tags Attendance
      * @name CreateAttendanceQr
      * @summary [관리자 페이지] 출석 시작
-     * @request GET:/api/attendance/qr
+     * @request POST:/api/attendance/qr
      * @secure
      */
     createAttendanceQr: (
@@ -398,11 +399,44 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
       }),
     /**
      * @tags Attendance
+     * @name GetAttendanceQr
+     * @summary [관리자 페이지] QR 정보 가져오기
+     * @request GET:/api/attendance/qr
+     * @secure
+     */
+    getAttendanceQr: (
+      params: RequestParams = {},
+    ) =>
+      this.request<CurrentQrCodeResponse>({
+        path: '/api/attendance/qr',
+        method: 'GET',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
+     * @name DeleteAttendanceQr
+     * @summary [관리자 페이지] QR 정보 삭제
+     * @request DELETE:/api/attendance/qr
+     * @secure
+     */
+    deleteAttendanceQr: (
+      params: RequestParams = {},
+    ) =>
+      this.request({
+        path: '/api/attendance/qr',
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @tags Attendance
      * @name FindActivityByGeneration
      * @summary [관리자 페이지] 활동 관리 조회
      * @request GET:/api/attendance/activity/{generation}
      * @secure
-     */ findActivityByGeneration: (
+     */
+    findActivityByGeneration: (
       generation: number,
       params: RequestParams = {},
     ) =>
@@ -418,7 +452,8 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
      * @summary [관리자 페이지] 활동 관리 조회
      * @request GET:/api/attendance/activity/{generation}/{generationMemberId}
      * @secure
-     */ findActivityHistory: (
+     */
+    findActivityHistory: (
       generationMemberId: number,
       generation: number,
       params: RequestParams = {},

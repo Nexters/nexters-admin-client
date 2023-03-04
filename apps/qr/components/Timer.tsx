@@ -1,6 +1,11 @@
 import { Icon, styled } from '@weekly/ui';
 
-function Timer() {
+type Props = {
+  expirationTime: string;
+}
+
+function Timer(props: Props) {
+  const { expirationTime } = props;
   return (
     <TimerContainer>
       <Icon name='clock' />

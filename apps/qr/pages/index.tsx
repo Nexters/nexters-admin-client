@@ -1,5 +1,5 @@
+import { useAttendanceQr, useDeleteAttendanceQr } from '@weekly/api';
 import { Button, styled } from '@weekly/ui';
-import { GetServerSidePropsContext } from 'next';
 import dynamic from 'next/dynamic';
 
 import { Timer } from '~/components/Timer';
@@ -8,12 +8,24 @@ const QRCode = dynamic(() => import('../components/QRCode'), {
   ssr: false,
 });
 
-interface Props {
-  callbackUrl: string;
-}
+function Home() {
+  const { data } = useAttendanceQr();
+  const { mutate } = useDeleteAttendanceQr();
 
-function Home(props: Props) {
-  const { callbackUrl } = props;
+  const { qrCode, expirationTime } = data ?? {};
+  const baseURL = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/attendance/qr'
+    : 'https://chulchul.site/attendance/qr';
+  const queryString = qrCode ? `?nonce=${qrCode}` : '';
+  const attendanceURL = baseURL + queryString;
+
+  const onClickDeleteAttendanceButton: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
+    mutate();
+  };
+
+  console.log(attendanceURL);
+
   return (
     <Container>
       <DateText>
@@ -22,13 +34,13 @@ function Home(props: Props) {
       <SessionTitle>
         1주차 세션
       </SessionTitle>
-      <QRCode url={callbackUrl} />
+      <QRCode url={attendanceURL} />
       <ButtonContainer>
-        <Button fullWidth>
+        <Button fullWidth onClick={onClickDeleteAttendanceButton}>
           출석 종료
         </Button>
       </ButtonContainer>
-      <Timer />
+      {expirationTime && <Timer expirationTime={expirationTime} />}
     </Container>
   );
 }
@@ -61,15 +73,5 @@ const ButtonContainer = styled.div`
   margin-top: ${({ theme }) => theme.rem(16)};
   width: ${({ theme }) => theme.rem(335)};
 `;
-
-export async function getServerSideProps({ req }: GetServerSidePropsContext) {
-  const callbackUrl = `${req.headers.host}/api/qr/callback`;
-
-  return {
-    props: {
-      callbackUrl,
-    },
-  };
-}
 
 export default Home;

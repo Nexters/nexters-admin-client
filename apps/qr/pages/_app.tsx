@@ -1,9 +1,11 @@
 import localFont from '@next/font/local';
 import { QueryClientProvider } from '@weekly/api';
+import { initAuthorization } from '@weekly/api/lib/admin/api';
 import { palette, ThemeProvider } from '@weekly/ui';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
+import { useEffect } from 'react';
 
 const pretandard = localFont({
   src: [
@@ -33,6 +35,11 @@ const pretandard = localFont({
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      initAuthorization();
+    }
+  }, []);
   return (
     <QueryClientProvider>
       <Head>

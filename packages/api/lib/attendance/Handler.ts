@@ -1,6 +1,6 @@
 
 import { ContentType, HttpClient, RequestParams } from '../HttpClient';
-import { AttendanceProfileResponse, FindProfileResponse, FindSessionHomeResponse, MemberLoginRequest, MemberLoginResponse, UpdatePasswordRequest } from '../types/attendance';
+import { AttendanceProfileResponse, FindProfileResponse, FindSessionHomeResponse, MemberLoginRequest, MemberLoginResponse, UpdatePasswordRequest, ValidateQrCodeRequest } from '../types/attendance';
 
 /**
  * @title 넥스터즈 출석체크 백엔드 API
@@ -53,6 +53,16 @@ export class Handler<SecurityDataType> extends HttpClient<SecurityDataType> {
         type: ContentType.Json,
         format: 'json',
         secure: true,
+        ...params,
+      }),
+    qrAttendance: (data: ValidateQrCodeRequest, params: RequestParams = {}) =>
+      this.request({
+        path: '/api/attendance',
+        method: 'POST',
+        type: ContentType.Json,
+        format: 'json',
+        secure: true,
+        body: data,
         ...params,
       }),
     /**

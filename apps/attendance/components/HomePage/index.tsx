@@ -34,7 +34,7 @@ function HomePage() {
     : undefined;
 
   const isLoading = sessionQueryResult.isLoading || meQueryResult.isLoading || wait;
-  const isEmptySession = sessionQueryResultData === null;
+  const isEmptySession = sessionQueryResultData == null;
   const isTodaySession = !!sessionDate && isToday(sessionDate);
   const isSessionPending = !!sessionStatus && sessionStatus === 'PENDING';
   const isDisplayCameraButton = !!attendanceStatus && attendanceStatus === 'PENDING' && !isSessionPending;

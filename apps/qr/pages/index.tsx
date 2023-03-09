@@ -1,5 +1,6 @@
 import { useAttendanceQr, useDeleteAttendanceQr } from '@weekly/api';
 import { Button, styled } from '@weekly/ui';
+import { formatKoreanMonthDate } from '@weekly/utils';
 import dynamic from 'next/dynamic';
 
 import { Timer } from '~/components/Timer';
@@ -11,7 +12,7 @@ const QRCode = dynamic(() => import('../components/QRCode'), {
 function Home() {
   const { data, refetch } = useAttendanceQr();
   const { mutate } = useDeleteAttendanceQr();
-  const { qrCode, expirationTime } = data ?? {};
+  const { sessionDate, week, qrCode, expirationTime } = data ?? {};
   // TODO: URL 교체
   const baseURL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/attendance/qr'
@@ -27,12 +28,16 @@ function Home() {
 
   return (
     <Container>
-      <DateText>
-        7월 1일
-      </DateText>
-      <SessionTitle>
-        1주차 세션
-      </SessionTitle>
+      {sessionDate && (
+        <DateText>
+          {formatKoreanMonthDate(sessionDate)}
+        </DateText>
+      )}
+      {week && (
+        <SessionTitle>
+          {week}주차 세션
+        </SessionTitle>
+      )}
       <QRCode url={attendanceURL} />
       <ButtonContainer>
         <Button fullWidth onClick={onClickDeleteAttendanceButton}>

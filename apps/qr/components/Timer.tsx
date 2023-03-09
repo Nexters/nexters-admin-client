@@ -18,7 +18,7 @@ function Timer(props: Props) {
   const minutes = Math.max(Math.floor(diff / 1000 / 60), 0);
   const seconds = Math.max(Math.floor(diff / 1000 % 60), 0);
   useEffect(() => {
-    if (minutes === 0 && seconds === 0) {
+    if (minutes === 0 && seconds <= 0) {
       startTime.current = new Date();
       refetchAttendanceQr();
       reset();

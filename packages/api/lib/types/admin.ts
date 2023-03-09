@@ -103,6 +103,8 @@ export interface GenerationResponse {
 export interface CurrentQrCodeResponse {
   /** @format int64 */
   sessionId: number;
+  week: number;
+  sessionDate: string;
   qrCode: string;
   qrCodeType: string;
   /** @format date-time */
